@@ -11,6 +11,12 @@
           "meta[name=color-scheme]"
         ]
       }
+    ],
+    "axe/name-role-value": [
+      "default",
+      {
+        "button-name": "off"
+      }
     ]
   }
 }
