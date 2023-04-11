@@ -1,26 +1,30 @@
 import { Routes } from '@angular/router';
-import { AdminRootComponent } from './modules/administrator/admin-root/admin-root.component';
-import { EmployeeRootComponent } from './modules/employee/employee-root/employee-root.component';
-import { CustomerRootComponent } from './modules/customer/customer-root/customer-root.component';
 
 export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-    children: [
-      {
-        path: 'admin',
-        component: AdminRootComponent,
-      },
-      {
-        path: 'employee',
-        component: EmployeeRootComponent,
-      },
-      {
-        path: 'customer',
-        component: CustomerRootComponent,
-      },
-    ],
+  },
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./modules/administrator/admin-root/admin-root.component').then(
+        (m) => m.AdminRootComponent
+      ),
+  },
+  {
+    path: 'employee',
+    loadComponent: () =>
+      import('./modules/employee/employee-root/employee-root.component').then(
+        (m) => m.EmployeeRootComponent
+      ),
+  },
+  {
+    path: 'customer',
+    loadComponent: () =>
+      import('./modules/customer/customer-root/customer-root.component').then(
+        (m) => m.CustomerRootComponent
+      ),
   },
   {
     path: '',
