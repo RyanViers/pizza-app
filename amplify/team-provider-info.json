@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pizzaapp-dev-125945-authRole",
+      "UnauthRoleArn": "arn:aws:iam::143449136227:role/amplify-pizzaapp-dev-125945-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::143449136227:role/amplify-pizzaapp-dev-125945-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-pizzaapp-dev-125945-deployment",
+      "UnauthRoleName": "amplify-pizzaapp-dev-125945-unauthRole",
+      "StackName": "amplify-pizzaapp-dev-125945",
+      "StackId": "arn:aws:cloudformation:us-east-1:143449136227:stack/amplify-pizzaapp-dev-125945/435f9f20-d88a-11ed-823f-0a8597384a69",
+      "AmplifyAppId": "d3d28prt5k2ays"
+    },
+    "categories": {
+      "api": {
+        "pizzaapp": {}
+      }
+    }
+  }
+}
