@@ -5,11 +5,39 @@ mutation CreateOrder(
 ) {
   createOrder(input: $input, condition: $condition) {
     id
-    owner
-    orderNumber
-    orderDate
-    orderStatus
-    orderTotal
+    customPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    specialtyPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+      createdAt
+      updatedAt
+    }
+    name
+    timestamp
+    subtotal
+    tax
+    total
     createdAt
     updatedAt
   }
@@ -20,11 +48,39 @@ mutation UpdateOrder(
 ) {
   updateOrder(input: $input, condition: $condition) {
     id
-    owner
-    orderNumber
-    orderDate
-    orderStatus
-    orderTotal
+    customPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    specialtyPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+      createdAt
+      updatedAt
+    }
+    name
+    timestamp
+    subtotal
+    tax
+    total
     createdAt
     updatedAt
   }
@@ -35,11 +91,99 @@ mutation DeleteOrder(
 ) {
   deleteOrder(input: $input, condition: $condition) {
     id
-    owner
-    orderNumber
-    orderDate
-    orderStatus
-    orderTotal
+    customPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    specialtyPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+      createdAt
+      updatedAt
+    }
+    name
+    timestamp
+    subtotal
+    tax
+    total
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateSpecialityPizza(
+  $input: CreateSpecialityPizzaInput!
+  $condition: ModelSpecialityPizzaConditionInput
+) {
+  createSpecialityPizza(input: $input, condition: $condition) {
+    id
+    size
+    crust
+    sauce
+    cheese {
+      quantity
+      additional
+    }
+    meats
+    veggies
+    price
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateSpecialityPizza(
+  $input: UpdateSpecialityPizzaInput!
+  $condition: ModelSpecialityPizzaConditionInput
+) {
+  updateSpecialityPizza(input: $input, condition: $condition) {
+    id
+    size
+    crust
+    sauce
+    cheese {
+      quantity
+      additional
+    }
+    meats
+    veggies
+    price
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteSpecialityPizza(
+  $input: DeleteSpecialityPizzaInput!
+  $condition: ModelSpecialityPizzaConditionInput
+) {
+  deleteSpecialityPizza(input: $input, condition: $condition) {
+    id
+    size
+    crust
+    sauce
+    cheese {
+      quantity
+      additional
+    }
+    meats
+    veggies
+    price
     createdAt
     updatedAt
   }

@@ -13,27 +13,101 @@ export type __SubscriptionContainer = {
   onCreateOrder: OnCreateOrderSubscription;
   onUpdateOrder: OnUpdateOrderSubscription;
   onDeleteOrder: OnDeleteOrderSubscription;
+  onCreateSpecialityPizza: OnCreateSpecialityPizzaSubscription;
+  onUpdateSpecialityPizza: OnUpdateSpecialityPizzaSubscription;
+  onDeleteSpecialityPizza: OnDeleteSpecialityPizzaSubscription;
 };
 
 export type CreateOrderInput = {
   id?: string | null;
-  owner?: string | null;
-  orderNumber: string;
-  orderDate: string;
-  orderStatus: string;
-  orderTotal: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  customPizzas: Array<CustomPizzaInput | null>;
+  name: string;
+  timestamp: string;
+  subtotal: number;
+  tax: number;
+  total: number;
 };
 
+export type CustomPizzaInput = {
+  id?: string | null;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: PizzaCheeseInput;
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+};
+
+export enum PizzaSize {
+  SMALL = "SMALL",
+  MEDIUM = "MEDIUM",
+  LARGE = "LARGE"
+}
+
+export enum PizzaCrust {
+  ORIGINAL = "ORIGINAL",
+  DEEP_DISH = "DEEP_DISH",
+  THIN = "THIN",
+  STUFFED = "STUFFED",
+  NEW_YORK = "NEW_YORK"
+}
+
+export enum PizzaSauce {
+  TOMATO = "TOMATO",
+  ALFREDO = "ALFREDO",
+  PESTO = "PESTO",
+  BBQ = "BBQ",
+  GARLIC = "GARLIC",
+  NONE = "NONE"
+}
+
+export type PizzaCheeseInput = {
+  quantity: CheeseQuantity;
+  additional?: AdditionCheeseType | null;
+};
+
+export enum CheeseQuantity {
+  NORMAL = "NORMAL",
+  LIGHT = "LIGHT",
+  NONE = "NONE"
+}
+
+export enum AdditionCheeseType {
+  THREE_CHEESE = "THREE_CHEESE",
+  EXTRA_CHEESE = "EXTRA_CHEESE",
+  PARMESAN = "PARMESAN",
+  FETA = "FETA",
+  CHEDDAR = "CHEDDAR"
+}
+
+export enum PizzaMeat {
+  PEPPERONI = "PEPPERONI",
+  SAUSAGE = "SAUSAGE",
+  BEEF = "BEEF",
+  HAM = "HAM",
+  BACON = "BACON",
+  CHICKEN = "CHICKEN",
+  NONE = "NONE"
+}
+
+export enum PizzaVeggie {
+  MUSHROOMS = "MUSHROOMS",
+  ONIONS = "ONIONS",
+  GREEN_PEPPERS = "GREEN_PEPPERS",
+  BLACK_OLIVES = "BLACK_OLIVES",
+  TOMATOES = "TOMATOES",
+  PINEAPPLE = "PINEAPPLE",
+  JALAPENOS = "JALAPENOS",
+  NONE = "NONE"
+}
+
 export type ModelOrderConditionInput = {
-  owner?: ModelStringInput | null;
-  orderNumber?: ModelStringInput | null;
-  orderDate?: ModelStringInput | null;
-  orderStatus?: ModelStringInput | null;
-  orderTotal?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  timestamp?: ModelStringInput | null;
+  subtotal?: ModelIntInput | null;
+  tax?: ModelIntInput | null;
+  total?: ModelIntInput | null;
   and?: Array<ModelOrderConditionInput | null> | null;
   or?: Array<ModelOrderConditionInput | null> | null;
   not?: ModelOrderConditionInput | null;
@@ -78,42 +152,148 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
+export type ModelIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
 export type Order = {
   __typename: "Order";
   id: string;
-  owner?: string | null;
-  orderNumber: string;
-  orderDate: string;
-  orderStatus: string;
-  orderTotal: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  customPizzas: Array<CustomPizza | null>;
+  specialtyPizzas: Array<SpecialityPizza | null>;
+  name: string;
+  timestamp: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CustomPizza = {
+  __typename: "CustomPizza";
+  id: string;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: PizzaCheese;
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+};
+
+export type PizzaCheese = {
+  __typename: "PizzaCheese";
+  quantity: CheeseQuantity;
+  additional?: AdditionCheeseType | null;
+};
+
+export type SpecialityPizza = {
+  __typename: "SpecialityPizza";
+  id: string;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: PizzaCheese;
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateOrderInput = {
   id: string;
-  owner?: string | null;
-  orderNumber?: string | null;
-  orderDate?: string | null;
-  orderStatus?: string | null;
-  orderTotal?: string | null;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  customPizzas?: Array<CustomPizzaInput | null> | null;
+  name?: string | null;
+  timestamp?: string | null;
+  subtotal?: number | null;
+  tax?: number | null;
+  total?: number | null;
 };
 
 export type DeleteOrderInput = {
   id: string;
 };
 
+export type CreateSpecialityPizzaInput = {
+  id?: string | null;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: PizzaCheeseInput;
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+};
+
+export type ModelSpecialityPizzaConditionInput = {
+  size?: ModelPizzaSizeInput | null;
+  crust?: ModelPizzaCrustInput | null;
+  sauce?: ModelPizzaSauceInput | null;
+  meats?: ModelPizzaMeatInput | null;
+  veggies?: ModelPizzaVeggieInput | null;
+  price?: ModelIntInput | null;
+  and?: Array<ModelSpecialityPizzaConditionInput | null> | null;
+  or?: Array<ModelSpecialityPizzaConditionInput | null> | null;
+  not?: ModelSpecialityPizzaConditionInput | null;
+};
+
+export type ModelPizzaSizeInput = {
+  eq?: PizzaSize | null;
+  ne?: PizzaSize | null;
+};
+
+export type ModelPizzaCrustInput = {
+  eq?: PizzaCrust | null;
+  ne?: PizzaCrust | null;
+};
+
+export type ModelPizzaSauceInput = {
+  eq?: PizzaSauce | null;
+  ne?: PizzaSauce | null;
+};
+
+export type ModelPizzaMeatInput = {
+  eq?: PizzaMeat | null;
+  ne?: PizzaMeat | null;
+};
+
+export type ModelPizzaVeggieInput = {
+  eq?: PizzaVeggie | null;
+  ne?: PizzaVeggie | null;
+};
+
+export type UpdateSpecialityPizzaInput = {
+  id: string;
+  size?: PizzaSize | null;
+  crust?: PizzaCrust | null;
+  sauce?: PizzaSauce | null;
+  cheese?: PizzaCheeseInput | null;
+  meats?: Array<PizzaMeat | null> | null;
+  veggies?: Array<PizzaVeggie | null> | null;
+  price?: number | null;
+};
+
+export type DeleteSpecialityPizzaInput = {
+  id: string;
+};
+
 export type ModelOrderFilterInput = {
   id?: ModelIDInput | null;
-  owner?: ModelStringInput | null;
-  orderNumber?: ModelStringInput | null;
-  orderDate?: ModelStringInput | null;
-  orderStatus?: ModelStringInput | null;
-  orderTotal?: ModelStringInput | null;
-  createdAt?: ModelStringInput | null;
-  updatedAt?: ModelStringInput | null;
+  name?: ModelStringInput | null;
+  timestamp?: ModelStringInput | null;
+  subtotal?: ModelIntInput | null;
+  tax?: ModelIntInput | null;
+  total?: ModelIntInput | null;
   and?: Array<ModelOrderFilterInput | null> | null;
   or?: Array<ModelOrderFilterInput | null> | null;
   not?: ModelOrderFilterInput | null;
@@ -141,15 +321,32 @@ export type ModelOrderConnection = {
   nextToken?: string | null;
 };
 
+export type ModelSpecialityPizzaFilterInput = {
+  id?: ModelIDInput | null;
+  size?: ModelPizzaSizeInput | null;
+  crust?: ModelPizzaCrustInput | null;
+  sauce?: ModelPizzaSauceInput | null;
+  meats?: ModelPizzaMeatInput | null;
+  veggies?: ModelPizzaVeggieInput | null;
+  price?: ModelIntInput | null;
+  and?: Array<ModelSpecialityPizzaFilterInput | null> | null;
+  or?: Array<ModelSpecialityPizzaFilterInput | null> | null;
+  not?: ModelSpecialityPizzaFilterInput | null;
+};
+
+export type ModelSpecialityPizzaConnection = {
+  __typename: "ModelSpecialityPizzaConnection";
+  items: Array<SpecialityPizza | null>;
+  nextToken?: string | null;
+};
+
 export type ModelSubscriptionOrderFilterInput = {
   id?: ModelSubscriptionIDInput | null;
-  owner?: ModelSubscriptionStringInput | null;
-  orderNumber?: ModelSubscriptionStringInput | null;
-  orderDate?: ModelSubscriptionStringInput | null;
-  orderStatus?: ModelSubscriptionStringInput | null;
-  orderTotal?: ModelSubscriptionStringInput | null;
-  createdAt?: ModelSubscriptionStringInput | null;
-  updatedAt?: ModelSubscriptionStringInput | null;
+  name?: ModelSubscriptionStringInput | null;
+  timestamp?: ModelSubscriptionStringInput | null;
+  subtotal?: ModelSubscriptionIntInput | null;
+  tax?: ModelSubscriptionIntInput | null;
+  total?: ModelSubscriptionIntInput | null;
   and?: Array<ModelSubscriptionOrderFilterInput | null> | null;
   or?: Array<ModelSubscriptionOrderFilterInput | null> | null;
 };
@@ -184,52 +381,258 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array<string | null> | null;
 };
 
+export type ModelSubscriptionIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  in?: Array<number | null> | null;
+  notIn?: Array<number | null> | null;
+};
+
+export type ModelSubscriptionSpecialityPizzaFilterInput = {
+  id?: ModelSubscriptionIDInput | null;
+  size?: ModelSubscriptionStringInput | null;
+  crust?: ModelSubscriptionStringInput | null;
+  sauce?: ModelSubscriptionStringInput | null;
+  meats?: ModelSubscriptionStringInput | null;
+  veggies?: ModelSubscriptionStringInput | null;
+  price?: ModelSubscriptionIntInput | null;
+  and?: Array<ModelSubscriptionSpecialityPizzaFilterInput | null> | null;
+  or?: Array<ModelSubscriptionSpecialityPizzaFilterInput | null> | null;
+};
+
 export type CreateOrderMutation = {
   __typename: "Order";
   id: string;
-  owner?: string | null;
-  orderNumber: string;
-  orderDate: string;
-  orderStatus: string;
-  orderTotal: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  customPizzas: Array<{
+    __typename: "CustomPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+  } | null>;
+  specialtyPizzas: Array<{
+    __typename: "SpecialityPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  name: string;
+  timestamp: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateOrderMutation = {
   __typename: "Order";
   id: string;
-  owner?: string | null;
-  orderNumber: string;
-  orderDate: string;
-  orderStatus: string;
-  orderTotal: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  customPizzas: Array<{
+    __typename: "CustomPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+  } | null>;
+  specialtyPizzas: Array<{
+    __typename: "SpecialityPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  name: string;
+  timestamp: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type DeleteOrderMutation = {
   __typename: "Order";
   id: string;
-  owner?: string | null;
-  orderNumber: string;
-  orderDate: string;
-  orderStatus: string;
-  orderTotal: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  customPizzas: Array<{
+    __typename: "CustomPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+  } | null>;
+  specialtyPizzas: Array<{
+    __typename: "SpecialityPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  name: string;
+  timestamp: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateSpecialityPizzaMutation = {
+  __typename: "SpecialityPizza";
+  id: string;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: {
+    __typename: "PizzaCheese";
+    quantity: CheeseQuantity;
+    additional?: AdditionCheeseType | null;
+  };
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateSpecialityPizzaMutation = {
+  __typename: "SpecialityPizza";
+  id: string;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: {
+    __typename: "PizzaCheese";
+    quantity: CheeseQuantity;
+    additional?: AdditionCheeseType | null;
+  };
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DeleteSpecialityPizzaMutation = {
+  __typename: "SpecialityPizza";
+  id: string;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: {
+    __typename: "PizzaCheese";
+    quantity: CheeseQuantity;
+    additional?: AdditionCheeseType | null;
+  };
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type GetOrderQuery = {
   __typename: "Order";
   id: string;
-  owner?: string | null;
-  orderNumber: string;
-  orderDate: string;
-  orderStatus: string;
-  orderTotal: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  customPizzas: Array<{
+    __typename: "CustomPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+  } | null>;
+  specialtyPizzas: Array<{
+    __typename: "SpecialityPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  name: string;
+  timestamp: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type ListOrdersQuery = {
@@ -237,13 +640,75 @@ export type ListOrdersQuery = {
   items: Array<{
     __typename: "Order";
     id: string;
-    owner?: string | null;
-    orderNumber: string;
-    orderDate: string;
-    orderStatus: string;
-    orderTotal: string;
-    createdAt?: string | null;
-    updatedAt?: string | null;
+    customPizzas: Array<{
+      __typename: "CustomPizza";
+      id: string;
+      size: PizzaSize;
+      crust: PizzaCrust;
+      sauce: PizzaSauce;
+      meats: Array<PizzaMeat | null>;
+      veggies: Array<PizzaVeggie | null>;
+      price: number;
+    } | null>;
+    specialtyPizzas: Array<{
+      __typename: "SpecialityPizza";
+      id: string;
+      size: PizzaSize;
+      crust: PizzaCrust;
+      sauce: PizzaSauce;
+      meats: Array<PizzaMeat | null>;
+      veggies: Array<PizzaVeggie | null>;
+      price: number;
+      createdAt: string;
+      updatedAt: string;
+    } | null>;
+    name: string;
+    timestamp: string;
+    subtotal: number;
+    tax: number;
+    total: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  nextToken?: string | null;
+};
+
+export type GetSpecialityPizzaQuery = {
+  __typename: "SpecialityPizza";
+  id: string;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: {
+    __typename: "PizzaCheese";
+    quantity: CheeseQuantity;
+    additional?: AdditionCheeseType | null;
+  };
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListSpecialityPizzasQuery = {
+  __typename: "ModelSpecialityPizzaConnection";
+  items: Array<{
+    __typename: "SpecialityPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+    createdAt: string;
+    updatedAt: string;
   } | null>;
   nextToken?: string | null;
 };
@@ -251,37 +716,187 @@ export type ListOrdersQuery = {
 export type OnCreateOrderSubscription = {
   __typename: "Order";
   id: string;
-  owner?: string | null;
-  orderNumber: string;
-  orderDate: string;
-  orderStatus: string;
-  orderTotal: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  customPizzas: Array<{
+    __typename: "CustomPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+  } | null>;
+  specialtyPizzas: Array<{
+    __typename: "SpecialityPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  name: string;
+  timestamp: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnUpdateOrderSubscription = {
   __typename: "Order";
   id: string;
-  owner?: string | null;
-  orderNumber: string;
-  orderDate: string;
-  orderStatus: string;
-  orderTotal: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  customPizzas: Array<{
+    __typename: "CustomPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+  } | null>;
+  specialtyPizzas: Array<{
+    __typename: "SpecialityPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  name: string;
+  timestamp: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnDeleteOrderSubscription = {
   __typename: "Order";
   id: string;
-  owner?: string | null;
-  orderNumber: string;
-  orderDate: string;
-  orderStatus: string;
-  orderTotal: string;
-  createdAt?: string | null;
-  updatedAt?: string | null;
+  customPizzas: Array<{
+    __typename: "CustomPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+  } | null>;
+  specialtyPizzas: Array<{
+    __typename: "SpecialityPizza";
+    id: string;
+    size: PizzaSize;
+    crust: PizzaCrust;
+    sauce: PizzaSauce;
+    cheese: {
+      __typename: "PizzaCheese";
+      quantity: CheeseQuantity;
+      additional?: AdditionCheeseType | null;
+    };
+    meats: Array<PizzaMeat | null>;
+    veggies: Array<PizzaVeggie | null>;
+    price: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null>;
+  name: string;
+  timestamp: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnCreateSpecialityPizzaSubscription = {
+  __typename: "SpecialityPizza";
+  id: string;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: {
+    __typename: "PizzaCheese";
+    quantity: CheeseQuantity;
+    additional?: AdditionCheeseType | null;
+  };
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnUpdateSpecialityPizzaSubscription = {
+  __typename: "SpecialityPizza";
+  id: string;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: {
+    __typename: "PizzaCheese";
+    quantity: CheeseQuantity;
+    additional?: AdditionCheeseType | null;
+  };
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type OnDeleteSpecialityPizzaSubscription = {
+  __typename: "SpecialityPizza";
+  id: string;
+  size: PizzaSize;
+  crust: PizzaCrust;
+  sauce: PizzaSauce;
+  cheese: {
+    __typename: "PizzaCheese";
+    quantity: CheeseQuantity;
+    additional?: AdditionCheeseType | null;
+  };
+  meats: Array<PizzaMeat | null>;
+  veggies: Array<PizzaVeggie | null>;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 @Injectable({
@@ -296,11 +911,43 @@ export class APIService {
         createOrder(input: $input, condition: $condition) {
           __typename
           id
-          owner
-          orderNumber
-          orderDate
-          orderStatus
-          orderTotal
+          customPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+          }
+          specialtyPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+            createdAt
+            updatedAt
+          }
+          name
+          timestamp
+          subtotal
+          tax
+          total
           createdAt
           updatedAt
         }
@@ -324,11 +971,43 @@ export class APIService {
         updateOrder(input: $input, condition: $condition) {
           __typename
           id
-          owner
-          orderNumber
-          orderDate
-          orderStatus
-          orderTotal
+          customPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+          }
+          specialtyPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+            createdAt
+            updatedAt
+          }
+          name
+          timestamp
+          subtotal
+          tax
+          total
           createdAt
           updatedAt
         }
@@ -352,11 +1031,43 @@ export class APIService {
         deleteOrder(input: $input, condition: $condition) {
           __typename
           id
-          owner
-          orderNumber
-          orderDate
-          orderStatus
-          orderTotal
+          customPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+          }
+          specialtyPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+            createdAt
+            updatedAt
+          }
+          name
+          timestamp
+          subtotal
+          tax
+          total
           createdAt
           updatedAt
         }
@@ -372,16 +1083,150 @@ export class APIService {
     )) as any;
     return <DeleteOrderMutation>response.data.deleteOrder;
   }
+  async CreateSpecialityPizza(
+    input: CreateSpecialityPizzaInput,
+    condition?: ModelSpecialityPizzaConditionInput
+  ): Promise<CreateSpecialityPizzaMutation> {
+    const statement = `mutation CreateSpecialityPizza($input: CreateSpecialityPizzaInput!, $condition: ModelSpecialityPizzaConditionInput) {
+        createSpecialityPizza(input: $input, condition: $condition) {
+          __typename
+          id
+          size
+          crust
+          sauce
+          cheese {
+            __typename
+            quantity
+            additional
+          }
+          meats
+          veggies
+          price
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateSpecialityPizzaMutation>response.data.createSpecialityPizza;
+  }
+  async UpdateSpecialityPizza(
+    input: UpdateSpecialityPizzaInput,
+    condition?: ModelSpecialityPizzaConditionInput
+  ): Promise<UpdateSpecialityPizzaMutation> {
+    const statement = `mutation UpdateSpecialityPizza($input: UpdateSpecialityPizzaInput!, $condition: ModelSpecialityPizzaConditionInput) {
+        updateSpecialityPizza(input: $input, condition: $condition) {
+          __typename
+          id
+          size
+          crust
+          sauce
+          cheese {
+            __typename
+            quantity
+            additional
+          }
+          meats
+          veggies
+          price
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateSpecialityPizzaMutation>response.data.updateSpecialityPizza;
+  }
+  async DeleteSpecialityPizza(
+    input: DeleteSpecialityPizzaInput,
+    condition?: ModelSpecialityPizzaConditionInput
+  ): Promise<DeleteSpecialityPizzaMutation> {
+    const statement = `mutation DeleteSpecialityPizza($input: DeleteSpecialityPizzaInput!, $condition: ModelSpecialityPizzaConditionInput) {
+        deleteSpecialityPizza(input: $input, condition: $condition) {
+          __typename
+          id
+          size
+          crust
+          sauce
+          cheese {
+            __typename
+            quantity
+            additional
+          }
+          meats
+          veggies
+          price
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteSpecialityPizzaMutation>response.data.deleteSpecialityPizza;
+  }
   async GetOrder(id: string): Promise<GetOrderQuery> {
     const statement = `query GetOrder($id: ID!) {
         getOrder(id: $id) {
           __typename
           id
-          owner
-          orderNumber
-          orderDate
-          orderStatus
-          orderTotal
+          customPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+          }
+          specialtyPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+            createdAt
+            updatedAt
+          }
+          name
+          timestamp
+          subtotal
+          tax
+          total
           createdAt
           updatedAt
         }
@@ -405,11 +1250,33 @@ export class APIService {
           items {
             __typename
             id
-            owner
-            orderNumber
-            orderDate
-            orderStatus
-            orderTotal
+            customPizzas {
+              __typename
+              id
+              size
+              crust
+              sauce
+              meats
+              veggies
+              price
+            }
+            specialtyPizzas {
+              __typename
+              id
+              size
+              crust
+              sauce
+              meats
+              veggies
+              price
+              createdAt
+              updatedAt
+            }
+            name
+            timestamp
+            subtotal
+            tax
+            total
             createdAt
             updatedAt
           }
@@ -431,6 +1298,77 @@ export class APIService {
     )) as any;
     return <ListOrdersQuery>response.data.listOrders;
   }
+  async GetSpecialityPizza(id: string): Promise<GetSpecialityPizzaQuery> {
+    const statement = `query GetSpecialityPizza($id: ID!) {
+        getSpecialityPizza(id: $id) {
+          __typename
+          id
+          size
+          crust
+          sauce
+          cheese {
+            __typename
+            quantity
+            additional
+          }
+          meats
+          veggies
+          price
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetSpecialityPizzaQuery>response.data.getSpecialityPizza;
+  }
+  async ListSpecialityPizzas(
+    filter?: ModelSpecialityPizzaFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListSpecialityPizzasQuery> {
+    const statement = `query ListSpecialityPizzas($filter: ModelSpecialityPizzaFilterInput, $limit: Int, $nextToken: String) {
+        listSpecialityPizzas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListSpecialityPizzasQuery>response.data.listSpecialityPizzas;
+  }
   OnCreateOrderListener(
     filter?: ModelSubscriptionOrderFilterInput
   ): Observable<
@@ -440,11 +1378,43 @@ export class APIService {
         onCreateOrder(filter: $filter) {
           __typename
           id
-          owner
-          orderNumber
-          orderDate
-          orderStatus
-          orderTotal
+          customPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+          }
+          specialtyPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+            createdAt
+            updatedAt
+          }
+          name
+          timestamp
+          subtotal
+          tax
+          total
           createdAt
           updatedAt
         }
@@ -469,11 +1439,43 @@ export class APIService {
         onUpdateOrder(filter: $filter) {
           __typename
           id
-          owner
-          orderNumber
-          orderDate
-          orderStatus
-          orderTotal
+          customPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+          }
+          specialtyPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+            createdAt
+            updatedAt
+          }
+          name
+          timestamp
+          subtotal
+          tax
+          total
           createdAt
           updatedAt
         }
@@ -498,11 +1500,43 @@ export class APIService {
         onDeleteOrder(filter: $filter) {
           __typename
           id
-          owner
-          orderNumber
-          orderDate
-          orderStatus
-          orderTotal
+          customPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+          }
+          specialtyPizzas {
+            __typename
+            id
+            size
+            crust
+            sauce
+            cheese {
+              __typename
+              quantity
+              additional
+            }
+            meats
+            veggies
+            price
+            createdAt
+            updatedAt
+          }
+          name
+          timestamp
+          subtotal
+          tax
+          total
           createdAt
           updatedAt
         }
@@ -515,6 +1549,123 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
       SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOrder">>
+    >;
+  }
+
+  OnCreateSpecialityPizzaListener(
+    filter?: ModelSubscriptionSpecialityPizzaFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onCreateSpecialityPizza">
+    >
+  > {
+    const statement = `subscription OnCreateSpecialityPizza($filter: ModelSubscriptionSpecialityPizzaFilterInput) {
+        onCreateSpecialityPizza(filter: $filter) {
+          __typename
+          id
+          size
+          crust
+          sauce
+          cheese {
+            __typename
+            quantity
+            additional
+          }
+          meats
+          veggies
+          price
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onCreateSpecialityPizza">
+      >
+    >;
+  }
+
+  OnUpdateSpecialityPizzaListener(
+    filter?: ModelSubscriptionSpecialityPizzaFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onUpdateSpecialityPizza">
+    >
+  > {
+    const statement = `subscription OnUpdateSpecialityPizza($filter: ModelSubscriptionSpecialityPizzaFilterInput) {
+        onUpdateSpecialityPizza(filter: $filter) {
+          __typename
+          id
+          size
+          crust
+          sauce
+          cheese {
+            __typename
+            quantity
+            additional
+          }
+          meats
+          veggies
+          price
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onUpdateSpecialityPizza">
+      >
+    >;
+  }
+
+  OnDeleteSpecialityPizzaListener(
+    filter?: ModelSubscriptionSpecialityPizzaFilterInput
+  ): Observable<
+    SubscriptionResponse<
+      Pick<__SubscriptionContainer, "onDeleteSpecialityPizza">
+    >
+  > {
+    const statement = `subscription OnDeleteSpecialityPizza($filter: ModelSubscriptionSpecialityPizzaFilterInput) {
+        onDeleteSpecialityPizza(filter: $filter) {
+          __typename
+          id
+          size
+          crust
+          sauce
+          cheese {
+            __typename
+            quantity
+            additional
+          }
+          meats
+          veggies
+          price
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    return API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    ) as Observable<
+      SubscriptionResponse<
+        Pick<__SubscriptionContainer, "onDeleteSpecialityPizza">
+      >
     >;
   }
 }

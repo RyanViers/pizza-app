@@ -2,11 +2,39 @@
 query GetOrder($id: ID!) {
   getOrder(id: $id) {
     id
-    owner
-    orderNumber
-    orderDate
-    orderStatus
-    orderTotal
+    customPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    specialtyPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+      createdAt
+      updatedAt
+    }
+    name
+    timestamp
+    subtotal
+    tax
+    total
     createdAt
     updatedAt
   }
@@ -19,11 +47,72 @@ query ListOrders(
   listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      owner
-      orderNumber
-      orderDate
-      orderStatus
-      orderTotal
+      customPizzas {
+        id
+        size
+        crust
+        sauce
+        meats
+        veggies
+        price
+      }
+      specialtyPizzas {
+        id
+        size
+        crust
+        sauce
+        meats
+        veggies
+        price
+        createdAt
+        updatedAt
+      }
+      name
+      timestamp
+      subtotal
+      tax
+      total
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetSpecialityPizza($id: ID!) {
+  getSpecialityPizza(id: $id) {
+    id
+    size
+    crust
+    sauce
+    cheese {
+      quantity
+      additional
+    }
+    meats
+    veggies
+    price
+    createdAt
+    updatedAt
+  }
+}
+query ListSpecialityPizzas(
+  $filter: ModelSpecialityPizzaFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSpecialityPizzas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
       createdAt
       updatedAt
     }
