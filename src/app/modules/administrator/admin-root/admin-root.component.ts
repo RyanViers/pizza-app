@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-admin-root',
@@ -18,7 +19,7 @@ import { EmployeeListComponent } from './components/employee-list/employee-list.
   ],
 })
 export class AdminRootComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apollo: Apollo) {}
 
   ngOnInit() {}
 
