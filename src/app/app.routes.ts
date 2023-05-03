@@ -6,25 +6,31 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
   },
   {
-    path: 'admin',
-    loadComponent: () =>
-      import('./modules/administrator/admin-root/admin-root.component').then(
-        (m) => m.AdminRootComponent
-      ),
-  },
-  {
-    path: 'employee',
-    loadComponent: () =>
-      import('./modules/employee/employee-root/employee-root.component').then(
-        (m) => m.EmployeeRootComponent
-      ),
-  },
-  {
-    path: 'customer',
-    loadComponent: () =>
-      import('./modules/customer/customer-root/customer-root.component').then(
-        (m) => m.CustomerRootComponent
-      ),
+    path: 'pizza',
+    loadComponent: () => import('./pizza/pizza.component').then((m) => m.PizzaComponent),
+    children: [
+      {
+        path: 'base',
+        loadComponent: () => import('./pizza/components/base.component').then((m) => m.BaseComponent),
+      },
+      {
+        path: 'cheese',
+        loadComponent: () => import('./pizza/components/cheese.component').then((m) => m.CheeseComponent),
+      },
+      {
+        path: 'meat',
+        loadComponent: () => import('./pizza/components/meat.component').then((m) => m.MeatComponent),
+      },
+      {
+        path: 'veggie',
+        loadComponent: () => import('./pizza/components/veggie.component').then((m) => m.VeggieComponent),
+      },
+      {
+        path: '**',
+        redirectTo: 'base',
+        pathMatch: 'full',
+      },
+    ]
   },
   {
     path: '**',

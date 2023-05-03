@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { EmployeeRootComponent } from './modules/employee/employee-root/employee-root.component';
-import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +13,10 @@ import { Amplify, API, graphqlOperation } from 'aws-amplify';
     `,
   ],
   standalone: true,
-  imports: [CommonModule, IonicModule, EmployeeRootComponent],
+  imports: [CommonModule, IonicModule],
+  providers: []
 })
 export class AppComponent {
+
   constructor() {}
 }

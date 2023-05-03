@@ -10,26 +10,33 @@ export interface SubscriptionResponse<T> {
 }
 
 export type __SubscriptionContainer = {
-  onCreateEmployee: OnCreateEmployeeSubscription;
-  onUpdateEmployee: OnUpdateEmployeeSubscription;
-  onDeleteEmployee: OnDeleteEmployeeSubscription;
-  onCreateAddress: OnCreateAddressSubscription;
-  onUpdateAddress: OnUpdateAddressSubscription;
-  onDeleteAddress: OnDeleteAddressSubscription;
+  onCreateOrder: OnCreateOrderSubscription;
+  onUpdateOrder: OnUpdateOrderSubscription;
+  onDeleteOrder: OnDeleteOrderSubscription;
 };
 
-export type CreateEmployeeInput = {
+export type CreateOrderInput = {
   id?: string | null;
-  name: string;
-  age?: string | null;
+  owner?: string | null;
+  orderNumber: string;
+  orderDate: string;
+  orderStatus: string;
+  orderTotal: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
-export type ModelEmployeeConditionInput = {
-  name?: ModelStringInput | null;
-  age?: ModelStringInput | null;
-  and?: Array<ModelEmployeeConditionInput | null> | null;
-  or?: Array<ModelEmployeeConditionInput | null> | null;
-  not?: ModelEmployeeConditionInput | null;
+export type ModelOrderConditionInput = {
+  owner?: ModelStringInput | null;
+  orderNumber?: ModelStringInput | null;
+  orderDate?: ModelStringInput | null;
+  orderStatus?: ModelStringInput | null;
+  orderTotal?: ModelStringInput | null;
+  createdAt?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
+  and?: Array<ModelOrderConditionInput | null> | null;
+  or?: Array<ModelOrderConditionInput | null> | null;
+  not?: ModelOrderConditionInput | null;
 };
 
 export type ModelStringInput = {
@@ -71,63 +78,45 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type Employee = {
-  __typename: "Employee";
+export type Order = {
+  __typename: "Order";
   id: string;
-  name: string;
-  age?: string | null;
-  address?: ModelAddressConnection | null;
-  createdAt: string;
-  updatedAt: string;
+  owner?: string | null;
+  orderNumber: string;
+  orderDate: string;
+  orderStatus: string;
+  orderTotal: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
-export type ModelAddressConnection = {
-  __typename: "ModelAddressConnection";
-  items: Array<Address | null>;
-  nextToken?: string | null;
-};
-
-export type Address = {
-  __typename: "Address";
+export type UpdateOrderInput = {
   id: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  employeeID: string;
-  employee?: Employee | null;
-  createdAt: string;
-  updatedAt: string;
+  owner?: string | null;
+  orderNumber?: string | null;
+  orderDate?: string | null;
+  orderStatus?: string | null;
+  orderTotal?: string | null;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
-export type UpdateEmployeeInput = {
-  id: string;
-  name?: string | null;
-  age?: string | null;
-};
-
-export type DeleteEmployeeInput = {
+export type DeleteOrderInput = {
   id: string;
 };
 
-export type CreateAddressInput = {
-  id?: string | null;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  employeeID: string;
-};
-
-export type ModelAddressConditionInput = {
-  street?: ModelStringInput | null;
-  city?: ModelStringInput | null;
-  state?: ModelStringInput | null;
-  zip?: ModelStringInput | null;
-  employeeID?: ModelIDInput | null;
-  and?: Array<ModelAddressConditionInput | null> | null;
-  or?: Array<ModelAddressConditionInput | null> | null;
-  not?: ModelAddressConditionInput | null;
+export type ModelOrderFilterInput = {
+  id?: ModelIDInput | null;
+  owner?: ModelStringInput | null;
+  orderNumber?: ModelStringInput | null;
+  orderDate?: ModelStringInput | null;
+  orderStatus?: ModelStringInput | null;
+  orderTotal?: ModelStringInput | null;
+  createdAt?: ModelStringInput | null;
+  updatedAt?: ModelStringInput | null;
+  and?: Array<ModelOrderFilterInput | null> | null;
+  or?: Array<ModelOrderFilterInput | null> | null;
+  not?: ModelOrderFilterInput | null;
 };
 
 export type ModelIDInput = {
@@ -146,57 +135,23 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null;
 };
 
-export type UpdateAddressInput = {
-  id: string;
-  street?: string | null;
-  city?: string | null;
-  state?: string | null;
-  zip?: string | null;
-  employeeID?: string | null;
-};
-
-export type DeleteAddressInput = {
-  id: string;
-};
-
-export type ModelEmployeeFilterInput = {
-  id?: ModelIDInput | null;
-  name?: ModelStringInput | null;
-  age?: ModelStringInput | null;
-  and?: Array<ModelEmployeeFilterInput | null> | null;
-  or?: Array<ModelEmployeeFilterInput | null> | null;
-  not?: ModelEmployeeFilterInput | null;
-};
-
-export type ModelEmployeeConnection = {
-  __typename: "ModelEmployeeConnection";
-  items: Array<Employee | null>;
+export type ModelOrderConnection = {
+  __typename: "ModelOrderConnection";
+  items: Array<Order | null>;
   nextToken?: string | null;
 };
 
-export type ModelAddressFilterInput = {
-  id?: ModelIDInput | null;
-  street?: ModelStringInput | null;
-  city?: ModelStringInput | null;
-  state?: ModelStringInput | null;
-  zip?: ModelStringInput | null;
-  employeeID?: ModelIDInput | null;
-  and?: Array<ModelAddressFilterInput | null> | null;
-  or?: Array<ModelAddressFilterInput | null> | null;
-  not?: ModelAddressFilterInput | null;
-};
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC"
-}
-
-export type ModelSubscriptionEmployeeFilterInput = {
+export type ModelSubscriptionOrderFilterInput = {
   id?: ModelSubscriptionIDInput | null;
-  name?: ModelSubscriptionStringInput | null;
-  age?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionEmployeeFilterInput | null> | null;
-  or?: Array<ModelSubscriptionEmployeeFilterInput | null> | null;
+  owner?: ModelSubscriptionStringInput | null;
+  orderNumber?: ModelSubscriptionStringInput | null;
+  orderDate?: ModelSubscriptionStringInput | null;
+  orderStatus?: ModelSubscriptionStringInput | null;
+  orderTotal?: ModelSubscriptionStringInput | null;
+  createdAt?: ModelSubscriptionStringInput | null;
+  updatedAt?: ModelSubscriptionStringInput | null;
+  and?: Array<ModelSubscriptionOrderFilterInput | null> | null;
+  or?: Array<ModelSubscriptionOrderFilterInput | null> | null;
 };
 
 export type ModelSubscriptionIDInput = {
@@ -229,447 +184,123 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array<string | null> | null;
 };
 
-export type ModelSubscriptionAddressFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  street?: ModelSubscriptionStringInput | null;
-  city?: ModelSubscriptionStringInput | null;
-  state?: ModelSubscriptionStringInput | null;
-  zip?: ModelSubscriptionStringInput | null;
-  employeeID?: ModelSubscriptionIDInput | null;
-  and?: Array<ModelSubscriptionAddressFilterInput | null> | null;
-  or?: Array<ModelSubscriptionAddressFilterInput | null> | null;
-};
-
-export type CreateEmployeeMutation = {
-  __typename: "Employee";
+export type CreateOrderMutation = {
+  __typename: "Order";
   id: string;
-  name: string;
-  age?: string | null;
-  address?: {
-    __typename: "ModelAddressConnection";
-    items: Array<{
-      __typename: "Address";
-      id: string;
-      street: string;
-      city: string;
-      state: string;
-      zip: string;
-      employeeID: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
+  owner?: string | null;
+  orderNumber: string;
+  orderDate: string;
+  orderStatus: string;
+  orderTotal: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
-export type UpdateEmployeeMutation = {
-  __typename: "Employee";
+export type UpdateOrderMutation = {
+  __typename: "Order";
   id: string;
-  name: string;
-  age?: string | null;
-  address?: {
-    __typename: "ModelAddressConnection";
-    items: Array<{
-      __typename: "Address";
-      id: string;
-      street: string;
-      city: string;
-      state: string;
-      zip: string;
-      employeeID: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
+  owner?: string | null;
+  orderNumber: string;
+  orderDate: string;
+  orderStatus: string;
+  orderTotal: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
-export type DeleteEmployeeMutation = {
-  __typename: "Employee";
+export type DeleteOrderMutation = {
+  __typename: "Order";
   id: string;
-  name: string;
-  age?: string | null;
-  address?: {
-    __typename: "ModelAddressConnection";
-    items: Array<{
-      __typename: "Address";
-      id: string;
-      street: string;
-      city: string;
-      state: string;
-      zip: string;
-      employeeID: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
+  owner?: string | null;
+  orderNumber: string;
+  orderDate: string;
+  orderStatus: string;
+  orderTotal: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
-export type CreateAddressMutation = {
-  __typename: "Address";
+export type GetOrderQuery = {
+  __typename: "Order";
   id: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  employeeID: string;
-  employee?: {
-    __typename: "Employee";
-    id: string;
-    name: string;
-    age?: string | null;
-    address?: {
-      __typename: "ModelAddressConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
+  owner?: string | null;
+  orderNumber: string;
+  orderDate: string;
+  orderStatus: string;
+  orderTotal: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
-export type UpdateAddressMutation = {
-  __typename: "Address";
-  id: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  employeeID: string;
-  employee?: {
-    __typename: "Employee";
-    id: string;
-    name: string;
-    age?: string | null;
-    address?: {
-      __typename: "ModelAddressConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type DeleteAddressMutation = {
-  __typename: "Address";
-  id: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  employeeID: string;
-  employee?: {
-    __typename: "Employee";
-    id: string;
-    name: string;
-    age?: string | null;
-    address?: {
-      __typename: "ModelAddressConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type GetEmployeeQuery = {
-  __typename: "Employee";
-  id: string;
-  name: string;
-  age?: string | null;
-  address?: {
-    __typename: "ModelAddressConnection";
-    items: Array<{
-      __typename: "Address";
-      id: string;
-      street: string;
-      city: string;
-      state: string;
-      zip: string;
-      employeeID: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type ListEmployeesQuery = {
-  __typename: "ModelEmployeeConnection";
+export type ListOrdersQuery = {
+  __typename: "ModelOrderConnection";
   items: Array<{
-    __typename: "Employee";
+    __typename: "Order";
     id: string;
-    name: string;
-    age?: string | null;
-    address?: {
-      __typename: "ModelAddressConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
+    owner?: string | null;
+    orderNumber: string;
+    orderDate: string;
+    orderStatus: string;
+    orderTotal: string;
+    createdAt?: string | null;
+    updatedAt?: string | null;
   } | null>;
   nextToken?: string | null;
 };
 
-export type GetAddressQuery = {
-  __typename: "Address";
+export type OnCreateOrderSubscription = {
+  __typename: "Order";
   id: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  employeeID: string;
-  employee?: {
-    __typename: "Employee";
-    id: string;
-    name: string;
-    age?: string | null;
-    address?: {
-      __typename: "ModelAddressConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
+  owner?: string | null;
+  orderNumber: string;
+  orderDate: string;
+  orderStatus: string;
+  orderTotal: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
-export type ListAddressesQuery = {
-  __typename: "ModelAddressConnection";
-  items: Array<{
-    __typename: "Address";
-    id: string;
-    street: string;
-    city: string;
-    state: string;
-    zip: string;
-    employeeID: string;
-    employee?: {
-      __typename: "Employee";
-      id: string;
-      name: string;
-      age?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type AddressesByEmployeeIDQuery = {
-  __typename: "ModelAddressConnection";
-  items: Array<{
-    __typename: "Address";
-    id: string;
-    street: string;
-    city: string;
-    state: string;
-    zip: string;
-    employeeID: string;
-    employee?: {
-      __typename: "Employee";
-      id: string;
-      name: string;
-      age?: string | null;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null>;
-  nextToken?: string | null;
-};
-
-export type OnCreateEmployeeSubscription = {
-  __typename: "Employee";
+export type OnUpdateOrderSubscription = {
+  __typename: "Order";
   id: string;
-  name: string;
-  age?: string | null;
-  address?: {
-    __typename: "ModelAddressConnection";
-    items: Array<{
-      __typename: "Address";
-      id: string;
-      street: string;
-      city: string;
-      state: string;
-      zip: string;
-      employeeID: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
+  owner?: string | null;
+  orderNumber: string;
+  orderDate: string;
+  orderStatus: string;
+  orderTotal: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
-export type OnUpdateEmployeeSubscription = {
-  __typename: "Employee";
+export type OnDeleteOrderSubscription = {
+  __typename: "Order";
   id: string;
-  name: string;
-  age?: string | null;
-  address?: {
-    __typename: "ModelAddressConnection";
-    items: Array<{
-      __typename: "Address";
-      id: string;
-      street: string;
-      city: string;
-      state: string;
-      zip: string;
-      employeeID: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteEmployeeSubscription = {
-  __typename: "Employee";
-  id: string;
-  name: string;
-  age?: string | null;
-  address?: {
-    __typename: "ModelAddressConnection";
-    items: Array<{
-      __typename: "Address";
-      id: string;
-      street: string;
-      city: string;
-      state: string;
-      zip: string;
-      employeeID: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null>;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnCreateAddressSubscription = {
-  __typename: "Address";
-  id: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  employeeID: string;
-  employee?: {
-    __typename: "Employee";
-    id: string;
-    name: string;
-    age?: string | null;
-    address?: {
-      __typename: "ModelAddressConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnUpdateAddressSubscription = {
-  __typename: "Address";
-  id: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  employeeID: string;
-  employee?: {
-    __typename: "Employee";
-    id: string;
-    name: string;
-    age?: string | null;
-    address?: {
-      __typename: "ModelAddressConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type OnDeleteAddressSubscription = {
-  __typename: "Address";
-  id: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-  employeeID: string;
-  employee?: {
-    __typename: "Employee";
-    id: string;
-    name: string;
-    age?: string | null;
-    address?: {
-      __typename: "ModelAddressConnection";
-      nextToken?: string | null;
-    } | null;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
+  owner?: string | null;
+  orderNumber: string;
+  orderDate: string;
+  orderStatus: string;
+  orderTotal: string;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 };
 
 @Injectable({
   providedIn: "root"
 })
 export class APIService {
-  async CreateEmployee(
-    input: CreateEmployeeInput,
-    condition?: ModelEmployeeConditionInput
-  ): Promise<CreateEmployeeMutation> {
-    const statement = `mutation CreateEmployee($input: CreateEmployeeInput!, $condition: ModelEmployeeConditionInput) {
-        createEmployee(input: $input, condition: $condition) {
+  async CreateOrder(
+    input: CreateOrderInput,
+    condition?: ModelOrderConditionInput
+  ): Promise<CreateOrderMutation> {
+    const statement = `mutation CreateOrder($input: CreateOrderInput!, $condition: ModelOrderConditionInput) {
+        createOrder(input: $input, condition: $condition) {
           __typename
           id
-          name
-          age
-          address {
-            __typename
-            items {
-              __typename
-              id
-              street
-              city
-              state
-              zip
-              employeeID
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          owner
+          orderNumber
+          orderDate
+          orderStatus
+          orderTotal
           createdAt
           updatedAt
         }
@@ -683,33 +314,21 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <CreateEmployeeMutation>response.data.createEmployee;
+    return <CreateOrderMutation>response.data.createOrder;
   }
-  async UpdateEmployee(
-    input: UpdateEmployeeInput,
-    condition?: ModelEmployeeConditionInput
-  ): Promise<UpdateEmployeeMutation> {
-    const statement = `mutation UpdateEmployee($input: UpdateEmployeeInput!, $condition: ModelEmployeeConditionInput) {
-        updateEmployee(input: $input, condition: $condition) {
+  async UpdateOrder(
+    input: UpdateOrderInput,
+    condition?: ModelOrderConditionInput
+  ): Promise<UpdateOrderMutation> {
+    const statement = `mutation UpdateOrder($input: UpdateOrderInput!, $condition: ModelOrderConditionInput) {
+        updateOrder(input: $input, condition: $condition) {
           __typename
           id
-          name
-          age
-          address {
-            __typename
-            items {
-              __typename
-              id
-              street
-              city
-              state
-              zip
-              employeeID
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          owner
+          orderNumber
+          orderDate
+          orderStatus
+          orderTotal
           createdAt
           updatedAt
         }
@@ -723,33 +342,21 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <UpdateEmployeeMutation>response.data.updateEmployee;
+    return <UpdateOrderMutation>response.data.updateOrder;
   }
-  async DeleteEmployee(
-    input: DeleteEmployeeInput,
-    condition?: ModelEmployeeConditionInput
-  ): Promise<DeleteEmployeeMutation> {
-    const statement = `mutation DeleteEmployee($input: DeleteEmployeeInput!, $condition: ModelEmployeeConditionInput) {
-        deleteEmployee(input: $input, condition: $condition) {
+  async DeleteOrder(
+    input: DeleteOrderInput,
+    condition?: ModelOrderConditionInput
+  ): Promise<DeleteOrderMutation> {
+    const statement = `mutation DeleteOrder($input: DeleteOrderInput!, $condition: ModelOrderConditionInput) {
+        deleteOrder(input: $input, condition: $condition) {
           __typename
           id
-          name
-          age
-          address {
-            __typename
-            items {
-              __typename
-              id
-              street
-              city
-              state
-              zip
-              employeeID
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          owner
+          orderNumber
+          orderDate
+          orderStatus
+          orderTotal
           createdAt
           updatedAt
         }
@@ -763,150 +370,18 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <DeleteEmployeeMutation>response.data.deleteEmployee;
+    return <DeleteOrderMutation>response.data.deleteOrder;
   }
-  async CreateAddress(
-    input: CreateAddressInput,
-    condition?: ModelAddressConditionInput
-  ): Promise<CreateAddressMutation> {
-    const statement = `mutation CreateAddress($input: CreateAddressInput!, $condition: ModelAddressConditionInput) {
-        createAddress(input: $input, condition: $condition) {
+  async GetOrder(id: string): Promise<GetOrderQuery> {
+    const statement = `query GetOrder($id: ID!) {
+        getOrder(id: $id) {
           __typename
           id
-          street
-          city
-          state
-          zip
-          employeeID
-          employee {
-            __typename
-            id
-            name
-            age
-            address {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <CreateAddressMutation>response.data.createAddress;
-  }
-  async UpdateAddress(
-    input: UpdateAddressInput,
-    condition?: ModelAddressConditionInput
-  ): Promise<UpdateAddressMutation> {
-    const statement = `mutation UpdateAddress($input: UpdateAddressInput!, $condition: ModelAddressConditionInput) {
-        updateAddress(input: $input, condition: $condition) {
-          __typename
-          id
-          street
-          city
-          state
-          zip
-          employeeID
-          employee {
-            __typename
-            id
-            name
-            age
-            address {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <UpdateAddressMutation>response.data.updateAddress;
-  }
-  async DeleteAddress(
-    input: DeleteAddressInput,
-    condition?: ModelAddressConditionInput
-  ): Promise<DeleteAddressMutation> {
-    const statement = `mutation DeleteAddress($input: DeleteAddressInput!, $condition: ModelAddressConditionInput) {
-        deleteAddress(input: $input, condition: $condition) {
-          __typename
-          id
-          street
-          city
-          state
-          zip
-          employeeID
-          employee {
-            __typename
-            id
-            name
-            age
-            address {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      input
-    };
-    if (condition) {
-      gqlAPIServiceArguments.condition = condition;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <DeleteAddressMutation>response.data.deleteAddress;
-  }
-  async GetEmployee(id: string): Promise<GetEmployeeQuery> {
-    const statement = `query GetEmployee($id: ID!) {
-        getEmployee(id: $id) {
-          __typename
-          id
-          name
-          age
-          address {
-            __typename
-            items {
-              __typename
-              id
-              street
-              city
-              state
-              zip
-              employeeID
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          owner
+          orderNumber
+          orderDate
+          orderStatus
+          orderTotal
           createdAt
           updatedAt
         }
@@ -917,25 +392,24 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <GetEmployeeQuery>response.data.getEmployee;
+    return <GetOrderQuery>response.data.getOrder;
   }
-  async ListEmployees(
-    filter?: ModelEmployeeFilterInput,
+  async ListOrders(
+    filter?: ModelOrderFilterInput,
     limit?: number,
     nextToken?: string
-  ): Promise<ListEmployeesQuery> {
-    const statement = `query ListEmployees($filter: ModelEmployeeFilterInput, $limit: Int, $nextToken: String) {
-        listEmployees(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  ): Promise<ListOrdersQuery> {
+    const statement = `query ListOrders($filter: ModelOrderFilterInput, $limit: Int, $nextToken: String) {
+        listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
           items {
             __typename
             id
-            name
-            age
-            address {
-              __typename
-              nextToken
-            }
+            owner
+            orderNumber
+            orderDate
+            orderStatus
+            orderTotal
             createdAt
             updatedAt
           }
@@ -955,171 +429,22 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <ListEmployeesQuery>response.data.listEmployees;
+    return <ListOrdersQuery>response.data.listOrders;
   }
-  async GetAddress(id: string): Promise<GetAddressQuery> {
-    const statement = `query GetAddress($id: ID!) {
-        getAddress(id: $id) {
-          __typename
-          id
-          street
-          city
-          state
-          zip
-          employeeID
-          employee {
-            __typename
-            id
-            name
-            age
-            address {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetAddressQuery>response.data.getAddress;
-  }
-  async ListAddresses(
-    filter?: ModelAddressFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<ListAddressesQuery> {
-    const statement = `query ListAddresses($filter: ModelAddressFilterInput, $limit: Int, $nextToken: String) {
-        listAddresses(filter: $filter, limit: $limit, nextToken: $nextToken) {
-          __typename
-          items {
-            __typename
-            id
-            street
-            city
-            state
-            zip
-            employeeID
-            employee {
-              __typename
-              id
-              name
-              age
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <ListAddressesQuery>response.data.listAddresses;
-  }
-  async AddressesByEmployeeID(
-    employeeID: string,
-    sortDirection?: ModelSortDirection,
-    filter?: ModelAddressFilterInput,
-    limit?: number,
-    nextToken?: string
-  ): Promise<AddressesByEmployeeIDQuery> {
-    const statement = `query AddressesByEmployeeID($employeeID: ID!, $sortDirection: ModelSortDirection, $filter: ModelAddressFilterInput, $limit: Int, $nextToken: String) {
-        addressesByEmployeeID(
-          employeeID: $employeeID
-          sortDirection: $sortDirection
-          filter: $filter
-          limit: $limit
-          nextToken: $nextToken
-        ) {
-          __typename
-          items {
-            __typename
-            id
-            street
-            city
-            state
-            zip
-            employeeID
-            employee {
-              __typename
-              id
-              name
-              age
-              createdAt
-              updatedAt
-            }
-            createdAt
-            updatedAt
-          }
-          nextToken
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      employeeID
-    };
-    if (sortDirection) {
-      gqlAPIServiceArguments.sortDirection = sortDirection;
-    }
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    if (limit) {
-      gqlAPIServiceArguments.limit = limit;
-    }
-    if (nextToken) {
-      gqlAPIServiceArguments.nextToken = nextToken;
-    }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <AddressesByEmployeeIDQuery>response.data.addressesByEmployeeID;
-  }
-  OnCreateEmployeeListener(
-    filter?: ModelSubscriptionEmployeeFilterInput
+  OnCreateOrderListener(
+    filter?: ModelSubscriptionOrderFilterInput
   ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateEmployee">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateOrder">>
   > {
-    const statement = `subscription OnCreateEmployee($filter: ModelSubscriptionEmployeeFilterInput) {
-        onCreateEmployee(filter: $filter) {
+    const statement = `subscription OnCreateOrder($filter: ModelSubscriptionOrderFilterInput) {
+        onCreateOrder(filter: $filter) {
           __typename
           id
-          name
-          age
-          address {
-            __typename
-            items {
-              __typename
-              id
-              street
-              city
-              state
-              zip
-              employeeID
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          owner
+          orderNumber
+          orderDate
+          orderStatus
+          orderTotal
           createdAt
           updatedAt
         }
@@ -1131,36 +456,24 @@ export class APIService {
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateEmployee">>
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateOrder">>
     >;
   }
 
-  OnUpdateEmployeeListener(
-    filter?: ModelSubscriptionEmployeeFilterInput
+  OnUpdateOrderListener(
+    filter?: ModelSubscriptionOrderFilterInput
   ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateEmployee">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateOrder">>
   > {
-    const statement = `subscription OnUpdateEmployee($filter: ModelSubscriptionEmployeeFilterInput) {
-        onUpdateEmployee(filter: $filter) {
+    const statement = `subscription OnUpdateOrder($filter: ModelSubscriptionOrderFilterInput) {
+        onUpdateOrder(filter: $filter) {
           __typename
           id
-          name
-          age
-          address {
-            __typename
-            items {
-              __typename
-              id
-              street
-              city
-              state
-              zip
-              employeeID
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          owner
+          orderNumber
+          orderDate
+          orderStatus
+          orderTotal
           createdAt
           updatedAt
         }
@@ -1172,36 +485,24 @@ export class APIService {
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateEmployee">>
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateOrder">>
     >;
   }
 
-  OnDeleteEmployeeListener(
-    filter?: ModelSubscriptionEmployeeFilterInput
+  OnDeleteOrderListener(
+    filter?: ModelSubscriptionOrderFilterInput
   ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteEmployee">>
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOrder">>
   > {
-    const statement = `subscription OnDeleteEmployee($filter: ModelSubscriptionEmployeeFilterInput) {
-        onDeleteEmployee(filter: $filter) {
+    const statement = `subscription OnDeleteOrder($filter: ModelSubscriptionOrderFilterInput) {
+        onDeleteOrder(filter: $filter) {
           __typename
           id
-          name
-          age
-          address {
-            __typename
-            items {
-              __typename
-              id
-              street
-              city
-              state
-              zip
-              employeeID
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
+          owner
+          orderNumber
+          orderDate
+          orderStatus
+          orderTotal
           createdAt
           updatedAt
         }
@@ -1213,130 +514,7 @@ export class APIService {
     return API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteEmployee">>
-    >;
-  }
-
-  OnCreateAddressListener(
-    filter?: ModelSubscriptionAddressFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAddress">>
-  > {
-    const statement = `subscription OnCreateAddress($filter: ModelSubscriptionAddressFilterInput) {
-        onCreateAddress(filter: $filter) {
-          __typename
-          id
-          street
-          city
-          state
-          zip
-          employeeID
-          employee {
-            __typename
-            id
-            name
-            age
-            address {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateAddress">>
-    >;
-  }
-
-  OnUpdateAddressListener(
-    filter?: ModelSubscriptionAddressFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAddress">>
-  > {
-    const statement = `subscription OnUpdateAddress($filter: ModelSubscriptionAddressFilterInput) {
-        onUpdateAddress(filter: $filter) {
-          __typename
-          id
-          street
-          city
-          state
-          zip
-          employeeID
-          employee {
-            __typename
-            id
-            name
-            age
-            address {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateAddress">>
-    >;
-  }
-
-  OnDeleteAddressListener(
-    filter?: ModelSubscriptionAddressFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAddress">>
-  > {
-    const statement = `subscription OnDeleteAddress($filter: ModelSubscriptionAddressFilterInput) {
-        onDeleteAddress(filter: $filter) {
-          __typename
-          id
-          street
-          city
-          state
-          zip
-          employeeID
-          employee {
-            __typename
-            id
-            name
-            age
-            address {
-              __typename
-              nextToken
-            }
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteAddress">>
+      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteOrder">>
     >;
   }
 }

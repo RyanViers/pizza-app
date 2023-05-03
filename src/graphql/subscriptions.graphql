@@ -1,132 +1,36 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateEmployee($filter: ModelSubscriptionEmployeeFilterInput) {
-  onCreateEmployee(filter: $filter) {
+subscription OnCreateOrder($filter: ModelSubscriptionOrderFilterInput) {
+  onCreateOrder(filter: $filter) {
     id
-    name
-    age
-    address {
-      items {
-        id
-        street
-        city
-        state
-        zip
-        employeeID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    owner
+    orderNumber
+    orderDate
+    orderStatus
+    orderTotal
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateEmployee($filter: ModelSubscriptionEmployeeFilterInput) {
-  onUpdateEmployee(filter: $filter) {
+subscription OnUpdateOrder($filter: ModelSubscriptionOrderFilterInput) {
+  onUpdateOrder(filter: $filter) {
     id
-    name
-    age
-    address {
-      items {
-        id
-        street
-        city
-        state
-        zip
-        employeeID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
+    owner
+    orderNumber
+    orderDate
+    orderStatus
+    orderTotal
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteEmployee($filter: ModelSubscriptionEmployeeFilterInput) {
-  onDeleteEmployee(filter: $filter) {
+subscription OnDeleteOrder($filter: ModelSubscriptionOrderFilterInput) {
+  onDeleteOrder(filter: $filter) {
     id
-    name
-    age
-    address {
-      items {
-        id
-        street
-        city
-        state
-        zip
-        employeeID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateAddress($filter: ModelSubscriptionAddressFilterInput) {
-  onCreateAddress(filter: $filter) {
-    id
-    street
-    city
-    state
-    zip
-    employeeID
-    employee {
-      id
-      name
-      age
-      address {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateAddress($filter: ModelSubscriptionAddressFilterInput) {
-  onUpdateAddress(filter: $filter) {
-    id
-    street
-    city
-    state
-    zip
-    employeeID
-    employee {
-      id
-      name
-      age
-      address {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteAddress($filter: ModelSubscriptionAddressFilterInput) {
-  onDeleteAddress(filter: $filter) {
-    id
-    street
-    city
-    state
-    zip
-    employeeID
-    employee {
-      id
-      name
-      age
-      address {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
+    owner
+    orderNumber
+    orderDate
+    orderStatus
+    orderTotal
     createdAt
     updatedAt
   }
