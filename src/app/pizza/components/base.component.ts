@@ -104,7 +104,9 @@ export class BaseComponent implements OnInit {
 
   constructor(private pizzaService: PizzaService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.pizzaService.updateSelections({ size: this.PizzaSize[0] });
+  }
 
   objectKeys(obj: object): string[] {
     return Object.keys(obj);
