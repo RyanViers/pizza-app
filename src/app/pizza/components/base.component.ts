@@ -1,22 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PizzaSize, PizzaCrust, PizzaSauce } from 'src/app/API.service';
-import { PizzaSelections, PizzaService } from '../pizza.service';
-import { Subscription } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PizzaService } from '../pizza.service';
 
 @Component({
+  selector: 'app-base',
   standalone: true,
   imports: [CommonModule, IonicModule, FormsModule],
   providers: [],
   template: `
     <div class="flex w-full justify-evenly ">
-      <div class="flex items-center mb-4">
-        <img src="assets/pizza.jpg" alt="Pizza" class="w-80" />
-      </div>
-
       <fieldset>
         <legend class="text-base font-semibold text-dark">Select Size</legend>
         <div
@@ -33,6 +28,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
             </div>
             <div class="ml-3 flex h-6 items-center">
               <input
+                [checked]="($pizzaSize | async) === size"
                 [id]="size"
                 [name]="'pizzaSize'"
                 type="radio"
@@ -59,10 +55,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
             </div>
             <div class="ml-3 flex h-6 items-center">
               <input
+                [checked]="($pizzaCrust | async) === crust"
                 [id]="crust"
                 [name]="'pizzaCrust'"
                 type="radio"
                 class="h-4 w-4"
+                (change)="onCrustChange(crust)"
               />
             </div>
           </div>
@@ -84,10 +82,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
             </div>
             <div class="ml-3 flex h-6 items-center">
               <input
+                [checked]="($pizzaSauce | async) === sauce"
                 [id]="sauce"
                 [name]="'pizzaSauce'"
                 type="radio"
                 class="h-4 w-4"
+                (change)="onSauceChange(sauce)"
               />
             </div>
           </div>
@@ -98,9 +98,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styles: [':host { display: flex; justify-content: center; }'],
 })
 export class BaseComponent implements OnInit {
-  PizzaSize = this.objectKeys(PizzaSize);
-  PizzaSauce = this.objectKeys(PizzaSauce);
-  PizzaCrust = this.objectKeys(PizzaCrust);
+
+  PizzaSize = this.objectValues(PizzaSize);
+  PizzaSauce = this.objectValues(PizzaSauce);
+  PizzaCrust = this.objectValues(PizzaCrust);
+
+  $pizzaCrust = this.pizzaService.$pizzaCrust;
+  $pizzaSize = this.pizzaService.$pizzaSize;
+  $pizzaSauce = this.pizzaService.$pizzaSauce;
 
   constructor(private pizzaService: PizzaService) {}
 
@@ -108,19 +113,19 @@ export class BaseComponent implements OnInit {
     this.pizzaService.updateSelections({ size: this.PizzaSize[0] });
   }
 
-  objectKeys(obj: object): string[] {
-    return Object.keys(obj);
+  objectValues(obj: object): string[] {
+    return Object.values(obj);
   }
 
-  onSizeChange(size: string): void {
-    this.pizzaService.updateSelections({ size: size });
+  onSizeChange(size: PizzaSize | string): void {
+    this.pizzaService.setPizza({ size: size as PizzaSize });
   }
 
   onCrustChange(crust: any): void {
-    this.pizzaService.updateSelections({ crust: crust });
+    this.pizzaService.setPizza({ crust: crust });
   }
 
-  onSauceChange(sauce: PizzaSauce): void {
-    this.pizzaService.updateSelections({ sauce: sauce });
+  onSauceChange(sauce: PizzaSauce | string): void {    
+    this.pizzaService.setPizza({ sauce: sauce as PizzaSauce });
   }
 }

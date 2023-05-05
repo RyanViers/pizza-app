@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
 import { PizzaStepperSection } from './helpers/enums';
 import { Router } from '@angular/router';
-import {
-  PizzaSize,
-  PizzaCrust,
-  PizzaSauce,
-  CheeseQuantity,
-  AdditionCheeseType,
-  PizzaVeggie,
-  PizzaMeat,
-} from '../API.service';
-import { BehaviorSubject } from 'rxjs';
-
-export interface PizzaSelections {
-  size: string;
-  crust: string;
-  sauce: string;
-  cheeseQty?: string;
-  cheeseType?: string;
-  meats?: string[];
-  veggies?: string[];
-}
+import { BehaviorSubject, map } from 'rxjs';
+import { AdditionCheeseType, CheeseQuantity, PizzaCheese, PizzaCrust,  PizzaMeat,  PizzaSauce, PizzaSize, PizzaVeggie } from '../API.service';
+import { Pizza } from './helpers/models';
 
 @Injectable()
 export class PizzaService {
+  
+  //behavior subjects
+  private $pizza = new BehaviorSubject<Pizza>({
+    size: PizzaSize.LARGE,
+    crust: PizzaCrust.ORIGINAL,
+    sauce: PizzaSauce.TOMATO,
+    cheese: {__typename: 'PizzaCheese', quantity: CheeseQuantity.NORMAL, additional: AdditionCheeseType.NONE},
+    meats: [],
+    veggies: []
+  });
+
+  //observable
+  public $pizzaSize = this.$pizza.pipe(map((pizza: Pizza) => {return pizza.size}));
+  public $pizzaCrust = this.$pizza.pipe(map((pizza: Pizza) => {return pizza.crust}));
+  public $pizzaSauce = this.$pizza.pipe(map((pizza: Pizza) => {return pizza.sauce}));
+  public $pizzaCheeseQuantity = this.$pizza.pipe(map((pizza: Pizza) => {return pizza.cheese.quantity}));
+  public $pizzaCheeseAdditional = this.$pizza.pipe(map((pizza: Pizza) => {return pizza.cheese.additional}));
+  public $pizzaMeats = this.$pizza.pipe(map((pizza: Pizza) => {return pizza.meats}));
+  public $pizzaVeggies = this.$pizza.pipe(map((pizza: Pizza) => {return pizza.veggies}));
+
+  //variables
   private currentSection: PizzaStepperSection = PizzaStepperSection.BASE;
 
   /**
@@ -31,6 +35,16 @@ export class PizzaService {
    * @param router
    */
   constructor(private router: Router) {}
+
+  /****************************** PUBLIC API ********************************/
+
+  /**
+   * set pizza
+   * @param size 
+   */
+  setPizza(options: Partial<Pizza>) {
+    this.$pizza.next({...this.$pizza.value, ...options});
+  }
 
   /**
    * get section
@@ -102,21 +116,5 @@ export class PizzaService {
     }
   }
 
-  private _selections = new BehaviorSubject<PizzaSelections>({
-    size: 'super',
-    crust: '',
-    sauce: '',
-    cheeseQty: '',
-    cheeseType: '',
-    meats: [],
-    veggies: [],
-  });
-
-  getSelections() {
-    return this._selections.asObservable();
-  }
-
-  updateSelections(selections: Partial<PizzaSelections>) {
-    this._selections.next({ ...this._selections.value, ...selections });
-  }
+  /*********************************** PRIVATE METHODS **************************************/
 }

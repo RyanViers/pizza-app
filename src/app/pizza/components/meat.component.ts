@@ -4,14 +4,11 @@ import { IonicModule } from '@ionic/angular';
 import { PizzaMeat } from 'src/app/API.service';
 
 @Component({
+  selector: 'app-meat',
   standalone: true,
   imports: [CommonModule, IonicModule],
   providers: [],
   template: `<div class="flex w-full justify-evenly ">
-    <div class="flex items-center mb-4">
-      <img src="assets/pizza.jpg" alt="Pizza" class="w-80" />
-    </div>
-
     <fieldset>
       <legend class="text-base font-semibold text-dark">Select Meats</legend>
       <div
@@ -41,13 +38,13 @@ import { PizzaMeat } from 'src/app/API.service';
   styles: [':host { display: flex; justify-content: center; }'],
 })
 export class MeatComponent implements OnInit {
-  PizzaMeat = this.objectKeys(PizzaMeat);
+  PizzaMeat = this.objectValues(PizzaMeat);
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  objectKeys(obj: any) {
-    return Object.keys(obj);
+  objectValues(obj: any) {
+    return Object.values(obj);
   }
 }
