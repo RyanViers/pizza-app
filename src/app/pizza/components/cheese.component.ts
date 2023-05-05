@@ -28,8 +28,8 @@ import { PizzaService } from '../pizza.service';
           </div>
           <div class="ml-3 flex h-6 items-center">
             <input
+              [checked]="($pizzaCheeseQuantity | async) === qty"
               [id]="qty"
-              [name]="'qtyCheese'"
               type="radio"
               class="h-4 w-4 border-gray-300"
               (click)="updateCheeseQuantity(qty)"
@@ -56,10 +56,11 @@ import { PizzaService } from '../pizza.service';
           </div>
           <div class="ml-3 flex h-6 items-center">
             <input
+              [checked]="($pizzaCheeseAdditional | async) === cheese"
               [id]="cheese"
-              [name]="'addCheese'"
               type="radio"
               class="h-4 w-4"
+              (click)="updateAdditionalCheeseType(cheese)"
             />
           </div>
         </div>
@@ -72,6 +73,9 @@ export class CheeseComponent implements OnInit {
   CheeseQuantity = this.objectValues(CheeseQuantity);
   AdditionCheeseType = this.objectValues(AdditionCheeseType);
 
+  $pizzaCheeseQuantity = this.pizzaService.$pizzaCheeseQuantity;
+  $pizzaCheeseAdditional = this.pizzaService.$pizzaCheeseAdditional;
+
   constructor(private pizzaService: PizzaService) {}
 
   ngOnInit(): void {}
@@ -80,11 +84,21 @@ export class CheeseComponent implements OnInit {
     return Object.values(obj);
   }
 
-  updateCheeseQuantity(qty: string): void {
-    //this.pizzaService.setPizza({ cheese: {} });
+  updateCheeseQuantity(qty: CheeseQuantity | string): void {
+    this.pizzaService.setPizza({
+      cheese: {
+        ...this.pizzaService.getPizzaCheese(),
+        ...{ quantity: qty as CheeseQuantity },
+      },
+    });
   }
 
-  updateAdditionalCheeseType(cheese: AdditionCheeseType): void {
-    //this.pizzaService.updateSelections({ cheeseType: cheese });
+  updateAdditionalCheeseType(cheese: AdditionCheeseType | string): void {
+    this.pizzaService.setPizza({
+      cheese: {
+        ...this.pizzaService.getPizzaCheese(),
+        ...{ additional: cheese as AdditionCheeseType },
+      },
+    });
   }
 }

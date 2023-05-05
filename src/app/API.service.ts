@@ -54,7 +54,7 @@ export enum PizzaCrust {
 }
 
 export enum PizzaSauce {
-  TOMATO = "Tomato",
+  TOMATO = 'Tomato',
   ALFREDO = 'Alfredo',
   PESTO = 'Pesto',
   BBQ = 'Bbq',
@@ -89,7 +89,6 @@ export enum PizzaMeat {
   HAM = 'Ham',
   BACON = 'Bacon',
   CHICKEN = 'Chicken',
-  NONE = 'None',
 }
 
 export enum PizzaVeggie {
@@ -100,7 +99,6 @@ export enum PizzaVeggie {
   TOMATOES = 'Tomatoes',
   PINEAPPLE = 'Pineapple',
   JALAPENOS = 'Jalapenos',
-  NONE = 'None',
 }
 
 export type ModelOrderConditionInput = {

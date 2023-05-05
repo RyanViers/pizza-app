@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { PizzaMeat } from 'src/app/API.service';
+import { PizzaService } from '../pizza.service';
 
 @Component({
   selector: 'app-meat',
@@ -25,10 +26,11 @@ import { PizzaMeat } from 'src/app/API.service';
           </div>
           <div class="ml-3 flex h-6 items-center">
             <input
+              [checked]="($pizzaMeats | async)?.includes(meat)"
               [id]="meat"
-              [name]="'meat'"
               type="radio"
               class="h-4 w-4 border-gray-300"
+              (click)="updateMeat(meat)"
             />
           </div>
         </div>
@@ -38,13 +40,27 @@ import { PizzaMeat } from 'src/app/API.service';
   styles: [':host { display: flex; justify-content: center; }'],
 })
 export class MeatComponent implements OnInit {
-  PizzaMeat = this.objectValues(PizzaMeat);
+  PizzaMeat: PizzaMeat[] = this.objectValues(PizzaMeat);
 
-  constructor() {}
+  $pizzaMeats = this.pizzaService.$pizzaMeats;
+
+  constructor(private pizzaService: PizzaService) {}
 
   ngOnInit(): void {}
 
-  objectValues(obj: any) {
+  objectValues(obj: any): PizzaMeat[] {
     return Object.values(obj);
+  }
+
+  updateMeat(meat: PizzaMeat | string) {
+    const currentMeats: (PizzaMeat | null)[] =
+      this.pizzaService.getPizzaMeats();
+    const exsist = currentMeats.includes(meat as PizzaMeat);
+
+    this.pizzaService.setPizza({
+      meats: exsist
+        ? currentMeats.filter((m) => m !== (meat as PizzaMeat))
+        : [...currentMeats, meat as PizzaMeat],
+    });
   }
 }

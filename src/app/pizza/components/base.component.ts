@@ -98,7 +98,6 @@ import { PizzaService } from '../pizza.service';
   styles: [':host { display: flex; justify-content: center; }'],
 })
 export class BaseComponent implements OnInit {
-
   PizzaSize = this.objectValues(PizzaSize);
   PizzaSauce = this.objectValues(PizzaSauce);
   PizzaCrust = this.objectValues(PizzaCrust);
@@ -109,9 +108,7 @@ export class BaseComponent implements OnInit {
 
   constructor(private pizzaService: PizzaService) {}
 
-  ngOnInit(): void {
-    this.pizzaService.updateSelections({ size: this.PizzaSize[0] });
-  }
+  ngOnInit(): void {}
 
   objectValues(obj: object): string[] {
     return Object.values(obj);
@@ -125,7 +122,7 @@ export class BaseComponent implements OnInit {
     this.pizzaService.setPizza({ crust: crust });
   }
 
-  onSauceChange(sauce: PizzaSauce | string): void {    
+  onSauceChange(sauce: PizzaSauce | string): void {
     this.pizzaService.setPizza({ sauce: sauce as PizzaSauce });
   }
 }
