@@ -5,14 +5,11 @@ import { AdditionCheeseType, CheeseQuantity } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
 
 @Component({
+  selector: 'app-cheese',
   standalone: true,
   imports: [CommonModule, IonicModule],
   providers: [],
   template: `<div class="flex w-full justify-evenly ">
-    <div class="flex items-center mb-4">
-      <img src="assets/pizza.jpg" alt="Pizza" class="w-80" />
-    </div>
-
     <fieldset>
       <legend class="text-base font-semibold text-dark">
         Select Cheese Quantity
@@ -72,22 +69,22 @@ import { PizzaService } from '../pizza.service';
   styles: [':host { display: flex; justify-content: center; }'],
 })
 export class CheeseComponent implements OnInit {
-  CheeseQuantity = this.objectKeys(CheeseQuantity);
-  AdditionCheeseType = this.objectKeys(AdditionCheeseType);
+  CheeseQuantity = this.objectValues(CheeseQuantity);
+  AdditionCheeseType = this.objectValues(AdditionCheeseType);
 
   constructor(private pizzaService: PizzaService) {}
 
   ngOnInit(): void {}
 
-  objectKeys(obj: object): string[] {
-    return Object.keys(obj);
+  objectValues(obj: object): string[] {
+    return Object.values(obj);
   }
 
   updateCheeseQuantity(qty: string): void {
-    this.pizzaService.updateSelections({ cheeseQty: qty });
+    //this.pizzaService.setPizza({ cheese: {} });
   }
 
   updateAdditionalCheeseType(cheese: AdditionCheeseType): void {
-    this.pizzaService.updateSelections({ cheeseType: cheese });
+    //this.pizzaService.updateSelections({ cheeseType: cheese });
   }
 }

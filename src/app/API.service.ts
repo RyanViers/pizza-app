@@ -40,26 +40,26 @@ export type CustomPizzaInput = {
 };
 
 export enum PizzaSize {
-  SMALL = 'SMALL',
-  MEDIUM = 'MEDIUM',
-  LARGE = 'LARGE',
+  SMALL = 'Small',
+  MEDIUM = 'Medium',
+  LARGE = 'Large',
 }
 
 export enum PizzaCrust {
-  ORIGINAL = 'ORIGINAL',
-  DEEP_DISH = 'DEEP_DISH',
-  THIN = 'THIN',
-  STUFFED = 'STUFFED',
-  NEW_YORK = 'NEW_YORK',
+  ORIGINAL = 'Original',
+  DEEP_DISH = 'Deep Dish',
+  THIN = 'Thin',
+  STUFFED = 'Stuffed',
+  NEW_YORK = 'New York',
 }
 
 export enum PizzaSauce {
-  TOMATO = 'TOMATO',
-  ALFREDO = 'ALFREDO',
-  PESTO = 'PESTO',
-  BBQ = 'BBQ',
-  GARLIC = 'GARLIC',
-  NONE = 'NONE',
+  TOMATO = "Tomato",
+  ALFREDO = 'Alfredo',
+  PESTO = 'Pesto',
+  BBQ = 'Bbq',
+  GARLIC = 'Garlic',
+  NONE = 'None',
 }
 
 export type PizzaCheeseInput = {
@@ -68,38 +68,39 @@ export type PizzaCheeseInput = {
 };
 
 export enum CheeseQuantity {
-  NORMAL = 'NORMAL',
-  LIGHT = 'LIGHT',
-  NONE = 'NONE',
+  NORMAL = 'Normal',
+  LIGHT = 'Light',
+  NONE = 'None',
 }
 
 export enum AdditionCheeseType {
-  THREE_CHEESE = 'THREE_CHEESE',
-  EXTRA_CHEESE = 'EXTRA_CHEESE',
-  PARMESAN = 'PARMESAN',
-  FETA = 'FETA',
-  CHEDDAR = 'CHEDDAR',
+  THREE_CHEESE = 'Three Cheese',
+  EXTRA_CHEESE = 'Extra Cheese',
+  PARMESAN = 'Parmesan',
+  FETA = 'Feta',
+  NONE = 'None',
+  CHEDDAR = 'Cheddar',
 }
 
 export enum PizzaMeat {
-  PEPPERONI = 'PEPPERONI',
-  SAUSAGE = 'SAUSAGE',
-  BEEF = 'BEEF',
-  HAM = 'HAM',
-  BACON = 'BACON',
-  CHICKEN = 'CHICKEN',
-  NONE = 'NONE',
+  PEPPERONI = 'Pepperoni',
+  SAUSAGE = 'Sausage',
+  BEEF = 'Beef',
+  HAM = 'Ham',
+  BACON = 'Bacon',
+  CHICKEN = 'Chicken',
+  NONE = 'None',
 }
 
 export enum PizzaVeggie {
-  MUSHROOMS = 'MUSHROOMS',
-  ONIONS = 'ONIONS',
-  GREEN_PEPPERS = 'GREEN_PEPPERS',
-  BLACK_OLIVES = 'BLACK_OLIVES',
-  TOMATOES = 'TOMATOES',
-  PINEAPPLE = 'PINEAPPLE',
-  JALAPENOS = 'JALAPENOS',
-  NONE = 'NONE',
+  MUSHROOMS = 'Mushrooms',
+  ONIONS = 'Onions',
+  GREEN_PEPPERS = 'Green Peppers',
+  BLACK_OLIVES = 'Black Olives',
+  TOMATOES = 'Tomatoes',
+  PINEAPPLE = 'Pineapple',
+  JALAPENOS = 'Jalapenos',
+  NONE = 'None',
 }
 
 export type ModelOrderConditionInput = {

@@ -1,20 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { PizzaSelections, PizzaService } from './pizza.service';
-import {
-  PizzaSize,
-  PizzaCrust,
-  PizzaSauce,
-  PizzaMeat,
-  PizzaVeggie,
-  CheeseQuantity,
-  AdditionCheeseType,
-} from '../API.service';
+import { PizzaService } from './pizza.service';
+import { PizzaPreviewComponent } from './components/preview.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, PizzaPreviewComponent],
   providers: [PizzaService],
   template: `
     <ion-header class="p-4">
@@ -63,13 +55,14 @@ import {
         </div>
       </div>
     </ion-header>
-    <div class="flex justify-evenly max-w-2xl mx-auto w-full relative z-10">
-      <p class="text-sm font-medium text-dark-tint">
-        {{ pizzaSelections }}
-      </p>
-    </div>
+
     <ion-content class="w-full relative">
-      <ion-router-outlet></ion-router-outlet>
+      <div class="max-w-max mx-auto grid grid-cols-1 md:grid-cols-[400px_1fr] w-full relative h-auto md:h-[381px] mt-24 px-8">
+        <app-pizza-preview class="flex justify-center items-start"></app-pizza-preview>
+        <div class="min-h-[381px] mt-12 md:mt-0 relative w-full block">
+          <ion-router-outlet></ion-router-outlet>
+        </div>
+      </div>
     </ion-content>
 
     <ion-footer class="p-4 max-w-2xl mx-auto w-full relative z-10">
@@ -142,11 +135,7 @@ import {
 export class PizzaComponent {
   constructor(private pizza: PizzaService) {}
 
-  // Create an object to hold the selections
-  pizzaSelections = this.pizza.getSelections();
-
   ngAfterViewInit() {
-    console.log(this.pizzaSelections);
   }
   /**
    * add pizza to order
