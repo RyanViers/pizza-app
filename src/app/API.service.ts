@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
-import { Injectable } from "@angular/core";
-import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
-import { Observable } from "zen-observable-ts";
+import { Injectable } from '@angular/core';
+import API, { graphqlOperation, GraphQLResult } from '@aws-amplify/api-graphql';
+import { Observable } from 'zen-observable-ts';
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
@@ -40,26 +40,26 @@ export type CustomPizzaInput = {
 };
 
 export enum PizzaSize {
-  SMALL = "SMALL",
-  MEDIUM = "MEDIUM",
-  LARGE = "LARGE"
+  SMALL = 'SMALL',
+  MEDIUM = 'MEDIUM',
+  LARGE = 'LARGE',
 }
 
 export enum PizzaCrust {
-  ORIGINAL = "ORIGINAL",
-  DEEP_DISH = "DEEP_DISH",
-  THIN = "THIN",
-  STUFFED = "STUFFED",
-  NEW_YORK = "NEW_YORK"
+  ORIGINAL = 'ORIGINAL',
+  DEEP_DISH = 'DEEP_DISH',
+  THIN = 'THIN',
+  STUFFED = 'STUFFED',
+  NEW_YORK = 'NEW_YORK',
 }
 
 export enum PizzaSauce {
-  TOMATO = "TOMATO",
-  ALFREDO = "ALFREDO",
-  PESTO = "PESTO",
-  BBQ = "BBQ",
-  GARLIC = "GARLIC",
-  NONE = "NONE"
+  TOMATO = 'TOMATO',
+  ALFREDO = 'ALFREDO',
+  PESTO = 'PESTO',
+  BBQ = 'BBQ',
+  GARLIC = 'GARLIC',
+  NONE = 'NONE',
 }
 
 export type PizzaCheeseInput = {
@@ -68,38 +68,38 @@ export type PizzaCheeseInput = {
 };
 
 export enum CheeseQuantity {
-  NORMAL = "NORMAL",
-  LIGHT = "LIGHT",
-  NONE = "NONE"
+  NORMAL = 'NORMAL',
+  LIGHT = 'LIGHT',
+  NONE = 'NONE',
 }
 
 export enum AdditionCheeseType {
-  THREE_CHEESE = "THREE_CHEESE",
-  EXTRA_CHEESE = "EXTRA_CHEESE",
-  PARMESAN = "PARMESAN",
-  FETA = "FETA",
-  CHEDDAR = "CHEDDAR"
+  THREE_CHEESE = 'THREE_CHEESE',
+  EXTRA_CHEESE = 'EXTRA_CHEESE',
+  PARMESAN = 'PARMESAN',
+  FETA = 'FETA',
+  CHEDDAR = 'CHEDDAR',
 }
 
 export enum PizzaMeat {
-  PEPPERONI = "PEPPERONI",
-  SAUSAGE = "SAUSAGE",
-  BEEF = "BEEF",
-  HAM = "HAM",
-  BACON = "BACON",
-  CHICKEN = "CHICKEN",
-  NONE = "NONE"
+  PEPPERONI = 'PEPPERONI',
+  SAUSAGE = 'SAUSAGE',
+  BEEF = 'BEEF',
+  HAM = 'HAM',
+  BACON = 'BACON',
+  CHICKEN = 'CHICKEN',
+  NONE = 'NONE',
 }
 
 export enum PizzaVeggie {
-  MUSHROOMS = "MUSHROOMS",
-  ONIONS = "ONIONS",
-  GREEN_PEPPERS = "GREEN_PEPPERS",
-  BLACK_OLIVES = "BLACK_OLIVES",
-  TOMATOES = "TOMATOES",
-  PINEAPPLE = "PINEAPPLE",
-  JALAPENOS = "JALAPENOS",
-  NONE = "NONE"
+  MUSHROOMS = 'MUSHROOMS',
+  ONIONS = 'ONIONS',
+  GREEN_PEPPERS = 'GREEN_PEPPERS',
+  BLACK_OLIVES = 'BLACK_OLIVES',
+  TOMATOES = 'TOMATOES',
+  PINEAPPLE = 'PINEAPPLE',
+  JALAPENOS = 'JALAPENOS',
+  NONE = 'NONE',
 }
 
 export type ModelOrderConditionInput = {
@@ -130,16 +130,16 @@ export type ModelStringInput = {
 };
 
 export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null"
+  binary = 'binary',
+  binarySet = 'binarySet',
+  bool = 'bool',
+  list = 'list',
+  map = 'map',
+  number = 'number',
+  numberSet = 'numberSet',
+  string = 'string',
+  stringSet = 'stringSet',
+  _null = '_null',
 }
 
 export type ModelSizeInput = {
@@ -165,7 +165,7 @@ export type ModelIntInput = {
 };
 
 export type Order = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   customPizzas: Array<CustomPizza | null>;
   specialtyPizzas: Array<SpecialityPizza | null>;
@@ -179,7 +179,7 @@ export type Order = {
 };
 
 export type CustomPizza = {
-  __typename: "CustomPizza";
+  __typename: 'CustomPizza';
   id: string;
   size: PizzaSize;
   crust: PizzaCrust;
@@ -191,13 +191,13 @@ export type CustomPizza = {
 };
 
 export type PizzaCheese = {
-  __typename: "PizzaCheese";
+  __typename: 'PizzaCheese';
   quantity: CheeseQuantity;
   additional?: AdditionCheeseType | null;
 };
 
 export type SpecialityPizza = {
-  __typename: "SpecialityPizza";
+  __typename: 'SpecialityPizza';
   id: string;
   size: PizzaSize;
   crust: PizzaCrust;
@@ -316,7 +316,7 @@ export type ModelIDInput = {
 };
 
 export type ModelOrderConnection = {
-  __typename: "ModelOrderConnection";
+  __typename: 'ModelOrderConnection';
   items: Array<Order | null>;
   nextToken?: string | null;
 };
@@ -335,7 +335,7 @@ export type ModelSpecialityPizzaFilterInput = {
 };
 
 export type ModelSpecialityPizzaConnection = {
-  __typename: "ModelSpecialityPizzaConnection";
+  __typename: 'ModelSpecialityPizzaConnection';
   items: Array<SpecialityPizza | null>;
   nextToken?: string | null;
 };
@@ -406,16 +406,16 @@ export type ModelSubscriptionSpecialityPizzaFilterInput = {
 };
 
 export type CreateOrderMutation = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -424,13 +424,13 @@ export type CreateOrderMutation = {
     price: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialityPizza";
+    __typename: 'SpecialityPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -450,16 +450,16 @@ export type CreateOrderMutation = {
 };
 
 export type UpdateOrderMutation = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -468,13 +468,13 @@ export type UpdateOrderMutation = {
     price: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialityPizza";
+    __typename: 'SpecialityPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -494,16 +494,16 @@ export type UpdateOrderMutation = {
 };
 
 export type DeleteOrderMutation = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -512,13 +512,13 @@ export type DeleteOrderMutation = {
     price: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialityPizza";
+    __typename: 'SpecialityPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -538,13 +538,13 @@ export type DeleteOrderMutation = {
 };
 
 export type CreateSpecialityPizzaMutation = {
-  __typename: "SpecialityPizza";
+  __typename: 'SpecialityPizza';
   id: string;
   size: PizzaSize;
   crust: PizzaCrust;
   sauce: PizzaSauce;
   cheese: {
-    __typename: "PizzaCheese";
+    __typename: 'PizzaCheese';
     quantity: CheeseQuantity;
     additional?: AdditionCheeseType | null;
   };
@@ -556,13 +556,13 @@ export type CreateSpecialityPizzaMutation = {
 };
 
 export type UpdateSpecialityPizzaMutation = {
-  __typename: "SpecialityPizza";
+  __typename: 'SpecialityPizza';
   id: string;
   size: PizzaSize;
   crust: PizzaCrust;
   sauce: PizzaSauce;
   cheese: {
-    __typename: "PizzaCheese";
+    __typename: 'PizzaCheese';
     quantity: CheeseQuantity;
     additional?: AdditionCheeseType | null;
   };
@@ -574,13 +574,13 @@ export type UpdateSpecialityPizzaMutation = {
 };
 
 export type DeleteSpecialityPizzaMutation = {
-  __typename: "SpecialityPizza";
+  __typename: 'SpecialityPizza';
   id: string;
   size: PizzaSize;
   crust: PizzaCrust;
   sauce: PizzaSauce;
   cheese: {
-    __typename: "PizzaCheese";
+    __typename: 'PizzaCheese';
     quantity: CheeseQuantity;
     additional?: AdditionCheeseType | null;
   };
@@ -592,16 +592,16 @@ export type DeleteSpecialityPizzaMutation = {
 };
 
 export type GetOrderQuery = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -610,13 +610,13 @@ export type GetOrderQuery = {
     price: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialityPizza";
+    __typename: 'SpecialityPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -636,12 +636,12 @@ export type GetOrderQuery = {
 };
 
 export type ListOrdersQuery = {
-  __typename: "ModelOrderConnection";
+  __typename: 'ModelOrderConnection';
   items: Array<{
-    __typename: "Order";
+    __typename: 'Order';
     id: string;
     customPizzas: Array<{
-      __typename: "CustomPizza";
+      __typename: 'CustomPizza';
       id: string;
       size: PizzaSize;
       crust: PizzaCrust;
@@ -651,7 +651,7 @@ export type ListOrdersQuery = {
       price: number;
     } | null>;
     specialtyPizzas: Array<{
-      __typename: "SpecialityPizza";
+      __typename: 'SpecialityPizza';
       id: string;
       size: PizzaSize;
       crust: PizzaCrust;
@@ -674,13 +674,13 @@ export type ListOrdersQuery = {
 };
 
 export type GetSpecialityPizzaQuery = {
-  __typename: "SpecialityPizza";
+  __typename: 'SpecialityPizza';
   id: string;
   size: PizzaSize;
   crust: PizzaCrust;
   sauce: PizzaSauce;
   cheese: {
-    __typename: "PizzaCheese";
+    __typename: 'PizzaCheese';
     quantity: CheeseQuantity;
     additional?: AdditionCheeseType | null;
   };
@@ -692,15 +692,15 @@ export type GetSpecialityPizzaQuery = {
 };
 
 export type ListSpecialityPizzasQuery = {
-  __typename: "ModelSpecialityPizzaConnection";
+  __typename: 'ModelSpecialityPizzaConnection';
   items: Array<{
-    __typename: "SpecialityPizza";
+    __typename: 'SpecialityPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -714,16 +714,16 @@ export type ListSpecialityPizzasQuery = {
 };
 
 export type OnCreateOrderSubscription = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -732,13 +732,13 @@ export type OnCreateOrderSubscription = {
     price: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialityPizza";
+    __typename: 'SpecialityPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -758,16 +758,16 @@ export type OnCreateOrderSubscription = {
 };
 
 export type OnUpdateOrderSubscription = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -776,13 +776,13 @@ export type OnUpdateOrderSubscription = {
     price: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialityPizza";
+    __typename: 'SpecialityPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -802,16 +802,16 @@ export type OnUpdateOrderSubscription = {
 };
 
 export type OnDeleteOrderSubscription = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -820,13 +820,13 @@ export type OnDeleteOrderSubscription = {
     price: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialityPizza";
+    __typename: 'SpecialityPizza';
     id: string;
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -846,13 +846,13 @@ export type OnDeleteOrderSubscription = {
 };
 
 export type OnCreateSpecialityPizzaSubscription = {
-  __typename: "SpecialityPizza";
+  __typename: 'SpecialityPizza';
   id: string;
   size: PizzaSize;
   crust: PizzaCrust;
   sauce: PizzaSauce;
   cheese: {
-    __typename: "PizzaCheese";
+    __typename: 'PizzaCheese';
     quantity: CheeseQuantity;
     additional?: AdditionCheeseType | null;
   };
@@ -864,13 +864,13 @@ export type OnCreateSpecialityPizzaSubscription = {
 };
 
 export type OnUpdateSpecialityPizzaSubscription = {
-  __typename: "SpecialityPizza";
+  __typename: 'SpecialityPizza';
   id: string;
   size: PizzaSize;
   crust: PizzaCrust;
   sauce: PizzaSauce;
   cheese: {
-    __typename: "PizzaCheese";
+    __typename: 'PizzaCheese';
     quantity: CheeseQuantity;
     additional?: AdditionCheeseType | null;
   };
@@ -882,13 +882,13 @@ export type OnUpdateSpecialityPizzaSubscription = {
 };
 
 export type OnDeleteSpecialityPizzaSubscription = {
-  __typename: "SpecialityPizza";
+  __typename: 'SpecialityPizza';
   id: string;
   size: PizzaSize;
   crust: PizzaCrust;
   sauce: PizzaSauce;
   cheese: {
-    __typename: "PizzaCheese";
+    __typename: 'PizzaCheese';
     quantity: CheeseQuantity;
     additional?: AdditionCheeseType | null;
   };
@@ -900,7 +900,7 @@ export type OnDeleteSpecialityPizzaSubscription = {
 };
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class APIService {
   async CreateOrder(
@@ -953,7 +953,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -1013,7 +1013,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -1073,7 +1073,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -1107,7 +1107,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -1141,7 +1141,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -1175,7 +1175,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
@@ -1232,7 +1232,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1319,7 +1319,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      id
+      id,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
