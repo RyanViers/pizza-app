@@ -6,13 +6,16 @@ import { IonicModule } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styles: [``],
-  standalone: true,
-  imports: [
-    CommonModule,
-    IonicModule,
-    RouterModule
+  styles: [
+    `
+      :host {
+        display: flex;
+        justify-content: center;
+      }
+    `,
   ],
+  standalone: true,
+  imports: [CommonModule, IonicModule, RouterModule],
 })
 export class HomePage {
   constructor() {}

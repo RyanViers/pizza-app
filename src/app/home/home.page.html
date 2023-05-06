@@ -1,5 +1,36 @@
-<div class="w-full h-full bg-blue-600 flex justify-center items-center">
-    
-    <button [routerLink]="['/pizza']" type="button" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Order Pizza</button>
-    
-</div>
+<ion-content>
+  <section
+    class="h-full bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply"
+  >
+    <div class="max-w-screen-xl px-4 py-24 mx-auto text-center lg:py-56">
+      <h1
+        class="mb-4 mt-[22rem] text-6xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl"
+      >
+        Big Daddy's Bayou Pizza
+      </h1>
+      <p
+        class="mb-8 text-xl font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48"
+      >
+        "Grab a Slice of Swampy Paradise!"
+      </p>
+      <div
+        class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4"
+      >
+        <button
+          [routerLink]="['/pizza']"
+          type="button"
+          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Order Pizza
+        </button>
+        <button
+          [routerLink]="['/sign-up']"
+          type="button"
+          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Sign Up
+        </button>
+      </div>
+    </div>
+  </section>
+</ion-content>

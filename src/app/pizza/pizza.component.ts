@@ -3,13 +3,23 @@ import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { PizzaService } from './pizza.service';
 import { PizzaPreviewComponent } from './components/preview.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, IonicModule, PizzaPreviewComponent],
+  imports: [CommonModule, IonicModule, PizzaPreviewComponent, RouterModule],
   providers: [PizzaService],
   template: `
-    <ion-header class="p-4">
+    <ion-header class="flex p-4">
+      <div class=" flex items-center">
+        <button
+          [routerLink]="['/home']"
+          type="button"
+          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Home
+        </button>
+      </div>
       <div class="max-w-2xl mx-auto w-full relative z-10">
         <div class="w-full relative">
           <div class="mt-6" aria-hidden="true">
@@ -57,15 +67,19 @@ import { PizzaPreviewComponent } from './components/preview.component';
     </ion-header>
 
     <ion-content class="w-full relative">
-      <div class="max-w-max mx-auto grid grid-cols-1 md:grid-cols-[400px_1fr] w-full relative h-auto md:h-[381px] mt-24 px-8">
-        <app-pizza-preview class="flex justify-center items-start"></app-pizza-preview>
+      <div
+        class="max-w-max mx-auto grid grid-cols-1 md:grid-cols-[400px_1fr] w-full relative h-auto md:h-[381px] mt-24 px-8"
+      >
+        <app-pizza-preview
+          class="flex justify-center items-start"
+        ></app-pizza-preview>
         <div class="min-h-[381px] mt-12 md:mt-0 relative w-full block">
           <ion-router-outlet></ion-router-outlet>
         </div>
       </div>
     </ion-content>
 
-    <ion-footer class="p-4 max-w-2xl mx-auto w-full relative z-10">
+    <ion-footer class="flex p-4 max-w-2xl mx-auto w-full relative z-10">
       <div class="w-full flex justify-between items-center">
         <button
           (click)="back()"
@@ -123,7 +137,7 @@ import { PizzaPreviewComponent } from './components/preview.component';
         <button
           (click)="next()"
           type="button"
-          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          class="rounded-md  bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Next
         </button>
@@ -135,8 +149,7 @@ import { PizzaPreviewComponent } from './components/preview.component';
 export class PizzaComponent {
   constructor(private pizza: PizzaService) {}
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
   /**
    * add pizza to order
    */
