@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { DirectiveModuleModule} from '../directives/directive-module/directive-module.module';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { IonicModule } from '@ionic/angular';
   ],
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule],
+  providers: [DirectiveModuleModule],
 })
 export class HomePage {
   constructor() {}

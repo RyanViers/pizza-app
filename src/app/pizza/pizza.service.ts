@@ -86,6 +86,10 @@ export class PizzaService {
     return this.$pizza?.value?.meats;
   }
 
+  getPizzaVeggies(): (PizzaVeggie | null)[] {
+    return this.$pizza?.value?.veggies;
+  }
+
   /**
    * set pizza
    * @param size

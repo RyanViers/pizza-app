@@ -55,13 +55,21 @@ import { PizzaService } from '../pizza.service';
           </p>
         </div>
       </div>
-      <div class="grid grid-cols-1 gap-4 mt-4">
+      <div class="grid grid-cols-2 gap-4 mt-4">
         <div>
           <h3 class="text-sm font-semibold leading-8 tracking-tight text-dark">
             The Meats:
           </h3>
           <p class="text-base leading-7 text-medium">
             {{ ($pizzaMeats | async)?.length }}
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold leading-8 tracking-tight text-dark">
+            The Veggies:
+          </h3>
+          <p class="text-base leading-7 text-medium">
+            {{ ($pizzaVeggies | async)?.length }}
           </p>
         </div>
       </div>
