@@ -1,0 +1,13 @@
+#set( $pk = "USER_ID#" + $ctx.args.input.user_id )
+#set( $pk = "ORDER#DATE#" )
+{
+    "version": "2017-02-28",
+    "operation": "Query",
+    "query": {
+        "expression": "PK = :pk AND begins_with(SK, :sk)",
+        "expressionValues": {
+            ":pk": $util.dynamodb.toDynamoDBJson($pk),
+            ":sk": $util.dynamodb.toDynamoDBJson($sk)
+        }
+    }
+}

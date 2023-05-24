@@ -1,7 +1,8 @@
 # this is an auto generated file. This will be overwritten
-query GetOrder($id: ID!) {
-  getOrder(id: $id) {
+query ListOrdersByUser($input: ListOrdersByUserInput!) {
+  listOrdersByUser(input: $input) {
     id
+    user_id
     customPizzas {
       id
       size
@@ -27,95 +28,11 @@ query GetOrder($id: ID!) {
       meats
       veggies
       price
-      createdAt
-      updatedAt
     }
     name
     timestamp
     subtotal
     tax
     total
-    createdAt
-    updatedAt
-  }
-}
-query ListOrders(
-  $filter: ModelOrderFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      customPizzas {
-        id
-        size
-        crust
-        sauce
-        meats
-        veggies
-        price
-      }
-      specialtyPizzas {
-        id
-        size
-        crust
-        sauce
-        meats
-        veggies
-        price
-        createdAt
-        updatedAt
-      }
-      name
-      timestamp
-      subtotal
-      tax
-      total
-      createdAt
-      updatedAt
-    }
-    nextToken
-  }
-}
-query GetSpecialityPizza($id: ID!) {
-  getSpecialityPizza(id: $id) {
-    id
-    size
-    crust
-    sauce
-    cheese {
-      quantity
-      additional
-    }
-    meats
-    veggies
-    price
-    createdAt
-    updatedAt
-  }
-}
-query ListSpecialityPizzas(
-  $filter: ModelSpecialityPizzaFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listSpecialityPizzas(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      size
-      crust
-      sauce
-      cheese {
-        quantity
-        additional
-      }
-      meats
-      veggies
-      price
-      createdAt
-      updatedAt
-    }
-    nextToken
   }
 }
