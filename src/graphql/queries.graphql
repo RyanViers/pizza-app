@@ -1,8 +1,9 @@
 # this is an auto generated file. This will be overwritten
-query ListOrdersByUser($input: ListOrdersByUserInput!) {
+query ListOrdersByUser($input: ListOrdersByUserInput) {
   listOrdersByUser(input: $input) {
     id
     user_id
+    date
     customPizzas {
       id
       size
@@ -29,10 +30,75 @@ query ListOrdersByUser($input: ListOrdersByUserInput!) {
       veggies
       price
     }
-    name
-    timestamp
+    user_name
     subtotal
     tax
     total
+  }
+}
+query GetOrder($input: GetOrderInput!) {
+  getOrder(input: $input) {
+    id
+    user_id
+    date
+    customPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    specialtyPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    user_name
+    subtotal
+    tax
+    total
+  }
+}
+query PizzaAppsByGSI_SECONDARY_PKAndGSI_SECONDARY_SK(
+  $GSI_SECONDARY_PK: String!
+  $GSI_SECONDARY_SK: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelPizzaAppFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  pizzaAppsByGSI_SECONDARY_PKAndGSI_SECONDARY_SK(
+    GSI_SECONDARY_PK: $GSI_SECONDARY_PK
+    GSI_SECONDARY_SK: $GSI_SECONDARY_SK
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      PK
+      SK
+      GSI_SECONDARY_PK
+      GSI_SECONDARY_SK
+      CREATED_AT
+      UPDATED_AT
+      MODEL
+      TTL
+    }
+    nextToken
   }
 }

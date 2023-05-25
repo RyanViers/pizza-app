@@ -1,0 +1,112 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateOrder($input: CreateOrderInput!) {
+  createOrder(input: $input) {
+    id
+    user_id
+    date
+    customPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    specialtyPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    user_name
+    subtotal
+    tax
+    total
+  }
+}
+mutation UpdateOrder($input: UpdateOrderInput!) {
+  updateOrder(input: $input) {
+    id
+    user_id
+    date
+    customPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    specialtyPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    user_name
+    subtotal
+    tax
+    total
+  }
+}
+mutation DeleteOrder($input: DeleteOrderInput!) {
+  deleteOrder(input: $input) {
+    id
+    user_id
+    date
+    customPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    specialtyPizzas {
+      id
+      size
+      crust
+      sauce
+      cheese {
+        quantity
+        additional
+      }
+      meats
+      veggies
+      price
+    }
+    user_name
+    subtotal
+    tax
+    total
+  }
+}
