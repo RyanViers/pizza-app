@@ -36,6 +36,7 @@
     "graphql-tag": "^2.12.6",
     "ionicons": "^7.0.0",
     "rxjs": "~7.5.0",
+    "splitting": "^1.0.6",
     "tslib": "^2.3.0",
     "uuid": "^9.0.0",
     "zone.js": "~0.11.4"
@@ -56,6 +57,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^12.11.1",
+    "@types/splitting": "^1.0.1",
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",

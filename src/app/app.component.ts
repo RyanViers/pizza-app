@@ -14,7 +14,7 @@ import { IonicModule } from '@ionic/angular';
   ],
   standalone: true,
   imports: [CommonModule, IonicModule],
-  providers: []
+  
 })
 export class AppComponent {
 
