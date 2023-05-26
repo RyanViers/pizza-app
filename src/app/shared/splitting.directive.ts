@@ -1,18 +1,17 @@
 import { AfterViewInit, Directive, ElementRef } from '@angular/core';
-import * as Splitting from 'splitting';
-
+import Splitting from 'splitting';
 
 @Directive({
-  selector: '[appSplitting]'
+  selector: '[appSplitting]',
 })
-export class SplittingDirective implements AfterViewInit{
+export class SplittingDirective implements AfterViewInit {
+  constructor(private el: ElementRef) {}
 
-  constructor(private el: ElementRef) { }
-
-  ngAfterViewInit(): void {
-    console.log('Directive initialized');
-    console.log('Element text before splitting:', this.el.nativeElement.textContent);
-    Splitting({ target: this.el.nativeElement });
-    console.log('Element text after splitting:', this.el.nativeElement.textContent);
+  ngAfterViewInit() {
+    console.log(this.el.nativeElement);
+    this.el.nativeElement.classList.add('splitting');
+    setTimeout(() => {
+      Splitting({ target: this.el.nativeElement });
+    });
   }
 }

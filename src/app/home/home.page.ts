@@ -14,18 +14,26 @@ import { SharedModule } from '../shared/shared.module';
         justify-content: center;
       }
       .splitting .char {
-        transition: transform 5s;
         display: inline-block;
+        transform: translateY(20px);
+        opacity: 0;
+        animation: typing 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
       }
-      
-      .splitting .char:hover {
-        transform: scale(2);
+
+      @keyframes typing {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
     `,
   ],
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule, SharedModule],
-  
 })
 export class HomePage {
   constructor() {}

@@ -2,14 +2,14 @@
   <section
     class="h-full bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply"
   >
-    <div appBackgroundColor  class="max-w-screen-xl px-4 py-24 mx-auto text-center lg:py-56">
+    <div class="max-w-screen-xl px-4 py-24 mx-auto text-center lg:py-56">
       <h1
         appSplitting
         class="mb-4 mt-[22rem] text-6xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl"
       >
         Big Daddy's Bayou Pizza
       </h1>
-      <p 
+      <p
         appSplitting
         class="mb-8 text-xl font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48"
       >
@@ -31,6 +31,13 @@
           class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Sign Up
+        </button>
+        <button
+          [routerLink]="['/admin-root']"
+          type="button"
+          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Admin
         </button>
       </div>
     </div>
