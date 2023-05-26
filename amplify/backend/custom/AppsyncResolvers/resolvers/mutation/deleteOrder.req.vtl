@@ -1,0 +1,14 @@
+#set($PK = "USER_ID" + $ctx.args.input.user_id)
+#set($SK = "ORDER#DATE#" + $ctx.args.input.date + "#ID#" + $ctx.args.input.id)
+
+{
+    "version" : "2018-05-29",
+    "operation" : "DeleteItem",
+    "key": {
+        "PK" : $util.dynamodb.toString($PK),
+        "SK" : $util.dynamodb.toString($SK)
+    },
+    "condition" : {
+        "expression" : "attribute_exists(PK) && attribute_exists(SK)"
+    }
+}

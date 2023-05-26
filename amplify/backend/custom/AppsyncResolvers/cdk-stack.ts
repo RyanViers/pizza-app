@@ -4,6 +4,8 @@ import * as AmplifyHelpers from '@aws-amplify/cli-extensibility-helper';
 import { AmplifyDependentResourcesAttributes } from '../../types/amplify-dependent-resources-ref';
 import path from 'path';
 import fs from 'fs';
+import { queryMap } from './resolver-maps/queries';
+import { mutationMap } from './resolver-maps/mutations';
 
 export class cdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps, amplifyResourceProps?: AmplifyHelpers.AmplifyResourceProps) {
@@ -16,7 +18,7 @@ export class cdkStack extends cdk.Stack {
     });
     
     // Access other Amplify Resources 
-    const dependencies:AmplifyDependentResourcesAttributes = AmplifyHelpers.addResourceDependency(this, 
+    const dependencies: AmplifyDependentResourcesAttributes = AmplifyHelpers.addResourceDependency(this, 
       amplifyResourceProps.category, 
       amplifyResourceProps.resourceName, 
       [{
@@ -24,17 +26,58 @@ export class cdkStack extends cdk.Stack {
         resourceName: "pizzaapp"
       }]
     );
-    
-    const requestTemplate = fs.readFileSync(path.join(__dirname, "..", "resolvers", "query", "listOrdersByUser.req.vtl"), 'utf-8');
-    const responseTemplate = fs.readFileSync(path.join(__dirname, "..", "resolvers", "query", "listOrdersByUser.res.vtl"), 'utf-8');
+    this.createResolvers(dependencies);
+  }
 
-    new appsync.CfnResolver(this, "ListOrdersByUserResolver", {
-      apiId: cdk.Fn.ref(dependencies.api.pizzaapp.GraphQLAPIIdOutput),
-      fieldName: "listOrdersByUser", 
-      typeName: "Query",
-      requestMappingTemplate: requestTemplate,
-      responseMappingTemplate: responseTemplate,
-      dataSourceName: "PizzaAppTable"
-    });
+  /**
+   * create resolvers
+   * @param dependencies 
+   */
+  private createResolvers(dependencies: AmplifyDependentResourcesAttributes) {
+    this.createQueryResolvers(dependencies);
+    this.createMutationResolvers(dependencies);
+  }
+
+  /**
+   * create query resolvers
+   * @param dependencies 
+   */
+  private createQueryResolvers(dependencies: AmplifyDependentResourcesAttributes) {
+    for(let [key, value] of queryMap) {    
+      
+      const requestTemplate = fs.readFileSync(path.join(__dirname, "..", "resolvers", "query", value.requestTemplate), 'utf-8');
+      const responseTemplate = fs.readFileSync(path.join(__dirname, "..", "resolvers", "query", value.responseTemplate), 'utf-8');
+
+      new appsync.CfnResolver(this, key, {
+        apiId: cdk.Fn.ref(dependencies.api.pizzaapp.GraphQLAPIIdOutput),
+        fieldName: value.fieldName, 
+        typeName: "Query",
+        requestMappingTemplate: requestTemplate,
+        responseMappingTemplate: responseTemplate,
+        dataSourceName: "PizzaAppTable"
+      });
+    }
+  }
+  
+  /**
+   * create mutation resolvers
+   * @param dependencies 
+   */
+  private createMutationResolvers(dependencies: AmplifyDependentResourcesAttributes) {
+    
+    for(let [key, value] of mutationMap) {    
+      
+      const requestTemplate = fs.readFileSync(path.join(__dirname, "..", "resolvers", "mutation", value.requestTemplate), 'utf-8');
+      const responseTemplate = fs.readFileSync(path.join(__dirname, "..", "resolvers", "mutation", value.responseTemplate), 'utf-8');
+
+      new appsync.CfnResolver(this, key, {
+        apiId: cdk.Fn.ref(dependencies.api.pizzaapp.GraphQLAPIIdOutput),
+        fieldName: value.fieldName, 
+        typeName: "Mutation",
+        requestMappingTemplate: requestTemplate,
+        responseMappingTemplate: responseTemplate,
+        dataSourceName: "PizzaAppTable"
+      });
+    }
   }
 }

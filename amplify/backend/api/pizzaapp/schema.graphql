@@ -1,31 +1,32 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
 
 type PizzaApp
   @model(queries: null, mutations: null, subscriptions: null, timestamps: null)  {
   
   PK: String! @primaryKey(sortKeyFields: ["SK"])
   SK: String!
+  GSI_SECONDARY_PK: String! @index(name: "GSI_SECONDARY_PK", sortKeyFields: ["GSI_SECONDARY_SK"])
+  GSI_SECONDARY_SK: String!
+  CREATED_AT: String!
+  UPDATED_AT: String!
+  MODEL: String!
   TTL: AWSTimestamp
 }
 
-""" TYPES """
-
 type Order {
-  id: ID!
+  id: String!
   user_id: String!
+  date: String!
   customPizzas: [CustomPizza]!
   specialtyPizzas: [SpecialityPizza]!
-  name: String!
-  timestamp: String!
+  user_name: String!
   subtotal: Int!
   tax: Int!
   total: Int!
 }
 
 type CustomPizza {
-  id: ID!
+  id: String!
   size: PizzaSize!
   crust: PizzaCrust!
   sauce: PizzaSauce!
@@ -36,7 +37,7 @@ type CustomPizza {
 }
 
 type SpecialityPizza {
-  id: ID!
+  id: String!
   size: PizzaSize!
   crust: PizzaCrust!
   sauce: PizzaSauce!
@@ -44,6 +45,11 @@ type SpecialityPizza {
   meats: [PizzaMeat]!
   veggies: [PizzaVeggie]!
   price: Int!
+}
+
+type PizzaCheese {
+  quantity: CheeseQuantity!
+  additional: AdditionCheeseType
 }
 
 enum PizzaVeggie {
@@ -65,11 +71,6 @@ enum PizzaMeat {
   BACON
   CHICKEN
   NONE
-}
-
-type PizzaCheese {
-  quantity: CheeseQuantity!
-  additional: AdditionCheeseType
 }
 
 enum AdditionCheeseType {
@@ -110,14 +111,79 @@ enum PizzaSauce {
   NONE
 }
 
-""" INPUTS """
-
 input ListOrdersByUserInput {
   user_id: String!
 }
 
-type Query {
+input GetOrderInput {
+  id: String!
+  user_id: String!
+  date: String!
+}
 
-  """ORDERS"""
-  listOrdersByUser(input: ListOrdersByUserInput!): [Order]
+input CreateOrderInput {
+  user_id: String!
+  date: String!
+  user_name: String!
+  subtotal: Int!
+  tax: Int!
+  total: Int!
+  customPizzas: [CustomPizzaInput]
+  specialtyPizzas: [SpecialityPizzaInput]
+}
+
+input UpdateOrderInput {
+  id: String!
+  user_id: String!
+  date: String!
+  user_name: String
+  subtotal: Int
+  tax: Int
+  total: Int
+  customPizzas: [CustomPizzaInput]
+  specialtyPizzas: [SpecialityPizzaInput]
+}
+
+input CustomPizzaInput {
+  id: String!
+  size: PizzaSize!
+  crust: PizzaCrust!
+  sauce: PizzaSauce!
+  cheese: PizzaCheeseInput!
+  meats: [PizzaMeat]!
+  veggies: [PizzaVeggie]!
+  price: Int!
+}
+
+input SpecialityPizzaInput {
+  id: String!
+  size: PizzaSize!
+  crust: PizzaCrust!
+  sauce: PizzaSauce!
+  cheese: PizzaCheeseInput!
+  meats: [PizzaMeat]!
+  veggies: [PizzaVeggie]!
+  price: Int!
+}
+
+input PizzaCheeseInput {
+  quantity: CheeseQuantity!
+  additional: AdditionCheeseType
+}
+
+input DeleteOrderInput {
+  id: String!
+  user_id: String!
+  date: String!
+}
+
+type Query {
+  listOrdersByUser(input: ListOrdersByUserInput): [Order]
+  getOrder(input: GetOrderInput!): Order
+}
+
+type Mutation {
+  createOrder(input: CreateOrderInput!): Order
+  updateOrder(input: UpdateOrderInput!): Order
+  deleteOrder(input: DeleteOrderInput!): Order
 }

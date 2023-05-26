@@ -11,9 +11,8 @@ export class SplittingDirective implements AfterViewInit{
 
   ngAfterViewInit(): void {
     console.log('Directive initialized');
-  console.log('Element text before splitting:', this.el.nativeElement.textContent);
-  
-  Splitting({ target: this.el.nativeElement });
-  console.log('Element text after splitting:', this.el.nativeElement.textContent);
+    console.log('Element text before splitting:', this.el.nativeElement.textContent);
+    Splitting({ target: this.el.nativeElement });
+    console.log('Element text after splitting:', this.el.nativeElement.textContent);
   }
 }
