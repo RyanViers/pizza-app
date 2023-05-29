@@ -8,7 +8,13 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, IonicModule, PizzaPreviewComponent, RouterModule, FooterComponent],
+  imports: [
+    CommonModule,
+    IonicModule,
+    PizzaPreviewComponent,
+    RouterModule,
+    FooterComponent,
+  ],
   providers: [PizzaService],
   template: `
     <ion-header class="flex p-4">
@@ -65,6 +71,15 @@ import { RouterModule } from '@angular/router';
           </div>
         </div>
       </div>
+      <div class=" flex items-center">
+        <button
+          (click)="goToSection(4)"
+          type="button"
+          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Check Out
+        </button>
+      </div>
     </ion-header>
 
     <ion-content class="w-full relative">
@@ -74,7 +89,7 @@ import { RouterModule } from '@angular/router';
         <app-pizza-preview
           class="flex justify-center items-start"
         ></app-pizza-preview>
-        <div class="min-h-[381px] mt-12 md:mt-0 relative w-full block">
+        <div class="min-h-[381px] mt-12 md:mt-0 relative w-full block ">
           <ion-router-outlet></ion-router-outlet>
         </div>
       </div>

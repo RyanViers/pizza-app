@@ -125,6 +125,9 @@ export class PizzaService {
       case PizzaStepperSection.VEGGIES:
         this.router.navigate(['/pizza/veggie']);
         break;
+      case PizzaStepperSection.CHECK_OUT:
+        this.router.navigate(['/pizza/checkout']);
+        break;
     }
   }
 
@@ -143,6 +146,8 @@ export class PizzaService {
         return 2;
       case PizzaStepperSection.VEGGIES:
         return 3;
+      case PizzaStepperSection.CHECK_OUT:
+        return 4;
       default:
         return 0;
     }
@@ -163,6 +168,8 @@ export class PizzaService {
         return PizzaStepperSection.MEATS;
       case 3:
         return PizzaStepperSection.VEGGIES;
+      case 4:
+        return PizzaStepperSection.CHECK_OUT;
       default:
         return PizzaStepperSection.BASE;
     }

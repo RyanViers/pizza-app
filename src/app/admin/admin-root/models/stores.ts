@@ -25,6 +25,7 @@ export const stores: Store[] = [
         age: 30,
         email: 'john@gmail.com',
         storeName: 'Johnson City',
+        phone: '423-123-4567',
         salary: 2000,
       },
       {
@@ -33,6 +34,7 @@ export const stores: Store[] = [
         age: 25,
         email: 'mary@gmail.com',
         storeName: 'Johnson City',
+        phone: '423-123-4567',
         salary: 1500,
       },
     ],
@@ -51,6 +53,7 @@ export const stores: Store[] = [
         age: 20,
         email: 'andrew@gmail.com',
         storeName: 'Bristol',
+        phone: '423-123-4567',
         salary: 1000,
       },
       {
@@ -59,6 +62,7 @@ export const stores: Store[] = [
         age: 35,
         email: 'kate@gmail.com',
         storeName: 'Bristol',
+        phone: '423-123-4567',
         salary: 2500,
       },
     ],
@@ -77,6 +81,7 @@ export const stores: Store[] = [
         age: 40,
         email: 'alex@gmail.com',
         storeName: 'Kingsport',
+        phone: '423-123-4567',
         salary: 3000,
       },
       {
@@ -85,6 +90,7 @@ export const stores: Store[] = [
         age: 45,
         email: 'julia@gmail.com',
         storeName: 'Kingsport',
+        phone: '423-123-4567',
         salary: 3500,
       },
     ],

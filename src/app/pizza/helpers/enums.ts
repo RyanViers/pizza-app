@@ -3,6 +3,7 @@ export enum PizzaStepperSection {
   CHEESE = 'cheese',
   MEATS = 'meats',
   VEGGIES = 'veggies',
+  CHECK_OUT = 'check-out',
 }
 
 export enum MeatPrice {

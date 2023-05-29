@@ -51,6 +51,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'checkout',
+        loadComponent: () =>
+          import('./pizza/components/checkout.component').then(
+            (m) => m.CheckoutComponent
+          ),
+      },
+      {
         path: '**',
         redirectTo: 'base',
         pathMatch: 'full',
