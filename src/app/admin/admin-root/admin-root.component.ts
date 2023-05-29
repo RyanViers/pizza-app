@@ -1,3 +1,5 @@
+import { FooterComponent } from './../../components/footer/footer.component';
+import { HeaderComponent } from './../../components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -21,6 +23,8 @@ import { StoreListComponent } from '../admin-root/store-list/store-list.componen
     EmployeeListComponent,
     InventoryComponent,
     StoreListComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
 })
 export class AdminRootComponent implements OnInit {
