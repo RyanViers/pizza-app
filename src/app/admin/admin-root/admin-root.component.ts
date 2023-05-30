@@ -5,10 +5,10 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { AdminInfoComponent } from '../admin-root/admin-info/admin-info.component';
-import { EmployeeListComponent } from '../admin-root/employee-list/employee-list.component';
-import { InventoryComponent } from '../admin-root/inventory/inventory.component';
-import { StoreListComponent } from '../admin-root/store-list/store-list.component';
+import { AdminInfoComponent } from './components/admin-info/admin-info.component';
+import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import { InventoryComponent } from './components/inventory/inventory.component';
+import { StoreListComponent } from './components/store-list/store-list.component';
 
 @Component({
   selector: 'app-admin-root',

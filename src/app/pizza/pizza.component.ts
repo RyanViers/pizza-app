@@ -84,12 +84,14 @@ import { RouterModule } from '@angular/router';
 
     <ion-content class="w-full relative">
       <div
-        class="max-w-max mx-auto grid grid-cols-1 md:grid-cols-[400px_1fr] w-full relative h-auto md:h-[381px] mt-24 px-8"
+        class="grid-flow-row my-10 md:grid-cols-2 gap-x-28 max-w-max mx-auto grid grid-cols-1  w-full relative h-auto md:h-[381px] mt-24 px-8"
       >
         <app-pizza-preview
           class="flex justify-center items-start"
         ></app-pizza-preview>
-        <div class="min-h-[381px] mt-12 md:mt-0 relative w-full block ">
+        <div
+          class="min-h-[381px] mt-12 md:mt-0 relative w-full block max-w-max"
+        >
           <ion-router-outlet></ion-router-outlet>
         </div>
       </div>

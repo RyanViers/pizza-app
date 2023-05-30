@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { PizzaStepperSection } from './helpers/enums';
+import { MeatPrice, PizzaStepperSection, VeggiePrice } from './helpers/enums';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import {
   AdditionCheeseType,
   CheeseQuantity,
@@ -61,13 +61,34 @@ export class PizzaService {
       return pizza.meats;
     })
   );
+  public $meatPrice: Observable<string> = this.$pizzaMeats.pipe(
+    map((meats) =>
+      (meats || [])
+        .reduce(
+          (total, meat) =>
+            total + (MeatPrice[meat as PizzaMeat] || MeatPrice.NONE),
+          0
+        )
+        .toFixed(2)
+    )
+  );
   public $pizzaVeggies = this.$pizza.pipe(
     map((pizza: Pizza) => {
       return pizza.veggies;
     })
   );
+  // public $veggiePrice: Observable<string> = this.$pizzaVeggies.pipe(
+  //   map((veggies) =>
+  //     (veggies || [])
+  //       .reduce(
+  //         (total, veggie) =>
+  //           total + (VeggiePrice[veggie as PizzaVeggie] || VeggiePrice.NONE),
+  //         0
+  //       )
+  //       .toFixed(2)
+  //   )
+  // );
 
-  //variables
   private currentSection: PizzaStepperSection = PizzaStepperSection.BASE;
 
   /**
@@ -85,6 +106,26 @@ export class PizzaService {
   getPizzaMeats(): (PizzaMeat | null)[] {
     return this.$pizza?.value?.meats;
   }
+
+  // getMeatsPrice(choices: PizzaMeat[] | null) {
+  //   let total = 0;
+  //   this.$pizza?.value?.meats?.forEach((meat) => {
+  //     if (meat === 'PEPPERONI') {
+  //       total += MeatPrice.PEPPERONI;
+  //     } else if (meat === 'SAUSAGE') {
+  //       total += MeatPrice.SAUSAGE;
+  //     } else if (meat === 'HAM') {
+  //       total += MeatPrice.HAM;
+  //     } else if (meat === 'BACON') {
+  //       total += MeatPrice.BACON;
+  //     } else if (meat === 'CHICKEN') {
+  //       total += MeatPrice.CHICKEN;
+  //     } else if (meat === 'BEEF') {
+  //       total += MeatPrice.BEEF;
+  //     }
+  //   });
+  //   return total.toFixed(2);
+  // }
 
   getPizzaVeggies(): (PizzaVeggie | null)[] {
     return this.$pizza?.value?.veggies;

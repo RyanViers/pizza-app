@@ -1,15 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
+import { MeatPrice, VeggiePrice } from '../helpers/enums';
+import { Observable, map } from 'rxjs';
+import { PizzaMeat } from 'src/app/API.service';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule],
   providers: [],
-  styles: [],
+  styles: [
+    `
+      :host {
+      }
+    `,
+  ],
   template: `
     <div class="mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-0 ">
       <h1
@@ -30,8 +38,6 @@ import { PizzaService } from '../pizza.service';
               <div class="flex-shrink-0">
                 <img
                   src="assets/pizza.jpg"
-                  alt="Front side of charcoal
-                cotton t-shirt."
                   class="h-24 w-24 rounded-md object-cover
                 object-center sm:h-32 sm:w-32"
                 />
@@ -72,7 +78,7 @@ import { PizzaService } from '../pizza.service';
                   <div class="flex justify-between">
                     <h3 class="text-sm">Pizza Meats:</h3>
                     <p class="text-sm pl-5 text-gray-400">
-                      {{ $pizzaMeats | async }}
+                      {{ $meatPrice | async }}
                     </p>
                   </div>
                   <div class="flex justify-between">
@@ -84,8 +90,6 @@ import { PizzaService } from '../pizza.service';
                 </div>
               </div>
             </li>
-
-            <!-- More products... -->
           </ul>
         </section>
 
@@ -131,7 +135,7 @@ import { PizzaService } from '../pizza.service';
     </div>
   `,
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements OnInit {
   $pizzaSize = this.pizza.$pizzaSize;
   $pizzaCrust = this.pizza.$pizzaCrust;
   $pizzaSauce = this.pizza.$pizzaSauce;
@@ -140,7 +144,12 @@ export class CheckoutComponent {
   $pizzaMeats = this.pizza.$pizzaMeats;
   $pizzaVeggies = this.pizza.$pizzaVeggies;
 
+  $meatPrice = this.pizza.$meatPrice;
+  //$veggiePrice = this.pizza.$veggiePrice;
+
   constructor(private pizza: PizzaService) {}
 
-  meatNum(num: number) {}
+  //create an observable that can be bound to the template that takes pizza meats and returns total price of all meats selected
+
+  ngOnInit() {}
 }
