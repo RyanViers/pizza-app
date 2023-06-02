@@ -77,17 +77,17 @@ export class PizzaService {
       return pizza.veggies;
     })
   );
-  // public $veggiePrice: Observable<string> = this.$pizzaVeggies.pipe(
-  //   map((veggies) =>
-  //     (veggies || [])
-  //       .reduce(
-  //         (total, veggie) =>
-  //           total + (VeggiePrice[veggie as PizzaVeggie] || VeggiePrice.NONE),
-  //         0
-  //       )
-  //       .toFixed(2)
-  //   )
-  // );
+  public $veggiePrice: Observable<string> = this.$pizzaVeggies.pipe(
+    map((veggies) =>
+      (veggies || [])
+        .reduce(
+          (total, veggie) =>
+            total + (VeggiePrice[veggie as PizzaVeggie]  || VeggiePrice.NONE),
+          0
+        )
+        .toFixed(2)
+    )
+  );
 
   private currentSection: PizzaStepperSection = PizzaStepperSection.BASE;
 

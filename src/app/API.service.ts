@@ -88,6 +88,7 @@ export enum PizzaVeggie {
   TOMATOES = "TOMATOES",
   PINEAPPLE = "PINEAPPLE",
   JALAPENOS = "JALAPENOS",
+  SPINACH = "SPINACH",
   NONE = "NONE"
 }
 

@@ -7,7 +7,7 @@ export enum PizzaStepperSection {
 }
 
 export enum MeatPrice {
-  BACON = 1.99,
+  BACON  = 1.99,
   CHICKEN = 1.99,
   HAM = 1.99,
   PEPPERONI = 0.99,
@@ -17,12 +17,13 @@ export enum MeatPrice {
 }
 
 export enum VeggiePrice {
-  BLACK_OLIVES = 0.99,
-  GREEN_PEPPERS = 0.99,
   MUSHROOMS = 1.99,
   ONIONS = 0.99,
-  PINEAPPLE = 1.99,
-  SPINACH = 0.99,
+  GREEN_PEPPERS = 0.99,
+  BLACK_OLIVES = 1.99,
   TOMATOES = 0.99,
+  PINEAPPLE = 1.99,
+  JALAPENOS = 2.99,
+  SPINACH = 1.99,
   NONE = 0,
 }

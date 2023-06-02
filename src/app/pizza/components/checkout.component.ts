@@ -84,7 +84,7 @@ import { PizzaMeat } from 'src/app/API.service';
                   <div class="flex justify-between">
                     <h3 class="text-sm">Pizza Veggies:</h3>
                     <p class="text-sm pl-5 text-gray-400">
-                      {{ $pizzaVeggies | async }}
+                      {{ $veggiePrice | async }}
                     </p>
                   </div>
                 </div>
@@ -145,7 +145,7 @@ export class CheckoutComponent implements OnInit {
   $pizzaVeggies = this.pizza.$pizzaVeggies;
 
   $meatPrice = this.pizza.$meatPrice;
-  //$veggiePrice = this.pizza.$veggiePrice;
+  $veggiePrice = this.pizza.$veggiePrice;
 
   constructor(private pizza: PizzaService) {}
 
