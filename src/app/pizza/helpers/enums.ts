@@ -27,3 +27,48 @@ export enum VeggiePrice {
   SPINACH = 1.99,
   NONE = 0,
 }
+
+export enum PizzaToppingsNumber {
+  LIGHT = 1,
+  NORMAL = 2,
+  EXTRA = 3,
+}
+
+export enum PizzaSizePrice {
+  SMALL = 9.99,
+  MEDIUM = 12.99,
+  LARGE = 14.99,
+}
+
+export enum PizzaCrustPrice {
+  ORIGINAL = 0,
+  DEEP_DISH = 1.99,
+  THIN = 0.99,
+  STUFFED = 2.99,
+  NEW_YORK = 1.99,
+}
+
+export enum PizzaSaucePrice {
+  TOMATO = 0,
+  ALFREDO = 1.99,
+  PESTO = 1.99,
+  BBQ = 1.99,
+  GARLIC = 1.99,
+  NONE = 0,
+}
+
+export enum CheeseQuantityPrice {
+  NORMAL = 0.99,
+  LIGHT = 0.5,
+  EXTRA = 1.99,
+  NONE = 0,
+}
+
+export enum AdditionCheeseTypePrice {
+  THREE_CHEESE = 1.99,
+  EXTRA_CHEESE = 1.99,
+  PARMESAN = 0.99,
+  FETA = 2.99,
+  CHEDDAR = 1.99,
+  NONE = 0,
+}

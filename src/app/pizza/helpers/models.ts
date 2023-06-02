@@ -16,8 +16,4 @@ export interface Pizza {
   veggies: Array<PizzaVeggie | null>;
 }
 
-export enum PizzaToppingsNumber {
-  LIGHT = 1,
-  NORMAL = 2,
-  EXTRA = 3,
-}
+

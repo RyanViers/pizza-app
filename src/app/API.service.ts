@@ -58,6 +58,7 @@ export type PizzaCheeseInput = {
 export enum CheeseQuantity {
   NORMAL = "NORMAL",
   LIGHT = "LIGHT",
+  EXTRA = "EXTRA",
   NONE = "NONE"
 }
 

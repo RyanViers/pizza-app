@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
-import { MeatPrice, VeggiePrice } from '../helpers/enums';
-import { Observable, map } from 'rxjs';
-import { PizzaMeat } from 'src/app/API.service';
+import { Observable, combineLatest, map } from 'rxjs';
+import { parse } from 'path';
+
 
 @Component({
   selector: 'app-checkout',
@@ -48,31 +48,31 @@ import { PizzaMeat } from 'src/app/API.service';
                   <div class="flex justify-between">
                     <h3 class="text-sm">Pizza Size:</h3>
                     <p class="text-sm pl-5 text-gray-400">
-                      {{ $pizzaSize | async }}
+                      {{ $pizzaSizePrice | async }}
                     </p>
                   </div>
                   <div class="flex justify-between">
                     <h3 class="text-sm">Pizza Crust:</h3>
                     <p class="text-sm pl-5 text-gray-400">
-                      {{ $pizzaCrust | async }}
+                      {{ $pizzaCrustPrice | async }}
                     </p>
                   </div>
                   <div class="flex justify-between">
                     <h3 class="text-sm">Pizza Sauce:</h3>
                     <p class="text-sm pl-5 text-gray-400">
-                      {{ $pizzaSauce | async }}
+                      {{ $pizzaSaucePrice | async }}
                     </p>
                   </div>
                   <div class="flex justify-between">
                     <h3 class="text-sm">Pizza Cheese Qty:</h3>
                     <p class="text-sm pl-5 text-gray-400">
-                      {{ $pizzaCheeseQuantity | async }}
+                      {{ $pizzaCheeseQuantityPrice | async }}
                     </p>
                   </div>
                   <div class="flex justify-between">
                     <h3 class="text-sm">Pizza Add Cheese:</h3>
                     <p class="text-sm pl-5 text-gray-400">
-                      {{ $pizzaCheeseAdditional | async }}
+                      {{ $pizzaCheeseAdditionalPrice | async }}
                     </p>
                   </div>
                   <div class="flex justify-between">
@@ -101,7 +101,19 @@ import { PizzaMeat } from 'src/app/API.service';
             <dl class="space-y-4">
               <div class="flex items-center justify-between">
                 <dt class="text-base font-medium text-gray-300">Subtotal</dt>
-                <dd class="ml-4 text-base font-medium text-gray-300">$96.00</dd>
+                <dd class="ml-4 text-base font-medium text-gray-300">{{ totalPriceBeforeTax() | async}}</dd>
+              </div>
+            </dl>
+            <dl class="space-y-4">
+              <div class="flex items-center justify-between">
+                <dt class="text-xs font-medium text-medium-default">Tax</dt>
+                <dd class="ml-4 text-base font-medium text-gray-300">{{ totalTax() | async}}</dd>
+              </div>
+            </dl>
+            <dl class="space-y-4">
+              <div class="flex items-center justify-between">
+                <dt class="text-base font-medium text-gray-300">Total</dt>
+                <dd class="ml-4 text-base font-medium text-gray-300">{{ totalPriceAfterTax() | async}}</dd>
               </div>
             </dl>
             <p class="mt-1 text-sm text-gray-500">
@@ -135,21 +147,45 @@ import { PizzaMeat } from 'src/app/API.service';
     </div>
   `,
 })
-export class CheckoutComponent implements OnInit {
-  $pizzaSize = this.pizza.$pizzaSize;
-  $pizzaCrust = this.pizza.$pizzaCrust;
-  $pizzaSauce = this.pizza.$pizzaSauce;
-  $pizzaCheeseQuantity = this.pizza.$pizzaCheeseQuantity;
-  $pizzaCheeseAdditional = this.pizza.$pizzaCheeseAdditional;
-  $pizzaMeats = this.pizza.$pizzaMeats;
-  $pizzaVeggies = this.pizza.$pizzaVeggies;
+export class CheckoutComponent {
 
+  $pizzaSizePrice = this.pizza.$pizzaSizePrice;
+  $pizzaCrustPrice = this.pizza.$pizzaCrustPrice;
+  $pizzaSaucePrice = this.pizza.$pizzaSaucePrice;
+  $pizzaCheeseQuantityPrice = this.pizza.$pizzaCheeseQuantityPrice;
+  $pizzaCheeseAdditionalPrice = this.pizza.$pizzaCheeseAdditionalPrice;
   $meatPrice = this.pizza.$meatPrice;
   $veggiePrice = this.pizza.$veggiePrice;
 
   constructor(private pizza: PizzaService) {}
 
-  //create an observable that can be bound to the template that takes pizza meats and returns total price of all meats selected
+  totalPriceBeforeTax(): Observable<number> {
+    return combineLatest([
+      this.$pizzaSizePrice,
+      this.$pizzaCrustPrice,
+      this.$pizzaSaucePrice,
+      this.$pizzaCheeseQuantityPrice,
+      this.$pizzaCheeseAdditionalPrice,
+      this.$meatPrice,
+      this.$veggiePrice
+    ]).pipe(
+      map(prices => prices.reduce((total, price) => total + price, 0))
+    );
+  }
 
-  ngOnInit() {}
+  totalTax(): Observable<number> {
+    return this.totalPriceBeforeTax().pipe(
+      map(total => (total * 0.097)),
+      map((totalTax: number) => parseFloat(totalTax.toFixed(2)))
+    );
+  }
+
+  totalPriceAfterTax(): Observable<number> {
+    return this.totalPriceBeforeTax().pipe(
+      map((total: number) => (total * 0.097) + total),
+      map((totalWithTax: number) => parseFloat(totalWithTax.toFixed(2)))
+    );
+  }
 }
+
+
