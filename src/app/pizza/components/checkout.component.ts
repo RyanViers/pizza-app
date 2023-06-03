@@ -78,13 +78,13 @@ import { parse } from 'path';
                   <div class="flex justify-between">
                     <h3 class="text-sm">Pizza Meats:</h3>
                     <p class="text-sm pl-5 text-gray-400">
-                      {{ $meatPrice | async }}
+                      {{ meatFormat() | async }}
                     </p>
                   </div>
                   <div class="flex justify-between">
                     <h3 class="text-sm">Pizza Veggies:</h3>
                     <p class="text-sm pl-5 text-gray-400">
-                      {{ $veggiePrice | async }}
+                      {{ veggieFormat() | async }}
                     </p>
                   </div>
                 </div>
@@ -157,6 +157,8 @@ export class CheckoutComponent {
   $meatPrice = this.pizza.$meatPrice;
   $veggiePrice = this.pizza.$veggiePrice;
 
+  
+
   constructor(private pizza: PizzaService) {}
 
   totalPriceBeforeTax(): Observable<number> {
@@ -169,7 +171,8 @@ export class CheckoutComponent {
       this.$meatPrice,
       this.$veggiePrice
     ]).pipe(
-      map(prices => prices.reduce((total, price) => total + price, 0))
+      map(prices => prices.reduce((total, price) => total + price, 0)),
+      map((total: number) => parseFloat(total.toFixed(2)))
     );
   }
 
@@ -185,6 +188,24 @@ export class CheckoutComponent {
       map((total: number) => (total * 0.097) + total),
       map((totalWithTax: number) => parseFloat(totalWithTax.toFixed(2)))
     );
+  }
+
+  veggieFormat(): Observable<string> {
+    return this.$veggiePrice.pipe(
+      map((veggiePrice: number) => {
+        return veggiePrice.toFixed(2);
+      }
+      )
+    )
+  }
+
+  meatFormat(): Observable<string> {
+    return this.$meatPrice.pipe(
+      map((meatPrice: number) => {
+        return meatPrice.toFixed(2);
+      }
+      )
+    )
   }
 }
 
