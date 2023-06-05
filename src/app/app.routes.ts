@@ -18,6 +18,13 @@ export const routes: Routes = [
       import('./sign-up/sign-up.component').then((m) => m.SignUpComponent),
   },
   {
+    path: 'specialty-pizzas',
+    loadComponent: () =>
+      import('./pizza/specialty-pizzas/specialty-pizzas.component').then(
+        (m) => m.SpecialtyPizzasComponent
+      ),
+  },
+  {
     path: 'pizza',
     loadComponent: () =>
       import('./pizza/pizza.component').then((m) => m.PizzaComponent),

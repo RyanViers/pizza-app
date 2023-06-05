@@ -1,5 +1,14 @@
 import { Injectable } from '@angular/core';
-import { MeatPrice, PizzaCrustPrice, PizzaSizePrice, PizzaStepperSection, VeggiePrice, PizzaSaucePrice, CheeseQuantityPrice, AdditionCheeseTypePrice } from './helpers/enums';
+import {
+  MeatPrice,
+  PizzaCrustPrice,
+  PizzaSizePrice,
+  PizzaStepperSection,
+  VeggiePrice,
+  PizzaSaucePrice,
+  CheeseQuantityPrice,
+  AdditionCheeseTypePrice,
+} from './helpers/enums';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import {
@@ -30,7 +39,15 @@ export class PizzaService {
     veggies: [],
   });
 
+  private $quantity = new BehaviorSubject<number>(1);
+
   //observable
+  public $quantityTotal = this.$quantity.pipe(
+    map((quantity) => {
+      return quantity;
+    })
+  );
+
   public $pizzaSize = this.$pizza.pipe(
     map((pizza: Pizza) => {
       return pizza.size;
@@ -38,7 +55,7 @@ export class PizzaService {
   );
   public $pizzaSizePrice: Observable<number> = this.$pizzaSize.pipe(
     map((size: string) => {
-      return (PizzaSizePrice[size as PizzaSize] || PizzaSizePrice.LARGE)
+      return PizzaSizePrice[size as PizzaSize] || PizzaSizePrice.LARGE;
     })
   );
   public $pizzaCrust = this.$pizza.pipe(
@@ -48,7 +65,7 @@ export class PizzaService {
   );
   public $pizzaCrustPrice: Observable<number> = this.$pizzaCrust.pipe(
     map((crust: string) => {
-      return (PizzaCrustPrice[crust as PizzaCrust] || PizzaCrustPrice.ORIGINAL)
+      return PizzaCrustPrice[crust as PizzaCrust] || PizzaCrustPrice.ORIGINAL;
     })
   );
   public $pizzaSauce = this.$pizza.pipe(
@@ -58,7 +75,7 @@ export class PizzaService {
   );
   public $pizzaSaucePrice: Observable<number> = this.$pizzaSauce.pipe(
     map((sauce: string) => {
-      return (PizzaSaucePrice[sauce as PizzaSauce] || PizzaSaucePrice.TOMATO)
+      return PizzaSaucePrice[sauce as PizzaSauce] || PizzaSaucePrice.TOMATO;
     })
   );
   public $pizzaCheeseQuantity = this.$pizza.pipe(
@@ -66,21 +83,29 @@ export class PizzaService {
       return pizza.cheese.quantity;
     })
   );
-  public $pizzaCheeseQuantityPrice: Observable<number> = this.$pizzaCheeseQuantity.pipe(
-    map((quantity: string) => {
-      return (CheeseQuantityPrice[quantity as CheeseQuantity] || CheeseQuantityPrice.NORMAL)
-    })
-  );
+  public $pizzaCheeseQuantityPrice: Observable<number> =
+    this.$pizzaCheeseQuantity.pipe(
+      map((quantity: string) => {
+        return (
+          CheeseQuantityPrice[quantity as CheeseQuantity] ||
+          CheeseQuantityPrice.NORMAL
+        );
+      })
+    );
   public $pizzaCheeseAdditional = this.$pizza.pipe(
     map((pizza: Pizza) => {
       return pizza.cheese.additional;
     })
   );
-  public $pizzaCheeseAdditionalPrice: Observable<number> = this.$pizzaCheeseAdditional.pipe(
-    map((additional) => {
-      return (AdditionCheeseTypePrice[additional as AdditionCheeseType] || AdditionCheeseTypePrice.NONE)
-    })
-  );
+  public $pizzaCheeseAdditionalPrice: Observable<number> =
+    this.$pizzaCheeseAdditional.pipe(
+      map((additional) => {
+        return (
+          AdditionCheeseTypePrice[additional as AdditionCheeseType] ||
+          AdditionCheeseTypePrice.NONE
+        );
+      })
+    );
 
   public $pizzaMeats = this.$pizza.pipe(
     map((pizza: Pizza) => {
@@ -89,12 +114,11 @@ export class PizzaService {
   );
   public $meatPrice: Observable<number> = this.$pizzaMeats.pipe(
     map((meats) =>
-      (meats || [])
-        .reduce(
-          (total, meat) =>
-            total + (MeatPrice[meat as PizzaMeat] || MeatPrice.NONE),
-          0
-        )
+      (meats || []).reduce(
+        (total, meat) =>
+          total + (MeatPrice[meat as PizzaMeat] || MeatPrice.NONE),
+        0
+      )
     )
   );
   public $pizzaVeggies = this.$pizza.pipe(
@@ -104,12 +128,11 @@ export class PizzaService {
   );
   public $veggiePrice: Observable<number> = this.$pizzaVeggies.pipe(
     map((veggies) =>
-      (veggies || [])
-        .reduce(
-          (total, veggie) =>
-            total + (VeggiePrice[veggie as PizzaVeggie]  || VeggiePrice.NONE),
-          0
-        )
+      (veggies || []).reduce(
+        (total, veggie) =>
+          total + (VeggiePrice[veggie as PizzaVeggie] || VeggiePrice.NONE),
+        0
+      )
     )
   );
 
@@ -161,6 +184,18 @@ export class PizzaService {
    */
   setPizza(options: Partial<Pizza>) {
     this.$pizza.next({ ...this.$pizza.value, ...options });
+  }
+
+  /**
+   * set quantity
+   * @param quantity
+   */
+  setQuantity(quantity: number) {
+    this.$quantity.next(quantity);
+  }
+
+  getQuantity(): number {
+    return this.$quantity.value;
   }
 
   /**

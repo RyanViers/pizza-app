@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
@@ -6,7 +7,7 @@ import { PizzaService } from '../pizza.service';
 @Component({
   selector: `app-pizza-preview`,
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, SharedModule],
   providers: [],
   template: `
     <div class="grid grid-cols-1 gap-4">

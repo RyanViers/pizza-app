@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { PizzaService } from './pizza.service';
 import { PizzaPreviewComponent } from './components/preview.component';
 import { RouterModule } from '@angular/router';
+import { QuantityComponent } from './components/quantity.component';
 
 @Component({
   standalone: true,
@@ -14,6 +15,7 @@ import { RouterModule } from '@angular/router';
     PizzaPreviewComponent,
     RouterModule,
     FooterComponent,
+    QuantityComponent,
   ],
   providers: [PizzaService],
   template: `
@@ -84,11 +86,15 @@ import { RouterModule } from '@angular/router';
 
     <ion-content class="w-full relative">
       <div
-        class="grid-flow-row my-10 md:grid-cols-2 gap-x-28 max-w-max mx-auto grid grid-cols-1  w-full relative h-auto md:h-[381px] mt-24 px-8"
+        class="grid-flow-row my-10 md:grid-cols-2 gap-x-28 max-w-max mx-auto grid grid-cols-1  w-full relative h-auto  px-8"
       >
-        <app-pizza-preview
-          class="flex justify-center items-start"
-        ></app-pizza-preview>
+        <div>
+          <app-pizza-preview
+            class="flex justify-center items-start"
+          ></app-pizza-preview>
+          <app-quantity class="flex justify-center items-start"></app-quantity>
+        </div>
+
         <div
           class="min-h-[381px] mt-12 md:mt-0 relative w-full block max-w-max"
         >

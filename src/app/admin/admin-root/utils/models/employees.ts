@@ -6,6 +6,7 @@ export interface Employee {
   storeName: string;
   phone: string;
   salary: number;
+  img?: string;
 }
 
 export const employees: Employee[] = [
@@ -17,6 +18,7 @@ export const employees: Employee[] = [
     storeName: 'Johnson City',
     phone: '423-123-4567',
     salary: 2000,
+    img: 'assets/employees/john.jpg',
   },
   {
     id: 2,
@@ -26,6 +28,7 @@ export const employees: Employee[] = [
     storeName: 'Johnson City',
     phone: '423-123-4567',
     salary: 1500,
+    img: 'assets/employees/mary.jpg',
   },
   {
     id: 3,
@@ -35,6 +38,7 @@ export const employees: Employee[] = [
     storeName: 'Bristol',
     phone: '423-123-4567',
     salary: 1000,
+    img: 'assets/employees/andrew.jpg',
   },
   {
     id: 4,
@@ -44,6 +48,7 @@ export const employees: Employee[] = [
     storeName: 'Bristol',
     phone: '423-123-4567',
     salary: 2500,
+    img: 'assets/employees/kate.jpg',
   },
   {
     id: 5,
@@ -53,6 +58,7 @@ export const employees: Employee[] = [
     storeName: 'Kingsport',
     phone: '423-123-4567',
     salary: 3000,
+    img: 'assets/employees/alex.jpg',
   },
   {
     id: 6,
@@ -62,5 +68,6 @@ export const employees: Employee[] = [
     storeName: 'Kingsport',
     phone: '423-123-4567',
     salary: 3500,
+    img: 'assets/employees/julia.jpg',
   },
 ];

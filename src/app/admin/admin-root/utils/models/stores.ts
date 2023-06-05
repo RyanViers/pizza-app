@@ -7,6 +7,7 @@ export interface Store {
   phone: string;
   email: string;
   manager: string;
+  img?: string;
   employees: Employee[];
 }
 
@@ -18,6 +19,7 @@ export const stores: Store[] = [
     phone: '123-456-7890',
     email: 'bigDaddysJC@bigdaddys.com',
     manager: 'John Doe',
+    img: 'assets/stores/jc-pic.jpg',
     employees: [
       {
         id: 1,
@@ -46,6 +48,7 @@ export const stores: Store[] = [
     phone: '123-456-7890',
     email: 'bigdaddysBristol@gmail.com',
     manager: 'Jane Doe',
+    img: 'assets/stores/bristol-pic.jpg',
     employees: [
       {
         id: 3,
@@ -74,6 +77,7 @@ export const stores: Store[] = [
     phone: '123-456-7890',
     email: 'bigdaddysKingsport@gmail.com',
     manager: 'John Smith',
+    img: 'assets/stores/kingsport-pic.jpg',
     employees: [
       {
         id: 5,
