@@ -25,6 +25,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'cart',
+    loadComponent: () =>
+      import('./cart/cart/cart.component').then((m) => m.CartComponent),
+  },
+  {
     path: 'pizza',
     loadComponent: () =>
       import('./pizza/pizza.component').then((m) => m.PizzaComponent),

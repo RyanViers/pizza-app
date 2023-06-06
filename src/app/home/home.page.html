@@ -1,4 +1,8 @@
 <ion-content>
+  <ion-header>
+    <app-header></app-header>
+  </ion-header>
+
   <section
     class="h-full bg-center bg-no-repeat bg-[url('src/assets/volcano.png')] bg-gray-700 bg-blend-multiply"
   >
@@ -15,38 +19,9 @@
       >
         "Grab a Slice of Swampy Paradise!"
       </p>
-      <div
-        class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4"
-      >
-        <button
-          [routerLink]="['/pizza']"
-          type="button"
-          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Create Pizza
-        </button>
-        <button
-          [routerLink]="['/specialty-pizzas']"
-          type="button"
-          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Specialty Pizza
-        </button>
-        <button
-          [routerLink]="['/sign-up']"
-          type="button"
-          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Sign Up
-        </button>
-        <button
-          [routerLink]="['/admin-root']"
-          type="button"
-          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Admin
-        </button>
-      </div>
     </div>
   </section>
+  <ion-footer>
+    <app-footer></app-footer>
+  </ion-footer>
 </ion-content>

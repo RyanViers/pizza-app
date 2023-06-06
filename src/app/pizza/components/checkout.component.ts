@@ -10,12 +10,7 @@ import { Observable, combineLatest, map } from 'rxjs';
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule],
   providers: [],
-  styles: [
-    `
-      :host {
-      }
-    `,
-  ],
+  styles: [``],
   template: `
     <ion-content>
       <div class="mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-0 ">

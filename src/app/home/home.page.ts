@@ -1,3 +1,5 @@
+import { FooterComponent } from './../components/footer/footer.component';
+import { HeaderComponent } from './../components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -33,7 +35,14 @@ import { SharedModule } from '../shared/shared.module';
     `,
   ],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule, SharedModule],
+  imports: [
+    CommonModule,
+    IonicModule,
+    RouterModule,
+    SharedModule,
+    HeaderComponent,
+    FooterComponent,
+  ],
 })
 export class HomePage {
   constructor() {}

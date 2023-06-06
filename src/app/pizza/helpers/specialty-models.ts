@@ -9,6 +9,7 @@ export interface SpecialtyPizza {
   description: string;
   imageUrl: string;
   toppings: PizzaTopping[];
+  price?: number;
 }
 
 export const pizzas: SpecialtyPizza[] = [
@@ -24,6 +25,7 @@ export const pizzas: SpecialtyPizza[] = [
       { name: 'Basil', vegetarian: true },
       { name: 'Extra-Virgin Olive Oil', vegetarian: true },
     ],
+    price: 19.99,
   },
   {
     id: 2,
@@ -35,6 +37,7 @@ export const pizzas: SpecialtyPizza[] = [
       { name: 'Mozzarella', vegetarian: true },
       { name: 'Pepperoni', vegetarian: false },
     ],
+    price: 19.99,
   },
   {
     id: 3,
@@ -46,6 +49,7 @@ export const pizzas: SpecialtyPizza[] = [
       { name: 'Chicken', vegetarian: false },
       { name: 'Onions', vegetarian: true },
     ],
+    price: 19.99,
   },
   {
     id: 4,
@@ -58,6 +62,7 @@ export const pizzas: SpecialtyPizza[] = [
       { name: 'Ham', vegetarian: false },
       { name: 'Pineapple', vegetarian: true },
     ],
+    price: 19.99,
   },
   {
     id: 5,
@@ -71,6 +76,7 @@ export const pizzas: SpecialtyPizza[] = [
       { name: 'Bacon', vegetarian: false },
       { name: 'Sausage', vegetarian: false },
     ],
+    price: 24.99,
   },
   {
     id: 6,
@@ -85,6 +91,7 @@ export const pizzas: SpecialtyPizza[] = [
       { name: 'Peppers', vegetarian: true },
       { name: 'Onions', vegetarian: true },
     ],
+    price: 19.99,
   },
   {
     id: 7,
@@ -96,6 +103,7 @@ export const pizzas: SpecialtyPizza[] = [
       { name: 'Chicken', vegetarian: false },
       { name: 'Blue Cheese', vegetarian: true },
     ],
+    price: 24.99,
   },
   {
     id: 8,
@@ -109,6 +117,7 @@ export const pizzas: SpecialtyPizza[] = [
       { name: 'Tomatoes', vegetarian: true },
       { name: 'Cheddar Cheese', vegetarian: true },
     ],
+    price: 19.99,
   },
   {
     id: 9,
@@ -123,6 +132,7 @@ export const pizzas: SpecialtyPizza[] = [
       { name: 'Calamari', vegetarian: false },
       { name: 'Clams', vegetarian: false },
     ],
+    price: 29.99,
   },
   {
     id: 10,
@@ -137,5 +147,6 @@ export const pizzas: SpecialtyPizza[] = [
       { name: 'Fontina', vegetarian: true },
       { name: 'Parmesan', vegetarian: true },
     ],
+    price: 24.99,
   },
 ];
