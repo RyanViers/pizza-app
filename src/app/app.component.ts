@@ -5,18 +5,10 @@ import { IonicModule } from '@ionic/angular';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styles: [
-    `
-      :host {
-        --ion-background-color: var(--ion-color-light);
-      }
-    `,
-  ],
+  styles: [``],
   standalone: true,
   imports: [CommonModule, IonicModule],
-  
 })
 export class AppComponent {
-
   constructor() {}
 }
