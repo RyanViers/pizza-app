@@ -1,15 +1,16 @@
 import { HeaderComponent } from './../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { SwalComponent, SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PizzaPreviewComponent } from '../components/preview.component';
 import { RouterModule } from '@angular/router';
 import { QuantityComponent } from '../components/quantity.component';
 import { pizzas, SpecialtyPizza } from '../helpers/specialty-models';
 import Swal from 'sweetalert2';
 import { SweetAlertOptions } from 'sweetalert2';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-specialty-pizzas',
@@ -26,11 +27,12 @@ import { SweetAlertOptions } from 'sweetalert2';
     QuantityComponent,
   ],
   styles: [``],
-  template: ` <ion-content>
-    <ion-header>
-      <app-header></app-header>
-    </ion-header>
+  template: ` 
+  <ion-header>
+    <app-header></app-header>
+  </ion-header>
 
+  <ion-content>  
     <div class="bg-white">
       <div
         class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
@@ -71,13 +73,17 @@ import { SweetAlertOptions } from 'sweetalert2';
     </ion-footer>
   </ion-content>`,
 })
-export class SpecialtyPizzasComponent {
-  pizzas: SpecialtyPizza[] = pizzas;
+export class SpecialtyPizzasComponent implements OnDestroy{
+  pizzas: SpecialtyPizza[] = [];
 
-  @ViewChild('swal')
-  swal!: SwalComponent;
+  constructor() { of(pizzas).subscribe((pizzaArray: SpecialtyPizza[]) => {
+    this.pizzas = pizzaArray;
+  });}
 
-  constructor() {}
+
+  ngOnDestroy(): void {
+    this.pizzas = [];
+  }
 
   public readonly swalOptions: SweetAlertOptions = {
     title: '',
@@ -88,9 +94,8 @@ export class SpecialtyPizzasComponent {
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
     customClass: {
-      popup: 'bg-light-shade',
+      popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg', 
     },
-    html: `<p>andrew sucks butt</p>`,
   };
 
   onClick(pizza: SpecialtyPizza) {

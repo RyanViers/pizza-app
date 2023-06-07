@@ -1,3 +1,5 @@
+import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SharedModule } from './../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -23,6 +25,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     RouterModule,
     SharedModule,
+    HeaderComponent,
+    FooterComponent,
   ],
   providers: [SignUpService, FormBuilder],
   templateUrl: './sign-up.component.html',

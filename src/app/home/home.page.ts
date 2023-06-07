@@ -8,32 +8,34 @@ import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styles: [
-    `
-      :host {
-        display: flex;
-        justify-content: center;
-      }
-      .splitting .char {
-        display: inline-block;
-        transform: translateY(20px);
-        opacity: 0;
-        animation: typing 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-      }
+  template: ` <ion-header>
+      <app-header></app-header>
+    </ion-header>
 
-      @keyframes typing {
-        from {
-          transform: translateY(20px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-    `,
-  ],
+    <ion-content>
+      <section
+        class="h-full w-full bg-center bg-no-repeat bg-[url('src/assets/volcano.png')] bg-gray-700 bg-blend-multiply"
+      >
+        <div class="max-w-screen-xl px-4 py-24 mx-auto text-center">
+          <h1
+            appSplitting
+            class="mb-4 mt-[22rem] text-6xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl"
+          >
+            Big Daddy's Bayou Pizza
+          </h1>
+          <p
+            appSplitting
+            class="mb-8 text-xl font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48"
+          >
+            "Grab a Slice of Swampy Paradise!"
+          </p>
+        </div>
+      </section>
+      <ion-footer>
+        <app-footer></app-footer>
+      </ion-footer>
+    </ion-content>`,
+  styles: [``],
   standalone: true,
   imports: [
     CommonModule,

@@ -1,19 +1,13 @@
+<ion-header>
+  <app-header></app-header>
+</ion-header>
 <ion-content>
   <div
-    class="w-full p-12 mx-auto space-y-10 divide-y max-w-max divide-gray-900/10"
+    class="w-full bg-light-shade p-12 mx-auto space-y-10 divide-y max-w-max divide-gray-900/10"
   >
-    <div class="flex items-center">
-      <button
-        [routerLink]="['/home']"
-        type="button"
-        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      >
-        Home
-      </button>
-    </div>
     <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
       <div class="px-4 sm:px-0">
-        <h2 appBackgroundColor class="text-base font-semibold leading-7 text-dark">Profile</h2>
+        <h2 class="text-base font-semibold leading-7 text-dark">Profile</h2>
         <p class="mt-1 text-sm leading-6 text-medium">
           This information will be displayed publicly so be careful what you
           share.
@@ -592,4 +586,8 @@
       </form>
     </div>
   </div>
+
+  <ion-footer>
+    <app-footer></app-footer>
+  </ion-footer>
 </ion-content>

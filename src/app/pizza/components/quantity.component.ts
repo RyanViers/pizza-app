@@ -43,12 +43,15 @@ import { TailwindIconType, TailwindIcon } from 'src/app/utils/tailwind-icons';
             ></span>
           </button>
         </div>
-        <button
-          type="button"
-          class="rounded-md bg-light-tint px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Add to Order
-        </button>
+        <div class=" flex items-center">
+    <button
+      (click)="goToSection(4)"
+      type="button"
+      class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    >
+      Check Out
+    </button>
+  </div>
       </div>
     </div>
   </ion-footer>`,
@@ -92,5 +95,9 @@ export class QuantityComponent {
       quantity -= num;
       this.pizzaService.setQuantity(quantity);
     }
+  }
+
+  goToSection(precedence: number) {
+    this.pizzaService.setSection(this.pizzaService.getSectionFromPrecedence(precedence));
   }
 }

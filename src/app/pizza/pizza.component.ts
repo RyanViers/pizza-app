@@ -1,3 +1,4 @@
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from './../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
@@ -16,19 +17,16 @@ import { QuantityComponent } from './components/quantity.component';
     RouterModule,
     FooterComponent,
     QuantityComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   providers: [PizzaService],
   template: `
-    <ion-header class="flex p-4">
-      <div class=" flex items-center">
-        <button
-          [routerLink]="['/home']"
-          type="button"
-          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Home
-        </button>
-      </div>
+    <ion-header>
+      <app-header></app-header>
+    </ion-header>
+    
+    <ion-content>
       <div class="max-w-2xl mx-auto w-full relative z-10">
         <div class="w-full relative">
           <div class="mt-6" aria-hidden="true">
@@ -73,18 +71,7 @@ import { QuantityComponent } from './components/quantity.component';
           </div>
         </div>
       </div>
-      <div class=" flex items-center">
-        <button
-          (click)="goToSection(4)"
-          type="button"
-          class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Check Out
-        </button>
-      </div>
-    </ion-header>
-
-    <ion-content class="w-full relative">
+      
       <div
         class="grid-flow-row my-10 md:grid-cols-2 gap-x-28 max-w-max mx-auto grid grid-cols-1  w-full relative h-auto  px-8"
       >
@@ -101,9 +88,12 @@ import { QuantityComponent } from './components/quantity.component';
           <ion-router-outlet></ion-router-outlet>
         </div>
       </div>
-    </ion-content>
+    
+      <ion-footer class="relative z-10">
+        <app-footer></app-footer>
+      </ion-footer>
 
-    <app-footer></app-footer>
+    </ion-content>
   `,
   styles: [],
 })
