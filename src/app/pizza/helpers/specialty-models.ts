@@ -9,7 +9,8 @@ export interface SpecialtyPizza {
   description: string;
   imageUrl: string;
   toppings: PizzaTopping[];
-  price?: number;
+  price: number;
+  quantity?: number;
 }
 
 export const pizzas: SpecialtyPizza[] = [

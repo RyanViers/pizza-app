@@ -10,7 +10,7 @@ import {
   AdditionCheeseTypePrice,
 } from './helpers/enums';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 import {
   AdditionCheeseType,
   CheeseQuantity,
@@ -22,8 +22,11 @@ import {
   PizzaVeggie,
 } from '../API.service';
 import { Pizza } from './helpers/models';
+import { SpecialtyPizza } from './helpers/specialty-models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class PizzaService {
   //behavior subjects
   private $pizza = new BehaviorSubject<Pizza>({
@@ -37,7 +40,27 @@ export class PizzaService {
     },
     meats: [],
     veggies: [],
+    price: 0,
   });
+
+  getPizza = this.$pizza.asObservable();
+
+  /******************* SPECIALTY PIZZAS ****************/
+  private $specialtyPizza = new BehaviorSubject<SpecialtyPizza[]>([]);
+
+  //observable
+  public $specialtyPizzaList = this.$specialtyPizza.asObservable();
+
+  public addSpecialtyPizza(pizza: SpecialtyPizza) {
+    // Get the current value of the array
+    const currentPizzas = this.$specialtyPizza.getValue();
+
+    // Add the new pizza to the array
+    const newPizzas = [...currentPizzas, pizza];
+
+    // Update the BehaviorSubject with the new array
+    this.$specialtyPizza.next(newPizzas);
+  }
 
   private $quantity = new BehaviorSubject<number>(1);
 
@@ -154,26 +177,6 @@ export class PizzaService {
     return this.$pizza?.value?.meats;
   }
 
-  // getMeatsPrice(choices: PizzaMeat[] | null) {
-  //   let total = 0;
-  //   this.$pizza?.value?.meats?.forEach((meat) => {
-  //     if (meat === 'PEPPERONI') {
-  //       total += MeatPrice.PEPPERONI;
-  //     } else if (meat === 'SAUSAGE') {
-  //       total += MeatPrice.SAUSAGE;
-  //     } else if (meat === 'HAM') {
-  //       total += MeatPrice.HAM;
-  //     } else if (meat === 'BACON') {
-  //       total += MeatPrice.BACON;
-  //     } else if (meat === 'CHICKEN') {
-  //       total += MeatPrice.CHICKEN;
-  //     } else if (meat === 'BEEF') {
-  //       total += MeatPrice.BEEF;
-  //     }
-  //   });
-  //   return total.toFixed(2);
-  // }
-
   getPizzaVeggies(): (PizzaVeggie | null)[] {
     return this.$pizza?.value?.veggies;
   }
@@ -184,6 +187,37 @@ export class PizzaService {
    */
   setPizza(options: Partial<Pizza>) {
     this.$pizza.next({ ...this.$pizza.value, ...options });
+  }
+
+  /*********************************** MATH METHODS **************************************/
+  totalPriceBeforeTax(): Observable<number> {
+    const qty = this.getQuantity();
+    return combineLatest([
+      this.$pizzaSizePrice,
+      this.$pizzaCrustPrice,
+      this.$pizzaSaucePrice,
+      this.$pizzaCheeseQuantityPrice,
+      this.$pizzaCheeseAdditionalPrice,
+      this.$meatPrice,
+      this.$veggiePrice,
+    ]).pipe(
+      map((prices) => prices.reduce((total, price) => total + price, 0)),
+      map((total: number) => parseFloat((total * qty).toFixed(2)))
+    );
+  }
+
+  totalTax(): Observable<number> {
+    return this.totalPriceBeforeTax().pipe(
+      map((total) => total * 0.097),
+      map((totalTax: number) => parseFloat(totalTax.toFixed(2)))
+    );
+  }
+
+  totalPriceAfterTax(): Observable<number> {
+    return this.totalPriceBeforeTax().pipe(
+      map((total: number) => total * 0.097 + total),
+      map((totalWithTax: number) => parseFloat(totalWithTax.toFixed(2)))
+    );
   }
 
   /**

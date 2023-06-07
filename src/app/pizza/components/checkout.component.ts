@@ -169,33 +169,15 @@ export class CheckoutComponent {
   constructor(private pizza: PizzaService) {}
 
   totalPriceBeforeTax(): Observable<number> {
-    const qty = this.pizza.getQuantity();
-    return combineLatest([
-      this.$pizzaSizePrice,
-      this.$pizzaCrustPrice,
-      this.$pizzaSaucePrice,
-      this.$pizzaCheeseQuantityPrice,
-      this.$pizzaCheeseAdditionalPrice,
-      this.$meatPrice,
-      this.$veggiePrice,
-    ]).pipe(
-      map((prices) => prices.reduce((total, price) => total + price, 0)),
-      map((total: number) => parseFloat((total * qty).toFixed(2)))
-    );
+    return this.pizza.totalPriceBeforeTax();
   }
 
   totalTax(): Observable<number> {
-    return this.totalPriceBeforeTax().pipe(
-      map((total) => total * 0.097),
-      map((totalTax: number) => parseFloat(totalTax.toFixed(2)))
-    );
+    return this.pizza.totalTax();
   }
 
   totalPriceAfterTax(): Observable<number> {
-    return this.totalPriceBeforeTax().pipe(
-      map((total: number) => total * 0.097 + total),
-      map((totalWithTax: number) => parseFloat(totalWithTax.toFixed(2)))
-    );
+    return this.pizza.totalPriceAfterTax();
   }
 
   veggieFormat(): Observable<string> {

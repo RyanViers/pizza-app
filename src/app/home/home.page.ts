@@ -8,10 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-home',
-  template: ` <ion-header>
-      <app-header></app-header>
-    </ion-header>
-
+  template: `
     <ion-content>
       <section
         class="h-full w-full bg-center bg-no-repeat bg-[url('src/assets/volcano.png')] bg-gray-700 bg-blend-multiply"
@@ -32,9 +29,12 @@ import { SharedModule } from '../shared/shared.module';
         </div>
       </section>
       <ion-footer>
-        <app-footer></app-footer>
+        <ion-toolbar>
+          <app-footer></app-footer>
+        </ion-toolbar>
       </ion-footer>
-    </ion-content>`,
+    </ion-content>
+  `,
   styles: [``],
   standalone: true,
   imports: [

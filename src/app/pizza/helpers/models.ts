@@ -6,6 +6,7 @@ import {
   PizzaMeat,
   PizzaVeggie,
 } from 'src/app/API.service';
+import { SpecialtyPizza } from './specialty-models';
 
 export interface Pizza {
   size: PizzaSize;
@@ -14,6 +15,9 @@ export interface Pizza {
   cheese: PizzaCheese;
   meats: Array<PizzaMeat | null>;
   veggies: Array<PizzaVeggie | null>;
+  price?: number;
 }
 
-
+export interface CartItem {
+  pizza: Pizza | SpecialtyPizza;
+}

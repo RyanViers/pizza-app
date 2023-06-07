@@ -20,12 +20,8 @@ import { QuantityComponent } from './components/quantity.component';
     HeaderComponent,
     FooterComponent,
   ],
-  providers: [PizzaService],
+
   template: `
-    <ion-header>
-      <app-header></app-header>
-    </ion-header>
-    
     <ion-content>
       <div class="max-w-2xl mx-auto w-full relative z-10">
         <div class="w-full relative">
@@ -71,7 +67,7 @@ import { QuantityComponent } from './components/quantity.component';
           </div>
         </div>
       </div>
-      
+
       <div
         class="grid-flow-row my-10 md:grid-cols-2 gap-x-28 max-w-max mx-auto grid grid-cols-1  w-full relative h-auto  px-8"
       >
@@ -88,12 +84,10 @@ import { QuantityComponent } from './components/quantity.component';
           <ion-router-outlet></ion-router-outlet>
         </div>
       </div>
-    
-      <ion-footer class="relative z-10">
-        <app-footer></app-footer>
-      </ion-footer>
-
     </ion-content>
+    <ion-footer class="relative z-10">
+      <app-footer></app-footer>
+    </ion-footer>
   `,
   styles: [],
 })
