@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
 import { Observable, combineLatest, map } from 'rxjs';
+import { Pizza } from '../helpers/models';
 
 @Component({
   selector: 'app-checkout',
@@ -131,10 +132,11 @@ import { Observable, combineLatest, map } from 'rxjs';
 
             <div class="mt-10">
               <button
-                type="submit"
+                (click)="addPizzaToCart()"
+                type="button"
                 class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
-                Checkout
+                Add To Cart
               </button>
             </div>
 
@@ -166,6 +168,8 @@ export class CheckoutComponent {
   $veggiePrice = this.pizza.$veggiePrice;
   $quantityTotal = this.pizza.$quantityTotal;
 
+  customPizza = this.pizza.getPizza;
+
   constructor(private pizza: PizzaService) {}
 
   totalPriceBeforeTax(): Observable<number> {
@@ -194,5 +198,9 @@ export class CheckoutComponent {
         return meatPrice.toFixed(2);
       })
     );
+  }
+
+  addPizzaToCart() {
+    this.pizza.addCustomPizza(this.customPizza);
   }
 }

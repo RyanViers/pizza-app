@@ -2,6 +2,8 @@ import { Injectable, importProvidersFrom } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SpecialtyPizza } from '../pizza/helpers/specialty-models';
 import { Pizza, CartItem } from '../pizza/helpers/models';
+import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
+import { TailwindIconType, TailwindIcon } from '../utils/tailwind-icons';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,23 @@ export class CartService {
 
   getCart = this.cart.asObservable();
 
-  constructor() {}
+  icons: Map<TailwindIconType, SafeHtml> = TailwindIcon.getTailwindIconSvgs(
+    [TailwindIconType.X_MARK, TailwindIconType.QUESTION_MARK_CIRCLE],
+    this.sanitizer
+  );
+
+  constructor(private sanitizer: DomSanitizer) {}
+
+  getIcon(num: number): SafeHtml | undefined {
+    switch (num) {
+      case 1:
+        return this.icons.get(TailwindIconType.X_MARK);
+      case 2:
+        return this.icons.get(TailwindIconType.QUESTION_MARK_CIRCLE);
+      default:
+        return '';
+    }
+  }
 
   addToCart(item: CartItem) {
     this.cartItems.push(item);

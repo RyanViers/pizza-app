@@ -45,6 +45,22 @@ export class PizzaService {
 
   getPizza = this.$pizza.asObservable();
 
+  /******************* CUSTOM PIZZA ****************/
+  private $customPizza = new BehaviorSubject<Pizza[]>([]);
+
+  public $getCustomPizzaList = this.$customPizza.asObservable();
+
+  addCustomPizza(pizza: any) {
+    // Get the current value of the array
+    const currentPizzas = this.$customPizza.getValue();
+
+    // Add the new pizza to the array
+    const newPizzas = [...currentPizzas, pizza];
+
+    // Update the BehaviorSubject with the new array
+    this.$customPizza.next(newPizzas);
+  }
+
   /******************* SPECIALTY PIZZAS ****************/
   private $specialtyPizza = new BehaviorSubject<SpecialtyPizza[]>([]);
 
