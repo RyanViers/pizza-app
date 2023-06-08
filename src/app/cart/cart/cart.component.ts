@@ -29,9 +29,8 @@ import { Observable } from 'rxjs';
   styles: [],
 })
 export class CartComponent implements OnInit {
-  
   $specialtyPizzaList = this.pizza.$specialtyPizzaList;
-  $customPizzaList = this.pizza.$getCustomPizzaList;
+  $customPizzaList = this.pizza.$customPizza;
 
   constructor(private pizza: PizzaService) {}
 

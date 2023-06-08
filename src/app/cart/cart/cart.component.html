@@ -16,7 +16,7 @@
           >
             <li
               class="flex py-6 sm:py-10"
-              *ngFor="let customPizza of $customPizzaList | async"
+              *ngFor="let customPizza of $customPizzaList?.value"
             >
               <app-custom-cart [customPizza]="customPizza"></app-custom-cart>
             </li>

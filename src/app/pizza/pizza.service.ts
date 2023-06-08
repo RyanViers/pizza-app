@@ -29,7 +29,7 @@ import { SpecialtyPizza } from './helpers/specialty-models';
 })
 export class PizzaService {
   //behavior subjects
-  private $pizza = new BehaviorSubject<Pizza>({
+  public $pizza = new BehaviorSubject<Pizza>({
     size: PizzaSize.LARGE,
     crust: PizzaCrust.ORIGINAL,
     sauce: PizzaSauce.TOMATO,
@@ -46,11 +46,12 @@ export class PizzaService {
   getPizza = this.$pizza.asObservable();
 
   /******************* CUSTOM PIZZA ****************/
-  private $customPizza = new BehaviorSubject<Pizza[]>([]);
+  public $customPizza = new BehaviorSubject<Pizza[]>([]);
 
-  public $getCustomPizzaList = this.$customPizza.asObservable();
+  //public $getCustomPizzaList = this.$customPizza.asObservable();
 
   addCustomPizza(pizza: any) {
+    console.log(pizza);
     // Get the current value of the array
     const currentPizzas = this.$customPizza.getValue();
 

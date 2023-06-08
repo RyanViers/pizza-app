@@ -4,6 +4,8 @@ import { PizzaService } from 'src/app/pizza/pizza.service';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { Pizza } from 'src/app/pizza/helpers/models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-custom-cart',
@@ -13,18 +15,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
   styles: [],
 })
 export class CustomCartComponent implements OnInit, AfterViewInit {
-  @Input() customPizza: any;
+  @Input() customPizza?: Pizza | any;
 
   constructor(private cart: CartService, private pizza: PizzaService) {
     console.log(this.customPizza);
   }
 
-  ngOnInit() {
-    this.customPizza.subscribe((pizza: any) => {
-      console.log(pizza);
-    }
-    );
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     console.log(this.customPizza);

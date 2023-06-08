@@ -168,8 +168,6 @@ export class CheckoutComponent {
   $veggiePrice = this.pizza.$veggiePrice;
   $quantityTotal = this.pizza.$quantityTotal;
 
-  customPizza = this.pizza.getPizza;
-
   constructor(private pizza: PizzaService) {}
 
   totalPriceBeforeTax(): Observable<number> {
@@ -201,6 +199,6 @@ export class CheckoutComponent {
   }
 
   addPizzaToCart() {
-    this.pizza.addCustomPizza(this.customPizza);
+    this.pizza.addCustomPizza(this.pizza.$pizza.value);
   }
 }
