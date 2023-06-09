@@ -15,17 +15,13 @@ import { Observable } from 'rxjs';
   styles: [],
 })
 export class CustomCartComponent implements OnInit, AfterViewInit {
-  @Input() customPizza?: Pizza | any;
+  @Input() customPizza?: Pizza;
 
-  constructor(private cart: CartService, private pizza: PizzaService) {
-    console.log(this.customPizza);
-  }
+  constructor(private cart: CartService, private pizza: PizzaService) {}
 
   ngOnInit() {}
 
-  ngAfterViewInit() {
-    console.log(this.customPizza);
-  }
+  ngAfterViewInit() {}
 
   getIcon(num: number) {
     return this.cart.getIcon(num);

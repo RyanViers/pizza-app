@@ -7,14 +7,12 @@
   </div>
 
   <div class="flex flex-col justify-between flex-1 ml-4 sm:ml-6">
-    <div class="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
+    <div class="relative p-9 sm:grid sm:gap-x-6">
       <div>
         <div class="flex justify-between">
-          <h3 class="text-sm">
-            <a href="#" class="font-medium text-gray-700 hover:text-gray-800">
-              {{ specialtyPizza.name }}</a
-            >
-          </h3>
+          <h1 class="font-medium text-gray-700 hover:text-gray-800">
+            {{ specialtyPizza.name }}
+          </h1>
         </div>
         <div class="flex mt-1 text-sm">
           <p class="text-blue-600">
@@ -27,17 +25,6 @@
         <p class="mt-1 text-sm font-medium text-gray-900">
           {{ specialtyPizza.price }}
         </p>
-      </div>
-
-      <div class="mt-4 sm:mt-0 sm:pr-9">
-        <div class="absolute top-0 right-0">
-          <button
-            type="button"
-            class="inline-flex p-2 -m-2 text-gray-400 hover:text-gray-500"
-          >
-            <span class="w-6 h-6" [innerHTML]="getIcon(1)"></span>
-          </button>
-        </div>
       </div>
     </div>
   </div>

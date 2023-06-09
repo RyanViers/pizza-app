@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
-import { Observable, combineLatest, map } from 'rxjs';
+import { Observable, Subscription, combineLatest, map } from 'rxjs';
 import { Pizza } from '../helpers/models';
 
 @Component({
