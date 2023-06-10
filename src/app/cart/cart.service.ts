@@ -1,7 +1,6 @@
-import { Injectable, importProvidersFrom } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SpecialtyPizza } from '../pizza/helpers/specialty-models';
-import { Pizza, CartItem } from '../pizza/helpers/models';
+import { CartItem } from '../pizza/helpers/models';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { TailwindIconType, TailwindIcon } from '../utils/tailwind-icons';
 

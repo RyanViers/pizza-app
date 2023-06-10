@@ -16,6 +16,7 @@ export interface Pizza {
   meats: Array<PizzaMeat | null>;
   veggies: Array<PizzaVeggie | null>;
   price?: number;
+  quantity?: number;
 }
 
 export interface CartItem {

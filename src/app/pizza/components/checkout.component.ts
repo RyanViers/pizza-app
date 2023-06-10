@@ -3,8 +3,7 @@ import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
-import { Observable, Subscription, combineLatest, map } from 'rxjs';
-import { Pizza } from '../helpers/models';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -14,19 +13,15 @@ import { Pizza } from '../helpers/models';
   styles: [``],
   template: `
     <ion-content>
-      <div class="mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-0 ">
+      <div class="flex flex-col w-full h-full mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-0 ">
         <h1
           class="text-center text-3xl font-bold tracking-tight text-gray-400 sm:text-4xl"
         >
           Pizza Cart
         </h1>
 
-        <form class="mt-12">
+        <div class="mt-12">
           <section aria-labelledby="cart-heading">
-            <h2 id="cart-heading" class="sr-only">
-              Items in your shopping cart
-            </h2>
-
             <ul
               role="list"
               class="divide-y divide-gray-200 border-b border-t border-gray-200"
@@ -139,23 +134,11 @@ import { Pizza } from '../helpers/models';
                 Add To Cart
               </button>
             </div>
-
-            <div class="mt-6 text-center text-sm">
-              <p>
-                or
-                <a
-                  href="#"
-                  class="font-medium text-indigo-600 hover:text-indigo-500"
-                >
-                  Continue Shopping
-                  <span aria-hidden="true"> &rarr;</span>
-                </a>
-              </p>
-            </div>
           </section>
-        </form>
+        </div>
       </div>
-    </ion-content>
+      </ion-content>
+    
   `,
 })
 export class CheckoutComponent {
@@ -166,7 +149,8 @@ export class CheckoutComponent {
   $pizzaCheeseAdditionalPrice = this.pizza.$pizzaCheeseAdditionalPrice;
   $meatPrice = this.pizza.$meatPrice;
   $veggiePrice = this.pizza.$veggiePrice;
-  $quantityTotal = this.pizza.$quantityTotal;
+  $pizzaPrice = this.pizza.$pizzaPrice;
+  $quantityTotal = this.pizza.$quantity;
 
   constructor(private pizza: PizzaService) {}
 
@@ -199,6 +183,11 @@ export class CheckoutComponent {
   }
 
   addPizzaToCart() {
+    const subscription = this.pizza.totalPriceBeforeTax().subscribe(price => {
+    this.pizza.setPizza({price: price})
+    });
     this.pizza.addCustomPizza(this.pizza.$pizza.value);
+    subscription.unsubscribe();
   }
+
 }

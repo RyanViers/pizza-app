@@ -10,7 +10,7 @@ import {
   AdditionCheeseTypePrice,
 } from './helpers/enums';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map, tap } from 'rxjs';
 import {
   AdditionCheeseType,
   CheeseQuantity,
@@ -23,6 +23,7 @@ import {
 } from '../API.service';
 import { Pizza } from './helpers/models';
 import { SpecialtyPizza } from './helpers/specialty-models';
+import { isEqual } from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +42,7 @@ export class PizzaService {
     meats: [],
     veggies: [],
     price: 0,
+    quantity: 1,
   });
 
   getPizza = this.$pizza.asObservable();
@@ -48,10 +50,7 @@ export class PizzaService {
   /******************* CUSTOM PIZZA ****************/
   public $customPizza = new BehaviorSubject<Pizza[]>([]);
 
-  //public $getCustomPizzaList = this.$customPizza.asObservable();
-
   addCustomPizza(pizza: any) {
-    console.log(pizza);
     // Get the current value of the array
     const currentPizzas = this.$customPizza.getValue();
 
@@ -63,10 +62,7 @@ export class PizzaService {
   }
 
   /******************* SPECIALTY PIZZAS ****************/
-  private $specialtyPizza = new BehaviorSubject<SpecialtyPizza[]>([]);
-
-  //observable
-  public $specialtyPizzaList = this.$specialtyPizza.asObservable();
+  public $specialtyPizza = new BehaviorSubject<SpecialtyPizza[]>([]);
 
   public addSpecialtyPizza(pizza: SpecialtyPizza) {
     // Get the current value of the array
@@ -77,17 +73,9 @@ export class PizzaService {
 
     // Update the BehaviorSubject with the new array
     this.$specialtyPizza.next(newPizzas);
-  }
-
-  private $quantity = new BehaviorSubject<number>(1);
+  };
 
   //observable
-  public $quantityTotal = this.$quantity.pipe(
-    map((quantity) => {
-      return quantity;
-    })
-  );
-
   public $pizzaSize = this.$pizza.pipe(
     map((pizza: Pizza) => {
       return pizza.size;
@@ -176,8 +164,18 @@ export class PizzaService {
     )
   );
 
-  private currentSection: PizzaStepperSection = PizzaStepperSection.BASE;
+  public $pizzaPrice: Observable<number | undefined> = this.$pizza.pipe(
+    map((pizza: Pizza) => {
+      return pizza.price;
+    })
+  );
 
+  public $quantity: Observable<number | undefined> = this.$pizza.pipe(
+    map((pizza: Pizza) => {
+      return pizza.quantity;
+    })
+  );
+  
   /**
    * constructor
    * @param router
@@ -198,17 +196,28 @@ export class PizzaService {
     return this.$pizza?.value?.veggies;
   }
 
+  getPizzaQuantity(): number {
+    return this.$pizza?.value?.quantity || 1;
+  }
+
+  getPizzaPrice(): number {
+    return this.$pizza?.value?.price || 0;
+  }
   /**
    * set pizza
    * @param size
    */
   setPizza(options: Partial<Pizza>) {
-    this.$pizza.next({ ...this.$pizza.value, ...options });
+    const currentPizza = this.$pizza.value;
+    const newPizza = { ...currentPizza, ...options };
+    if (!isEqual(currentPizza, newPizza)) {
+      this.$pizza.next(newPizza);
+    }
   }
 
   /*********************************** MATH METHODS **************************************/
   totalPriceBeforeTax(): Observable<number> {
-    const qty = this.getQuantity();
+    const qty = this.$pizza.value.quantity || 1;
     return combineLatest([
       this.$pizzaSizePrice,
       this.$pizzaCrustPrice,
@@ -219,7 +228,7 @@ export class PizzaService {
       this.$veggiePrice,
     ]).pipe(
       map((prices) => prices.reduce((total, price) => total + price, 0)),
-      map((total: number) => parseFloat((total * qty).toFixed(2)))
+      map((total: number) => parseFloat((total * qty).toFixed(2))),
     );
   }
 
@@ -233,21 +242,12 @@ export class PizzaService {
   totalPriceAfterTax(): Observable<number> {
     return this.totalPriceBeforeTax().pipe(
       map((total: number) => total * 0.097 + total),
-      map((totalWithTax: number) => parseFloat(totalWithTax.toFixed(2)))
+      map((totalWithTax: number) => parseFloat(totalWithTax.toFixed(2))),
     );
   }
-
-  /**
-   * set quantity
-   * @param quantity
-   */
-  setQuantity(quantity: number) {
-    this.$quantity.next(quantity);
-  }
-
-  getQuantity(): number {
-    return this.$quantity.value;
-  }
+  
+  /*********************************** STEPPER METHODS **************************************/
+  private currentSection: PizzaStepperSection = PizzaStepperSection.BASE;
 
   /**
    * get section

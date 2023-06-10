@@ -57,7 +57,7 @@ import { TailwindIconType, TailwindIcon } from 'src/app/utils/tailwind-icons';
   </ion-footer>`,
 })
 export class QuantityComponent {
-  $quantityTotal: Observable<number> = this.pizzaService.$quantityTotal;
+  $quantityTotal: Observable<number | undefined> = this.pizzaService.$quantity;
 
   icons: Map<TailwindIconType, SafeHtml> = TailwindIcon.getTailwindIconSvgs(
     [TailwindIconType.PLUS, TailwindIconType.MINUS],
@@ -82,18 +82,18 @@ export class QuantityComponent {
 
   // create a method that will increment the quantity up or down based on user input as long as the quantity is greater than or equal to 1
   increaseQuantity(num: number): void {
-    let quantity = this.pizzaService.getQuantity();
+    let quantity = this.pizzaService.getPizzaQuantity();
     if (quantity >= 1) {
       quantity += num;
-      this.pizzaService.setQuantity(quantity);
+      this.pizzaService.setPizza({ quantity: quantity });
     }
   }
 
   decreaseQuantity(num: number): void {
-    let quantity = this.pizzaService.getQuantity();
+    let quantity = this.pizzaService.getPizzaQuantity();
     if (quantity > 1) {
       quantity -= num;
-      this.pizzaService.setQuantity(quantity);
+      this.pizzaService.setPizza({ quantity: quantity });
     }
   }
 

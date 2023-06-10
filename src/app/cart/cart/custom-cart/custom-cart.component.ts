@@ -26,4 +26,5 @@ export class CustomCartComponent implements OnInit, AfterViewInit {
   getIcon(num: number) {
     return this.cart.getIcon(num);
   }
+
 }

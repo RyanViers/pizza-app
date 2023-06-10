@@ -13,9 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = employees;
-  constructor() {
-    console.log('employees', employees);
-  }
+  constructor() {}
 
   ngOnInit() {}
 }
