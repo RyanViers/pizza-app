@@ -13,7 +13,9 @@ import { Observable, map } from 'rxjs';
   styles: [``],
   template: `
     <ion-content>
-      <div class="flex flex-col w-full h-full mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-0 ">
+      <div
+        class="flex flex-col w-full h-full mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-0 "
+      >
         <h1
           class="text-center text-3xl font-bold tracking-tight text-gray-400 sm:text-4xl"
         >
@@ -137,8 +139,7 @@ import { Observable, map } from 'rxjs';
           </section>
         </div>
       </div>
-      </ion-content>
-    
+    </ion-content>
   `,
 })
 export class CheckoutComponent {
@@ -183,11 +184,10 @@ export class CheckoutComponent {
   }
 
   addPizzaToCart() {
-    const subscription = this.pizza.totalPriceBeforeTax().subscribe(price => {
-    this.pizza.setPizza({price: price})
+    const subscription = this.pizza.totalPriceBeforeTax().subscribe((price) => {
+      this.pizza.setPizza({ price: price });
     });
     this.pizza.addCustomPizza(this.pizza.$pizza.value);
     subscription.unsubscribe();
   }
-
 }

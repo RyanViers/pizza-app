@@ -3,14 +3,13 @@ import {
   MeatPrice,
   PizzaCrustPrice,
   PizzaSizePrice,
-  PizzaStepperSection,
   VeggiePrice,
   PizzaSaucePrice,
   CheeseQuantityPrice,
   AdditionCheeseTypePrice,
 } from './helpers/enums';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, combineLatest, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 import {
   AdditionCheeseType,
   CheeseQuantity,
@@ -29,6 +28,12 @@ import { isEqual } from 'lodash';
   providedIn: 'root',
 })
 export class PizzaService {
+  /**
+   * constructor
+   * @param router
+   */
+  constructor(private router: Router) {}
+
   //behavior subjects
   public $pizza = new BehaviorSubject<Pizza>({
     size: PizzaSize.LARGE,
@@ -73,7 +78,7 @@ export class PizzaService {
 
     // Update the BehaviorSubject with the new array
     this.$specialtyPizza.next(newPizzas);
-  };
+  }
 
   //observable
   public $pizzaSize = this.$pizza.pipe(
@@ -175,12 +180,6 @@ export class PizzaService {
       return pizza.quantity;
     })
   );
-  
-  /**
-   * constructor
-   * @param router
-   */
-  constructor(private router: Router) {}
 
   /****************************** PUBLIC API ********************************/
 
@@ -228,7 +227,7 @@ export class PizzaService {
       this.$veggiePrice,
     ]).pipe(
       map((prices) => prices.reduce((total, price) => total + price, 0)),
-      map((total: number) => parseFloat((total * qty).toFixed(2))),
+      map((total: number) => parseFloat((total * qty).toFixed(2)))
     );
   }
 
@@ -242,88 +241,8 @@ export class PizzaService {
   totalPriceAfterTax(): Observable<number> {
     return this.totalPriceBeforeTax().pipe(
       map((total: number) => total * 0.097 + total),
-      map((totalWithTax: number) => parseFloat(totalWithTax.toFixed(2))),
+      map((totalWithTax: number) => parseFloat(totalWithTax.toFixed(2)))
     );
-  }
-  
-  /*********************************** STEPPER METHODS **************************************/
-  private currentSection: PizzaStepperSection = PizzaStepperSection.BASE;
-
-  /**
-   * get section
-   * @returns
-   */
-  getSection(): PizzaStepperSection {
-    return this.currentSection;
-  }
-
-  /**
-   * set section
-   * @param section
-   */
-  setSection(section: PizzaStepperSection): void {
-    this.currentSection = section;
-    switch (this.currentSection) {
-      case PizzaStepperSection.BASE:
-        this.router.navigate(['/pizza/base']);
-        break;
-      case PizzaStepperSection.CHEESE:
-        this.router.navigate(['/pizza/cheese']);
-        break;
-      case PizzaStepperSection.MEATS:
-        this.router.navigate(['/pizza/meat']);
-        break;
-      case PizzaStepperSection.VEGGIES:
-        this.router.navigate(['/pizza/veggie']);
-        break;
-      case PizzaStepperSection.CHECK_OUT:
-        this.router.navigate(['/pizza/checkout']);
-        break;
-    }
-  }
-
-  /**
-   * get section precedence
-   * @param section
-   * @returns
-   */
-  getSectionPrecedence(section: PizzaStepperSection): number {
-    switch (section) {
-      case PizzaStepperSection.BASE:
-        return 0;
-      case PizzaStepperSection.CHEESE:
-        return 1;
-      case PizzaStepperSection.MEATS:
-        return 2;
-      case PizzaStepperSection.VEGGIES:
-        return 3;
-      case PizzaStepperSection.CHECK_OUT:
-        return 4;
-      default:
-        return 0;
-    }
-  }
-
-  /**
-   * get section from precedence
-   * @param precedence
-   * @returns
-   */
-  getSectionFromPrecedence(precedence: number) {
-    switch (precedence) {
-      case 0:
-        return PizzaStepperSection.BASE;
-      case 1:
-        return PizzaStepperSection.CHEESE;
-      case 2:
-        return PizzaStepperSection.MEATS;
-      case 3:
-        return PizzaStepperSection.VEGGIES;
-      case 4:
-        return PizzaStepperSection.CHECK_OUT;
-      default:
-        return PizzaStepperSection.BASE;
-    }
   }
 
   /*********************************** PRIVATE METHODS **************************************/

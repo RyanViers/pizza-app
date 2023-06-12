@@ -1,3 +1,4 @@
+import { StepperService } from './stepper.service';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from './../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
@@ -92,7 +93,7 @@ import { QuantityComponent } from './components/quantity.component';
   styles: [],
 })
 export class PizzaComponent {
-  constructor(private pizza: PizzaService) {}
+  constructor(private pizza: PizzaService, private stepper: StepperService) {}
 
   ngAfterViewInit() {}
   /**
@@ -104,10 +105,12 @@ export class PizzaComponent {
    * back
    */
   back() {
-    const precedence = this.pizza.getSectionPrecedence(this.pizza.getSection());
+    const precedence = this.stepper.getSectionPrecedence(
+      this.stepper.getSection()
+    );
     if (precedence > 0)
-      this.pizza.setSection(
-        this.pizza.getSectionFromPrecedence(precedence - 1)
+      this.stepper.setSection(
+        this.stepper.getSectionFromPrecedence(precedence - 1)
       );
   }
 
@@ -115,10 +118,12 @@ export class PizzaComponent {
    * hext
    */
   next() {
-    const precedence = this.pizza.getSectionPrecedence(this.pizza.getSection());
+    const precedence = this.stepper.getSectionPrecedence(
+      this.stepper.getSection()
+    );
     if (precedence < 3)
-      this.pizza.setSection(
-        this.pizza.getSectionFromPrecedence(precedence + 1)
+      this.stepper.setSection(
+        this.stepper.getSectionFromPrecedence(precedence + 1)
       );
   }
 
@@ -127,7 +132,7 @@ export class PizzaComponent {
    * @param precedence
    */
   goToSection(precedence: number) {
-    this.pizza.setSection(this.pizza.getSectionFromPrecedence(precedence));
+    this.stepper.setSection(this.stepper.getSectionFromPrecedence(precedence));
   }
 
   /**
@@ -136,7 +141,7 @@ export class PizzaComponent {
    * @returns
    */
   getColor(precedence: number) {
-    return this.pizza.getSectionPrecedence(this.pizza.getSection()) >=
+    return this.stepper.getSectionPrecedence(this.stepper.getSection()) >=
       precedence
       ? '!text-indigo-600'
       : '';
@@ -147,7 +152,7 @@ export class PizzaComponent {
    * @returns
    */
   getWidth() {
-    switch (this.pizza.getSectionPrecedence(this.pizza.getSection())) {
+    switch (this.stepper.getSectionPrecedence(this.stepper.getSection())) {
       case 0:
         return 'w-[2%]';
       case 1:

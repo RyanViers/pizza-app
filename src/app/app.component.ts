@@ -6,10 +6,20 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styles: [``],
   standalone: true,
   imports: [CommonModule, IonicModule, SweetAlert2Module, HeaderComponent],
+  template: `<ion-app>
+    <ion-header>
+      <ion-toolbar>
+        <app-header></app-header>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-content>
+  </ion-app>`,
+  styles: [],
 })
 export class AppComponent {
   constructor() {}

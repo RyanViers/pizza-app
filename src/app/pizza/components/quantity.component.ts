@@ -1,3 +1,4 @@
+import { StepperService } from './../stepper.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
@@ -66,6 +67,7 @@ export class QuantityComponent {
 
   constructor(
     private pizzaService: PizzaService,
+    private stepper: StepperService,
     private sanitizer: DomSanitizer
   ) {}
 
@@ -98,8 +100,8 @@ export class QuantityComponent {
   }
 
   goToSection(precedence: number) {
-    this.pizzaService.setSection(
-      this.pizzaService.getSectionFromPrecedence(precedence)
+    this.stepper.setSection(
+      this.stepper.getSectionFromPrecedence(precedence)
     );
   }
 }
