@@ -5,17 +5,22 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import {
   AUTH_TYPE,
   createAuthLink as awsCreateAuthLink,
-} from "aws-appsync-auth-link";
-import awsmobile from "./aws-exports";
+} from 'aws-appsync-auth-link';
+import awsmobile from './aws-exports';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
-import { APOLLO_OPTIONS, Apollo } from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import { HttpLink, InMemoryCache, concat } from '@apollo/client/core';
+import { Amplify } from 'aws-amplify';
 
 if (environment.production) {
   enableProdMode();
 }
+
+Amplify.configure({
+  Auth: environment.cognito,
+});
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -30,8 +35,8 @@ bootstrapApplication(AppComponent, {
               region: awsmobile.aws_appsync_region,
               auth: {
                 type: AUTH_TYPE.API_KEY,
-                apiKey: awsmobile.aws_appsync_apiKey
-              }
+                apiKey: awsmobile.aws_appsync_apiKey,
+              },
             }),
             link
           ),
@@ -39,7 +44,11 @@ bootstrapApplication(AppComponent, {
       },
       deps: [HttpLink],
     },
-    { provide: HttpLink, useFactory: () => new HttpLink({ uri: awsmobile.aws_appsync_graphqlEndpoint }) },
+    {
+      provide: HttpLink,
+      useFactory: () =>
+        new HttpLink({ uri: awsmobile.aws_appsync_graphqlEndpoint }),
+    },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     importProvidersFrom(IonicModule.forRoot({})),
     provideRouter(routes),

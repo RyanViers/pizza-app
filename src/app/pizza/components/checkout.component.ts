@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
 import { Observable, map } from 'rxjs';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 
 @Component({
   selector: 'app-checkout',
@@ -191,5 +192,27 @@ export class CheckoutComponent {
     });
     this.pizza.addCustomPizza(this.pizza.$pizza.value);
     subscription.unsubscribe();
+
+    Swal.fire({
+      ...this.swalOptions,
+      title: 'Pizza Added to Cart!',
+      text: `Price: ${this.pizza.$pizza.value.price}`,
+      icon: 'success',
+      target: document.body,
+      heightAuto: false,
+    });
   }
+
+  public readonly swalOptions: SweetAlertOptions = {
+    title: '',
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonText: 'Add to Cart',
+    cancelButtonText: 'Cancel',
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    customClass: {
+      popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
+    },
+  };
 }
