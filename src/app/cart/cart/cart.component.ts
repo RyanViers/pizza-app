@@ -10,6 +10,8 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from 'src/app/pizza/pizza.service';
 import { Observable } from 'rxjs';
+import { SpecialtyPizza } from 'src/app/pizza/helpers/specialty-models';
+import { Pizza } from 'src/app/pizza/helpers/models';
 
 @Component({
   selector: 'app-cart',

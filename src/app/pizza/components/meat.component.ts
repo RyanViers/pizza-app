@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { PizzaMeat } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-meat',
@@ -42,7 +43,7 @@ import { PizzaService } from '../pizza.service';
 export class MeatComponent implements OnInit {
   PizzaMeat: PizzaMeat[] = this.objectValues(PizzaMeat);
 
-  $pizzaMeats = this.pizzaService.$pizzaMeats;
+  $pizzaMeats: Observable<(PizzaMeat | null)[]> = this.pizzaService.$pizzaMeats;
 
   constructor(private pizzaService: PizzaService) {}
 
@@ -52,7 +53,7 @@ export class MeatComponent implements OnInit {
     return Object.values(obj);
   }
 
-  updateMeat(meat: PizzaMeat | string) {
+  updateMeat(meat: PizzaMeat | string): void {
     const currentMeats: (PizzaMeat | null)[] =
       this.pizzaService.getPizzaMeats();
     const exsist = currentMeats.includes(meat as PizzaMeat);

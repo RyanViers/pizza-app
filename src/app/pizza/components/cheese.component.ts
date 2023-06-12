@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { AdditionCheeseType, CheeseQuantity } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cheese',
@@ -70,11 +71,13 @@ import { PizzaService } from '../pizza.service';
   styles: [':host { display: flex; justify-content: center; }'],
 })
 export class CheeseComponent implements OnInit {
-  CheeseQuantity = this.objectValues(CheeseQuantity);
-  AdditionCheeseType = this.objectValues(AdditionCheeseType);
+  CheeseQuantity: string[] = this.objectValues(CheeseQuantity);
+  AdditionCheeseType: string[] = this.objectValues(AdditionCheeseType);
 
-  $pizzaCheeseQuantity = this.pizzaService.$pizzaCheeseQuantity;
-  $pizzaCheeseAdditional = this.pizzaService.$pizzaCheeseAdditional;
+  $pizzaCheeseQuantity: Observable<CheeseQuantity | undefined> =
+    this.pizzaService.$pizzaCheeseQuantity;
+  $pizzaCheeseAdditional: Observable<AdditionCheeseType | null | undefined> =
+    this.pizzaService.$pizzaCheeseAdditional;
 
   constructor(private pizzaService: PizzaService) {}
 

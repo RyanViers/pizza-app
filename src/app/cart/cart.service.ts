@@ -10,7 +10,9 @@ import { TailwindIconType, TailwindIcon } from '../utils/tailwind-icons';
 export class CartService {
   private cartItems: CartItem[] = [];
 
-  private cart = new BehaviorSubject<CartItem[]>([]);
+  private cart: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>(
+    []
+  );
 
   getCart = this.cart.asObservable();
 

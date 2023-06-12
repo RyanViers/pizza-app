@@ -99,7 +99,7 @@ export class SpecialtyPizzasComponent implements OnDestroy {
     },
   };
 
-  onClick(pizza: SpecialtyPizza) {
+  onClick(pizza: SpecialtyPizza): void {
     const toppingsList: string = pizza.toppings
       .map((topping) => topping.name)
       .join(', ');

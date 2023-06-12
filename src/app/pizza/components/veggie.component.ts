@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { PizzaVeggie } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-veggie',
@@ -42,7 +43,8 @@ import { PizzaService } from '../pizza.service';
 export class VeggieComponent implements OnInit {
   PizzaVeggie: PizzaVeggie[] = this.objectValues(PizzaVeggie);
 
-  $pizzaVeggies = this.pizzaService.$pizzaVeggies;
+  $pizzaVeggies: Observable<(PizzaVeggie | null)[]> =
+    this.pizzaService.$pizzaVeggies;
 
   constructor(private pizzaService: PizzaService) {}
 
@@ -52,7 +54,7 @@ export class VeggieComponent implements OnInit {
     return Object.values(obj);
   }
 
-  updateVeggie(veg: PizzaVeggie | string) {
+  updateVeggie(veg: PizzaVeggie | string): void {
     const currentVeggies: (PizzaVeggie | null)[] =
       this.pizzaService.getPizzaVeggies();
     const exsist = currentVeggies.includes(veg as PizzaVeggie);

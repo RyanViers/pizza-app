@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { SpecialtyPizza } from 'src/app/pizza/helpers/specialty-models';
+import { Pizza } from 'src/app/pizza/helpers/models';
 
 @Component({
   selector: 'app-cart-summary',
@@ -61,8 +63,9 @@ import { RouterModule } from '@angular/router';
   styles: [],
 })
 export class CartSummaryComponent implements OnInit {
-  $specialtyPizzaList = this.pizza.$specialtyPizza;
-  $customPizzaList = this.pizza.$customPizza;
+  $specialtyPizzaList: Observable<(SpecialtyPizza | undefined)[]> =
+    this.pizza.$specialtyPizza;
+  $customPizzaList: Observable<(Pizza | undefined)[]> = this.pizza.$customPizza;
 
   constructor(
     private pizza: PizzaService,
@@ -85,7 +88,7 @@ export class CartSummaryComponent implements OnInit {
       map(([specialtyPizzas, customPizzas]) => {
         const pizzas = [...specialtyPizzas, ...customPizzas];
         return pizzas.reduce((total, pizza) => {
-          return pizza.price ? total + pizza.price : total;
+          return pizza?.price ? total + pizza?.price : total;
         }, 0);
       }),
       map((total: number) => parseFloat(total.toFixed(2)))

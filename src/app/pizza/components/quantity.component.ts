@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
-import { Observable, combineLatest, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { TailwindIconType, TailwindIcon } from 'src/app/utils/tailwind-icons';
 
@@ -99,9 +99,7 @@ export class QuantityComponent {
     }
   }
 
-  goToSection(precedence: number) {
-    this.stepper.setSection(
-      this.stepper.getSectionFromPrecedence(precedence)
-    );
+  goToSection(precedence: number): void {
+    this.stepper.setSection(this.stepper.getSectionFromPrecedence(precedence));
   }
 }

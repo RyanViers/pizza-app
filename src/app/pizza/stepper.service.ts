@@ -71,7 +71,7 @@ export class StepperService {
    * @param precedence
    * @returns
    */
-  getSectionFromPrecedence(precedence: number) {
+  getSectionFromPrecedence(precedence: number): PizzaStepperSection {
     switch (precedence) {
       case 0:
         return PizzaStepperSection.BASE;

@@ -52,7 +52,7 @@ import { Observable } from 'rxjs';
   styles: [],
 })
 export class CustomCartComponent implements OnInit, AfterViewInit {
-  @Input() customPizza?: Pizza;
+  @Input() customPizza: Pizza | undefined;
 
   constructor(private cart: CartService, private pizza: PizzaService) {}
 

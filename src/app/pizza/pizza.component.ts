@@ -104,7 +104,7 @@ export class PizzaComponent {
   /**
    * back
    */
-  back() {
+  back(): void {
     const precedence = this.stepper.getSectionPrecedence(
       this.stepper.getSection()
     );
@@ -117,7 +117,7 @@ export class PizzaComponent {
   /**
    * hext
    */
-  next() {
+  next(): void {
     const precedence = this.stepper.getSectionPrecedence(
       this.stepper.getSection()
     );
@@ -131,7 +131,7 @@ export class PizzaComponent {
    * go to section
    * @param precedence
    */
-  goToSection(precedence: number) {
+  goToSection(precedence: number): void {
     this.stepper.setSection(this.stepper.getSectionFromPrecedence(precedence));
   }
 
@@ -140,7 +140,7 @@ export class PizzaComponent {
    * @param precedence
    * @returns
    */
-  getColor(precedence: number) {
+  getColor(precedence: number): string {
     return this.stepper.getSectionPrecedence(this.stepper.getSection()) >=
       precedence
       ? '!text-indigo-600'
@@ -151,7 +151,7 @@ export class PizzaComponent {
    * get width
    * @returns
    */
-  getWidth() {
+  getWidth(): string {
     switch (this.stepper.getSectionPrecedence(this.stepper.getSection())) {
       case 0:
         return 'w-[2%]';

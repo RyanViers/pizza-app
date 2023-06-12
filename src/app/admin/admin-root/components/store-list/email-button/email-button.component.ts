@@ -53,7 +53,7 @@ export class EmailButtonComponent implements OnInit {
 
   ngOnInit() {}
 
-  onClick() {
+  onClick(): void {
     this.menu?.nativeElement.classList.toggle('hidden');
   }
 }

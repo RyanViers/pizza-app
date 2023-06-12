@@ -143,15 +143,17 @@ import { Observable, map } from 'rxjs';
   `,
 })
 export class CheckoutComponent {
-  $pizzaSizePrice = this.pizza.$pizzaSizePrice;
-  $pizzaCrustPrice = this.pizza.$pizzaCrustPrice;
-  $pizzaSaucePrice = this.pizza.$pizzaSaucePrice;
-  $pizzaCheeseQuantityPrice = this.pizza.$pizzaCheeseQuantityPrice;
-  $pizzaCheeseAdditionalPrice = this.pizza.$pizzaCheeseAdditionalPrice;
-  $meatPrice = this.pizza.$meatPrice;
-  $veggiePrice = this.pizza.$veggiePrice;
-  $pizzaPrice = this.pizza.$pizzaPrice;
-  $quantityTotal = this.pizza.$quantity;
+  $pizzaSizePrice: Observable<number> = this.pizza.$pizzaSizePrice;
+  $pizzaCrustPrice: Observable<number> = this.pizza.$pizzaCrustPrice;
+  $pizzaSaucePrice: Observable<number> = this.pizza.$pizzaSaucePrice;
+  $pizzaCheeseQuantityPrice: Observable<number> =
+    this.pizza.$pizzaCheeseQuantityPrice;
+  $pizzaCheeseAdditionalPrice: Observable<number> =
+    this.pizza.$pizzaCheeseAdditionalPrice;
+  $meatPrice: Observable<number> = this.pizza.$meatPrice;
+  $veggiePrice: Observable<number> = this.pizza.$veggiePrice;
+  $pizzaPrice: Observable<number | undefined> = this.pizza.$pizzaPrice;
+  $quantityTotal: Observable<number | undefined> = this.pizza.$quantity;
 
   constructor(private pizza: PizzaService) {}
 
@@ -183,7 +185,7 @@ export class CheckoutComponent {
     );
   }
 
-  addPizzaToCart() {
+  addPizzaToCart(): void {
     const subscription = this.pizza.totalPriceBeforeTax().subscribe((price) => {
       this.pizza.setPizza({ price: price });
     });
