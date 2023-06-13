@@ -1,5 +1,3 @@
-import { Country } from '../home/sign-up/helpers/enums';
-
 export interface User {
   email: string;
   password: string;

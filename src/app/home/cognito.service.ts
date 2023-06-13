@@ -22,4 +22,28 @@ export class CognitoService {
   public confirmSignUp(email: string, code: string): Promise<any> {
     return Auth.confirmSignUp(email, code);
   }
+
+  getUser(): Promise<any> {
+    return Auth.currentUserInfo();
+  }
+
+  public signIn(email: string, password: string): Promise<any> {
+    return Auth.signIn(email, password);
+  }
+
+  public signOut(): Promise<any> {
+    return Auth.signOut();
+  }
+
+  public forgotPassword(email: string): Promise<any> {
+    return Auth.forgotPassword(email);
+  }
+
+  public forgotPasswordSubmit(
+    email: string,
+    code: string,
+    password: string
+  ): Promise<any> {
+    return Auth.forgotPasswordSubmit(email, code, password);
+  }
 }

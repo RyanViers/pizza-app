@@ -9,7 +9,7 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from 'src/app/pizza/pizza.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { SpecialtyPizza } from 'src/app/pizza/helpers/specialty-models';
 import { Pizza } from 'src/app/pizza/helpers/models';
 
@@ -83,8 +83,9 @@ import { Pizza } from 'src/app/pizza/helpers/models';
   styles: [],
 })
 export class CartComponent implements OnInit {
-  $specialtyPizzaList = this.pizza.$specialtyPizza;
-  $customPizzaList = this.pizza.$customPizza;
+  $specialtyPizzaList: BehaviorSubject<SpecialtyPizza[]> =
+    this.pizza.$specialtyPizza;
+  $customPizzaList: BehaviorSubject<Pizza[]> = this.pizza.$customPizza;
 
   constructor(private pizza: PizzaService) {}
 

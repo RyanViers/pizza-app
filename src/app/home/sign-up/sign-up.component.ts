@@ -37,7 +37,7 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
   styles: [],
 })
 export class SignUpComponent implements OnInit, OnDestroy {
-  isConfirm = true;
+  isConfirm = false;
 
   //PROFILE INFORMATION
   fgProfile: FormGroup = this.builder.group({});
@@ -110,6 +110,22 @@ export class SignUpComponent implements OnInit, OnDestroy {
     if (this.fgPersonal.valid) {
       this.cognitoService
         .signUp(this.fgPersonal.value)
+        .then((data) => {
+          console.log(data);
+          this.isConfirm = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
+  public getUser(): void {}
+
+  public confirmSignUp(): void {
+    if (this.fgPersonal.valid) {
+      this.cognitoService
+        .confirmSignUp(this.fgPersonal.value.email, this.fgPersonal.value.code)
         .then((data) => {
           console.log(data);
         })
