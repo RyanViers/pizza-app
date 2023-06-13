@@ -90,10 +90,10 @@ import { QuantityComponent } from './components/quantity.component';
           <ion-router-outlet></ion-router-outlet>
         </div>
       </div>
+      <ion-footer class="relative z-10">
+        <app-footer></app-footer>
+      </ion-footer>
     </ion-content>
-    <ion-footer class="relative z-10">
-      <app-footer></app-footer>
-    </ion-footer>
   `,
   styles: [],
 })
