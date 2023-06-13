@@ -9,6 +9,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'sign-up',
+    loadComponent: () =>
+      import('./home/sign-up/sign-up.component').then((m) => m.SignUpComponent),
+  },
+  {
     path: 'home',
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
   },
@@ -20,9 +25,11 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'sign-up',
+    path: 'profile',
     loadComponent: () =>
-      import('./home/sign-up/sign-up.component').then((m) => m.SignUpComponent),
+      import('./profile/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
   },
   {
     path: 'specialty-pizzas',

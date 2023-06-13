@@ -27,7 +27,12 @@ import { Pizza } from 'src/app/pizza/helpers/models';
     SpecialtyCartComponent,
     CartSummaryComponent,
   ],
-  template: `<ion-content>
+  template: `<ion-header>
+      <ion-toolbar>
+        <app-header></app-header>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
       <div class="bg-dark-shade">
         <div
           class="max-w-2xl px-4 pt-16 pb-24 mx-auto sm:px-6 lg:max-w-7xl lg:px-8"

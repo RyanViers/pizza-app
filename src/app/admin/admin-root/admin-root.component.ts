@@ -25,23 +25,28 @@ import { StoreListComponent } from './components/store-list/store-list.component
     HeaderComponent,
     FooterComponent,
   ],
-  template: `<ion-content>
-    <div class="grid w-full grid-flow-row my-10 md:grid-cols-2 gap-x-3">
-      <app-admin-info></app-admin-info>
-      <app-inventory></app-inventory>
-    </div>
-
-    <div class="grid w-full grid-flow-row my-10 md:grid-cols-2 gap-x-3">
-      <app-store-list></app-store-list>
-      <app-employee-list></app-employee-list>
-    </div>
-
-    <ion-footer>
+  template: `<ion-header>
       <ion-toolbar>
-        <app-footer></app-footer>
+        <app-header></app-header>
       </ion-toolbar>
-    </ion-footer>
-  </ion-content>`,
+    </ion-header>
+    <ion-content>
+      <div class="grid w-full grid-flow-row my-10 md:grid-cols-2 gap-x-3">
+        <app-admin-info></app-admin-info>
+        <app-inventory></app-inventory>
+      </div>
+
+      <div class="grid w-full grid-flow-row my-10 md:grid-cols-2 gap-x-3">
+        <app-store-list></app-store-list>
+        <app-employee-list></app-employee-list>
+      </div>
+
+      <ion-footer>
+        <ion-toolbar>
+          <app-footer></app-footer>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-content>`,
   styles: [],
 })
 export class AdminRootComponent implements OnInit {

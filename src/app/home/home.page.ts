@@ -9,6 +9,11 @@ import { SharedModule } from '../shared/shared.module';
 @Component({
   selector: 'app-home',
   template: `
+    <ion-header>
+      <ion-toolbar>
+        <app-header></app-header>
+      </ion-toolbar>
+    </ion-header>
     <ion-content>
       <section
         class="h-full w-full bg-center bg-no-repeat bg-[url('src/assets/volcano.png')] bg-gray-700 bg-blend-multiply"

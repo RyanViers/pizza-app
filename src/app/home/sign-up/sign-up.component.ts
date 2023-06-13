@@ -3,7 +3,13 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SharedModule } from '../../shared/shared.module';
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SignUpService } from './sign-up.service';
 import {
@@ -15,8 +21,8 @@ import {
 } from '@angular/forms';
 import { SignUpForm } from './helpers/models';
 import { Subscription } from 'rxjs';
-import { RouterModule } from '@angular/router';
-import { SweetAlertOptions } from 'sweetalert2';
+import { RouterModule, Router } from '@angular/router';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { NotificationsSettingsComponent } from './notifications-settings/notifications-settings/notifications-settings.component';
 
 @Component({
@@ -37,10 +43,11 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
   styles: [],
 })
 export class SignUpComponent implements OnInit, OnDestroy {
+  @ViewChild('verificationCode') verificationCode: ElementRef | undefined;
   isConfirm = false;
 
   //PROFILE INFORMATION
-  fgProfile: FormGroup = this.builder.group({});
+  //fgProfile: FormGroup = this.builder.group({});
 
   //PERSONAL INFORMATION
   fgPersonal: FormGroup = this.builder.group({
@@ -56,7 +63,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   });
 
   //NOTIFICATION PREFERENCES
-  fgNotification: FormGroup = this.builder.group({});
+  //fgNotification: FormGroup = this.builder.group({});
 
   private personalSub = new Subscription();
 
@@ -68,7 +75,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
   constructor(
     private signUp: SignUpService,
     private builder: FormBuilder,
-    private cognitoService: CognitoService
+    private cognitoService: CognitoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -123,11 +131,21 @@ export class SignUpComponent implements OnInit, OnDestroy {
   public getUser(): void {}
 
   public confirmSignUp(): void {
+    let code = this.verificationCode?.nativeElement.value;
     if (this.fgPersonal.valid) {
       this.cognitoService
-        .confirmSignUp(this.fgPersonal.value.email, this.fgPersonal.value.code)
+        .confirmSignUp(this.fgPersonal.value.email, code)
         .then((data) => {
           console.log(data);
+          this.isConfirm = false;
+          Swal.fire({
+            ...this.swalOptions,
+            title: 'User Confirmed. Please Sign In.',
+            icon: 'success',
+            target: document.body,
+            heightAuto: false,
+          });
+          this.router.navigate(['/sign-in']);
         })
         .catch((err) => {
           console.log(err);
@@ -139,9 +157,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     title: '',
     icon: 'info',
     showCancelButton: true,
-    confirmButtonText: 'Add to Cart',
     cancelButtonText: 'Cancel',
-    confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
     customClass: {
       popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',

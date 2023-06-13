@@ -9,12 +9,6 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
   standalone: true,
   imports: [CommonModule, IonicModule, SweetAlert2Module, HeaderComponent],
   template: `<ion-app>
-    <ion-header>
-      <ion-toolbar>
-        <app-header></app-header>
-      </ion-toolbar>
-    </ion-header>
-
     <ion-content>
       <ion-router-outlet></ion-router-outlet>
     </ion-content>

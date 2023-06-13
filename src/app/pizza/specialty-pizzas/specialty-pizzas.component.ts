@@ -29,6 +29,11 @@ import { PizzaService } from '../pizza.service';
   ],
   styles: [``],
   template: `
+    <ion-header>
+      <ion-toolbar>
+        <app-header></app-header>
+      </ion-toolbar>
+    </ion-header>
     <ion-content>
       <div class="bg-white">
         <div

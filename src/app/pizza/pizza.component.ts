@@ -23,6 +23,11 @@ import { QuantityComponent } from './components/quantity.component';
   ],
 
   template: `
+    <ion-header>
+      <ion-toolbar>
+        <app-header></app-header>
+      </ion-toolbar>
+    </ion-header>
     <ion-content>
       <div class="max-w-2xl mx-auto w-full relative z-10">
         <div class="w-full relative">
