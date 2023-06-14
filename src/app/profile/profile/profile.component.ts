@@ -1,3 +1,5 @@
+import { DeleteAccountComponent } from './delete-account/delete-account/delete-account.component';
+import { PasswordChangeComponent } from './password-change/password-change/password-change.component';
 import { ProfileService } from './../profile.service';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { CommonModule } from '@angular/common';
@@ -19,6 +21,8 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
     HeaderComponent,
     FooterComponent,
     NotificationsSettingsComponent,
+    PasswordChangeComponent,
+    DeleteAccountComponent,
   ],
   templateUrl: './profile.component.html',
   styles: [``],
