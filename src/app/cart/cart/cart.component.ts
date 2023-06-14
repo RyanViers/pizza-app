@@ -9,7 +9,7 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from 'src/app/pizza/pizza.service';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { SpecialtyPizza } from 'src/app/pizza/helpers/specialty-models';
 import { Pizza } from 'src/app/pizza/helpers/models';
 
@@ -79,12 +79,12 @@ import { Pizza } from 'src/app/pizza/helpers/models';
           </form>
         </div>
       </div>
-    </ion-content>
-    <ion-footer>
-      <ion-toolbar>
-        <app-footer></app-footer>
-      </ion-toolbar>
-    </ion-footer>`,
+      <ion-footer>
+        <ion-toolbar>
+          <app-footer></app-footer>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-content> `,
   styles: [],
 })
 export class CartComponent implements OnInit {

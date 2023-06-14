@@ -23,7 +23,6 @@ import { SignUpForm } from './helpers/models';
 import { Subscription } from 'rxjs';
 import { RouterModule, Router } from '@angular/router';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
-import { NotificationsSettingsComponent } from './notifications-settings/notifications-settings/notifications-settings.component';
 
 @Component({
   standalone: true,
@@ -36,7 +35,6 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
     SharedModule,
     HeaderComponent,
     FooterComponent,
-    NotificationsSettingsComponent,
   ],
   providers: [SignUpService, FormBuilder],
   templateUrl: './sign-up.component.html',
@@ -45,9 +43,6 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
 export class SignUpComponent implements OnInit, OnDestroy {
   @ViewChild('verificationCode') verificationCode: ElementRef | undefined;
   isConfirm = false;
-
-  //PROFILE INFORMATION
-  //fgProfile: FormGroup = this.builder.group({});
 
   //PERSONAL INFORMATION
   fgPersonal: FormGroup = this.builder.group({
@@ -61,9 +56,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
     state: ['', [Validators.required, Validators.maxLength(60)]],
     zip: ['', [Validators.required, Validators.pattern(new RegExp(/^\d{5}$/))]],
   });
-
-  //NOTIFICATION PREFERENCES
-  //fgNotification: FormGroup = this.builder.group({});
 
   private personalSub = new Subscription();
 
@@ -127,8 +119,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
         });
     }
   }
-
-  public getUser(): void {}
 
   public confirmSignUp(): void {
     let code = this.verificationCode?.nativeElement.value;

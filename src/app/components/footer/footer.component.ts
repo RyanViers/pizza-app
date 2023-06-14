@@ -133,9 +133,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
               The latest deals and savings, sent to your inbox weekly.
             </p>
             <form class="mt-2 flex sm:max-w-md">
-              <label for="email-address" class="sr-only">Email address</label>
+              <label for="email-address-footer" class="sr-only"
+                >Email address</label
+              >
               <input
-                id="email-address"
                 type="text"
                 autocomplete="email"
                 required

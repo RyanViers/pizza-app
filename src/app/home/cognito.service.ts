@@ -39,6 +39,10 @@ export class CognitoService {
     return Auth.forgotPassword(email);
   }
 
+  public currentAuthenticatedUser(): Promise<any> {
+    return Auth.currentAuthenticatedUser();
+  }
+
   public forgotPasswordSubmit(
     email: string,
     code: string,

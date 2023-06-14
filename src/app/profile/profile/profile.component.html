@@ -56,8 +56,8 @@
                       type="text"
                       name="first-name"
                       id="first-name"
-                      autocomplete="given-name"
-                      class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                      [placeholder]="user?.given_name"
+                      class="block w-full pl-3 rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
@@ -73,8 +73,9 @@
                       type="text"
                       name="last-name"
                       id="last-name"
+                      [placeholder]="user?.family_name"
                       autocomplete="family-name"
-                      class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                      class="block pl-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
@@ -90,34 +91,9 @@
                       id="email"
                       name="email"
                       type="email"
-                      autocomplete="email"
-                      class="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                      [placeholder]="user?.email"
+                      class="block pl-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                     />
-                  </div>
-                </div>
-
-                <div class="col-span-full">
-                  <label
-                    for="username"
-                    class="block text-sm font-medium leading-6 text-white"
-                    >Username</label
-                  >
-                  <div class="mt-2">
-                    <div
-                      class="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
-                    >
-                      <span
-                        class="flex items-center pl-3 text-gray-400 select-none sm:text-sm"
-                        >example.com/</span
-                      >
-                      <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        autocomplete="username"
-                        class="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
@@ -131,6 +107,10 @@
                 </button>
               </div>
             </form>
+          </div>
+
+          <div class="flex w-full border-t-2">
+            <app-notifications-settings></app-notifications-settings>
           </div>
 
           <div
