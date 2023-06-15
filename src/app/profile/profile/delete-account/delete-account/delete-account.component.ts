@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { set } from 'lodash';
 import { SharedModule } from 'src/app/shared/shared.module';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 

@@ -1,3 +1,4 @@
+import { ProfileInfoComponent } from './profile-info/profile-info/profile-info.component';
 import { DeleteAccountComponent } from './delete-account/delete-account/delete-account.component';
 import { PasswordChangeComponent } from './password-change/password-change/password-change.component';
 import { ProfileService } from './../profile.service';
@@ -23,18 +24,18 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
     NotificationsSettingsComponent,
     PasswordChangeComponent,
     DeleteAccountComponent,
+    ProfileInfoComponent,
   ],
   templateUrl: './profile.component.html',
   styles: [``],
 })
 export class ProfileComponent implements OnInit {
-  user: any;
+  user?: any;
 
   constructor(private profile: ProfileService) {}
 
   ngOnInit() {
     this.profile.currentAuthenticatedUser().then((user) => {
-      console.log(user.attributes);
       this.user = user.attributes;
     });
   }
