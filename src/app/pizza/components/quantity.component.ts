@@ -14,10 +14,8 @@ import { TailwindIconType, TailwindIcon } from 'src/app/utils/tailwind-icons';
   imports: [CommonModule, IonicModule, SharedModule],
   providers: [],
   styles: [``],
-  template: `<ion-footer
-    class="relative z-10 flex w-full max-w-2xl p-4 mx-auto"
-  >
-    <div class="flex items-center justify-between w-full">
+  template: `<div class="relative z-10 flex w-full max-w-2xl p-4 mx-auto">
+    <div class="flex items-center justify-center w-full">
       <div class="flex flex-row items-center justify-center space-x-6">
         <div class="flex flex-row items-center justify-center space-x-2">
           <button
@@ -55,7 +53,7 @@ import { TailwindIconType, TailwindIcon } from 'src/app/utils/tailwind-icons';
         </div>
       </div>
     </div>
-  </ion-footer>`,
+  </div>`,
 })
 export class QuantityComponent {
   $quantityTotal: Observable<number | undefined> = this.pizzaService.$quantity;

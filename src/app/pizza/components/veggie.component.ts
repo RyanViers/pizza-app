@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [CommonModule, IonicModule],
   providers: [],
-  template: `<div class="flex w-full justify-evenly ">
+  template: `<div class="flex w-full h-full justify-evenly ">
     <fieldset>
       <legend class="text-base font-semibold text-dark">Select Veggies</legend>
       <div

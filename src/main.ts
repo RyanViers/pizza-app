@@ -12,7 +12,7 @@ import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { Apollo } from 'apollo-angular';
 import { HttpLink, InMemoryCache, concat } from '@apollo/client/core';
-import { Amplify } from 'aws-amplify';
+import { Amplify, Auth } from 'aws-amplify';
 
 if (environment.production) {
   enableProdMode();
@@ -20,6 +20,12 @@ if (environment.production) {
 
 Amplify.configure({
   Auth: environment.cognito,
+  aws_appsync_region: 'us-east-1',
+  aws_appsync_graphqlEndpoint:
+    'https://ha2knhtddvdq3hjskh7quhei3i.appsync-api.us-east-1.amazonaws.com/graphql',
+  aws_appsync_authenticationType: 'API_KEY',
+  aws_appsync_apiKey: 'da2-tp5ecrxlv5bx3ilanppgd5jgsq',
+  graphql_endpoint_iam_region: 'us-east-1',
 });
 
 bootstrapApplication(AppComponent, {

@@ -43,6 +43,15 @@ export class CognitoService {
     return Auth.currentAuthenticatedUser();
   }
 
+  public async refreshSession(): Promise<any> {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      return await Auth.userSession(user);
+    } catch (err) {
+      return console.log(err);
+    }
+  }
+
   public forgotPasswordSubmit(
     email: string,
     code: string,

@@ -130,10 +130,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
           this.isConfirm = false;
           Swal.fire({
             ...this.swalOptions,
-            title: 'User Confirmed. Please Sign In.',
-            icon: 'success',
-            target: document.body,
-            heightAuto: false,
           });
           this.router.navigate(['/sign-in']);
         })
@@ -144,8 +140,10 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   public readonly swalOptions: SweetAlertOptions = {
-    title: '',
-    icon: 'info',
+    title: 'User Confirmed. Please Sign In.',
+    icon: 'success',
+    target: document.body,
+    heightAuto: false,
     showCancelButton: true,
     cancelButtonText: 'Cancel',
     cancelButtonColor: '#d33',

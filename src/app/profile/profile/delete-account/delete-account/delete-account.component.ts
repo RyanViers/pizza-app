@@ -24,7 +24,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
       </p>
     </div>
 
-    <form class="flex items-start md:col-span-2">
+    <div class="flex items-start md:col-span-2">
       <button
         (click)="deleteAccount()"
         type="submit"
@@ -32,7 +32,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
       >
         Yes, delete my account
       </button>
-    </form>
+    </div>
   </div>`,
   styles: [],
 })
@@ -41,25 +41,30 @@ export class DeleteAccountComponent implements OnInit {
 
   ngOnInit() {}
 
-  deleteAccount() {
-    this.profile.deleteUser();
-    Swal.fire({
+  async deleteAccount() {
+    await Swal.fire({
       ...this.swalOptions,
-      title: 'Account deleted',
-      text: 'Your account has been deleted successfully.',
-      icon: 'success',
-      target: document.body,
-      heightAuto: false,
+    }).then((isConfirm) => {
+      if (isConfirm.isConfirmed) {
+        this.profile.deleteUser();
+        this.router.navigate(['/sign-in']);
+      } else {
+        Swal.close();
+      }
     });
-    this.router.navigate(['/']);
   }
 
   public readonly swalOptions: SweetAlertOptions = {
-    title: '',
+    title: 'Account deletion',
     icon: 'info',
-    showCancelButton: false,
-    confirmButtonText: 'Sign In',
+    showCancelButton: true,
+    confirmButtonText: 'Delete my account',
+    cancelButtonText: 'Cancel',
+    reverseButtons: true,
+    heightAuto: false,
+    target: document.body,
     confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#aaa',
 
     customClass: {
       popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',

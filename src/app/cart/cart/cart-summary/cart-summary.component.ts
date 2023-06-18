@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Observable, combineLatest, map } from 'rxjs';
+import { Observable, combineLatest, map, firstValueFrom } from 'rxjs';
 import { PizzaService } from 'src/app/pizza/pizza.service';
 import { CartService } from '../../cart.service';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { SpecialtyPizza } from 'src/app/pizza/helpers/specialty-models';
 import { Pizza } from 'src/app/pizza/helpers/models';
+import { Auth } from 'aws-amplify';
+import { APIService, CreateOrderInput } from 'src/app/API.service';
+import { CognitoService } from 'src/app/home/cognito.service';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 
 @Component({
   selector: 'app-cart-summary',
@@ -54,7 +58,8 @@ import { Pizza } from 'src/app/pizza/helpers/models';
 
     <div class="mt-6">
       <button
-        type="submit"
+        (click)="onCheckout()"
+        type="button"
         class="w-full px-4 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
       >
         Checkout
@@ -69,8 +74,10 @@ export class CartSummaryComponent implements OnInit {
 
   constructor(
     private pizza: PizzaService,
+    private cognito: CognitoService,
+    private sanitizer: DomSanitizer,
     private cart: CartService,
-    private sanitizer: DomSanitizer
+    private api: APIService
   ) {}
 
   ngOnInit() {}
@@ -112,4 +119,73 @@ export class CartSummaryComponent implements OnInit {
       map((totalWithTax: number) => parseFloat(totalWithTax.toFixed(2)))
     );
   }
+
+  async onCheckout(): Promise<void> {
+    console.log('Checkout clicked');
+    try {
+      await this.cognito.refreshSession(); // Refresh the session here
+      const user = await this.cognito.currentAuthenticatedUser();
+
+      
+
+      // Get total cost, tax, and authenticated user
+      const totalCost: any = await firstValueFrom(
+        this.pizza.totalPriceAfterTax()
+      );
+      console.log('totalCost:', totalCost);
+      const tax: any = await firstValueFrom(this.pizza.totalTax());
+      console.log('tax:', tax);
+      const subtotal: number = await firstValueFrom(
+        this.pizza.totalPriceBeforeTax()
+      );
+      console.log('subtotal:', subtotal);
+
+      console.log('user:', user);
+
+      // Get custom and specialty pizzas
+      const customPizzas: any = this.pizza.$customPizza.getValue();
+      console.log('customPizzas:', customPizzas);
+      const specialtyPizzas: any = this.pizza.$specialtyPizza.getValue();
+      console.log('specialtyPizzas:', specialtyPizzas);
+
+      // Create CreateOrderInput
+      const order: CreateOrderInput = {
+        user_id: user.attributes.sub,
+        user_name: user.username,
+        date: new Date().toISOString(),
+        customPizzas: customPizzas,
+        specialtyPizzas: specialtyPizzas,
+        subtotal: subtotal,
+        tax: tax,
+        total: totalCost,
+      };
+      console.log('Order:', order);
+
+      Swal.fire({ ...this.swalOptions }).then((isConfirm) => {
+        if (isConfirm) {
+          console.log('Order:', order);
+          this.api.CreateOrder(order);
+          console.log('Order saved successfully', order);
+        } else {
+          Swal.close();
+        }
+      });
+    } catch (err) {
+      console.error('Error in onCheckout:', err);
+    }
+  }
+
+  public readonly swalOptions: SweetAlertOptions = {
+    title: 'Save Order',
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonText: 'Add To Database',
+    cancelButtonText: 'Cancel',
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    heightAuto: false,
+    customClass: {
+      popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
+    },
+  };
 }

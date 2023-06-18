@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   imports: [CommonModule, IonicModule, FormsModule],
   providers: [],
   template: `
-    <div class="flex w-full justify-evenly ">
+    <div class="flex w-full h-full justify-evenly ">
       <fieldset>
         <legend class="text-base font-semibold text-dark">Select Size</legend>
         <div
