@@ -20,12 +20,7 @@ if (environment.production) {
 
 Amplify.configure({
   Auth: environment.cognito,
-  aws_appsync_region: 'us-east-1',
-  aws_appsync_graphqlEndpoint:
-    'https://ha2knhtddvdq3hjskh7quhei3i.appsync-api.us-east-1.amazonaws.com/graphql',
-  aws_appsync_authenticationType: 'API_KEY',
-  aws_appsync_apiKey: 'da2-tp5ecrxlv5bx3ilanppgd5jgsq',
-  graphql_endpoint_iam_region: 'us-east-1',
+  ...awsmobile,
 });
 
 bootstrapApplication(AppComponent, {

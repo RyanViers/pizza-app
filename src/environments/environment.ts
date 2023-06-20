@@ -23,14 +23,7 @@ export const environment = {
   },
 };
 
-// Amplify.configure({
-//   Auth: {
-//     region: environment.cognito.region,
-//     userPoolId: environment.cognito.userPoolId,
-//     userPoolWebClientId: environment.cognito.userPoolWebClientId,
-//     identityPoolId: environment.cognito.aws_cognito_identity_pool_id,
-//   },
-// });
+//identityPoolId: 'us-east-1:fa9bf76b-a317-4b9f-908d-b088a8e777b8',
 
 //
 /*

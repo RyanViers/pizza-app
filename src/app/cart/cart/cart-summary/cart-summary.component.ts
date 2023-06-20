@@ -122,11 +122,10 @@ export class CartSummaryComponent implements OnInit {
 
   async onCheckout(): Promise<void> {
     console.log('Checkout clicked');
+
     try {
       await this.cognito.refreshSession(); // Refresh the session here
       const user = await this.cognito.currentAuthenticatedUser();
-
-      
 
       // Get total cost, tax, and authenticated user
       const totalCost: any = await firstValueFrom(
@@ -145,19 +144,20 @@ export class CartSummaryComponent implements OnInit {
       // Get custom and specialty pizzas
       const customPizzas: any = this.pizza.$customPizza.getValue();
       console.log('customPizzas:', customPizzas);
+      console.log('sub:', user.attributes.sub);
       const specialtyPizzas: any = this.pizza.$specialtyPizza.getValue();
       console.log('specialtyPizzas:', specialtyPizzas);
 
       // Create CreateOrderInput
       const order: CreateOrderInput = {
-        user_id: user.attributes.sub,
-        user_name: user.username,
+        user_id: user?.attributes.sub,
+        user_name: user?.username,
         date: new Date().toISOString(),
         customPizzas: customPizzas,
-        specialtyPizzas: specialtyPizzas,
-        subtotal: subtotal,
-        tax: tax,
-        total: totalCost,
+        specialtyPizzas: specialtyPizzas || [],
+        subtotal: 0,
+        tax: 0,
+        total: 0,
       };
       console.log('Order:', order);
 

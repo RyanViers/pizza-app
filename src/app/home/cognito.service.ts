@@ -43,6 +43,10 @@ export class CognitoService {
     return Auth.currentAuthenticatedUser();
   }
 
+  public currentCredentials(): Promise<any> {
+    return Auth.currentCredentials();
+  }
+
   public async refreshSession(): Promise<any> {
     try {
       const user = await Auth.currentAuthenticatedUser();
