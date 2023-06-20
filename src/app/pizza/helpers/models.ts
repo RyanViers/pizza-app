@@ -5,8 +5,8 @@ import {
   PizzaCheese,
   PizzaMeat,
   PizzaVeggie,
+  SpecialtyPizza,
 } from 'src/app/API.service';
-import { SpecialtyPizza } from './specialty-models';
 
 export interface Pizza {
   size: PizzaSize;

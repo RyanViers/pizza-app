@@ -1,5 +1,6 @@
+import { MutationsService } from './../../../utils/services/api/mutations.service';
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SafeHtml } from '@angular/platform-browser';
 import { Observable, combineLatest, map, firstValueFrom } from 'rxjs';
 import { PizzaService } from 'src/app/pizza/pizza.service';
 import { CartService } from '../../cart.service';
@@ -7,10 +8,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { SpecialtyPizza } from 'src/app/pizza/helpers/specialty-models';
 import { Pizza } from 'src/app/pizza/helpers/models';
-import { Auth } from 'aws-amplify';
-import { APIService, CreateOrderInput } from 'src/app/API.service';
+import { CreateOrderInput, SpecialtyPizza } from 'src/app/API.service';
 import { CognitoService } from 'src/app/home/cognito.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 
@@ -75,9 +74,8 @@ export class CartSummaryComponent implements OnInit {
   constructor(
     private pizza: PizzaService,
     private cognito: CognitoService,
-    private sanitizer: DomSanitizer,
-    private cart: CartService,
-    private api: APIService
+    private mutation: MutationsService,
+    private cart: CartService
   ) {}
 
   ngOnInit() {}
@@ -153,23 +151,23 @@ export class CartSummaryComponent implements OnInit {
         user_id: user?.attributes.sub,
         user_name: user?.username,
         date: new Date().toISOString(),
-        customPizzas: customPizzas,
-        specialtyPizzas: specialtyPizzas || [],
-        subtotal: 0,
-        tax: 0,
-        total: 0,
+        customPizzas: [...customPizzas],
+        specialtyPizzas: [...specialtyPizzas],
+        subtotal: subtotal,
+        tax: tax,
+        total: totalCost,
       };
       console.log('Order:', order);
 
-      Swal.fire({ ...this.swalOptions }).then((isConfirm) => {
-        if (isConfirm) {
-          console.log('Order:', order);
-          this.api.CreateOrder(order);
-          console.log('Order saved successfully', order);
-        } else {
-          Swal.close();
-        }
-      });
+      const swal = await Swal.fire({ ...this.swalOptions });
+
+      if (swal.isConfirmed) {
+        console.log('Order:', order);
+        this.mutation.createOrder(order);
+        console.log('Order saved successfully', order);
+      } else {
+        Swal.close();
+      }
     } catch (err) {
       console.error('Error in onCheckout:', err);
     }

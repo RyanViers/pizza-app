@@ -18,17 +18,12 @@ query ListOrdersByUser($input: ListOrdersByUserInput) {
       price
     }
     specialtyPizzas {
+      description
       id
-      size
-      crust
-      sauce
-      cheese {
-        quantity
-        additional
-      }
-      meats
-      veggies
+      imageUrl
+      name
       price
+      toppings
     }
     user_name
     subtotal
@@ -55,17 +50,12 @@ query GetOrder($input: GetOrderInput!) {
       price
     }
     specialtyPizzas {
+      description
       id
-      size
-      crust
-      sauce
-      cheese {
-        quantity
-        additional
-      }
-      meats
-      veggies
+      imageUrl
+      name
       price
+      toppings
     }
     user_name
     subtotal

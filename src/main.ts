@@ -11,8 +11,9 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { Apollo } from 'apollo-angular';
+import { ApolloModule } from 'apollo-angular';
 import { HttpLink, InMemoryCache, concat } from '@apollo/client/core';
-import { Amplify, Auth } from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
 
 if (environment.production) {
   enableProdMode();
@@ -25,6 +26,14 @@ Amplify.configure({
 
 bootstrapApplication(AppComponent, {
   providers: [
+    {
+      provide: ApolloModule,
+    },
+    {
+      provide: HttpLink,
+      useFactory: () =>
+        new HttpLink({ uri: awsmobile.aws_appsync_graphqlEndpoint }),
+    },
     {
       provide: Apollo,
       useFactory(link: HttpLink) {
@@ -45,11 +54,7 @@ bootstrapApplication(AppComponent, {
       },
       deps: [HttpLink],
     },
-    {
-      provide: HttpLink,
-      useFactory: () =>
-        new HttpLink({ uri: awsmobile.aws_appsync_graphqlEndpoint }),
-    },
+
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     importProvidersFrom(IonicModule.forRoot({})),
     provideRouter(routes),

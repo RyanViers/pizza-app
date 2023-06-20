@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '../../cart.service';
 import { SafeHtml } from '@angular/platform-browser';
-import { SpecialtyPizza } from 'src/app/pizza/helpers/specialty-models';
+import { SpecialtyPizza } from 'src/app/API.service';
 
 @Component({
   selector: 'app-specialty-cart',

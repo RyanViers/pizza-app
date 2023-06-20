@@ -7,11 +7,12 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PizzaPreviewComponent } from '../components/preview.component';
 import { RouterModule } from '@angular/router';
 import { QuantityComponent } from '../components/quantity.component';
-import { pizzas, SpecialtyPizza } from '../helpers/specialty-models';
+import { pizzas } from '../helpers/specialty-models';
 import Swal from 'sweetalert2';
 import { SweetAlertOptions } from 'sweetalert2';
 import { of } from 'rxjs';
 import { PizzaService } from '../pizza.service';
+import { SpecialtyPizza } from 'src/app/API.service';
 
 @Component({
   selector: 'app-specialty-pizzas',
@@ -104,22 +105,20 @@ export class SpecialtyPizzasComponent implements OnDestroy {
     },
   };
 
-  onClick(pizza: SpecialtyPizza): void {
-    const toppingsList: string = pizza.toppings
-      .map((topping) => topping.name)
-      .join(', ');
+  async onClick(pizza: SpecialtyPizza): Promise<void> {
+    const toppingsList: string = pizza.toppings.join(', ');
 
-    Swal.fire({
+    const swal = await Swal.fire({
       ...this.swalOptions,
-      title: pizza.name,
+      title: pizza?.name || '',
       text: `Ingredients: ${toppingsList}`,
       icon: 'success',
       target: document.body,
       heightAuto: false,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.pizzaService.addSpecialtyPizza(pizza);
-      }
     });
+
+    if (swal.isConfirmed) {
+      this.pizzaService.addSpecialtyPizza(pizza);
+    }
   }
 }

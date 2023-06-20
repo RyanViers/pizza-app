@@ -21,7 +21,7 @@ import {
   PizzaVeggie,
 } from '../API.service';
 import { Pizza } from './helpers/models';
-import { SpecialtyPizza } from './helpers/specialty-models';
+import { SpecialtyPizza } from '../API.service';
 import { isEqual } from 'lodash';
 
 @Injectable({
@@ -53,7 +53,9 @@ export class PizzaService {
   getPizza = this.$pizza.asObservable();
 
   /******************* CUSTOM PIZZA ****************/
-  public $customPizza: BehaviorSubject<Pizza[]> = new BehaviorSubject<Pizza[]>([]);
+  public $customPizza: BehaviorSubject<Pizza[]> = new BehaviorSubject<Pizza[]>(
+    []
+  );
 
   addCustomPizza(pizza: any): void {
     // Get the current value of the array
@@ -67,7 +69,8 @@ export class PizzaService {
   }
 
   /******************* SPECIALTY PIZZAS ****************/
-  public $specialtyPizza: BehaviorSubject<SpecialtyPizza[]> = new BehaviorSubject<SpecialtyPizza[]>([]);
+  public $specialtyPizza: BehaviorSubject<SpecialtyPizza[]> =
+    new BehaviorSubject<SpecialtyPizza[]>([]);
 
   public addSpecialtyPizza(pizza: SpecialtyPizza): void {
     // Get the current value of the array
@@ -125,7 +128,9 @@ export class PizzaService {
         );
       })
     );
-  public $pizzaCheeseAdditional: Observable<AdditionCheeseType | null | undefined> = this.$pizza.pipe(
+  public $pizzaCheeseAdditional: Observable<
+    AdditionCheeseType | null | undefined
+  > = this.$pizza.pipe(
     map((pizza: Pizza) => {
       return pizza.cheese.additional;
     })
