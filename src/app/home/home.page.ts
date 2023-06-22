@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { DirectiveModuleModule} from '../directives/directive-module/directive-module.module';
+import { DirectiveModuleModule} from '../utils/directives/directive-module.module';
 
 @Component({
   selector: 'app-home',

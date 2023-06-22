@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BackgroundColorDirective } from '../background-color.directive';
+import { BackgroundColorDirective } from './background-color.directive';
 
 
 @NgModule({
@@ -10,4 +10,4 @@ import { BackgroundColorDirective } from '../background-color.directive';
   ],
   exports: [BackgroundColorDirective]
 })
-export class DirectiveModuleModule { }
+export class DirectiveModuleModule {}
