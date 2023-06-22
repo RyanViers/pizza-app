@@ -46,6 +46,18 @@ export class PizzaService {
       quantity: 1,
     });
 
+  /**
+   * set pizza
+   * @param size
+   */
+  setPizza(options: Partial<CustomPizza>): void {
+    const currentPizza = this.$pizza.value;
+    const newPizza = { ...currentPizza, ...options };
+    if (!isEqual(currentPizza, newPizza)) {
+      this.$pizza.next(newPizza);
+    }
+  }
+
   getPizza = this.$pizza.asObservable();
 
   /******************* CUSTOM PIZZA ****************/
@@ -202,17 +214,6 @@ export class PizzaService {
 
   getPizzaPrice(): number {
     return this.$pizza?.value?.price || 0;
-  }
-  /**
-   * set pizza
-   * @param size
-   */
-  setPizza(options: Partial<CustomPizza>): void {
-    const currentPizza = this.$pizza.value;
-    const newPizza = { ...currentPizza, ...options };
-    if (!isEqual(currentPizza, newPizza)) {
-      this.$pizza.next(newPizza);
-    }
   }
 
   /*********************************** MATH METHODS **************************************/

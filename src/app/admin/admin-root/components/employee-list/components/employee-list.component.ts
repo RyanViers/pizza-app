@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { employees, Employee } from '../../../../utils/models/employees';
+import { employees, Employee } from '../../../utils/models/employees';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule, RouterModule],
-  template: `<div>
+  template: `<ion-content>
     <div class="flex items-center justify-center w-full">
       <h1>
         <span class="text-4xl font-bold text-white">Employess</span>
@@ -22,7 +22,6 @@ import { employees, Employee } from '../../../../utils/models/employees';
           <img
             class="flex-none w-12 h-12 bg-gray-800 rounded-full"
             [src]="e.img"
-            alt=""
           />
           <div class="flex-auto min-w-0">
             <p class="text-sm font-semibold leading-6 text-white">
@@ -41,7 +40,7 @@ import { employees, Employee } from '../../../../utils/models/employees';
         </div>
       </li>
     </ul>
-  </div>`,
+  </ion-content>`,
   styles: [],
 })
 export class EmployeeListComponent implements OnInit {

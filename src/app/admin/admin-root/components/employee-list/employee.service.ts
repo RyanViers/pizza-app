@@ -26,10 +26,10 @@ export class EmployeeService {
     this.currentSection = section;
     switch (this.currentSection) {
       case EmployeeSection.EMPLOYEE_LIST:
-        this.router.navigate(['/employee/employee-list']);
+        this.router.navigate(['/admin-root/employee-list']);
         break;
       case EmployeeSection.EMPLOYEE_SIGN_UP:
-        this.router.navigate(['/employee/employee-sign-up']);
+        this.router.navigate(['/admin-root/employee-sign-up']);
         break;
     }
   }
