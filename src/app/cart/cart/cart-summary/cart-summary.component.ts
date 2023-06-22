@@ -170,6 +170,15 @@ export class CartSummaryComponent implements OnInit {
       if (swal.isConfirmed) {
         console.log('order:', order);
         await this.mutation.createOrder(order);
+        await Swal.fire({
+          title: 'Order Saved',
+          icon: 'success',
+          heightAuto: false,
+          customClass: {
+            popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
+          },
+        });
+        this.pizza.resetPizza();
       }
     } catch (err) {
       console.error('Error in onCheckout:', err);

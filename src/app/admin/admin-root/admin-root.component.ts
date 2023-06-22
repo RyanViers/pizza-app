@@ -24,22 +24,23 @@ import { StoreListComponent } from './components/store-list/store-list.component
     HeaderComponent,
     FooterComponent,
   ],
-  template: `<ion-header>
+  template: `
+    <ion-header>
       <ion-toolbar>
         <app-header></app-header>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <div class="grid w-full grid-flow-row my-10 md:grid-cols-2 gap-x-3">
-        <app-admin-info></app-admin-info>
-        <app-inventory></app-inventory>
-      </div>
+      <div class="block w-full h-full">
+        <div class="grid w-full grid-flow-row my-10 md:grid-cols-2 gap-x-3">
+          <app-admin-info></app-admin-info>
+          <app-inventory></app-inventory>
+        </div>
 
-      <div class="grid w-full grid-flow-row my-10 md:grid-cols-2 gap-x-3">
-        <app-store-list></app-store-list>
+        <div class="grid w-full grid-flow-row md:grid-cols-2 gap-x-3">
+          <app-store-list></app-store-list>
 
-        <div>
-          <div class="grid grid-rows-1 g-8">
+          <div class="grid grid-flow-row gap-8 h-full ">
             <div class="flex justify-evenly items-center">
               <button
                 (click)="goToSection(0)"
@@ -56,20 +57,27 @@ import { StoreListComponent } from './components/store-list/store-list.component
                 Add Employee
               </button>
             </div>
-          </div>
-          <div class="h-full mt-12 md:mt-0 relative w-full block max-w-max">
-            <ion-router-outlet></ion-router-outlet>
+
+            <div
+              class=" min-h-screen h-full md:mt-0 sticky w-full flex max-w-max"
+            >
+              <ion-router-outlet></ion-router-outlet>
+            </div>
           </div>
         </div>
+        <app-footer></app-footer>
       </div>
-
-      <ion-footer>
-        <ion-toolbar>
-          <app-footer></app-footer>
-        </ion-toolbar>
-      </ion-footer>
-    </ion-content>`,
-  styles: [],
+    </ion-content>
+  `,
+  styles: [
+    `
+      :host {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+    `,
+  ],
 })
 export class AdminRootComponent implements OnInit {
   constructor(private employee: EmployeeService) {}

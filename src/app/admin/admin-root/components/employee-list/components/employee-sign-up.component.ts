@@ -8,8 +8,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   selector: 'app-employee-sign-up',
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule, RouterModule],
-  template: `<ion-content>
-    <div class="border-b border-white/10 pb-12">
+  template: `<div class="flex flex-row w-full">
+    <div class="border-b border-white/10 pb-12 mx-20 w-full">
       <h2 class="text-base font-semibold leading-7 text-white">
         Personal Information
       </h2>
@@ -158,7 +158,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
         </div>
       </div>
     </div>
-  </ion-content>`,
+  </div>`,
   styles: [],
 })
 export class EmployeeSignUpComponent implements OnInit {

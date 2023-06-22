@@ -125,7 +125,7 @@ export type CustomPizza = {
 };
 
 export type PizzaCheese = {
-  __typename: 'PizzaCheese';
+  //__typename: 'PizzaCheese';
   quantity: CheeseQuantity;
   additional?: AdditionCheeseType | null;
 };

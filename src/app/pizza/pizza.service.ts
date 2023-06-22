@@ -36,7 +36,6 @@ export class PizzaService {
       crust: PizzaCrust.ORIGINAL,
       sauce: PizzaSauce.TOMATO,
       cheese: {
-        __typename: 'PizzaCheese',
         quantity: CheeseQuantity.NORMAL,
         additional: AdditionCheeseType.NONE,
       },
@@ -58,7 +57,29 @@ export class PizzaService {
     }
   }
 
-  getPizza = this.$pizza.asObservable();
+  /**
+   * reset pizza
+   * @param
+   * @returns void
+   */
+  resetPizza(): void {
+    this.$pizza.next({
+      __typename: 'CustomPizza',
+      size: PizzaSize.LARGE,
+      crust: PizzaCrust.ORIGINAL,
+      sauce: PizzaSauce.TOMATO,
+      cheese: {
+        quantity: CheeseQuantity.NORMAL,
+        additional: AdditionCheeseType.NONE,
+      },
+      meats: [],
+      veggies: [],
+      price: 0,
+      quantity: 1,
+    });
+    this.$customPizza.next([]);
+    this.$specialtyPizza.next([]);
+  }
 
   /******************* CUSTOM PIZZA ****************/
   public $customPizza: BehaviorSubject<CustomPizza[]> = new BehaviorSubject<
