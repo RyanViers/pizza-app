@@ -1,4 +1,4 @@
-#set($PK = "USER_ID" + $ctx.args.input.user_id)
+#set($PK = "USER_ID#" + $ctx.args.input.user_id)
 #set($SK = "ORDER#DATE#" + $ctx.args.input.date + "#ID#" + $ctx.args.input.id)
 
 #set($expression = "")
@@ -16,47 +16,48 @@
     #set($expression = $expression + "#data.#subtotal = :subtotal, ")
     $util.qr($names.put("#data", "DATA"))
     $util.qr($names.put("#subtotal", "subtotal"))
-    $util.qr($values.put(":subtotal", $util.dynamodb.toString($ctx.args.input.subtotal)))
+    $util.qr($values.put(":subtotal", $util.dynamodb.toNumber($ctx.args.input.subtotal)))
 #end
 
 #if(!$util.isNullOrEmpty($ctx.args.input.tax))
     #set($expression = $expression + "#data.#tax = :tax, ")
     $util.qr($names.put("#data", "DATA"))
     $util.qr($names.put("#tax", "tax"))
-    $util.qr($values.put(":tax", $util.dynamodb.toString($ctx.args.input.tax)))
+    $util.qr($values.put(":tax", $util.dynamodb.toNumber($ctx.args.input.tax)))
 #end
 
 #if(!$util.isNullOrEmpty($ctx.args.input.total))
     #set($expression = $expression + "#data.#total = :total, ")
     $util.qr($names.put("#data", "DATA"))
     $util.qr($names.put("#total", "total"))
-    $util.qr($values.put(":total", $util.dynamodb.toString($ctx.args.input.total)))
+    $util.qr($values.put(":total", $util.dynamodb.toNumber($ctx.args.input.total)))
 #end
 
 #if(!$util.isNullOrEmpty($ctx.args.input.customPizzas))
     #set($expression = $expression + "#data.#customPizzas = :customPizzas, ")
     $util.qr($names.put("#data", "DATA"))
     $util.qr($names.put("#customPizzas", "customPizzas"))
-    $util.qr($values.put(":customPizzas", $util.dynamodb.toString($ctx.args.input.customPizzas)))
+    $util.qr($values.put(":customPizzas", $util.dynamodb.toList($ctx.args.input.customPizzas)))
 #end
 
 #if(!$util.isNullOrEmpty($ctx.args.input.specialtyPizzas))
     #set($expression = $expression + "#data.#specialtyPizzas = :specialtyPizzas, ")
     $util.qr($names.put("#data", "DATA"))
     $util.qr($names.put("#specialtyPizzas", "specialtyPizzas"))
-    $util.qr($values.put(":specialtyPizzas", $util.dynamodb.toString($ctx.args.input.specialtyPizzas)))
+    $util.qr($values.put(":specialtyPizzas", $util.dynamodb.toList($ctx.args.input.specialtyPizzas)))
 #end
 
-#if($expression.size() > 0)
-    #set($expression = "SET " + $expression.substring(0, $expression.length() - 2))
+#if($expression.length() > 0)
+	#set($length = $expression.length() - 2 )
+    #set($expression = "SET " + $expression.substring(0, $length))
 #end
 
 {
     "version" : "2018-05-29",
     "operation" : "UpdateItem",
     "key": {
-        "PK" : $util.dynamodb.toString($PK),
-        "SK" : $util.dynamodb.toString($SK)
+        "PK" : {"S": "${PK}"},
+        "SK" : {"S": "${SK}"}
     },
     "update" : {
         "expression" : "${expression}",

@@ -5,7 +5,6 @@ mutation CreateOrder($input: CreateOrderInput!) {
     user_id
     date
     customPizzas {
-      id
       size
       crust
       sauce
@@ -16,19 +15,15 @@ mutation CreateOrder($input: CreateOrderInput!) {
       meats
       veggies
       price
+      quantity
     }
     specialtyPizzas {
+      description
       id
-      size
-      crust
-      sauce
-      cheese {
-        quantity
-        additional
-      }
-      meats
-      veggies
+      imageUrl
+      name
       price
+      toppings
     }
     user_name
     subtotal
@@ -42,7 +37,6 @@ mutation UpdateOrder($input: UpdateOrderInput!) {
     user_id
     date
     customPizzas {
-      id
       size
       crust
       sauce
@@ -53,19 +47,15 @@ mutation UpdateOrder($input: UpdateOrderInput!) {
       meats
       veggies
       price
+      quantity
     }
     specialtyPizzas {
+      description
       id
-      size
-      crust
-      sauce
-      cheese {
-        quantity
-        additional
-      }
-      meats
-      veggies
+      imageUrl
+      name
       price
+      toppings
     }
     user_name
     subtotal
@@ -79,7 +69,6 @@ mutation DeleteOrder($input: DeleteOrderInput!) {
     user_id
     date
     customPizzas {
-      id
       size
       crust
       sauce
@@ -90,19 +79,15 @@ mutation DeleteOrder($input: DeleteOrderInput!) {
       meats
       veggies
       price
+      quantity
     }
     specialtyPizzas {
+      description
       id
-      size
-      crust
-      sauce
-      cheese {
-        quantity
-        additional
-      }
-      meats
-      veggies
+      imageUrl
+      name
       price
+      toppings
     }
     user_name
     subtotal

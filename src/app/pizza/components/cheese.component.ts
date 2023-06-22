@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { AdditionCheeseType, CheeseQuantity } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cheese',
   standalone: true,
   imports: [CommonModule, IonicModule],
   providers: [],
-  template: `<div class="flex w-full justify-evenly ">
+  template: `<div class="flex w-full h-full justify-evenly ">
     <fieldset>
       <legend class="text-base font-semibold text-dark">
         Select Cheese Quantity
@@ -70,11 +71,13 @@ import { PizzaService } from '../pizza.service';
   styles: [':host { display: flex; justify-content: center; }'],
 })
 export class CheeseComponent implements OnInit {
-  CheeseQuantity = this.objectValues(CheeseQuantity);
-  AdditionCheeseType = this.objectValues(AdditionCheeseType);
+  CheeseQuantity: string[] = this.objectValues(CheeseQuantity);
+  AdditionCheeseType: string[] = this.objectValues(AdditionCheeseType);
 
-  $pizzaCheeseQuantity = this.pizzaService.$pizzaCheeseQuantity;
-  $pizzaCheeseAdditional = this.pizzaService.$pizzaCheeseAdditional;
+  $pizzaCheeseQuantity: Observable<CheeseQuantity | undefined> =
+    this.pizzaService.$pizzaCheeseQuantity;
+  $pizzaCheeseAdditional: Observable<AdditionCheeseType | null | undefined> =
+    this.pizzaService.$pizzaCheeseAdditional;
 
   constructor(private pizzaService: PizzaService) {}
 

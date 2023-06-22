@@ -1,10 +1,11 @@
 #set($PK = "USER_ID#" + $ctx.args.input.user_id)
 #set($SK = "ORDER#DATE#" + $ctx.args.input.date + "#ID#" + $ctx.args.input.id)
+
 {
     "version" : "2017-02-28",
     "operation" : "GetItem",
     "key" : {
-        "PK" : $util.dynamodb.toString($PK),
-        "SK" : $util.dynamodb.toString($SK)
+        "PK" : {"S": "${PK}"},
+        "SK" : {"S": "${SK}"}
     }
 }

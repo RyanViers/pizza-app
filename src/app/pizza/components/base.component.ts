@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PizzaSize, PizzaCrust, PizzaSauce } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-base',
@@ -11,7 +12,7 @@ import { PizzaService } from '../pizza.service';
   imports: [CommonModule, IonicModule, FormsModule],
   providers: [],
   template: `
-    <div class="flex w-full justify-evenly ">
+    <div class="flex w-full h-full justify-evenly ">
       <fieldset>
         <legend class="text-base font-semibold text-dark">Select Size</legend>
         <div
@@ -98,13 +99,13 @@ import { PizzaService } from '../pizza.service';
   styles: [':host { display: flex; justify-content: center; }'],
 })
 export class BaseComponent implements OnInit {
-  PizzaSize = this.objectValues(PizzaSize);
-  PizzaSauce = this.objectValues(PizzaSauce);
-  PizzaCrust = this.objectValues(PizzaCrust);
+  PizzaSize: string[] = this.objectValues(PizzaSize);
+  PizzaSauce: string[] = this.objectValues(PizzaSauce);
+  PizzaCrust: string[] = this.objectValues(PizzaCrust);
 
-  $pizzaCrust = this.pizzaService.$pizzaCrust;
-  $pizzaSize = this.pizzaService.$pizzaSize;
-  $pizzaSauce = this.pizzaService.$pizzaSauce;
+  $pizzaCrust: Observable<PizzaCrust> = this.pizzaService.$pizzaCrust;
+  $pizzaSize: Observable<PizzaSize> = this.pizzaService.$pizzaSize;
+  $pizzaSauce: Observable<PizzaSauce> = this.pizzaService.$pizzaSauce;
 
   constructor(private pizzaService: PizzaService) {}
 

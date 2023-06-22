@@ -1,11 +1,18 @@
-input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+}
 
 type PizzaApp
-  @model(queries: null, mutations: null, subscriptions: null, timestamps: null)  {
-  
+  @model(
+    queries: null
+    mutations: null
+    subscriptions: null
+    timestamps: null
+  ) {
   PK: String! @primaryKey(sortKeyFields: ["SK"])
   SK: String!
-  GSI_SECONDARY_PK: String! @index(name: "GSI_SECONDARY_PK", sortKeyFields: ["GSI_SECONDARY_SK"])
+  GSI_SECONDARY_PK: String!
+    @index(name: "GSI_SECONDARY_PK", sortKeyFields: ["GSI_SECONDARY_SK"])
   GSI_SECONDARY_SK: String!
   CREATED_AT: String!
   UPDATED_AT: String!
@@ -18,33 +25,31 @@ type Order {
   user_id: String!
   date: String!
   customPizzas: [CustomPizza]!
-  specialtyPizzas: [SpecialityPizza]!
+  specialtyPizzas: [SpecialtyPizza]!
   user_name: String!
-  subtotal: Int!
-  tax: Int!
-  total: Int!
+  subtotal: Float!
+  tax: Float!
+  total: Float!
 }
 
 type CustomPizza {
-  id: String!
   size: PizzaSize!
   crust: PizzaCrust!
   sauce: PizzaSauce!
   cheese: PizzaCheese!
   meats: [PizzaMeat]!
   veggies: [PizzaVeggie]!
-  price: Int!
+  price: Float!
+  quantity: Int!
 }
 
-type SpecialityPizza {
+type SpecialtyPizza {
+  description: String!
   id: String!
-  size: PizzaSize!
-  crust: PizzaCrust!
-  sauce: PizzaSauce!
-  cheese: PizzaCheese!
-  meats: [PizzaMeat]!
-  veggies: [PizzaVeggie]!
-  price: Int!
+  imageUrl: String!
+  name: String
+  price: Float!
+  toppings: [String]!
 }
 
 type PizzaCheese {
@@ -125,11 +130,11 @@ input CreateOrderInput {
   user_id: String!
   date: String!
   user_name: String!
-  subtotal: Int!
-  tax: Int!
-  total: Int!
+  subtotal: Float!
+  tax: Float!
+  total: Float!
   customPizzas: [CustomPizzaInput]
-  specialtyPizzas: [SpecialityPizzaInput]
+  specialtyPizzas: [SpecialtyPizzaInput]
 }
 
 input UpdateOrderInput {
@@ -137,33 +142,31 @@ input UpdateOrderInput {
   user_id: String!
   date: String!
   user_name: String
-  subtotal: Int
-  tax: Int
-  total: Int
+  subtotal: Float
+  tax: Float
+  total: Float
   customPizzas: [CustomPizzaInput]
-  specialtyPizzas: [SpecialityPizzaInput]
+  specialtyPizzas: [SpecialtyPizzaInput]
 }
 
 input CustomPizzaInput {
-  id: String!
   size: PizzaSize!
   crust: PizzaCrust!
   sauce: PizzaSauce!
   cheese: PizzaCheeseInput!
   meats: [PizzaMeat]!
   veggies: [PizzaVeggie]!
-  price: Int!
+  price: Float!
+  quantity: Int!
 }
 
-input SpecialityPizzaInput {
+input SpecialtyPizzaInput {
+  description: String!
   id: String!
-  size: PizzaSize!
-  crust: PizzaCrust!
-  sauce: PizzaSauce!
-  cheese: PizzaCheeseInput!
-  meats: [PizzaMeat]!
-  veggies: [PizzaVeggie]!
-  price: Int!
+  imageUrl: String!
+  name: String
+  price: Float!
+  toppings: [String]!
 }
 
 input PizzaCheeseInput {
