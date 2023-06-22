@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AdminInfoComponent } from './components/admin-info/admin-info.component';
-import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import { EmployeeComponent } from './components/employee-list/employee.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { StoreListComponent } from './components/store-list/store-list.component';
 
@@ -19,7 +19,7 @@ import { StoreListComponent } from './components/store-list/store-list.component
     SharedModule,
     RouterModule,
     AdminInfoComponent,
-    EmployeeListComponent,
+    EmployeeComponent,
     InventoryComponent,
     StoreListComponent,
     HeaderComponent,
@@ -38,7 +38,7 @@ import { StoreListComponent } from './components/store-list/store-list.component
 
       <div class="grid w-full grid-flow-row my-10 md:grid-cols-2 gap-x-3">
         <app-store-list></app-store-list>
-        <app-employee-list></app-employee-list>
+        <app-employee></app-employee>
       </div>
 
       <ion-footer>

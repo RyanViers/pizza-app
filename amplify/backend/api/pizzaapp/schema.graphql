@@ -27,20 +27,20 @@ type Order {
   customPizzas: [CustomPizza]!
   specialtyPizzas: [SpecialtyPizza]!
   user_name: String!
-  subtotal: Int!
-  tax: Int!
-  total: Int!
+  subtotal: Float!
+  tax: Float!
+  total: Float!
 }
 
 type CustomPizza {
-  id: String!
   size: PizzaSize!
   crust: PizzaCrust!
   sauce: PizzaSauce!
   cheese: PizzaCheese!
   meats: [PizzaMeat]!
   veggies: [PizzaVeggie]!
-  price: Int!
+  price: Float!
+  quantity: Int!
 }
 
 type SpecialtyPizza {
@@ -48,7 +48,7 @@ type SpecialtyPizza {
   id: String!
   imageUrl: String!
   name: String
-  price: Int!
+  price: Float!
   toppings: [String]!
 }
 
@@ -130,9 +130,9 @@ input CreateOrderInput {
   user_id: String!
   date: String!
   user_name: String!
-  subtotal: Int!
-  tax: Int!
-  total: Int!
+  subtotal: Float!
+  tax: Float!
+  total: Float!
   customPizzas: [CustomPizzaInput]
   specialtyPizzas: [SpecialtyPizzaInput]
 }
@@ -142,22 +142,22 @@ input UpdateOrderInput {
   user_id: String!
   date: String!
   user_name: String
-  subtotal: Int
-  tax: Int
-  total: Int
+  subtotal: Float
+  tax: Float
+  total: Float
   customPizzas: [CustomPizzaInput]
   specialtyPizzas: [SpecialtyPizzaInput]
 }
 
 input CustomPizzaInput {
-  id: String!
   size: PizzaSize!
   crust: PizzaCrust!
   sauce: PizzaSauce!
   cheese: PizzaCheeseInput!
   meats: [PizzaMeat]!
   veggies: [PizzaVeggie]!
-  price: Int!
+  price: Float!
+  quantity: Int!
 }
 
 input SpecialtyPizzaInput {
@@ -165,7 +165,7 @@ input SpecialtyPizzaInput {
   id: String!
   imageUrl: String!
   name: String
-  price: Int!
+  price: Float!
   toppings: [String]!
 }
 

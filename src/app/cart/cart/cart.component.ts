@@ -10,8 +10,7 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from 'src/app/pizza/pizza.service';
 import { BehaviorSubject } from 'rxjs';
-import { SpecialtyPizza } from 'src/app/API.service';
-import { Pizza } from 'src/app/pizza/helpers/models';
+import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
 
 @Component({
   selector: 'app-cart',
@@ -90,7 +89,7 @@ import { Pizza } from 'src/app/pizza/helpers/models';
 export class CartComponent implements OnInit {
   $specialtyPizzaList: BehaviorSubject<SpecialtyPizza[]> =
     this.pizza.$specialtyPizza;
-  $customPizzaList: BehaviorSubject<Pizza[]> = this.pizza.$customPizza;
+  $customPizzaList: BehaviorSubject<CustomPizza[]> = this.pizza.$customPizza;
 
   constructor(private pizza: PizzaService) {}
 

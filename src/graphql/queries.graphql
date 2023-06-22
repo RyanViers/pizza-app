@@ -5,7 +5,6 @@ query ListOrdersByUser($input: ListOrdersByUserInput) {
     user_id
     date
     customPizzas {
-      id
       size
       crust
       sauce
@@ -16,6 +15,7 @@ query ListOrdersByUser($input: ListOrdersByUserInput) {
       meats
       veggies
       price
+      quantity
     }
     specialtyPizzas {
       description
@@ -37,7 +37,6 @@ query GetOrder($input: GetOrderInput!) {
     user_id
     date
     customPizzas {
-      id
       size
       crust
       sauce
@@ -48,6 +47,7 @@ query GetOrder($input: GetOrderInput!) {
       meats
       veggies
       price
+      quantity
     }
     specialtyPizzas {
       description

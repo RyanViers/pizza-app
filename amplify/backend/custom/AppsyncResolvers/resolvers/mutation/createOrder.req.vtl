@@ -1,9 +1,9 @@
 #set($id = $util.autoId())
-#set($PK = "USER_ID" + $ctx.args.input.user_id)
+#set($PK = "USER_ID#" + $ctx.args.input.user_id)
 #set($SK = "ORDER#DATE#" + $ctx.args.input.date + "#ID#" + $id)
 #set($GSI_SECONDARY_SK = "DATE#" + $ctx.args.input.date + "#ID#" + $id)
 
-$util.qr($ctx.args.input.put("id", $id)))
+$util.qr($ctx.args.input.put("id", $id))
 
 #set($DATA = {
     "DATA": $ctx.args.input,
@@ -18,10 +18,10 @@ $util.qr($ctx.args.input.put("id", $id)))
     "version" : "2018-05-29",
     "operation" : "PutItem",
     "key": {
-        "PK" : $util.dynamodb.toString($PK),
-        "SK" : $util.dynamodb.toString($SK)
+        "PK" : {"S": "${PK}"},
+        "SK" : {"S": "${SK}"}
     },
-    "attributeValues" : $util.dynamodb.toDynamoDB($DATA),
+    "attributeValues" : $util.dynamodb.toMapValuesJson($DATA),
     "condition" : {
         "expression" : "attribute_not_exists(PK) AND attribute_not_exists(SK)"
     }

@@ -20,8 +20,7 @@ import {
   PizzaSize,
   PizzaVeggie,
 } from '../API.service';
-import { Pizza } from './helpers/models';
-import { SpecialtyPizza } from '../API.service';
+import { SpecialtyPizza, CustomPizza } from '../API.service';
 import { isEqual } from 'lodash';
 
 @Injectable({
@@ -35,27 +34,29 @@ export class PizzaService {
   constructor(private router: Router) {}
 
   //behavior subjects
-  public $pizza: BehaviorSubject<Pizza> = new BehaviorSubject<Pizza>({
-    size: PizzaSize.LARGE,
-    crust: PizzaCrust.ORIGINAL,
-    sauce: PizzaSauce.TOMATO,
-    cheese: {
-      __typename: 'PizzaCheese',
-      quantity: CheeseQuantity.NORMAL,
-      additional: AdditionCheeseType.NONE,
-    },
-    meats: [],
-    veggies: [],
-    price: 0,
-    quantity: 1,
-  });
+  public $pizza: BehaviorSubject<CustomPizza> =
+    new BehaviorSubject<CustomPizza>({
+      __typename: 'CustomPizza',
+      size: PizzaSize.LARGE,
+      crust: PizzaCrust.ORIGINAL,
+      sauce: PizzaSauce.TOMATO,
+      cheese: {
+        __typename: 'PizzaCheese',
+        quantity: CheeseQuantity.NORMAL,
+        additional: AdditionCheeseType.NONE,
+      },
+      meats: [],
+      veggies: [],
+      price: 0,
+      quantity: 1,
+    });
 
   getPizza = this.$pizza.asObservable();
 
   /******************* CUSTOM PIZZA ****************/
-  public $customPizza: BehaviorSubject<Pizza[]> = new BehaviorSubject<Pizza[]>(
-    []
-  );
+  public $customPizza: BehaviorSubject<CustomPizza[]> = new BehaviorSubject<
+    CustomPizza[]
+  >([]);
 
   addCustomPizza(pizza: any): void {
     // Get the current value of the array
@@ -85,7 +86,7 @@ export class PizzaService {
 
   //observable
   public $pizzaSize: Observable<PizzaSize> = this.$pizza.pipe(
-    map((pizza: Pizza) => {
+    map((pizza: CustomPizza) => {
       return pizza.size;
     })
   );
@@ -95,7 +96,7 @@ export class PizzaService {
     })
   );
   public $pizzaCrust: Observable<PizzaCrust> = this.$pizza.pipe(
-    map((pizza: Pizza) => {
+    map((pizza: CustomPizza) => {
       return pizza.crust;
     })
   );
@@ -105,7 +106,7 @@ export class PizzaService {
     })
   );
   public $pizzaSauce: Observable<PizzaSauce> = this.$pizza.pipe(
-    map((pizza: Pizza) => {
+    map((pizza: CustomPizza) => {
       return pizza.sauce;
     })
   );
@@ -115,7 +116,7 @@ export class PizzaService {
     })
   );
   public $pizzaCheeseQuantity: Observable<CheeseQuantity> = this.$pizza.pipe(
-    map((pizza: Pizza) => {
+    map((pizza: CustomPizza) => {
       return pizza.cheese.quantity;
     })
   );
@@ -131,7 +132,7 @@ export class PizzaService {
   public $pizzaCheeseAdditional: Observable<
     AdditionCheeseType | null | undefined
   > = this.$pizza.pipe(
-    map((pizza: Pizza) => {
+    map((pizza: CustomPizza) => {
       return pizza.cheese.additional;
     })
   );
@@ -146,7 +147,7 @@ export class PizzaService {
     );
 
   public $pizzaMeats: Observable<(PizzaMeat | null)[]> = this.$pizza.pipe(
-    map((pizza: Pizza) => {
+    map((pizza: CustomPizza) => {
       return pizza.meats;
     })
   );
@@ -160,7 +161,7 @@ export class PizzaService {
     )
   );
   public $pizzaVeggies: Observable<(PizzaVeggie | null)[]> = this.$pizza.pipe(
-    map((pizza: Pizza) => {
+    map((pizza: CustomPizza) => {
       return pizza.veggies;
     })
   );
@@ -175,13 +176,13 @@ export class PizzaService {
   );
 
   public $pizzaPrice: Observable<number | undefined> = this.$pizza.pipe(
-    map((pizza: Pizza) => {
+    map((pizza: CustomPizza) => {
       return pizza.price;
     })
   );
 
   public $quantity: Observable<number | undefined> = this.$pizza.pipe(
-    map((pizza: Pizza) => {
+    map((pizza: CustomPizza) => {
       return pizza.quantity;
     })
   );
@@ -211,7 +212,7 @@ export class PizzaService {
    * set pizza
    * @param size
    */
-  setPizza(options: Partial<Pizza>): void {
+  setPizza(options: Partial<CustomPizza>): void {
     const currentPizza = this.$pizza.value;
     const newPizza = { ...currentPizza, ...options };
     if (!isEqual(currentPizza, newPizza)) {

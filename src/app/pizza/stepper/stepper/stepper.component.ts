@@ -84,29 +84,6 @@ export class StepperComponent implements OnInit {
 
   ngOnInit() {}
 
-  back(): void {
-    const precedence = this.stepper.getSectionPrecedence(
-      this.stepper.getSection()
-    );
-    if (precedence > 0)
-      this.stepper.setSection(
-        this.stepper.getSectionFromPrecedence(precedence - 1)
-      );
-  }
-
-  /**
-   * hext
-   */
-  next(): void {
-    const precedence = this.stepper.getSectionPrecedence(
-      this.stepper.getSection()
-    );
-    if (precedence < 3)
-      this.stepper.setSection(
-        this.stepper.getSectionFromPrecedence(precedence + 1)
-      );
-  }
-
   /**
    * go to section
    * @param precedence
@@ -137,24 +114,5 @@ export class StepperComponent implements OnInit {
       precedence
       ? '!border-success'
       : '';
-  }
-
-  /**
-   * get width
-   * @returns
-   */
-  getWidth(): string {
-    switch (this.stepper.getSectionPrecedence(this.stepper.getSection())) {
-      case 0:
-        return 'w-[2%]';
-      case 1:
-        return 'w-[37.5%]';
-      case 2:
-        return 'w-[62.5%]';
-      case 3:
-        return 'w-full';
-      default:
-        return '';
-    }
   }
 }

@@ -4,8 +4,7 @@ import { PizzaService } from 'src/app/pizza/pizza.service';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { Pizza } from 'src/app/pizza/helpers/models';
-import { Observable } from 'rxjs';
+import { CustomPizza } from 'src/app/API.service';
 
 @Component({
   selector: 'app-custom-cart',
@@ -52,7 +51,7 @@ import { Observable } from 'rxjs';
   styles: [],
 })
 export class CustomCartComponent implements OnInit, AfterViewInit {
-  @Input() customPizza: Pizza | undefined;
+  @Input() customPizza: CustomPizza | undefined;
 
   constructor(private cart: CartService, private pizza: PizzaService) {}
 

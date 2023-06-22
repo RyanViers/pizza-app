@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 export default gql`
   query getOrder($input: GetOrderInput!) {
     getOrder(input: $input) {
+      id
       user_id
       date
       user_name
@@ -10,13 +11,17 @@ export default gql`
       tax
       total
       customPizzas {
-        id
         size
         crust
         sauce
-        cheese
-        toppings
+        cheese {
+          quantity
+          additional
+        }
+        meats
+        veggies
         price
+        quantity
       }
       specialtyPizzas {
         id

@@ -44,6 +44,29 @@ export const routes: Routes = [
       import('./cart/cart/cart.component').then((m) => m.CartComponent),
   },
   {
+    path: 'employee',
+    loadComponent: () =>
+      import(
+        './admin/admin-root/components/employee-list/employee.component'
+      ).then((m) => m.EmployeeComponent),
+    children: [
+      {
+        path: 'employee-list',
+        loadComponent: () =>
+          import(
+            './admin/admin-root/components/employee-list/components/employee-list/employee-list.component'
+          ).then((m) => m.EmployeeListComponent),
+      },
+      {
+        path: 'employee-sign-up',
+        loadComponent: () =>
+          import(
+            './admin/admin-root/components/employee-list/components/employee-sign-up/employee-sign-up.component'
+          ).then((m) => m.EmployeeSignUpComponent),
+      },
+    ],
+  },
+  {
     path: 'pizza',
     loadComponent: () =>
       import('./pizza/pizza.component').then((m) => m.PizzaComponent),

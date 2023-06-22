@@ -8,8 +8,11 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { Pizza } from 'src/app/pizza/helpers/models';
-import { CreateOrderInput, SpecialtyPizza } from 'src/app/API.service';
+import {
+  CreateOrderInput,
+  CustomPizza,
+  SpecialtyPizza,
+} from 'src/app/API.service';
 import { CognitoService } from 'src/app/home/cognito.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 
@@ -69,7 +72,8 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
 export class CartSummaryComponent implements OnInit {
   $specialtyPizzaList: Observable<(SpecialtyPizza | undefined)[]> =
     this.pizza.$specialtyPizza;
-  $customPizzaList: Observable<(Pizza | undefined)[]> = this.pizza.$customPizza;
+  $customPizzaList: Observable<(CustomPizza | undefined)[]> =
+    this.pizza.$customPizza;
 
   constructor(
     private pizza: PizzaService,
@@ -119,54 +123,53 @@ export class CartSummaryComponent implements OnInit {
   }
 
   async onCheckout(): Promise<void> {
-    console.log('Checkout clicked');
-
     try {
-      await this.cognito.refreshSession(); // Refresh the session here
       const user = await this.cognito.currentAuthenticatedUser();
 
       // Get total cost, tax, and authenticated user
       const totalCost: any = await firstValueFrom(
         this.pizza.totalPriceAfterTax()
       );
-      console.log('totalCost:', totalCost);
+
       const tax: any = await firstValueFrom(this.pizza.totalTax());
-      console.log('tax:', tax);
+
       const subtotal: number = await firstValueFrom(
         this.pizza.totalPriceBeforeTax()
       );
-      console.log('subtotal:', subtotal);
-
-      console.log('user:', user);
 
       // Get custom and specialty pizzas
-      const customPizzas: any = this.pizza.$customPizza.getValue();
-      console.log('customPizzas:', customPizzas);
-      console.log('sub:', user.attributes.sub);
-      const specialtyPizzas: any = this.pizza.$specialtyPizza.getValue();
-      console.log('specialtyPizzas:', specialtyPizzas);
+      const customPizzas: CustomPizza[] = this.pizza.$customPizza.getValue();
+
+      const specialtyPizzas: SpecialtyPizza[] =
+        this.pizza.$specialtyPizza.getValue();
 
       // Create CreateOrderInput
       const order: CreateOrderInput = {
         user_id: user?.attributes.sub,
         user_name: user?.username,
-        date: new Date().toISOString(),
-        customPizzas: [...customPizzas],
-        specialtyPizzas: [...specialtyPizzas],
+        date: `${new Date().getTime()}`,
+        customPizzas: [
+          ...customPizzas.map((pizza: CustomPizza) => {
+            delete (pizza as any)?.__typename;
+            return pizza;
+          }),
+        ],
+        specialtyPizzas: [
+          ...specialtyPizzas.map((pizza: SpecialtyPizza) => {
+            delete (pizza as any)?.__typename;
+            return pizza;
+          }),
+        ],
         subtotal: subtotal,
         tax: tax,
         total: totalCost,
       };
-      console.log('Order:', order);
 
       const swal = await Swal.fire({ ...this.swalOptions });
 
       if (swal.isConfirmed) {
-        console.log('Order:', order);
-        this.mutation.createOrder(order);
-        console.log('Order saved successfully', order);
-      } else {
-        Swal.close();
+        console.log('order:', order);
+        await this.mutation.createOrder(order);
       }
     } catch (err) {
       console.error('Error in onCheckout:', err);

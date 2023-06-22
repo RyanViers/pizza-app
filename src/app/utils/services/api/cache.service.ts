@@ -1,7 +1,7 @@
 import { ListOrdersByUserInput, GetOrderInput } from './../../../API.service';
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ApolloCache, InMemoryCache } from '@apollo/client/core';
-import { CreateOrderInput, Order } from 'src/app/API.service';
+import { Order } from 'src/app/API.service';
 import listOrdersByUser from 'src/app/utils/graphql/query/order/listOrdersByUser';
 import { ListOrdersByUserResponse } from './queries-response';
 import { cloneDeep } from 'lodash';

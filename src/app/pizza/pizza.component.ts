@@ -56,11 +56,5 @@ import { QuantityComponent } from './components/quantity.component';
   styles: [],
 })
 export class PizzaComponent {
-  constructor(private pizza: PizzaService, private stepper: StepperService) {}
-
-  ngAfterViewInit() {}
-  /**
-   * add pizza to order
-   */
-  addToOrder() {}
+  constructor() {}
 }
