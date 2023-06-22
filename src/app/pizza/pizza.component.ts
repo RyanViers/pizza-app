@@ -1,11 +1,9 @@
 import { StepperComponent } from './stepper/stepper/stepper.component';
-import { StepperService } from './stepper.service';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { FooterComponent } from './../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { PizzaService } from './pizza.service';
 import { PizzaPreviewComponent } from './components/preview.component';
 import { RouterModule } from '@angular/router';
 import { QuantityComponent } from './components/quantity.component';

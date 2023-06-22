@@ -89,7 +89,8 @@ export class StepperComponent implements OnInit {
    * @param precedence
    */
   goToSection(precedence: number): void {
-    this.stepper.setSection(this.stepper.getSectionFromPrecedence(precedence));
+    let section = this.stepper.getSectionFromPrecedence(precedence);
+    this.stepper.setSection(section);
   }
 
   /**

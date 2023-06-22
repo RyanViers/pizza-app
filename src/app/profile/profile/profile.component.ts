@@ -26,7 +26,43 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
     DeleteAccountComponent,
     ProfileInfoComponent,
   ],
-  templateUrl: './profile.component.html',
+  template: `<ion-header>
+      <ion-toolbar>
+        <app-header></app-header>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="flex w-full h-full">
+      <div>
+        <div class="xl:pl-72">
+          <main>
+            <!-- Settings forms -->
+            <div class="divide-y divide-white/5">
+              <div class="flex w-full border-t-2">
+                <app-profile-info [user]="user"></app-profile-info>
+              </div>
+
+              <div class="flex w-full border-t-2">
+                <app-notifications-settings></app-notifications-settings>
+              </div>
+
+              <div>
+                <app-password-change></app-password-change>
+              </div>
+
+              <div>
+                <app-delete-account></app-delete-account>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+      <ion-footer>
+        <ion-toolbar>
+          <app-footer></app-footer>
+        </ion-toolbar>
+      </ion-footer>
+    </ion-content> `,
   styles: [``],
 })
 export class ProfileComponent implements OnInit {

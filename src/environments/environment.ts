@@ -23,8 +23,6 @@ export const environment = {
   },
 };
 
-//identityPoolId: 'us-east-1:fa9bf76b-a317-4b9f-908d-b088a8e777b8',
-
 //
 /*
  * For easier debugging in development mode, you can import the following file

@@ -64,6 +64,11 @@ export const routes: Routes = [
             './admin/admin-root/components/employee-list/components/employee-sign-up/employee-sign-up.component'
           ).then((m) => m.EmployeeSignUpComponent),
       },
+      {
+        path: '**',
+        redirectTo: 'employee-list',
+        pathMatch: 'full',
+      },
     ],
   },
   {

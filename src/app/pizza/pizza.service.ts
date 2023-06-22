@@ -8,7 +8,6 @@ import {
   CheeseQuantityPrice,
   AdditionCheeseTypePrice,
 } from './helpers/enums';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 import {
   AdditionCheeseType,
@@ -27,11 +26,7 @@ import { isEqual } from 'lodash';
   providedIn: 'root',
 })
 export class PizzaService {
-  /**
-   * constructor
-   * @param router
-   */
-  constructor(private router: Router) {}
+  constructor() {}
 
   //behavior subjects
   public $pizza: BehaviorSubject<CustomPizza> =
