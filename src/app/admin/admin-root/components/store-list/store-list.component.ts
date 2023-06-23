@@ -25,22 +25,24 @@ import { EmailButtonComponent } from './email-button/email-button.component';
         >
           <li *ngFor="let s of stores">
             <img
-              class="aspect-[3/2] w-full rounded-2xl object-cover"
+              class="relative aspect-[3/2] w-full rounded-2xl object-cover"
               [src]="s.img"
-              alt=""
             />
-            <h3 class="mt-6 text-lg font-semibold leading-8 text-white">
-              {{ s.name }}
-            </h3>
-            <app-email-button [email]="s.email"></app-email-button>
-            <p class="text-base leading-7 text-gray-400">{{ s.address }}</p>
+            >
+            <div class="block z-50 justify-between items-center mt-4">
+              <h3 class="mt-6 text-lg font-semibold leading-8 text-white">
+                {{ s.name }}
+              </h3>
+              <app-email-button [email]="s.email"></app-email-button>
+              <p class="text-base leading-7 text-gray-400">{{ s.address }}</p>
 
-            <p class="mt-4 text-base leading-7 text-gray-200">
-              {{ s.phone }}
-            </p>
-            <p class="mt-4 text-base leading-7 text-gray-200">
-              {{ s.manager }}
-            </p>
+              <p class="mt-4 text-base leading-7 text-gray-200">
+                {{ s.phone }}
+              </p>
+              <p class="mt-4 text-base leading-7 text-gray-200">
+                {{ s.manager }}
+              </p>
+            </div>
           </li>
         </ul>
       </div>

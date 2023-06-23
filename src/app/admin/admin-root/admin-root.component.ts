@@ -40,7 +40,12 @@ import { StoreListComponent } from './components/store-list/store-list.component
         <div class="grid w-full grid-flow-row md:grid-cols-2 gap-x-3">
           <app-store-list></app-store-list>
 
-          <div class="grid grid-flow-row gap-8 h-full ">
+          <div class="grid h-full">
+            <h1
+              class="text-3xl font-bold tracking-tight text-[#fefefe] sm:text-4xl"
+            >
+              Employee Management
+            </h1>
             <div class="flex justify-evenly items-center">
               <button
                 (click)="goToSection(0)"
@@ -59,13 +64,17 @@ import { StoreListComponent } from './components/store-list/store-list.component
             </div>
 
             <div
-              class=" min-h-screen h-full md:mt-0 sticky w-full flex max-w-max"
+              class=" min-h-screen  h-full md:mt-0 sticky w-full flex max-w-max"
             >
               <ion-router-outlet></ion-router-outlet>
             </div>
           </div>
         </div>
-        <app-footer></app-footer>
+        <ion-footer>
+          <ion-toolbar>
+            <app-footer></app-footer>
+          </ion-toolbar>
+        </ion-footer>
       </div>
     </ion-content>
   `,
