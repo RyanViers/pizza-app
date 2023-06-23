@@ -50,6 +50,7 @@ import { opacityScale } from 'src/app/utils/animations';
           </div>
           <div class="relative z-10 flex items-center lg:hidden">
             <button
+              @opacityScale
               (click)="toggleMobileMenu()"
               type="button"
               class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -137,8 +138,9 @@ import { opacityScale } from 'src/app/utils/animations';
 
       <!-------------- Mobile Navigation -------------->
       <nav
-        class="lg:hidden absolute bottom-0 right-0 left-0 bg-light-tint z-50"
+        class="lg:hidden absolute right-0 left-0 bg-light-tint z-50"
         *ngIf="isMenuOpen"
+        @opacityScale
       >
         <div class="space-y-1 px-2 pb-3 pt-2">
           <button

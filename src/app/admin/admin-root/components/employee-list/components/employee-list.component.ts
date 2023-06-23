@@ -10,7 +10,7 @@ import { employees, Employee } from '../../../utils/models/employees';
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule, RouterModule],
   template: `
-    <div>
+    <ion-content>
       <h1
         class="flex justify-center items-center px-4 text-4xl font-semibold text-white sm:px-6 lg:px-8"
       >
@@ -111,7 +111,7 @@ import { employees, Employee } from '../../../utils/models/employees';
           <!-- More items... -->
         </tbody>
       </table>
-    </div>
+    </ion-content>
   `,
   styles: [],
 })

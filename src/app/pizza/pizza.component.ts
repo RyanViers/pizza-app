@@ -24,9 +24,7 @@ import { QuantityComponent } from './components/quantity.component';
 
   template: `
     <ion-header>
-      <ion-toolbar>
-        <app-header></app-header>
-      </ion-toolbar>
+      <app-header></app-header>
     </ion-header>
     <ion-content>
       <app-stepper></app-stepper>

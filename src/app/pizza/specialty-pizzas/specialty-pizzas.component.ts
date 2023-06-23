@@ -31,9 +31,7 @@ import { SpecialtyPizza } from 'src/app/API.service';
   styles: [``],
   template: `
     <ion-header>
-      <ion-toolbar>
-        <app-header></app-header>
-      </ion-toolbar>
+      <app-header></app-header>
     </ion-header>
     <ion-content>
       <div class="bg-white">
@@ -72,9 +70,7 @@ import { SpecialtyPizza } from 'src/app/API.service';
       </div>
 
       <ion-footer>
-        <ion-toolbar>
-          <app-footer></app-footer>
-        </ion-toolbar>
+        <app-footer></app-footer>
       </ion-footer>
     </ion-content>
   `,

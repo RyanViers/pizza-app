@@ -27,9 +27,7 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
     ProfileInfoComponent,
   ],
   template: `<ion-header>
-      <ion-toolbar>
-        <app-header></app-header>
-      </ion-toolbar>
+      <app-header></app-header>
     </ion-header>
 
     <ion-content class="flex w-full h-full">
@@ -58,9 +56,7 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
         </div>
       </div>
       <ion-footer>
-        <ion-toolbar>
-          <app-footer></app-footer>
-        </ion-toolbar>
+        <app-footer></app-footer>
       </ion-footer>
     </ion-content> `,
   styles: [``],

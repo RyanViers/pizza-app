@@ -18,7 +18,7 @@ import { SpecialtyPizza } from 'src/app/API.service';
       <div class="relative p-9 sm:grid sm:gap-x-6">
         <div>
           <div class="flex justify-between">
-            <h1 class="font-medium text-gray-700 hover:text-gray-800">
+            <h1 class="font-medium text-dark-shade hover:text-light">
               {{ specialtyPizza?.name }}
             </h1>
           </div>
@@ -30,8 +30,8 @@ import { SpecialtyPizza } from 'src/app/API.service';
               {{ specialtyPizza?.description }}
             </p>
           </div>
-          <p class="mt-1 text-sm font-medium text-gray-900">
-            {{ specialtyPizza?.price }}
+          <p class="mt-1 text-sm font-medium text-dark-shade">
+            <span class="text-success">$</span>{{ specialtyPizza?.price }}
           </p>
         </div>
       </div>
@@ -51,9 +51,10 @@ export class SpecialtyCartComponent implements OnInit {
   }
 
   /*******SPECIALTY PIZZA METHODS *********/
-  getToppings(specialtyPizza: any): string {
-    return specialtyPizza.toppings
-      ? specialtyPizza.toppings.map((topping: any) => topping.name).join(', ')
+  getToppings(specialtyPizza: SpecialtyPizza | undefined): string {
+    console.log(specialtyPizza);
+    return specialtyPizza?.toppings
+      ? specialtyPizza.toppings.map((topping: any) => topping).join(', ')
       : '';
   }
 }

@@ -37,7 +37,7 @@ import { SafeHtml } from '@angular/platform-browser';
       <div class="flex flex-col w-full h-full p-2 md:p-4 lg:p-6">
         <!-- Sticky search header -->
         <div
-          class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8"
+          class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-light-shade px-4 shadow-sm sm:px-6 lg:px-8"
         >
           <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
             <form class="flex flex-1" action="#" method="GET">
@@ -65,7 +65,7 @@ import { SafeHtml } from '@angular/platform-browser';
               <li>
                 <button
                   [routerLink]="['/admin-root/admin-info']"
-                  class="hover:text-indigo-400"
+                  class="text-success hover:text-indigo-400"
                 >
                   Overview
                 </button>
@@ -73,7 +73,7 @@ import { SafeHtml } from '@angular/platform-browser';
               <li>
                 <button
                   [routerLink]="['/admin-root/employee-list']"
-                  class="hover:text-indigo-400"
+                  class="text-success hover:text-indigo-400"
                 >
                   Employees List
                 </button>
@@ -81,7 +81,7 @@ import { SafeHtml } from '@angular/platform-browser';
               <li>
                 <button
                   [routerLink]="['/admin-root/employee-sign-up']"
-                  class="hover:text-indigo-400"
+                  class="text-success hover:text-indigo-400"
                 >
                   Employee Sign Up
                 </button>
@@ -89,7 +89,7 @@ import { SafeHtml } from '@angular/platform-browser';
               <li>
                 <button
                   [routerLink]="['/admin-root/store-list']"
-                  class="hover:text-indigo-400"
+                  class="text-success hover:text-indigo-400"
                 >
                   Store Locations
                 </button>
@@ -97,7 +97,7 @@ import { SafeHtml } from '@angular/platform-browser';
               <li>
                 <button
                   [routerLink]="['/admin-root/inventory']"
-                  class="hover:text-indigo-400"
+                  class="text-success hover:text-indigo-400"
                 >
                   Inventory
                 </button>
@@ -105,7 +105,7 @@ import { SafeHtml } from '@angular/platform-browser';
               <li>
                 <button
                   [routerLink]="['/admin-root/admin-info']"
-                  class="hover:text-indigo-400"
+                  class="text-success hover:text-indigo-400"
                 >
                   Notifications
                 </button>

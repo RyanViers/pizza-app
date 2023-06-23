@@ -15,9 +15,7 @@ import { ImageBackgroundComponent } from './components/image-background/image-ba
 @Component({
   selector: 'app-home',
   template: `<ion-header>
-      <ion-toolbar>
-        <app-header></app-header>
-      </ion-toolbar>
+      <app-header></app-header>
     </ion-header>
 
     <ion-content>
@@ -40,9 +38,7 @@ import { ImageBackgroundComponent } from './components/image-background/image-ba
         </main>
       </div>
       <ion-footer>
-        <ion-toolbar>
-          <app-footer></app-footer>
-        </ion-toolbar>
+        <app-footer></app-footer>
       </ion-footer>
     </ion-content>`,
   styles: [``],

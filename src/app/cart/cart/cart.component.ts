@@ -27,12 +27,10 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
     CartSummaryComponent,
   ],
   template: `<ion-header>
-      <ion-toolbar>
-        <app-header></app-header>
-      </ion-toolbar>
+      <app-header></app-header>
     </ion-header>
     <ion-content>
-      <div class="bg-light-shade">
+      <div class="bg-white">
         <div
           class="max-w-2xl px-4 pt-16 pb-24 mx-auto sm:px-6 lg:max-w-7xl lg:px-8"
         >
@@ -79,9 +77,7 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
         </div>
       </div>
       <ion-footer>
-        <ion-toolbar>
-          <app-footer></app-footer>
-        </ion-toolbar>
+        <app-footer></app-footer>
       </ion-footer>
     </ion-content> `,
   styles: [],
