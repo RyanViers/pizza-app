@@ -32,12 +32,12 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <div class="bg-dark-shade">
+      <div class="bg-light-shade">
         <div
           class="max-w-2xl px-4 pt-16 pb-24 mx-auto sm:px-6 lg:max-w-7xl lg:px-8"
         >
           <h1
-            class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+            class="text-3xl font-bold tracking-tight text-dark-shade sm:text-4xl"
           >
             Shopping Cart
           </h1>
@@ -71,7 +71,7 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
 
             <section
               aria-labelledby="summary-heading"
-              class="px-4 py-6 mt-16 rounded-lg bg-gray-50 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
+              class="px-4 py-6 mt-16 rounded-lg bg-light-tint sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
             >
               <app-cart-summary></app-cart-summary>
             </section>

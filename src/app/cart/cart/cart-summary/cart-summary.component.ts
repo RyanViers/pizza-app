@@ -20,21 +20,19 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
   selector: 'app-cart-summary',
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule, RouterModule],
-  template: `<h2 id="summary-heading" class="text-lg font-medium text-gray-900">
-      Order summary
-    </h2>
+  template: `<h2 class="text-lg font-medium text-dark-tint">Order summary</h2>
 
     <dl class="mt-6 space-y-4">
       <div class="flex items-center justify-between">
-        <dt class="text-sm text-gray-600">Subtotal</dt>
-        <dd class="text-sm font-medium text-gray-900">
+        <dt class="text-sm text-dark-tint">Subtotal</dt>
+        <dd class="text-sm font-medium text-dark-tint">
           {{ calculateTotal() | async }}
         </dd>
       </div>
       <div
         class="flex items-center justify-between pt-4 border-t border-gray-200"
       >
-        <dt class="flex text-sm text-gray-600">
+        <dt class="flex text-sm text-dark-tint">
           <span>Tax estimate</span>
           <a
             href="#"
@@ -43,7 +41,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
             <span class="w-6 h-6" [innerHTML]="getIcon(2)"></span>
           </a>
         </dt>
-        <dd class="flex text-sm font-medium text-gray-900">
+        <dd class="flex text-sm font-medium text-dark-tint">
           <p>$</p>
           {{ addTax() | async }}
         </dd>
@@ -51,8 +49,8 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
       <div
         class="flex items-center justify-between pt-4 border-t border-gray-200"
       >
-        <dt class="text-base font-medium text-gray-900">Order total</dt>
-        <dd class="text-base font-medium text-gray-900">
+        <dt class="text-base font-medium text-dark-tint">Order total</dt>
+        <dd class="text-base font-medium text-dark-tint">
           {{ calculateTotalWithTax() | async }}
         </dd>
       </div>
@@ -67,7 +65,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
         Checkout
       </button>
     </div> `,
-  styles: [],
+  styles: [``],
 })
 export class CartSummaryComponent implements OnInit {
   $specialtyPizzaList: Observable<(SpecialtyPizza | undefined)[]> =

@@ -1,3 +1,4 @@
+import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
@@ -28,6 +29,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FooterComponent,
   ],
   providers: [
     HttpClient,

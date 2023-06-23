@@ -11,6 +11,9 @@ export class IconsService {
       TailwindIconType.X_MARK,
       TailwindIconType.QUESTION_MARK_CIRCLE,
       TailwindIconType.CART,
+      TailwindIconType.MENU,
+      TailwindIconType.BELL,
+      TailwindIconType.SEARCH,
     ],
     this.sanitizer
   );
@@ -25,6 +28,12 @@ export class IconsService {
         return this.icons.get(TailwindIconType.QUESTION_MARK_CIRCLE);
       case 3:
         return this.icons.get(TailwindIconType.CART);
+      case 4:
+        return this.icons.get(TailwindIconType.MENU);
+      case 5:
+        return this.icons.get(TailwindIconType.BELL);
+      case 6:
+        return this.icons.get(TailwindIconType.SEARCH);
       default:
         return '';
     }

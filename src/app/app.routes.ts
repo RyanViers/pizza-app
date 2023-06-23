@@ -39,6 +39,27 @@ export const routes: Routes = [
           ).then((m) => m.EmployeeSignUpComponent),
       },
       {
+        path: 'admin-info',
+        loadComponent: () =>
+          import(
+            './admin/admin-root/components/admin-info/admin-info.component'
+          ).then((m) => m.AdminInfoComponent),
+      },
+      {
+        path: 'inventory',
+        loadComponent: () =>
+          import(
+            './admin/admin-root/components/inventory/inventory.component'
+          ).then((m) => m.InventoryComponent),
+      },
+      {
+        path: 'store-list',
+        loadComponent: () =>
+          import(
+            './admin/admin-root/components/store-list/store-list.component'
+          ).then((m) => m.StoreListComponent),
+      },
+      {
         path: '**',
         redirectTo: 'employee-list',
         pathMatch: 'full',
