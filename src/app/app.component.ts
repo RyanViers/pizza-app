@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
         <ion-router-outlet></ion-router-outlet>
       </div>
     </ion-content>
-  </ion-app>`,
+  </ion-app> `,
   styles: [
     `
       :host {

@@ -193,12 +193,12 @@ import { SafeHtml } from '@angular/platform-browser';
               </p>
             </div>
           </div>
+          <div class="h-full relative w-full block ">
+            <ion-router-outlet></ion-router-outlet>
+          </div>
+          <app-footer class="sticky"></app-footer>
         </main>
-        <div class="h-full relative w-full block ">
-          <ion-router-outlet style="height: 100%;"></ion-router-outlet>
-        </div>
       </div>
-      <app-footer class=""></app-footer>
     </ion-content> `,
   styles: [``],
 })
