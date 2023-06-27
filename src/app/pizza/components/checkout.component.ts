@@ -15,7 +15,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
   template: `
     <ion-content>
       <div
-        class="flex flex-col w-full h-full mx-auto max-w-2xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-0 "
+        class="flex flex-col w-full h-full mx-auto max-w-md px-4 pb-16 sm:px-6 sm:pb-24 lg:px-0 "
       >
         <h1
           class="text-center text-3xl font-bold tracking-tight text-gray-400 sm:text-4xl"

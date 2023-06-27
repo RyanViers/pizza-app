@@ -101,7 +101,10 @@ import { opacityScale } from 'src/app/utils/animations';
         </div>
 
         <!-------------- Desktop Navigation -------------->
-        <nav class="hidden lg:flex lg:space-x-8 lg:py-2" aria-label="Global">
+        <nav
+          class="hidden justify-between lg:flex lg:space-x-8 lg:py-2"
+          aria-label="Global"
+        >
           <button
             [routerLink]="['/pizza']"
             class="text-gray-300 hover:bg-gray-700 hover:text-white inline-flex items-center rounded-md py-2 px-3 text-sm font-medium"

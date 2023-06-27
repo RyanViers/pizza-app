@@ -1,8 +1,14 @@
 import { Employee } from './employees';
 
+export enum Location {
+  JohnsonCity = 'Johnson City',
+  Bristol = 'Bristol',
+  Kingsport = 'Kingsport',
+}
+
 export interface Store {
   id: number;
-  name: string;
+  location: Location;
   address: string;
   phone: string;
   email: string;
@@ -11,10 +17,10 @@ export interface Store {
   employees: Employee[];
 }
 
-export const stores: Store[] = [
+export const storesPractice: Store[] = [
   {
     id: 1,
-    name: 'Johnson City',
+    location: Location.JohnsonCity,
     address: '123 Main St',
     phone: '123-456-7890',
     email: 'bigDaddysJC@bigdaddys.com',
@@ -43,7 +49,7 @@ export const stores: Store[] = [
   },
   {
     id: 2,
-    name: 'Bristol',
+    location: Location.Bristol,
     address: '456 Main St',
     phone: '123-456-7890',
     email: 'bigdaddysBristol@gmail.com',
@@ -72,7 +78,7 @@ export const stores: Store[] = [
   },
   {
     id: 3,
-    name: 'Kingsport',
+    location: Location.Kingsport,
     address: '789 Main St',
     phone: '123-456-7890',
     email: 'bigdaddysKingsport@gmail.com',

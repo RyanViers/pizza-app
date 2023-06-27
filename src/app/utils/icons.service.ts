@@ -14,6 +14,8 @@ export class IconsService {
       TailwindIconType.MENU,
       TailwindIconType.BELL,
       TailwindIconType.SEARCH,
+      TailwindIconType.ARROW_RIGHT,
+      TailwindIconType.ARROW_LEFT,
     ],
     this.sanitizer
   );
@@ -34,6 +36,10 @@ export class IconsService {
         return this.icons.get(TailwindIconType.BELL);
       case 6:
         return this.icons.get(TailwindIconType.SEARCH);
+      case 7:
+        return this.icons.get(TailwindIconType.ARROW_RIGHT);
+      case 8:
+        return this.icons.get(TailwindIconType.ARROW_LEFT);
       default:
         return '';
     }
