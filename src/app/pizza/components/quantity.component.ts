@@ -1,4 +1,4 @@
-import { StepperService } from './../stepper.service';
+import { StepperService } from '../stepper/stepper/stepper.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';

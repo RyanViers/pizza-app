@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { StepperService } from '../../stepper.service';
+import { StepperService } from './stepper.service';
 
 @Component({
   selector: 'app-stepper',

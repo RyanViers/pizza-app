@@ -10,21 +10,18 @@ import { IonicModule } from '@ionic/angular';
   imports: [CommonModule, IonicModule, RouterModule, ReactiveFormsModule],
 
   template: `<div class="flex mb-8 w-max">
-    <button
-      id="stores-button"
-      data-dropdown-toggle="dropdown-stores"
-      class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-dark-shade bg-light-shade border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100"
-      type="button"
+    <div
+      class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-dark-shade bg-light-shade border border-light rounded-l-lg hover:bg-light focus:outline-none "
     >
       Locations
-    </button>
+    </div>
 
     <select
       id="stores"
       [formControl]="selectedLocation"
-      class="bg-light-tint border border-light text-dark-shade text-sm rounded-r-lg border-l-light border-l-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      class="cursor-pointer bg-light-tint border border-light text-dark-shade text-sm rounded-r-lg border-l-light border-l-2 block w-full p-2.5"
     >
-      <option value="">Choose a Store</option>
+      <option selected value="">Choose a Store</option>
       <option value="Johnson City">Johnson City</option>
       <option value="Bristol">Bristol</option>
       <option value="Kingsport">Kingsport</option>

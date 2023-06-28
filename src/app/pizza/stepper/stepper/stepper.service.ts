@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PizzaStepperSection } from './helpers/enums';
+import { PizzaStepperSection } from '../../helpers/enums';
 import { Router } from '@angular/router';
 
 @Injectable({
