@@ -100,7 +100,6 @@ export class InventoryComponent implements OnInit {
   }
 
   onLocationChange(location: string | null) {
-    //
     this.selectedLocation = location;
   }
 }
