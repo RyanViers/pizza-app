@@ -26,21 +26,21 @@ export const routes: Routes = [
         path: 'employee-list',
         loadComponent: () =>
           import(
-            './admin/admin-root/components/employee-list/components/employee-list.component'
+            './admin/admin-root/components/employee/employee-list.component'
           ).then((m) => m.EmployeeListComponent),
       },
       {
         path: 'employee-sign-up',
         loadComponent: () =>
           import(
-            './admin/admin-root/components/employee-list/components/employee-sign-up.component'
+            './admin/admin-root/components/employee/employee-sign-up.component'
           ).then((m) => m.EmployeeSignUpComponent),
       },
       {
         path: 'admin-info',
         loadComponent: () =>
           import(
-            './admin/admin-root/components/admin-info/admin-info.component'
+            './admin/admin-root/components/admin/admin-info.component'
           ).then((m) => m.AdminInfoComponent),
       },
       {

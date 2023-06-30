@@ -9,7 +9,7 @@ import { EmailButtonComponent } from './email-button/email-button.component';
   selector: 'app-store-list',
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule, EmailButtonComponent],
-  template: `<ion-content>
+  template: `<div>
     <div class="bg-light-shade py-24 sm:py-32">
       <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
         <div class="mx-auto max-w-2xl">
@@ -45,8 +45,8 @@ import { EmailButtonComponent } from './email-button/email-button.component';
           </li>
         </ul>
       </div>
-    </div></ion-content
-  >`,
+    </div>
+  </div>`,
   styles: [],
 })
 export class StoreListComponent implements OnInit {

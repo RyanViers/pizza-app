@@ -19,22 +19,22 @@ import { CustomPizza } from 'src/app/API.service';
     </div>
 
     <div class="grid grid-cols-2 ">
-      <h1 class="text-base font-bold text-light-shade">Quantity</h1>
-      <p class="text-sm text-light-tint">{{ customPizza?.quantity }}</p>
-      <h1 class="text-base font-bold text-light-shade">Size</h1>
-      <p class="text-sm text-light-tint">{{ customPizza?.size }}</p>
-      <h1 class="text-base font-bold text-light-shade">Crust</h1>
-      <p class="text-sm text-light-tint">{{ customPizza?.crust }}</p>
-      <h1 class="text-base font-bold text-light-shade">Sauce</h1>
-      <p class="text-sm text-light-tint">{{ customPizza?.sauce }}</p>
-      <h1 class="text-base font-bold text-light-shade">Cheese</h1>
-      <p class="text-sm text-light-tint">
+      <h1 class="text-base font-bold text-dark-shade">Quantity</h1>
+      <p class="text-sm text-dark-tint">{{ customPizza?.quantity }}</p>
+      <h1 class="text-base font-bold text-dark-shade">Size</h1>
+      <p class="text-sm text-dark-tint">{{ customPizza?.size }}</p>
+      <h1 class="text-base font-bold text-dark-shade">Crust</h1>
+      <p class="text-sm text-dark-tint">{{ customPizza?.crust }}</p>
+      <h1 class="text-base font-bold text-dark-shade">Sauce</h1>
+      <p class="text-sm text-dark-tint">{{ customPizza?.sauce }}</p>
+      <h1 class="text-base font-bold text-dark-shade">Cheese</h1>
+      <p class="text-sm text-dark-tint">
         {{ customPizza?.cheese?.quantity }}
       </p>
-      <h1 class="text-base font-bold text-light-shade">Toppings</h1>
-      <p class="text-sm text-light-tint">meat</p>
-      <h1 class="text-base font-bold text-light-shade">Price</h1>
-      <p class="text-sm text-light-tint">{{ customPizza?.price }}</p>
+      <h1 class="text-base font-bold text-dark-shade">Toppings</h1>
+      <p class="text-sm text-dark-tint">meat</p>
+      <h1 class="text-base font-bold text-dark-shade">Price</h1>
+      <p class="text-sm text-dark-tint">{{ customPizza?.price }}</p>
     </div>
 
     <div class="mt-4 sm:mt-0 sm:pr-9">

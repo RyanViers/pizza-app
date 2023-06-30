@@ -1,4 +1,4 @@
-import { AdminPaginationComponent } from './admin-pagination/admin-pagination.component';
+import { AdminPaginationComponent } from './components/admin-pagination.component';
 import { IconsService } from './../../../../utils/icons.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { PizzaVeggie, PizzaMeat } from 'src/app/API.service';
 import { Inventory, inventory } from './model';
 import { IonicModule } from '@ionic/angular';
-import { AdminLocationSelectorComponent } from './admin-location-selector/admin-location-selector.component';
+import { AdminLocationSelectorComponent } from '../location-selector/admin-location-selector.component';
 
 @Component({
   selector: 'app-inventory',
@@ -85,8 +85,8 @@ export class InventoryComponent implements OnInit {
     ...this.pizzaVeggie,
     ...this.pizzaMeat,
   ];
-
   inventory: Inventory[] = inventory;
+
   constructor(private icons: IconsService) {}
 
   ngOnInit() {}

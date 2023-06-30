@@ -1,9 +1,11 @@
+import { Location } from './../../utils/models/stores';
+
 export interface Employee {
   id: number;
   name: string;
   age: number;
   email: string;
-  storeName: string;
+  storeName: Location;
   phone: string;
   salary: number;
   img?: string;
@@ -15,7 +17,7 @@ export const employees: Employee[] = [
     name: 'John',
     age: 30,
     email: 'john@gmail.com',
-    storeName: 'Johnson City',
+    storeName: Location.JohnsonCity,
     phone: '423-123-4567',
     salary: 2000,
     img: 'assets/employees/john.jpg',
@@ -25,7 +27,7 @@ export const employees: Employee[] = [
     name: 'Mary',
     age: 25,
     email: 'mary@gmail.com',
-    storeName: 'Johnson City',
+    storeName: Location.JohnsonCity,
     phone: '423-123-4567',
     salary: 1500,
     img: 'assets/employees/mary.jpg',
@@ -35,7 +37,7 @@ export const employees: Employee[] = [
     name: 'Andrew',
     age: 20,
     email: 'andrew@gmail.com',
-    storeName: 'Bristol',
+    storeName: Location.Bristol,
     phone: '423-123-4567',
     salary: 1000,
     img: 'assets/employees/andrew.jpg',
@@ -45,7 +47,7 @@ export const employees: Employee[] = [
     name: 'Kate',
     age: 35,
     email: 'kate@gmail.com',
-    storeName: 'Bristol',
+    storeName: Location.Bristol,
     phone: '423-123-4567',
     salary: 2500,
     img: 'assets/employees/kate.jpg',
@@ -55,7 +57,7 @@ export const employees: Employee[] = [
     name: 'Alex',
     age: 40,
     email: 'alex@gmail.com',
-    storeName: 'Kingsport',
+    storeName: Location.Kingsport,
     phone: '423-123-4567',
     salary: 3000,
     img: 'assets/employees/alex.jpg',
@@ -65,7 +67,7 @@ export const employees: Employee[] = [
     name: 'Julia',
     age: 45,
     email: 'julia@gmail.com',
-    storeName: 'Kingsport',
+    storeName: Location.Kingsport,
     phone: '423-123-4567',
     salary: 3500,
     img: 'assets/employees/julia.jpg',
@@ -75,7 +77,7 @@ export const employees: Employee[] = [
     name: 'Mark',
     age: 50,
     email: 'mark@gmail.com',
-    storeName: 'Kingsport',
+    storeName: Location.Kingsport,
     phone: '423-123-4567',
     salary: 4000,
     img: 'assets/employees/Mark.jpg',
@@ -85,7 +87,7 @@ export const employees: Employee[] = [
     name: 'Peter',
     age: 55,
     email: 'peter@hotmail.com',
-    storeName: 'Johnson City',
+    storeName: Location.JohnsonCity,
     phone: '423-123-4567',
     salary: 4500,
     img: 'assets/employees/Peter.jpg',
@@ -95,7 +97,7 @@ export const employees: Employee[] = [
     name: 'Sara',
     age: 60,
     email: 'sara@gmail.com',
-    storeName: 'Bristol',
+    storeName: Location.Bristol,
     phone: '423-123-4567',
     salary: 5000,
     img: 'assets/employees/Sara.jpg',
@@ -105,7 +107,7 @@ export const employees: Employee[] = [
     name: 'Tom',
     age: 65,
     email: 'tom@gmail.com',
-    storeName: 'Johnson City',
+    storeName: Location.JohnsonCity,
     phone: '423-123-4567',
     salary: 5500,
     img: 'assets/employees/Tom.jpg',
