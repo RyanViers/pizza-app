@@ -33,6 +33,7 @@ import { SafeHtml } from '@angular/platform-browser';
     AdminNavigationComponent,
     AdminAnalyticsComponent,
   ],
+  styles: [``],
   template: `<ion-header>
       <app-header></app-header>
     </ion-header>
@@ -57,7 +58,6 @@ import { SafeHtml } from '@angular/platform-browser';
         </main>
       </div>
     </ion-content> `,
-  styles: [``],
 })
 export class AdminRootComponent implements OnInit {
   constructor(private icons: IconsService) {}

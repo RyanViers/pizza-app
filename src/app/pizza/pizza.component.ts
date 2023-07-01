@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PizzaPreviewComponent } from './components/preview.component';
 import { RouterModule } from '@angular/router';
 import { QuantityComponent } from './components/quantity.component';
+import { fader } from '../utils/animations';
 
 @Component({
   standalone: true,
@@ -21,7 +22,8 @@ import { QuantityComponent } from './components/quantity.component';
     FooterComponent,
     StepperComponent,
   ],
-
+  styles: [],
+  animations: [fader],
   template: `
     <ion-header>
       <app-header></app-header>
@@ -41,7 +43,7 @@ import { QuantityComponent } from './components/quantity.component';
         <div
           class="min-h-[381px] mt-12 md:mt-0 relative w-full block max-w-max"
         >
-          <ion-router-outlet></ion-router-outlet>
+          <ion-router-outlet @fader #outlet="outlet"></ion-router-outlet>
         </div>
       </div>
       <ion-footer class="relative z-10">
@@ -49,7 +51,6 @@ import { QuantityComponent } from './components/quantity.component';
       </ion-footer>
     </ion-content>
   `,
-  styles: [],
 })
 export class PizzaComponent {
   constructor() {}

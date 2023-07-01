@@ -4,14 +4,16 @@ import { IonicModule } from '@ionic/angular';
 import { AdditionCheeseType, CheeseQuantity } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
 import { Observable } from 'rxjs';
+import { opacityScale } from 'src/app/utils/animations';
 
 @Component({
   selector: 'app-cheese',
   standalone: true,
   imports: [CommonModule, IonicModule],
   providers: [],
+  animations: [opacityScale],
   template: `<div class="flex w-full h-full justify-evenly ">
-    <fieldset>
+    <fieldset @opacityScale>
       <legend class="text-base font-semibold text-dark">
         Select Cheese Quantity
       </legend>

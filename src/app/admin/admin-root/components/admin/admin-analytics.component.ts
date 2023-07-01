@@ -50,6 +50,7 @@ import { opacityScale } from 'src/app/utils/animations';
 
     <!-- Analytics -->
     <div
+      @opacityScale
       *ngIf="!(toggleState$ | async)"
       class="border-b mb-20 border-dark-shade grid grid-cols-1 bg-light-shade sm:grid-cols-2 lg:grid-cols-4"
     >
