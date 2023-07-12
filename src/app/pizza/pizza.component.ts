@@ -44,7 +44,7 @@ import { fader, routeFader } from '../utils/animations';
           [@routeFader]="outlet.isActivated ? outlet.activatedRoute : ''"
           class="min-h-[381px] mt-12 md:mt-0 relative w-full block max-w-max"
         >
-          <router-outlet #outlet="outlet"></router-outlet>
+          <ion-router-outlet @fader></ion-router-outlet>
         </div>
       </div>
       <ion-footer class="relative z-10">
