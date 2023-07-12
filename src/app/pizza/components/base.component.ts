@@ -96,7 +96,9 @@ import { Observable } from 'rxjs';
       </fieldset>
     </div>
   `,
-  styles: [':host { display: flex; justify-content: center; }'],
+  styles: [
+    ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0; }',
+  ],
 })
 export class BaseComponent implements OnInit {
   PizzaSize: string[] = this.objectValues(PizzaSize);

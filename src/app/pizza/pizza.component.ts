@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PizzaPreviewComponent } from './components/preview.component';
 import { RouterModule } from '@angular/router';
 import { QuantityComponent } from './components/quantity.component';
-import { fader } from '../utils/animations';
+import { fader, routeFader } from '../utils/animations';
 
 @Component({
   standalone: true,
@@ -23,7 +23,7 @@ import { fader } from '../utils/animations';
     StepperComponent,
   ],
   styles: [],
-  animations: [fader],
+  animations: [fader, routeFader],
   template: `
     <ion-header>
       <app-header></app-header>
@@ -41,9 +41,10 @@ import { fader } from '../utils/animations';
         </div>
 
         <div
+          [@routeFader]="outlet.isActivated ? outlet.activatedRoute : ''"
           class="min-h-[381px] mt-12 md:mt-0 relative w-full block max-w-max"
         >
-          <ion-router-outlet @fader #outlet="outlet"></ion-router-outlet>
+          <router-outlet #outlet="outlet"></router-outlet>
         </div>
       </div>
       <ion-footer class="relative z-10">

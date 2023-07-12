@@ -1,4 +1,10 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  query,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 export const opacityScale = trigger('opacityScale', [
   transition(':enter', [
@@ -65,5 +71,30 @@ export const fader = trigger('fader', [
       '600ms ease-in',
       style({ opacity: 0, transform: 'scale(0) translateY(100%)' })
     ),
+  ]),
+]);
+
+export const routeFader = trigger('routeFader', [
+  transition('* <=> *', [
+    query(':enter', style({ opacity: 0, position: 'absolute' }), {
+      optional: true,
+    }),
+    query(
+      ':leave',
+      [
+        style({ opacity: 1 }),
+        animate('0ms', style({ opacity: 0, position: 'absolute' })),
+      ],
+      { optional: true }
+    ),
+    query(
+      ':enter',
+      [
+        style({ opacity: 0 }),
+        animate('350ms 50ms ease-in-out', style({ opacity: 1 })),
+      ],
+      { optional: true }
+    ),
+    query(':enter', style({ position: 'inherit' }), { optional: true }),
   ]),
 ]);

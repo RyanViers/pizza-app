@@ -11,7 +11,16 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule],
   providers: [],
-  styles: [``],
+  styles: [
+    `
+      :host {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+    `,
+  ],
   template: `
     <ion-content>
       <div

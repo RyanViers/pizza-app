@@ -70,7 +70,9 @@ import { opacityScale } from 'src/app/utils/animations';
       </div>
     </fieldset>
   </div>`,
-  styles: [':host { display: flex; justify-content: center; }'],
+  styles: [
+    ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0; }',
+  ],
 })
 export class CheeseComponent implements OnInit {
   CheeseQuantity: string[] = this.objectValues(CheeseQuantity);
