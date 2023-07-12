@@ -41,7 +41,7 @@ import { fader, routeFader } from '../utils/animations';
         </div>
 
         <div
-          [@routeFader]="outlet.isActivated ? outlet.activatedRoute : ''"
+          
           class="min-h-[381px] mt-12 md:mt-0 relative w-full block max-w-max"
         >
           <ion-router-outlet @fader></ion-router-outlet>

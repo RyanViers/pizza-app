@@ -15,30 +15,30 @@ import { ImageBackgroundComponent } from './components/image-background/image-ba
 @Component({
   selector: 'app-home',
   template: `<ion-header>
-      <app-header></app-header>
+      <app-header />
     </ion-header>
 
     <ion-content>
       <div class="bg-white">
         <!-- Hero section -->
-        <app-hero></app-hero>
+        <app-hero />
 
         <main>
           <!-- Pizza Cards -->
-          <app-pizza-cards></app-pizza-cards>
+          <app-pizza-cards />
 
           <!-- Featured section -->
-          <app-image-background [options]="options1"></app-image-background>
+          <app-image-background [options]="options1" />
 
           <!-- Locations -->
           <app-locations></app-locations>
 
           <!-- Featured section -->
-          <app-image-background [options]="options2"></app-image-background>
+          <app-image-background [options]="options2" />
         </main>
       </div>
       <ion-footer>
-        <app-footer></app-footer>
+        <app-footer />
       </ion-footer>
     </ion-content>`,
   styles: [``],
