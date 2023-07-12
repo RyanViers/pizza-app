@@ -43,7 +43,7 @@ import { fader } from '../utils/animations';
         <div
           class="min-h-[381px] mt-12 md:mt-0 relative w-full block max-w-max"
         >
-          <ion-router-outlet @fader #outlet="outlet"></ion-router-outlet>
+          <ion-router-outlet @fader></ion-router-outlet>
         </div>
       </div>
       <ion-footer class="relative z-10">
