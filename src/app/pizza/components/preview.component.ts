@@ -100,16 +100,7 @@ import {
       </div>
     </div>
   `,
-  styles: [
-    `
-      :host {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-      }
-    `,
-  ],
+  styles: [``],
 })
 export class PizzaPreviewComponent {
   $pizzaSize: Observable<PizzaSize> = this.pizza.$pizzaSize;
