@@ -162,7 +162,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ></ion-content>`,
   styles: [],
 })
-export class EmployeeSignUpComponent implements OnInit {
+export default class EmployeeSignUpComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}

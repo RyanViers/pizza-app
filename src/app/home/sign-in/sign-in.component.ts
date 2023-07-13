@@ -94,7 +94,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
     </div>
   </div>`,
 })
-export class SignInComponent implements OnInit {
+export default class SignInComponent implements OnInit {
   @ViewChild('email') email: ElementRef | undefined;
   @ViewChild('password') password: ElementRef | undefined;
 

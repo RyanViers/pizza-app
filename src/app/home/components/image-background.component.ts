@@ -2,21 +2,22 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { Options } from '../../models/options';
+import { Options } from '../models/options';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-image-background',
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule],
+  imports: [CommonModule, IonicModule, RouterModule, NgOptimizedImage],
   template: `<section
-    aria-labelledby="comfort-heading"
     class="px-4 py-24 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:px-8"
   >
     <div class="relative overflow-hidden rounded-lg">
       <div class="absolute inset-0">
         <img
-          [src]="options?.image"
-          alt=""
+          ngSrc="{{ options?.image }}"
+          width="1"
+          height="1"
           class="object-cover object-center w-full h-full"
         />
       </div>
@@ -26,10 +27,7 @@ import { Options } from '../../models/options';
         <div
           class="relative flex flex-col items-center max-w-3xl mx-auto text-center"
         >
-          <h2
-            id="comfort-heading"
-            class="text-3xl font-bold tracking-tight text-white sm:text-4xl"
-          >
+          <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
             {{ options?.title }}
           </h2>
           <p class="mt-3 text-xl text-white">

@@ -16,6 +16,7 @@ import {
 } from 'aws-appsync-auth-link';
 import { HttpLink, InMemoryCache, concat } from '@apollo/client/core';
 import { IonicModule } from '@ionic/angular';
+import { NgOptimizedImage } from '@angular/common';
 
 if (environment.production) {
   enableProdMode();
@@ -38,10 +39,11 @@ bootstrapApplication(AppComponent, {
       BrowserAnimationsModule,
       IonicModule.forRoot({}),
       ApolloModule,
+      HttpClientModule,
       SweetAlert2Module.forRoot(),
+      NgOptimizedImage,
     ]),
     HttpClient,
-    HttpClientModule,
     {
       provide: HttpLink,
       useFactory: () =>

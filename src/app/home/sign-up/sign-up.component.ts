@@ -40,7 +40,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
   templateUrl: './sign-up.component.html',
   styles: [],
 })
-export class SignUpComponent implements OnInit, OnDestroy {
+export default class SignUpComponent implements OnInit, OnDestroy {
   @ViewChild('verificationCode') verificationCode: ElementRef | undefined;
   isConfirm = false;
 

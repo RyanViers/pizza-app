@@ -7,17 +7,11 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-pizza-cards',
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule],
-  template: `<section
-    aria-labelledby="category-heading"
-    class="pt-24 sm:pt-32 xl:mx-auto xl:max-w-7xl xl:px-8"
-  >
+  template: `<section class="pt-24 sm:pt-32 xl:mx-auto xl:max-w-7xl xl:px-8">
     <div
       class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0"
     >
-      <h2
-        id="category-heading"
-        class="text-2xl font-bold tracking-tight text-dark-shade"
-      >
+      <h2 class="text-2xl font-bold tracking-tight text-dark-shade">
         Specialty Pizzas
       </h2>
     </div>
@@ -34,15 +28,13 @@ import { IonicModule } from '@ionic/angular';
               [routerLink]="['/specialty-pizzas']"
               class="relative flex flex-col w-56 p-6 overflow-hidden rounded-lg h-80 hover:opacity-75 xl:w-auto"
             >
-              <span aria-hidden="true" class="absolute inset-0">
+              <span class="absolute inset-0">
                 <img
                   src="assets/specialty-pizzas/Pepperoni.jpeg"
-                  alt=""
                   class="object-cover object-center w-full h-full"
                 />
               </span>
               <span
-                aria-hidden="true"
                 class="absolute inset-x-0 bottom-0 opacity-50 h-2/3 bg-gradient-to-t from-gray-800"
               ></span>
               <span
@@ -54,15 +46,13 @@ import { IonicModule } from '@ionic/angular';
               [routerLink]="['/specialty-pizzas']"
               class="relative flex flex-col w-56 p-6 overflow-hidden rounded-lg h-80 hover:opacity-75 xl:w-auto"
             >
-              <span aria-hidden="true" class="absolute inset-0">
+              <span class="absolute inset-0">
                 <img
                   src="assets/specialty-pizzas/Meat-Lovers.jpeg"
-                  alt=""
                   class="object-cover object-center w-full h-full"
                 />
               </span>
               <span
-                aria-hidden="true"
                 class="absolute inset-x-0 bottom-0 opacity-50 h-2/3 bg-gradient-to-t from-gray-800"
               ></span>
               <span
@@ -74,15 +64,13 @@ import { IonicModule } from '@ionic/angular';
               [routerLink]="['/specialty-pizzas']"
               class="relative flex flex-col w-56 p-6 overflow-hidden rounded-lg h-80 hover:opacity-75 xl:w-auto"
             >
-              <span aria-hidden="true" class="absolute inset-0">
+              <span class="absolute inset-0">
                 <img
                   src="assets/specialty-pizzas/Margherita.jpeg"
-                  alt=""
                   class="object-cover object-center w-full h-full"
                 />
               </span>
               <span
-                aria-hidden="true"
                 class="absolute inset-x-0 bottom-0 opacity-50 h-2/3 bg-gradient-to-t from-gray-800"
               ></span>
               <span
@@ -94,15 +82,13 @@ import { IonicModule } from '@ionic/angular';
               [routerLink]="['/specialty-pizzas']"
               class="relative flex flex-col w-56 p-6 overflow-hidden rounded-lg h-80 hover:opacity-75 xl:w-auto"
             >
-              <span aria-hidden="true" class="absolute inset-0">
+              <span class="absolute inset-0">
                 <img
                   src="assets/specialty-pizzas/BBQ-Chicken-Pizza.jpeg"
-                  alt=""
                   class="object-cover object-center w-full h-full"
                 />
               </span>
               <span
-                aria-hidden="true"
                 class="absolute inset-x-0 bottom-0 opacity-50 h-2/3 bg-gradient-to-t from-gray-800"
               ></span>
               <span
@@ -114,15 +100,13 @@ import { IonicModule } from '@ionic/angular';
               [routerLink]="['/specialty-pizzas']"
               class="relative flex flex-col w-56 p-6 overflow-hidden rounded-lg h-80 hover:opacity-75 xl:w-auto"
             >
-              <span aria-hidden="true" class="absolute inset-0">
+              <span class="absolute inset-0">
                 <img
                   src="assets/specialty-pizzas/Taco.jpeg"
-                  alt=""
                   class="object-cover object-center w-full h-full"
                 />
               </span>
               <span
-                aria-hidden="true"
                 class="absolute inset-x-0 bottom-0 opacity-50 h-2/3 bg-gradient-to-t from-gray-800"
               ></span>
               <span

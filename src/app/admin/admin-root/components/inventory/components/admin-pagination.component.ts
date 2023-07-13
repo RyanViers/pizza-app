@@ -8,10 +8,7 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-admin-pagination',
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule],
-  template: `<nav
-    class="flex items-center justify-between pt-4"
-    aria-label="Table navigation"
-  >
+  template: `<nav class="flex items-center justify-between pt-4">
     <span class="text-sm font-normal text-gray-500 dark:text-gray-400"
       >Showing
       <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of

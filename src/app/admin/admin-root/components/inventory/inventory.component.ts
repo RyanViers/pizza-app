@@ -19,9 +19,7 @@ import { AdminLocationSelectorComponent } from '../location-selector/admin-locat
     AdminPaginationComponent,
   ],
   template: `<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <app-admin-location-selector
-      (locationChange)="onLocationChange($event)"
-    ></app-admin-location-selector>
+    <app-admin-location-selector (locationChange)="onLocationChange($event)" />
     <table class="w-full text-sm text-left text-dark-shade">
       <thead class="text-xs uppercase text-dark-shade bg-light-shade">
         <tr>
@@ -73,11 +71,11 @@ import { AdminLocationSelectorComponent } from '../location-selector/admin-locat
         </ng-container>
       </tbody>
     </table>
-    <app-admin-pagination></app-admin-pagination>
+    <app-admin-pagination />
   </div>`,
   styles: [],
 })
-export class InventoryComponent implements OnInit {
+export default class InventoryComponent implements OnInit {
   selectedLocation: string | null = null;
   pizzaVeggie: PizzaVeggie[] = this.objectValues(PizzaVeggie);
   pizzaMeat: PizzaMeat[] = this.objectValues(PizzaMeat);

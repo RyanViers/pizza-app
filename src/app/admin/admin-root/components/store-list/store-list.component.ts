@@ -49,7 +49,7 @@ import { EmailButtonComponent } from './email-button/email-button.component';
   </div>`,
   styles: [],
 })
-export class StoreListComponent implements OnInit {
+export default class StoreListComponent implements OnInit {
   stores: Store[] = storesPractice;
 
   constructor() {}

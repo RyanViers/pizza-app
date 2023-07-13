@@ -100,7 +100,7 @@ import { Observable } from 'rxjs';
     ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0; }',
   ],
 })
-export class BaseComponent implements OnInit {
+export default class BaseComponent implements OnInit {
   PizzaSize: string[] = this.objectValues(PizzaSize);
   PizzaSauce: string[] = this.objectValues(PizzaSauce);
   PizzaCrust: string[] = this.objectValues(PizzaCrust);

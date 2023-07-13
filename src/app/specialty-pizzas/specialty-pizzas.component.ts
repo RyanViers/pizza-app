@@ -1,17 +1,17 @@
-import { HeaderComponent } from './../../components/header/header.component';
-import { FooterComponent } from '../../components/footer/footer.component';
+import { HeaderComponent } from '../components/header/header.component';
+import { FooterComponent } from '../components/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { PizzaPreviewComponent } from '../components/preview.component';
+import { PizzaPreviewComponent } from '../pizza/components/preview.component';
 import { RouterModule } from '@angular/router';
-import { QuantityComponent } from '../components/quantity.component';
-import { pizzas } from '../helpers/specialty-models';
+import { QuantityComponent } from '../pizza/components/quantity.component';
+import { pizzas } from './specialty-models';
 import Swal from 'sweetalert2';
 import { SweetAlertOptions } from 'sweetalert2';
 import { of } from 'rxjs';
-import { PizzaService } from '../pizza.service';
+import { PizzaService } from '../pizza/pizza.service';
 import { SpecialtyPizza } from 'src/app/API.service';
 
 @Component({
@@ -31,7 +31,7 @@ import { SpecialtyPizza } from 'src/app/API.service';
   styles: [``],
   template: `
     <ion-header>
-      <app-header></app-header>
+      <app-header />
     </ion-header>
     <ion-content>
       <div class="bg-white">
@@ -51,7 +51,6 @@ import { SpecialtyPizza } from 'src/app/API.service';
               >
                 <img
                   [src]="pizza.imageUrl"
-                  alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
                   class="h-80 w-80 object-cover object-center group-hover:opacity-75"
                 />
               </div>
@@ -70,12 +69,12 @@ import { SpecialtyPizza } from 'src/app/API.service';
       </div>
 
       <ion-footer>
-        <app-footer></app-footer>
+        <app-footer />
       </ion-footer>
     </ion-content>
   `,
 })
-export class SpecialtyPizzasComponent implements OnDestroy {
+export default class SpecialtyPizzasComponent implements OnDestroy {
   pizzas: SpecialtyPizza[] = [];
 
   constructor(private pizzaService: PizzaService) {

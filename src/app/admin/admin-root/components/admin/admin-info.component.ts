@@ -1,4 +1,3 @@
-import { AdminRootComponent } from '../../admin-root.component';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -60,7 +59,7 @@ import { Administrator, administrator } from '../../utils/models/administrator';
   </div> `,
   styles: [],
 })
-export class AdminInfoComponent implements OnInit {
+export default class AdminInfoComponent implements OnInit {
   administrator: Administrator = administrator;
   constructor() {}
 

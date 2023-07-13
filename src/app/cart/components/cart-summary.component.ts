@@ -1,9 +1,9 @@
-import { MutationsService } from './../../../utils/services/api/mutations.service';
+import { MutationsService } from '../../utils/services/api/mutations.service';
 import { Component, OnInit } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Observable, combineLatest, map, firstValueFrom } from 'rxjs';
 import { PizzaService } from 'src/app/pizza/pizza.service';
-import { CartService } from '../../cart.service';
+import { CartService } from '../cart.service';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';

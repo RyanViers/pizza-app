@@ -1,6 +1,6 @@
-import { CustomCartComponent } from './custom-cart/custom-cart.component';
-import { CartSummaryComponent } from './cart-summary/cart-summary.component';
-import { SpecialtyCartComponent } from './specialty-cart/specialty-cart.component';
+import { CustomCartComponent } from './components/custom-cart.component';
+import { CartSummaryComponent } from './components/cart-summary.component';
+import { SpecialtyCartComponent } from './components/specialty-cart.component';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -27,7 +27,7 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
     CartSummaryComponent,
   ],
   template: `<ion-header>
-      <app-header></app-header>
+      <app-header />
     </ion-header>
     <ion-content>
       <div class="bg-white">
@@ -51,18 +51,14 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
                   class="grid py-6 sm:py-10"
                   *ngFor="let customPizza of $customPizzaList?.value"
                 >
-                  <app-custom-cart
-                    [customPizza]="customPizza"
-                  ></app-custom-cart>
+                  <app-custom-cart [customPizza]="customPizza" />
                 </li>
 
                 <li
                   class="flex py-6 sm:py-10"
                   *ngFor="let specialtyPizza of $specialtyPizzaList | async"
                 >
-                  <app-specialty-cart
-                    [specialtyPizza]="specialtyPizza"
-                  ></app-specialty-cart>
+                  <app-specialty-cart [specialtyPizza]="specialtyPizza" />
                 </li>
               </ul>
             </section>
@@ -71,18 +67,18 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
               aria-labelledby="summary-heading"
               class="px-4 py-6 mt-16 rounded-lg bg-light-tint sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
             >
-              <app-cart-summary></app-cart-summary>
+              <app-cart-summary />
             </section>
           </form>
         </div>
       </div>
       <ion-footer>
-        <app-footer></app-footer>
+        <app-footer />
       </ion-footer>
     </ion-content> `,
   styles: [],
 })
-export class CartComponent implements OnInit {
+export default class CartComponent implements OnInit {
   $specialtyPizzaList: BehaviorSubject<SpecialtyPizza[]> =
     this.pizza.$specialtyPizza;
   $customPizzaList: BehaviorSubject<CustomPizza[]> = this.pizza.$customPizza;

@@ -26,33 +26,30 @@ import { fader, routeFader } from '../utils/animations';
   animations: [fader, routeFader],
   template: `
     <ion-header>
-      <app-header></app-header>
+      <app-header />
     </ion-header>
     <ion-content>
-      <app-stepper></app-stepper>
+      <app-stepper />
       <div
         class="grid-flow-row my-10 md:grid-cols-2  mx-auto grid grid-cols-1  w-full relative h-auto  px-8"
       >
         <div>
-          <app-pizza-preview
-            class="flex justify-center items-start"
-          ></app-pizza-preview>
-          <app-quantity></app-quantity>
+          <app-pizza-preview class="flex justify-center items-start" />
+          <app-quantity />
         </div>
 
         <div
-          
           class="min-h-[381px] mt-12 md:mt-0 relative w-full block max-w-max"
         >
-          <ion-router-outlet @fader></ion-router-outlet>
+          <ion-router-outlet @fader />
         </div>
       </div>
       <ion-footer class="relative z-10">
-        <app-footer></app-footer>
+        <app-footer />
       </ion-footer>
     </ion-content>
   `,
 })
-export class PizzaComponent {
+export default class PizzaComponent {
   constructor() {}
 }

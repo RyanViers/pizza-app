@@ -1,6 +1,6 @@
-import { PizzaCardsComponent } from './components/pizza-cards/pizza-cards.component';
-import { HeroComponent } from './components/hero/hero.component';
-import { PromoComponent } from './components/promo/promo.component';
+import { PizzaCardsComponent } from './components/pizza-cards.component';
+import { HeroComponent } from './components/hero.component';
+import { PromoComponent } from './components/promo.component';
 import { FooterComponent } from './../components/footer/footer.component';
 import { HeaderComponent } from './../components/header/header.component';
 import { CommonModule } from '@angular/common';
@@ -8,12 +8,27 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '../shared/shared.module';
-import { LocationsComponent } from './components/locations/locations.component';
+import { LocationsComponent } from './components/locations.component';
 import { Options } from './models/options';
-import { ImageBackgroundComponent } from './components/image-background/image-background.component';
+import { ImageBackgroundComponent } from './components/image-background.component';
 
 @Component({
   selector: 'app-home',
+  styles: [``],
+  standalone: true,
+  imports: [
+    CommonModule,
+    IonicModule,
+    RouterModule,
+    SharedModule,
+    HeaderComponent,
+    FooterComponent,
+    PromoComponent,
+    HeroComponent,
+    PizzaCardsComponent,
+    LocationsComponent,
+    ImageBackgroundComponent,
+  ],
   template: `<ion-header>
       <app-header />
     </ion-header>
@@ -41,23 +56,8 @@ import { ImageBackgroundComponent } from './components/image-background/image-ba
         <app-footer />
       </ion-footer>
     </ion-content>`,
-  styles: [``],
-  standalone: true,
-  imports: [
-    CommonModule,
-    IonicModule,
-    RouterModule,
-    SharedModule,
-    HeaderComponent,
-    FooterComponent,
-    PromoComponent,
-    HeroComponent,
-    PizzaCardsComponent,
-    LocationsComponent,
-    ImageBackgroundComponent,
-  ],
 })
-export class HomePage {
+export default class HomePage {
   options1: Options | undefined = {
     image: 'assets/tri-pizza.jpeg',
     title: 'Masterpiece Menus',

@@ -1,7 +1,7 @@
 import { ProfileInfoComponent } from './profile-info/profile-info/profile-info.component';
-import { DeleteAccountComponent } from './delete-account/delete-account/delete-account.component';
+import { DeleteAccountComponent } from './components/delete-account.component';
 import { PasswordChangeComponent } from './password-change/password-change/password-change.component';
-import { ProfileService } from './../profile.service';
+import { ProfileService } from './profile.service';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -27,7 +27,7 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
     ProfileInfoComponent,
   ],
   template: `<ion-header>
-      <app-header></app-header>
+      <app-header />
     </ion-header>
 
     <ion-content class="flex w-full h-full">
@@ -37,31 +37,31 @@ import { NotificationsSettingsComponent } from './notifications-settings/notific
             <!-- Settings forms -->
             <div class="divide-y divide-white/5">
               <div class="flex w-full border-t-2">
-                <app-profile-info [user]="user"></app-profile-info>
+                <app-profile-info [user]="user" />
               </div>
 
               <div class="flex w-full border-t-2">
-                <app-notifications-settings></app-notifications-settings>
+                <app-notifications-settings />
               </div>
 
               <div>
-                <app-password-change></app-password-change>
+                <app-password-change />
               </div>
 
               <div>
-                <app-delete-account></app-delete-account>
+                <app-delete-account />
               </div>
             </div>
           </main>
         </div>
       </div>
       <ion-footer>
-        <app-footer></app-footer>
+        <app-footer />
       </ion-footer>
     </ion-content> `,
   styles: [``],
 })
-export class ProfileComponent implements OnInit {
+export default class ProfileComponent implements OnInit {
   user?: any;
 
   constructor(private profile: ProfileService) {}

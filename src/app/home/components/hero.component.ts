@@ -1,30 +1,30 @@
-import { IconsService } from './../../../utils/icons.service';
+import { IconsService } from '../../utils/icons.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule],
+  imports: [CommonModule, IonicModule, RouterModule, NgOptimizedImage],
   template: ` <div class="relative bg-gray-900">
     <!-- Decorative image and overlay -->
-    <div aria-hidden="true" class="absolute inset-0 overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
       <img
-        src="assets/pizzaria.jpg"
-        alt=""
+        priority
+        ngSrc="assets/pizzaria.jpg"
+        width="1024"
+        height="683"
         class="object-cover object-center w-full h-full opacity-60"
       />
     </div>
-    <div
-      aria-hidden="true"
-      class="absolute inset-0 bg-gray-900 opacity-50"
-    ></div>
+    <div class="absolute inset-0 bg-gray-900 opacity-50"></div>
 
     <!-- Navigation Header -->
     <header class="relative z-10">
-      <nav aria-label="Top">
+      <nav>
         <div class="bg-white bg-opacity-10 backdrop-blur-md backdrop-filter">
           <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div>

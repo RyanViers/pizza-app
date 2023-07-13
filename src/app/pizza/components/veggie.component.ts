@@ -42,7 +42,7 @@ import { Observable } from 'rxjs';
     ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0;}',
   ],
 })
-export class VeggieComponent implements OnInit {
+export default class VeggieComponent implements OnInit {
   PizzaVeggie: PizzaVeggie[] = this.objectValues(PizzaVeggie);
 
   $pizzaVeggies: Observable<(PizzaVeggie | null)[]> =

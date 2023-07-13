@@ -74,7 +74,7 @@ import { opacityScale } from 'src/app/utils/animations';
     ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0; }',
   ],
 })
-export class CheeseComponent implements OnInit {
+export default class CheeseComponent implements OnInit {
   CheeseQuantity: string[] = this.objectValues(CheeseQuantity);
   AdditionCheeseType: string[] = this.objectValues(AdditionCheeseType);
 

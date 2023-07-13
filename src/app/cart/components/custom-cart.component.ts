@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { CartService } from '../../cart.service';
+import { CartService } from '../cart.service';
 import { PizzaService } from 'src/app/pizza/pizza.service';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';

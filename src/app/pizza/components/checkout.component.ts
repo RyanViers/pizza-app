@@ -152,7 +152,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
     </ion-content>
   `,
 })
-export class CheckoutComponent {
+export default class CheckoutComponent {
   $pizzaSizePrice: Observable<number> = this.pizza.$pizzaSizePrice;
   $pizzaCrustPrice: Observable<number> = this.pizza.$pizzaCrustPrice;
   $pizzaSaucePrice: Observable<number> = this.pizza.$pizzaSaucePrice;
