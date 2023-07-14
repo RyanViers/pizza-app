@@ -43,13 +43,13 @@ import { ImageBackgroundComponent } from './components/image-background.componen
           <app-pizza-cards />
 
           <!-- Featured section -->
-          <app-image-background [options]="options1" />
+          <app-image-background class="w-full h-full relative" [options]="options1" />
 
           <!-- Locations -->
-          <app-locations></app-locations>
+          <app-locations class="w-full h-full relative" />
 
           <!-- Featured section -->
-          <app-image-background [options]="options2" />
+          <app-image-background class="w-full h-full relative" [options]="options2" />
         </main>
       </div>
       <ion-footer>

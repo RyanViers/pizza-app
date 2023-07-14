@@ -9,7 +9,7 @@ import { NgOptimizedImage } from '@angular/common';
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule, NgOptimizedImage],
   template: `<section
-    class="max-w-xl px-4 pt-24 mx-auto sm:px-6 sm:pt-32 lg:max-w-7xl lg:px-8"
+    class="relative max-w-xl px-4 mb-10 mx-auto sm:px-6  lg:max-w-7xl lg:px-8"
   >
     <h2 class="text-2xl font-bold tracking-tight text-dark-tint">
       Our Locations
@@ -22,7 +22,7 @@ import { NgOptimizedImage } from '@angular/common';
     <div
       class="mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0"
     >
-      <a href="#" class="block group">
+      <div class="block group">
         <div
           class="h-full overflow-hidden rounded-lg aspect-h-2 aspect-w-3 lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75"
         >
@@ -41,8 +41,8 @@ import { NgOptimizedImage } from '@angular/common';
           businesses, from eclectic boutiques to delicious restaurants,
           including the best pizza at The Crust Kingdom!
         </p>
-      </a>
-      <a href="#" class="block group">
+      </div>
+      <div class="block group">
         <div
           class="h-full overflow-hidden rounded-lg aspect-h-2 aspect-w-3 lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75"
         >
@@ -58,8 +58,8 @@ import { NgOptimizedImage } from '@angular/common';
           Known for its thriving arts scene, Kingsport is also home to Doughy
           Delights, where the art of pizza-making takes center stage!
         </p>
-      </a>
-      <a href="#" class="block group">
+      </div>
+      <div class="block group">
         <div
           class="h-full overflow-hidden rounded-lg aspect-h-2 aspect-w-3 lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75"
         >
@@ -76,7 +76,7 @@ import { NgOptimizedImage } from '@angular/common';
           for music, motorsports, and mouthwatering pizza from The Crust
           Kingdom!
         </p>
-      </a>
+      </div>
     </div>
   </section>`,
   styles: [``],

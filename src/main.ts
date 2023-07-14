@@ -27,10 +27,6 @@ Amplify.configure({
   ...awsmobile,
 });
 
-// platformBrowserDynamic()
-//   .bootstrapModule(AppModule)
-//   .catch((err) => console.error(err));
-
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),

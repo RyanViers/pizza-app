@@ -10,7 +10,7 @@ import { NgOptimizedImage } from '@angular/common';
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule, NgOptimizedImage],
   template: `<section
-    class="px-4 py-24 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:px-8"
+    class="relative px-4 py-4 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:px-8"
   >
     <div class="relative overflow-hidden rounded-lg">
       <div class="absolute inset-0">

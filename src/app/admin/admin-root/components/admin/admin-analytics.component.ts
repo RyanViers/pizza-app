@@ -102,7 +102,7 @@ import { opacityScale } from 'src/app/utils/animations';
         </p>
       </div>
     </div>
-    <div *ngIf="toggleState$ | async" class="w-full h-12"></div>
+    
   </div>`,
   styles: [],
 })

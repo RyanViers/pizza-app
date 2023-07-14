@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CartItem } from '../pizza/helpers/models';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { TailwindIconType, TailwindIcon } from '../utils/tailwind-icons';
+import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
 
+export interface CartItem {
+  pizza: CustomPizza | SpecialtyPizza;
+}
 @Injectable({
   providedIn: 'root',
 })
