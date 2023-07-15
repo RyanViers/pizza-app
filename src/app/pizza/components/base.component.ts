@@ -104,7 +104,7 @@ export default class BaseComponent implements OnInit {
   PizzaSize: string[] = this.objectValues(PizzaSize);
   PizzaSauce: string[] = this.objectValues(PizzaSauce);
   PizzaCrust: string[] = this.objectValues(PizzaCrust);
-
+  
   $pizzaCrust: Observable<PizzaCrust> = this.pizzaService.$pizzaCrust;
   $pizzaSize: Observable<PizzaSize> = this.pizzaService.$pizzaSize;
   $pizzaSauce: Observable<PizzaSauce> = this.pizzaService.$pizzaSauce;
