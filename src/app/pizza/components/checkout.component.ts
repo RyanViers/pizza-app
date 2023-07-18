@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, WritableSignal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
 import { Observable, map } from 'rxjs';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
+import { CustomPizza } from 'src/app/API.service';
 
 @Component({
   selector: 'app-checkout',
@@ -164,6 +165,8 @@ export default class CheckoutComponent {
   $veggiePrice: Observable<number> = this.pizza.$veggiePrice;
   $pizzaPrice: Observable<number | undefined> = this.pizza.$pizzaPrice;
   $quantityTotal: Observable<number | undefined> = this.pizza.$quantity;
+
+  $signal: WritableSignal<CustomPizza> = this.pizza.$signal;
 
   constructor(private pizza: PizzaService) {}
 

@@ -1,8 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { PizzaSize, PizzaCrust, PizzaSauce } from 'src/app/API.service';
+import {
+  PizzaSize,
+  PizzaCrust,
+  PizzaSauce,
+  CustomPizza,
+} from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
 import { Observable } from 'rxjs';
 
@@ -29,7 +34,7 @@ import { Observable } from 'rxjs';
             </div>
             <div class="ml-3 flex h-6 items-center">
               <input
-                [checked]="($pizzaSize | async) === size"
+                [checked]="$pizzaSizeSignal() === size"
                 [id]="size"
                 [name]="'pizzaSize'"
                 type="radio"
@@ -100,7 +105,7 @@ import { Observable } from 'rxjs';
     ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0; }',
   ],
 })
-export default class BaseComponent implements OnInit {
+export default class BaseComponent {
   PizzaSize: string[] = this.objectValues(PizzaSize);
   PizzaSauce: string[] = this.objectValues(PizzaSauce);
   PizzaCrust: string[] = this.objectValues(PizzaCrust);
@@ -109,16 +114,19 @@ export default class BaseComponent implements OnInit {
   $pizzaSize: Observable<PizzaSize> = this.pizzaService.$pizzaSize;
   $pizzaSauce: Observable<PizzaSauce> = this.pizzaService.$pizzaSauce;
 
-  constructor(private pizzaService: PizzaService) {}
+  $pizzaSizeSignal: Signal<PizzaSize> = this.pizzaService.$pizzaSizeSignal;
 
-  ngOnInit(): void {}
+  constructor(private pizzaService: PizzaService) {
+    console.log(this.$pizzaSizeSignal());
+  }
 
   objectValues(obj: object): string[] {
     return Object.values(obj);
   }
 
   onSizeChange(size: PizzaSize | string): void {
-    this.pizzaService.setPizza({ size: size as PizzaSize });
+    //this.pizzaService.setPizza({ size: size as PizzaSize });
+    this.pizzaService.setSignal(size as Partial<CustomPizza>);
   }
 
   onCrustChange(crust: any): void {

@@ -17,7 +17,7 @@ import { employees, Employee } from '../../utils/models/employees';
     AdminLocationSelectorComponent,
   ],
   template: `
-    <div class="maw-w-max">
+    <ion-content class="maw-w-max">
       <h1
         class="flex justify-center items-center px-4 text-4xl font-semibold text-white sm:px-6 lg:px-8"
       >
@@ -26,106 +26,115 @@ import { employees, Employee } from '../../utils/models/employees';
       <app-admin-location-selector
         (locationChange)="onLocationChange($event)"
       />
-      <table class="mt-6 w-full whitespace-nowrap text-left ">
-        <colgroup>
-          <col class="w-full sm:w-4/12" />
-          <col class="lg:w-4/12" />
-          <col class="lg:w-2/12" />
-          <col class="lg:w-1/12" />
-          <col class="lg:w-1/12" />
-        </colgroup>
-        <thead class="border-b border-white/10 text-sm leading-6 text-white">
-          <tr>
-            <th
-              scope="col"
-              class="py-2 pl-4 pr-8 font-semibold sm:pl-6 lg:pl-8"
+      <div class="px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+          <div class="sm:flex-auto">
+            <h1 class="text-base font-semibold leading-6 text-gray-300">
+              Users
+            </h1>
+            <p class="mt-2 text-sm text-gray-700">
+              A list of all the users in your account including their name,
+              title, email and role.
+            </p>
+          </div>
+          <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+            <button
+              type="button"
+              class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Employee
-            </th>
-            <th
-              scope="col"
-              class="hidden py-2 pl-0 pr-8 font-semibold sm:table-cell"
+              Add user
+            </button>
+          </div>
+        </div>
+        <div class="mt-8 flow-root">
+          <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div
+              class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
             >
-              Commit
-            </th>
-            <th
-              scope="col"
-              class="py-2 pl-0 pr-4 text-right font-semibold sm:pr-8 sm:text-left lg:pr-20"
-            >
-              Location
-            </th>
-            <th
-              scope="col"
-              class="hidden py-2 pl-0 pr-8 font-semibold md:table-cell lg:pr-20"
-            >
-              Duration
-            </th>
-            <th
-              scope="col"
-              class="hidden py-2 pl-0 pr-4 text-right font-semibold sm:table-cell sm:pr-6 lg:pr-8"
-            >
-              Deployed at
-            </th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-white/5">
-          <ng-container *ngFor="let e of employees">
-            <tr [hidden]="selectedLocation && e.storeName !== selectedLocation">
-              <td class="py-4 pl-4 pr-8 sm:pl-6 lg:pl-8">
-                <div class="flex items-center gap-x-4">
-                  <img [src]="e.img" class="h-8 w-8 rounded-full bg-gray-800" />
-                  <div
-                    class="truncate text-sm font-medium leading-6 text-white"
-                  >
-                    {{ e.name }}
-                  </div>
-                </div>
-              </td>
-              <td class="hidden py-4 pl-0 pr-4 sm:table-cell sm:pr-8">
-                <div class="flex gap-x-3">
-                  <div class="font-mono text-sm leading-6 text-gray-400">
-                    {{ e.email }}
-                  </div>
-                  <span
-                    class="inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 ring-1 ring-inset ring-gray-400/20"
-                    >main</span
-                  >
-                </div>
-              </td>
-              <td class="py-4 pl-0 pr-4 text-sm leading-6 sm:pr-8 lg:pr-20">
-                <div
-                  class="flex items-center justify-end gap-x-2 sm:justify-start"
-                >
-                  <time
-                    class="text-gray-400 sm:hidden"
-                    datetime="2023-01-23T11:00"
-                    >{{ e.storeName }}</time
-                  >
-                  <div
-                    class="flex-none rounded-full p-1 text-green-400 bg-green-400/10"
-                  >
-                    <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
-                  </div>
-                  <div class="hidden text-white sm:block">
-                    {{ e.storeName }}
-                  </div>
-                </div>
-              </td>
-              <td
-                class="hidden py-4 pl-0 pr-8 text-sm leading-6 text-gray-400 md:table-cell lg:pr-20"
-              >
-                {{ e.phone }}
-              </td>
-              <td
-                class="hidden py-4 pl-0 pr-4 text-right text-sm leading-6 text-gray-400 sm:table-cell sm:pr-6 lg:pr-8"
-              >
-                <time datetime="2023-01-23T11:00">{{ e.id }}</time>
-              </td>
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
+              <table class="min-w-full divide-y divide-gray-300">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col"
+                      class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-100 sm:pl-0"
+                    >
+                      Name
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-100"
+                    >
+                      Title
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-100"
+                    >
+                      Status
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-3 py-3.5 text-left text-sm font-semibold text-gray-100"
+                    >
+                      Role
+                    </th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                      <span class="sr-only">Edit</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                  <ng-container *ngFor="let e of employees">
+                    <tr
+                      *ngIf="
+                        !selectedLocation || e.storeName === selectedLocation
+                      "
+                    >
+                      <td
+                        class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0"
+                      >
+                        <div class="flex items-center">
+                          <div class="h-11 w-11 flex-shrink-0">
+                            <img class="h-11 w-11 rounded-full" [src]="e.img" />
+                          </div>
+                          <div class="ml-4">
+                            <div class="font-medium text-gray-300">
+                              {{ e.name }}
+                            </div>
+                            <div class="mt-1 text-gray-500">
+                              {{ e.email }}
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
+                      >
+                        <div class="text-gray-300">{{ e.storeName }}</div>
+                        <div class="mt-1 text-gray-500">{{ e.age }}</div>
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
+                      >
+                        <span
+                          class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+                          >{{ e.phone }}</span
+                        >
+                      </td>
+                      <td
+                        class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
+                      >
+                        {{ e.salary }}
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-content>
   `,
   styles: [],
 })

@@ -4,7 +4,7 @@ import { IconsService } from './../../utils/icons.service';
 import { FooterComponent } from './../../components/footer/footer.component';
 import { HeaderComponent } from './../../components/header/header.component';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -57,10 +57,8 @@ import StoreListComponent from './components/store-list/store-list.component';
       </div>
     </ion-content> `,
 })
-export default class AdminRootComponent implements OnInit {
+export default class AdminRootComponent {
   constructor(private icons: IconsService) {}
-
-  ngOnInit() {}
 
   /**
    * get icon

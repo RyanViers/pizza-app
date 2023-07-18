@@ -1,10 +1,5 @@
 import { SpecialtyPizza } from 'src/app/API.service';
 
-export interface PizzaTopping {
-  name: string;
-  vegetarian: boolean;
-}
-
 export const pizzas: SpecialtyPizza[] = [
   {
     __typename: 'SpecialtyPizza',

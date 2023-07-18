@@ -15,7 +15,6 @@ import { NgOptimizedImage } from '@angular/common';
       <img
         priority
         fill
-        
         ngSrc="assets/pizzaria.jpg"
         class="object-cover object-center w-full h-full opacity-60"
       />
