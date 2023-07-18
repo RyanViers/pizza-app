@@ -1,4 +1,10 @@
-import { Injectable } from '@angular/core';
+import {
+  Injectable,
+  Signal,
+  WritableSignal,
+  computed,
+  signal,
+} from '@angular/core';
 import {
   MeatPrice,
   PizzaCrustPrice,
@@ -81,7 +87,7 @@ export class PizzaService {
     this.$specialtyPizza.next([]);
   }
 
-  /******************* CUSTOM PIZZA ****************/
+  /******************* CUSTOM PIZZAS ARRAY ****************/
   public $customPizza: BehaviorSubject<CustomPizza[]> = new BehaviorSubject<
     CustomPizza[]
   >([]);
@@ -97,7 +103,7 @@ export class PizzaService {
     this.$customPizza.next(newPizzas);
   }
 
-  /******************* SPECIALTY PIZZAS ****************/
+  /******************* SPECIALTY PIZZAS ARRAY ****************/
   public $specialtyPizza: BehaviorSubject<SpecialtyPizza[]> =
     new BehaviorSubject<SpecialtyPizza[]>([]);
 
@@ -268,5 +274,82 @@ export class PizzaService {
     );
   }
 
-  /*********************************** PRIVATE METHODS **************************************/
+  /*********************************** Signals **************************************/
+  public $signal: WritableSignal<CustomPizza> = signal({
+    __typename: 'CustomPizza',
+    size: PizzaSize.LARGE,
+    crust: PizzaCrust.ORIGINAL,
+    sauce: PizzaSauce.TOMATO,
+    cheese: {
+      quantity: CheeseQuantity.NORMAL,
+      additional: AdditionCheeseType.NONE,
+    },
+    meats: [],
+    veggies: [],
+    price: 0,
+    quantity: 1,
+  });
+
+  /** set signal */
+  setSignal(options: Partial<CustomPizza>): void {
+    const currentPizza = this.$signal();
+    const newPizza = { ...currentPizza, ...options };
+    if (!isEqual(currentPizza, newPizza)) {
+      this.$signal.set(newPizza);
+    }
+  }
+
+  resetSignal(): void {
+    this.$signal.set({
+      __typename: 'CustomPizza',
+      size: PizzaSize.LARGE,
+      crust: PizzaCrust.ORIGINAL,
+      sauce: PizzaSauce.TOMATO,
+      cheese: {
+        quantity: CheeseQuantity.NORMAL,
+        additional: AdditionCheeseType.NONE,
+      },
+      meats: [],
+      veggies: [],
+      price: 0,
+      quantity: 1,
+    });
+  }
+
+  public $customPizzaArraySignal: WritableSignal<CustomPizza[]> = signal([]);
+
+  addCustomPizzaSignal(pizza: any): void {
+    // Get the current value of the array
+    const currentPizzas = this.$customPizzaArraySignal();
+
+    // Add the new pizza to the array
+    const newPizzas = [...currentPizzas, pizza];
+
+    // Update the BehaviorSubject with the new array
+    this.$customPizzaArraySignal.set(newPizzas);
+  }
+
+  public $specialtyPizzaArraySignal: WritableSignal<SpecialtyPizza[]> = signal(
+    []
+  );
+
+  public addSpecialtyPizzaSignal(pizza: SpecialtyPizza): void {
+    // Get the current value of the array
+    const currentPizzas = this.$specialtyPizzaArraySignal();
+
+    // Add the new pizza to the array
+    const newPizzas = [...currentPizzas, pizza];
+
+    // Update the BehaviorSubject with the new array
+    this.$specialtyPizzaArraySignal.set(newPizzas);
+  }
+
+  //observable
+  public $pizzaSizeSignal: Signal<PizzaSize> = computed(() => {
+    return this.$signal().size;
+  });
+
+  public $pizzaSauceSignal: Signal<PizzaSauce> = computed(() => {
+    return this.$signal().sauce;
+  });
 }

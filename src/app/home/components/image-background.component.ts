@@ -15,9 +15,8 @@ import { NgOptimizedImage } from '@angular/common';
     <div class="relative overflow-hidden rounded-lg">
       <div class="absolute inset-0">
         <img
+          fill
           ngSrc="{{ options?.image }}"
-          width="1"
-          height="1"
           class="object-cover object-center w-full h-full"
         />
       </div>

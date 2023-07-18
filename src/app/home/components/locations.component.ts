@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { NgOptimizedImage } from '@angular/common';
+import { Locations, locations } from '../models/locations';
 
 @Component({
   selector: 'app-locations',
@@ -22,59 +23,23 @@ import { NgOptimizedImage } from '@angular/common';
     <div
       class="mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0"
     >
-      <div class="block group">
+      <div *ngFor="let l of locations" class="block group">
         <div
           class="h-full overflow-hidden rounded-lg aspect-h-2 aspect-w-3 lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75"
         >
           <img
-            ngSrc="assets/stores/jc-pic.jpg"
-            width="1"
-            height="1"
+            cover
+            [ngSrc]="l.image"
+            width="300"
+            height="300"
             class="object-cover object-center w-full h-full"
           />
         </div>
         <h3 class="mt-4 text-base font-semibold text-dark-tint">
-          Johnson City
+          {{ l.name }}
         </h3>
         <p class="mt-2 text-sm text-gray-500">
-          The city's vibrant downtown area is a bustling hub of unique local
-          businesses, from eclectic boutiques to delicious restaurants,
-          including the best pizza at The Crust Kingdom!
-        </p>
-      </div>
-      <div class="block group">
-        <div
-          class="h-full overflow-hidden rounded-lg aspect-h-2 aspect-w-3 lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75"
-        >
-          <img
-            ngSrc="assets/stores/kingsport-pic.jpg"
-            width="1"
-            height="1"
-            class="object-cover object-center w-full h-full"
-          />
-        </div>
-        <h3 class="mt-4 text-base font-semibold text-dark-tint">Kingsport</h3>
-        <p class="mt-2 text-sm text-gray-500">
-          Known for its thriving arts scene, Kingsport is also home to Doughy
-          Delights, where the art of pizza-making takes center stage!
-        </p>
-      </div>
-      <div class="block group">
-        <div
-          class="h-full overflow-hidden rounded-lg aspect-h-2 aspect-w-3 lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75"
-        >
-          <img
-            ngSrc="assets/stores/bristol-pic.jpg"
-            width="1"
-            height="1"
-            class="object-cover object-center w-full h-full"
-          />
-        </div>
-        <h3 class="mt-4 text-base font-semibold text-dark-tint">Bristol</h3>
-        <p class="mt-2 text-sm text-gray-500">
-          Bristol is a city that straddles two states but is united in its love
-          for music, motorsports, and mouthwatering pizza from The Crust
-          Kingdom!
+          {{ l.description }}
         </p>
       </div>
     </div>
@@ -82,6 +47,7 @@ import { NgOptimizedImage } from '@angular/common';
   styles: [``],
 })
 export class LocationsComponent implements OnInit {
+  locations: Locations[] = locations;
   constructor() {}
 
   ngOnInit() {}
