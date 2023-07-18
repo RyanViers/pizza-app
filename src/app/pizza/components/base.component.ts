@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Signal } from '@angular/core';
+import { Component, Signal, DoCheck } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import {
@@ -10,12 +10,15 @@ import {
 } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
 import { Observable } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-base',
   standalone: true,
   imports: [CommonModule, IonicModule, FormsModule],
-  providers: [],
+  styles: [
+    ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0; }',
+  ],
   template: `
     <div class="flex w-full h-full justify-evenly ">
       <fieldset>
@@ -99,13 +102,11 @@ import { Observable } from 'rxjs';
           </div>
         </div>
       </fieldset>
+      <p>Total price before tax: {{ $totalPriceBeforeTaxSignal() }}</p>
     </div>
   `,
-  styles: [
-    ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0; }',
-  ],
 })
-export default class BaseComponent {
+export default class BaseComponent implements DoCheck {
   PizzaSize: string[] = this.objectValues(PizzaSize);
   PizzaSauce: string[] = this.objectValues(PizzaSauce);
   PizzaCrust: string[] = this.objectValues(PizzaCrust);
@@ -116,8 +117,13 @@ export default class BaseComponent {
 
   $pizzaSizeSignal: Signal<PizzaSize> = this.pizzaService.$pizzaSizeSignal;
 
-  constructor(private pizzaService: PizzaService) {
-    console.log(this.$pizzaSizeSignal());
+  $totalPriceBeforeTaxSignal: Signal<number> =
+    this.pizzaService.$totalPriceBeforeTaxSignal;
+
+  constructor(private pizzaService: PizzaService) {}
+
+  ngDoCheck(): void {
+    console.log(this.$totalPriceBeforeTaxSignal());
   }
 
   objectValues(obj: object): string[] {
@@ -125,15 +131,19 @@ export default class BaseComponent {
   }
 
   onSizeChange(size: PizzaSize | string): void {
-    //this.pizzaService.setPizza({ size: size as PizzaSize });
+    const newSize = size;
+    console.log(newSize);
+    this.pizzaService.setPizza({ size: size as PizzaSize });
     this.pizzaService.setSignal(size as Partial<CustomPizza>);
   }
 
   onCrustChange(crust: any): void {
     this.pizzaService.setPizza({ crust: crust });
+    this.pizzaService.setSignal(crust as Partial<CustomPizza>);
   }
 
   onSauceChange(sauce: PizzaSauce | string): void {
     this.pizzaService.setPizza({ sauce: sauce as PizzaSauce });
+    this.pizzaService.setSignal(sauce as Partial<CustomPizza>);
   }
 }

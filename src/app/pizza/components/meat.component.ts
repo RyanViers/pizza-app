@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { PizzaMeat } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
@@ -42,14 +42,15 @@ import { Observable } from 'rxjs';
     ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0;}',
   ],
 })
-export default class MeatComponent implements OnInit {
+export default class MeatComponent {
   PizzaMeat: PizzaMeat[] = this.objectValues(PizzaMeat);
 
   $pizzaMeats: Observable<(PizzaMeat | null)[]> = this.pizzaService.$pizzaMeats;
 
-  constructor(private pizzaService: PizzaService) {}
+  $pizzaMeatsSignal: Signal<(PizzaMeat | null)[]> =
+    this.pizzaService.$pizzaMeatsSignal;
 
-  ngOnInit(): void {}
+  constructor(private pizzaService: PizzaService) {}
 
   objectValues(obj: any): PizzaMeat[] {
     return Object.values(obj);
@@ -61,6 +62,12 @@ export default class MeatComponent implements OnInit {
     const exsist = currentMeats.includes(meat as PizzaMeat);
 
     this.pizzaService.setPizza({
+      meats: exsist
+        ? currentMeats.filter((m) => m !== (meat as PizzaMeat))
+        : [...currentMeats, meat as PizzaMeat],
+    });
+
+    this.pizzaService.setSignal({
       meats: exsist
         ? currentMeats.filter((m) => m !== (meat as PizzaMeat))
         : [...currentMeats, meat as PizzaMeat],

@@ -1,8 +1,8 @@
-import { Order } from "src/app/API.service"
+import { Order } from 'src/app/API.service';
 
 export interface ListOrdersByUserResponse {
-    listOrdersByUser: Order[]
+  listOrdersByUser: Order[];
 }
 export interface GetOrderResponse {
-    getOrder: Order
+  getOrder: Order;
 }

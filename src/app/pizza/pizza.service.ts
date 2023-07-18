@@ -290,15 +290,19 @@ export class PizzaService {
     quantity: 1,
   });
 
-  /** set signal */
+  /********************** SET SIGNAL ****************************/
   setSignal(options: Partial<CustomPizza>): void {
     const currentPizza = this.$signal();
+    console.log(currentPizza, options);
     const newPizza = { ...currentPizza, ...options };
+    console.log(newPizza);
     if (!isEqual(currentPizza, newPizza)) {
       this.$signal.set(newPizza);
+      console.log(this.$signal(), newPizza);
     }
   }
 
+  /********************** RESET SIGNAL ****************************/
   resetSignal(): void {
     this.$signal.set({
       __typename: 'CustomPizza',
@@ -316,40 +320,131 @@ export class PizzaService {
     });
   }
 
+  /****************************** CUSTOM PIZZAS ARRAY ********************************/
   public $customPizzaArraySignal: WritableSignal<CustomPizza[]> = signal([]);
 
   addCustomPizzaSignal(pizza: any): void {
-    // Get the current value of the array
     const currentPizzas = this.$customPizzaArraySignal();
-
-    // Add the new pizza to the array
     const newPizzas = [...currentPizzas, pizza];
-
-    // Update the BehaviorSubject with the new array
     this.$customPizzaArraySignal.set(newPizzas);
   }
 
+  /****************************** SPECIALTY PIZZAS ARRAY ********************************/
   public $specialtyPizzaArraySignal: WritableSignal<SpecialtyPizza[]> = signal(
     []
   );
 
   public addSpecialtyPizzaSignal(pizza: SpecialtyPizza): void {
-    // Get the current value of the array
     const currentPizzas = this.$specialtyPizzaArraySignal();
-
-    // Add the new pizza to the array
     const newPizzas = [...currentPizzas, pizza];
-
-    // Update the BehaviorSubject with the new array
     this.$specialtyPizzaArraySignal.set(newPizzas);
   }
 
-  //observable
+  /****************************** SIGNALS ********************************/
   public $pizzaSizeSignal: Signal<PizzaSize> = computed(() => {
     return this.$signal().size;
   });
 
   public $pizzaSauceSignal: Signal<PizzaSauce> = computed(() => {
     return this.$signal().sauce;
+  });
+
+  public $pizzaCrustSignal: Signal<PizzaCrust> = computed(() => {
+    return this.$signal().crust;
+  });
+
+  public $pizzaCheeseQuantitySignal: Signal<CheeseQuantity> = computed(() => {
+    return this.$signal().cheese.quantity;
+  });
+
+  public $quantitySignal: Signal<number | undefined> = computed(() => {
+    return this.$signal().quantity;
+  });
+
+  public $pizzaCheeseAdditionalSignal: Signal<
+    AdditionCheeseType | null | undefined
+  > = computed(() => {
+    return this.$signal().cheese.additional;
+  });
+
+  public $pizzaMeatsSignal: Signal<(PizzaMeat | null)[]> = computed(() => {
+    return this.$signal().meats;
+  });
+
+  public $pizzaVeggiesSignal: Signal<(PizzaVeggie | null)[]> = computed(() => {
+    return this.$signal().veggies;
+  });
+
+  public $pizzaPriceSignal: Signal<number | undefined> = computed(() => {
+    return this.$signal().price;
+  });
+
+  /****************************** COST SIGNALS ********************************/
+
+  public $pizzaSizePriceSignal: Signal<number> = computed(() => {
+    return PizzaSizePrice[this.$signal().size] || PizzaSizePrice.LARGE;
+  });
+
+  public $pizzaSaucePriceSignal: Signal<number> = computed(() => {
+    return PizzaSaucePrice[this.$signal().sauce] || PizzaSaucePrice.TOMATO;
+  });
+
+  public $pizzaCrustPriceSignal: Signal<number> = computed(() => {
+    return PizzaCrustPrice[this.$signal().crust] || PizzaCrustPrice.ORIGINAL;
+  });
+
+  public $pizzaCheeseQuantityPriceSignal: Signal<number> = computed(() => {
+    return (
+      CheeseQuantityPrice[this.$signal().cheese.quantity] ||
+      CheeseQuantityPrice.NORMAL
+    );
+  });
+
+  public $pizzaMeatsSignalPrice: Signal<number> = computed(() => {
+    return this.$signal().meats.reduce(
+      (total, meat) => total + (MeatPrice[meat as PizzaMeat] || MeatPrice.NONE),
+      0
+    );
+  });
+
+  public $pizzaVeggiesSignalPrice: Signal<number> = computed(() => {
+    return this.$signal().veggies.reduce(
+      (total, veggie) =>
+        total + (VeggiePrice[veggie as PizzaVeggie] || VeggiePrice.NONE),
+      0
+    );
+  });
+
+  /****************************** PUBLIC API ********************************/
+
+  getPizzaCheeseSignal(): PizzaCheese {
+    return this.$signal()?.cheese;
+  }
+
+  getPizzaMeatsSignal(): (PizzaMeat | null)[] {
+    return this.$signal()?.meats;
+  }
+
+  getPizzaVeggiesSignal(): (PizzaVeggie | null)[] {
+    return this.$signal()?.veggies;
+  }
+
+  getPizzaQuantitySignal(): number {
+    return this.$signal()?.quantity || 1;
+  }
+
+  getPizzaPriceSignal(): number {
+    return this.$signal()?.price || 0;
+  }
+
+  /*********************************** MATH METHODS **************************************/
+  $totalPriceBeforeTaxSignal: Signal<number> = computed(() => {
+    const qty = this.$signal().quantity || 1;
+    return (
+      (this.$pizzaSizePriceSignal() +
+        this.$pizzaCrustPriceSignal() +
+        this.$pizzaSaucePriceSignal()) *
+      qty
+    );
   });
 }

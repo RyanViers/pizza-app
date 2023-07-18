@@ -7,7 +7,7 @@ export enum PizzaStepperSection {
 }
 
 export enum MeatPrice {
-  BACON  = 1.99,
+  BACON = 1.99,
   CHICKEN = 1.99,
   HAM = 1.99,
   PEPPERONI = 0.99,

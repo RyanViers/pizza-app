@@ -1,11 +1,11 @@
-import { Order } from "src/app/API.service";
+import { Order } from 'src/app/API.service';
 
 export interface CreateOrderResponse {
-    createOrder: Order
+  createOrder: Order;
 }
 export interface UpdateOrderResponse {
-    updateOrder: Order
+  updateOrder: Order;
 }
 export interface DeleteOrderResponse {
-    deleteOrder: Order
+  deleteOrder: Order;
 }
