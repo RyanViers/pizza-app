@@ -14,9 +14,9 @@ import { NgOptimizedImage } from '@angular/common';
     <div class="absolute inset-0 overflow-hidden">
       <img
         priority
+        fill
+        
         ngSrc="assets/pizzaria.jpg"
-        width="1024"
-        height="683"
         class="object-cover object-center w-full h-full opacity-60"
       />
     </div>
