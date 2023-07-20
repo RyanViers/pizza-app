@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { AdditionCheeseType, CheeseQuantity } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
-import { Observable } from 'rxjs';
 import { opacityScale } from 'src/app/utils/animations';
 
 @Component({
@@ -12,6 +11,9 @@ import { opacityScale } from 'src/app/utils/animations';
   imports: [CommonModule, IonicModule],
   providers: [],
   animations: [opacityScale],
+  styles: [
+    ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0; }',
+  ],
   template: `<div class="flex w-full h-full justify-evenly ">
     <fieldset @opacityScale>
       <legend class="text-base font-semibold text-dark">
@@ -31,7 +33,7 @@ import { opacityScale } from 'src/app/utils/animations';
           </div>
           <div class="ml-3 flex h-6 items-center">
             <input
-              [checked]="($pizzaCheeseQuantity | async) === qty"
+              [checked]="$pizzaCheeseQuantitySignal() === qty"
               [id]="qty"
               type="radio"
               class="h-4 w-4 border-gray-300"
@@ -59,7 +61,7 @@ import { opacityScale } from 'src/app/utils/animations';
           </div>
           <div class="ml-3 flex h-6 items-center">
             <input
-              [checked]="($pizzaCheeseAdditional | async) === cheese"
+              [checked]="$pizzaCheeseAdditionalSignal() === cheese"
               [id]="cheese"
               type="radio"
               class="h-4 w-4"
@@ -70,40 +72,36 @@ import { opacityScale } from 'src/app/utils/animations';
       </div>
     </fieldset>
   </div>`,
-  styles: [
-    ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0; }',
-  ],
 })
-export default class CheeseComponent implements OnInit {
+export default class CheeseComponent {
   CheeseQuantity: string[] = this.objectValues(CheeseQuantity);
   AdditionCheeseType: string[] = this.objectValues(AdditionCheeseType);
 
-  $pizzaCheeseQuantity: Observable<CheeseQuantity | undefined> =
-    this.pizzaService.$pizzaCheeseQuantity;
-  $pizzaCheeseAdditional: Observable<AdditionCheeseType | null | undefined> =
-    this.pizzaService.$pizzaCheeseAdditional;
+  $pizzaCheeseQuantitySignal: Signal<CheeseQuantity | undefined> =
+    this.pizzaService.$pizzaCheeseQuantitySignal;
+
+  $pizzaCheeseAdditionalSignal: Signal<AdditionCheeseType | null | undefined> =
+    this.pizzaService.$pizzaCheeseAdditionalSignal;
 
   constructor(private pizzaService: PizzaService) {}
-
-  ngOnInit(): void {}
 
   objectValues(obj: object): string[] {
     return Object.values(obj);
   }
 
   updateCheeseQuantity(qty: CheeseQuantity | string): void {
-    this.pizzaService.setPizza({
+    this.pizzaService.setSignal({
       cheese: {
-        ...this.pizzaService.getPizzaCheese(),
+        ...this.pizzaService.getPizzaCheeseSignal(),
         ...{ quantity: qty as CheeseQuantity },
       },
     });
   }
 
   updateAdditionalCheeseType(cheese: AdditionCheeseType | string): void {
-    this.pizzaService.setPizza({
+    this.pizzaService.setSignal({
       cheese: {
-        ...this.pizzaService.getPizzaCheese(),
+        ...this.pizzaService.getPizzaCheeseSignal(),
         ...{ additional: cheese as AdditionCheeseType },
       },
     });

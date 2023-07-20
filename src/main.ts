@@ -66,4 +66,4 @@ bootstrapApplication(AppComponent, {
       deps: [HttpLink],
     },
   ],
-});
+}).catch((e) => console.error(e));

@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { PizzaVeggie } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-veggie',
@@ -27,7 +26,7 @@ import { Observable } from 'rxjs';
           </div>
           <div class="ml-3 flex h-6 items-center">
             <input
-              [checked]="($pizzaVeggies | async)?.includes(veg)"
+              [checked]="$pizzaVeggiesSignal().includes(veg)"
               [id]="veg"
               type="radio"
               class="h-4 w-4 border-gray-300"
@@ -45,8 +44,8 @@ import { Observable } from 'rxjs';
 export default class VeggieComponent implements OnInit {
   PizzaVeggie: PizzaVeggie[] = this.objectValues(PizzaVeggie);
 
-  $pizzaVeggies: Observable<(PizzaVeggie | null)[]> =
-    this.pizzaService.$pizzaVeggies;
+  $pizzaVeggiesSignal: Signal<(PizzaVeggie | null)[]> =
+    this.pizzaService.$pizzaVeggiesSignal;
 
   constructor(private pizzaService: PizzaService) {}
 
@@ -58,10 +57,10 @@ export default class VeggieComponent implements OnInit {
 
   updateVeggie(veg: PizzaVeggie | string): void {
     const currentVeggies: (PizzaVeggie | null)[] =
-      this.pizzaService.getPizzaVeggies();
+      this.pizzaService.getPizzaVeggiesSignal();
     const exsist = currentVeggies.includes(veg as PizzaVeggie);
 
-    this.pizzaService.setPizza({
+    this.pizzaService.setSignal({
       veggies: exsist
         ? currentVeggies.filter((v) => v !== (veg as PizzaVeggie))
         : [...currentVeggies, veg as PizzaVeggie],

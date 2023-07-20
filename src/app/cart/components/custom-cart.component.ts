@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  WritableSignal,
+} from '@angular/core';
 import { CartService } from '../cart.service';
 import { PizzaService } from 'src/app/pizza/pizza.service';
 import { CommonModule } from '@angular/common';
@@ -10,6 +16,7 @@ import { CustomPizza } from 'src/app/API.service';
   selector: 'app-custom-cart',
   imports: [CommonModule, IonicModule, SharedModule],
   standalone: true,
+  styles: [],
   template: `<div class="grid grid-cols-2">
     <div class="">
       <img
@@ -18,23 +25,24 @@ import { CustomPizza } from 'src/app/API.service';
       />
     </div>
 
-    <div class="grid grid-cols-2 ">
+    <div *ngFor="let c of $customPizzaArraySignal()" class="grid grid-cols-2">
       <h1 class="text-base font-bold text-dark-shade">Quantity</h1>
-      <p class="text-sm text-dark-tint">{{ customPizza?.quantity }}</p>
+      <p class="text-sm text-dark-tint">{{ c.quantity }}</p>
       <h1 class="text-base font-bold text-dark-shade">Size</h1>
-      <p class="text-sm text-dark-tint">{{ customPizza?.size }}</p>
+      <p class="text-sm text-dark-tint">{{ c.size }}</p>
       <h1 class="text-base font-bold text-dark-shade">Crust</h1>
-      <p class="text-sm text-dark-tint">{{ customPizza?.crust }}</p>
+      <p class="text-sm text-dark-tint">{{ c.crust }}</p>
       <h1 class="text-base font-bold text-dark-shade">Sauce</h1>
-      <p class="text-sm text-dark-tint">{{ customPizza?.sauce }}</p>
+      <p class="text-sm text-dark-tint">{{ c.sauce }}</p>
       <h1 class="text-base font-bold text-dark-shade">Cheese</h1>
       <p class="text-sm text-dark-tint">
-        {{ customPizza?.cheese?.quantity }}
+        {{ c.cheese.additional }}
       </p>
       <h1 class="text-base font-bold text-dark-shade">Toppings</h1>
-      <p class="text-sm text-dark-tint">meat</p>
+      <p class="text-sm text-dark-tint">{{ c.meats }}</p>
+      <p class="text-sm text-dark-tint">{{ c.veggies }}</p>
       <h1 class="text-base font-bold text-dark-shade">Price</h1>
-      <p class="text-sm text-dark-tint">{{ customPizza?.price }}</p>
+      <p class="text-sm text-dark-tint">{{ c.price }}</p>
     </div>
 
     <div class="mt-4 sm:mt-0 sm:pr-9">
@@ -48,16 +56,16 @@ import { CustomPizza } from 'src/app/API.service';
       </div>
     </div>
   </div> `,
-  styles: [],
 })
-export class CustomCartComponent implements OnInit, AfterViewInit {
+export class CustomCartComponent {
   @Input() customPizza: CustomPizza | undefined;
 
-  constructor(private cart: CartService, private pizza: PizzaService) {}
+  $customPizzaArraySignal: WritableSignal<CustomPizza[]> =
+    this.pizza.$customPizzaArraySignal;
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {}
+  constructor(private cart: CartService, private pizza: PizzaService) {
+    console.log(this.$customPizzaArraySignal());
+  }
 
   getIcon(num: number) {
     return this.cart.getIcon(num);

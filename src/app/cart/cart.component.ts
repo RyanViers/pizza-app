@@ -2,7 +2,7 @@ import { CustomCartComponent } from './components/custom-cart.component';
 import { CartSummaryComponent } from './components/cart-summary.component';
 import { SpecialtyCartComponent } from './components/specialty-cart.component';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, WritableSignal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
@@ -83,7 +83,9 @@ export default class CartComponent implements OnInit {
     this.pizza.$specialtyPizza;
   $customPizzaList: BehaviorSubject<CustomPizza[]> = this.pizza.$customPizza;
 
-  constructor(private pizza: PizzaService) {}
+  constructor(private pizza: PizzaService) {
+    console.log();
+  }
 
   ngOnInit() {}
 }

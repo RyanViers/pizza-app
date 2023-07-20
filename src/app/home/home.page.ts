@@ -14,7 +14,6 @@ import { ImageBackgroundComponent } from './components/image-background.componen
 
 @Component({
   selector: 'app-home',
-  styles: [``],
   standalone: true,
   imports: [
     CommonModule,
@@ -29,6 +28,7 @@ import { ImageBackgroundComponent } from './components/image-background.componen
     LocationsComponent,
     ImageBackgroundComponent,
   ],
+  styles: [``],
   template: `<ion-header>
       <app-header />
     </ion-header>
@@ -38,18 +38,25 @@ import { ImageBackgroundComponent } from './components/image-background.componen
         <!-- Hero section -->
         <app-hero />
 
+        <p class="text-base font-bold text-dark-shade">Right Here</p>
         <main>
           <!-- Pizza Cards -->
           <app-pizza-cards />
 
           <!-- Featured section -->
-          <app-image-background class="w-full h-full relative" [options]="options1" />
+          <app-image-background
+            class="w-full h-full relative"
+            [options]="options1"
+          />
 
           <!-- Locations -->
           <app-locations class="w-full h-full relative" />
 
           <!-- Featured section -->
-          <app-image-background class="w-full h-full relative" [options]="options2" />
+          <app-image-background
+            class="w-full h-full relative"
+            [options]="options2"
+          />
         </main>
       </div>
       <ion-footer>

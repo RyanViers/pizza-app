@@ -2,15 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Signal, DoCheck } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import {
-  PizzaSize,
-  PizzaCrust,
-  PizzaSauce,
-  CustomPizza,
-} from 'src/app/API.service';
+import { PizzaSize, PizzaCrust, PizzaSauce } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
-import { Observable } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-base',
@@ -37,7 +30,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
             </div>
             <div class="ml-3 flex h-6 items-center">
               <input
-                [checked]="$pizzaSizeSignal() === size"
+                [checked]="$pizzaSize() === size"
                 [id]="size"
                 [name]="'pizzaSize'"
                 type="radio"
@@ -64,7 +57,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
             </div>
             <div class="ml-3 flex h-6 items-center">
               <input
-                [checked]="($pizzaCrust | async) === crust"
+                [checked]="$pizzaCrust() === crust"
                 [id]="crust"
                 [name]="'pizzaCrust'"
                 type="radio"
@@ -91,7 +84,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
             </div>
             <div class="ml-3 flex h-6 items-center">
               <input
-                [checked]="($pizzaSauce | async) === sauce"
+                [checked]="$pizzaSauce() === sauce"
                 [id]="sauce"
                 [name]="'pizzaSauce'"
                 type="radio"
@@ -102,7 +95,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
           </div>
         </div>
       </fieldset>
-      <p>Total price before tax: {{ $totalPriceBeforeTaxSignal() }}</p>
     </div>
   `,
 })
@@ -111,11 +103,9 @@ export default class BaseComponent implements DoCheck {
   PizzaSauce: string[] = this.objectValues(PizzaSauce);
   PizzaCrust: string[] = this.objectValues(PizzaCrust);
 
-  $pizzaCrust: Observable<PizzaCrust> = this.pizzaService.$pizzaCrust;
-  $pizzaSize: Observable<PizzaSize> = this.pizzaService.$pizzaSize;
-  $pizzaSauce: Observable<PizzaSauce> = this.pizzaService.$pizzaSauce;
-
-  $pizzaSizeSignal: Signal<PizzaSize> = this.pizzaService.$pizzaSizeSignal;
+  $pizzaCrust: Signal<PizzaCrust> = this.pizzaService.$pizzaCrustSignal;
+  $pizzaSize: Signal<PizzaSize> = this.pizzaService.$pizzaSizeSignal;
+  $pizzaSauce: Signal<PizzaSauce> = this.pizzaService.$pizzaSauceSignal;
 
   $totalPriceBeforeTaxSignal: Signal<number> =
     this.pizzaService.$totalPriceBeforeTaxSignal;
@@ -131,19 +121,14 @@ export default class BaseComponent implements DoCheck {
   }
 
   onSizeChange(size: PizzaSize | string): void {
-    const newSize = size;
-    console.log(newSize);
-    this.pizzaService.setPizza({ size: size as PizzaSize });
-    this.pizzaService.setSignal(size as Partial<CustomPizza>);
+    this.pizzaService.setSignal({ size: size as PizzaSize });
   }
 
   onCrustChange(crust: any): void {
-    this.pizzaService.setPizza({ crust: crust });
-    this.pizzaService.setSignal(crust as Partial<CustomPizza>);
+    this.pizzaService.setSignal({ crust: crust as PizzaCrust });
   }
 
   onSauceChange(sauce: PizzaSauce | string): void {
-    this.pizzaService.setPizza({ sauce: sauce as PizzaSauce });
-    this.pizzaService.setSignal(sauce as Partial<CustomPizza>);
+    this.pizzaService.setSignal({ sauce: sauce as PizzaSauce });
   }
 }

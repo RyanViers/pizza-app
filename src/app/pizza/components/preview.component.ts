@@ -1,18 +1,9 @@
 import { SharedModule } from './../../shared/shared.module';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { PizzaService } from '../pizza.service';
-import { Observable } from 'rxjs';
-import {
-  AdditionCheeseType,
-  CheeseQuantity,
-  PizzaCrust,
-  PizzaMeat,
-  PizzaSauce,
-  PizzaSize,
-  PizzaVeggie,
-} from 'src/app/API.service';
+import { CustomPizza } from 'src/app/API.service';
 
 @Component({
   selector: `app-pizza-preview`,
@@ -33,7 +24,7 @@ import {
               Size:
             </h3>
             <p class="text-base leading-7 text-medium">
-              {{ $pizzaSize | async }}
+              {{ $signal().size }}
             </p>
           </div>
           <div>
@@ -43,7 +34,7 @@ import {
               Crust:
             </h3>
             <p class="text-base leading-7 text-medium">
-              {{ $pizzaCrust | async }}
+              {{ $signal().crust }}
             </p>
           </div>
           <div>
@@ -53,7 +44,7 @@ import {
               Sauce:
             </h3>
             <p class="text-base leading-7 text-medium">
-              {{ $pizzaSauce | async }}
+              {{ $signal().sauce }}
             </p>
           </div>
         </div>
@@ -65,7 +56,7 @@ import {
               Cheese Quantity:
             </h3>
             <p class="text-base leading-7 text-medium">
-              {{ $pizzaCheeseQuantity | async }}
+              {{ $signal().cheese.quantity }}
             </p>
           </div>
           <div>
@@ -75,7 +66,7 @@ import {
               Additional Cheese:
             </h3>
             <p class="text-base leading-7 text-medium">
-              {{ $pizzaCheeseAdditional | async }}
+              {{ $signal().cheese.additional }}
             </p>
           </div>
         </div>
@@ -86,7 +77,7 @@ import {
             The Meats:
           </h3>
           <p class="text-base leading-7 text-medium">
-            {{ ($pizzaMeats | async)?.length }}
+            {{ $signal().meats.length }}
           </p>
         </div>
         <div>
@@ -94,7 +85,7 @@ import {
             The Veggies:
           </h3>
           <p class="text-base leading-7 text-medium">
-            {{ ($pizzaVeggies | async)?.length }}
+            {{ $signal().veggies.length }}
           </p>
         </div>
       </div>
@@ -103,15 +94,8 @@ import {
   styles: [``],
 })
 export class PizzaPreviewComponent {
-  $pizzaSize: Observable<PizzaSize> = this.pizza.$pizzaSize;
-  $pizzaCrust: Observable<PizzaCrust> = this.pizza.$pizzaCrust;
-  $pizzaSauce: Observable<PizzaSauce> = this.pizza.$pizzaSauce;
-  $pizzaCheeseQuantity: Observable<CheeseQuantity> =
-    this.pizza.$pizzaCheeseQuantity;
-  $pizzaCheeseAdditional: Observable<AdditionCheeseType | null | undefined> =
-    this.pizza.$pizzaCheeseAdditional;
-  $pizzaMeats: Observable<(PizzaMeat | null)[]> = this.pizza.$pizzaMeats;
-  $pizzaVeggies: Observable<(PizzaVeggie | null)[]> = this.pizza.$pizzaVeggies;
+
+  $signal: Signal<CustomPizza> = this.pizza.$signal;
 
   constructor(private pizza: PizzaService) {}
 }

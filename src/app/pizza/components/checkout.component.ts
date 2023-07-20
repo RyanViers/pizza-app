@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, WritableSignal } from '@angular/core';
+import { Component, Signal, WritableSignal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
-import { Observable, map } from 'rxjs';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { CustomPizza } from 'src/app/API.service';
 
@@ -53,49 +52,49 @@ import { CustomPizza } from 'src/app/API.service';
                     <div class="flex justify-between">
                       <h3 class="text-sm">Quantity:</h3>
                       <p class="text-sm pl-5 text-gray-400">
-                        {{ $quantityTotal | async }}
+                        {{ $quantitySignal() }}
                       </p>
                     </div>
                     <div class="flex justify-between">
                       <h3 class="text-sm">Size:</h3>
                       <p class="text-sm pl-5 text-gray-400">
-                        {{ $pizzaSizePrice | async }}
+                        {{ $pizzaSizePriceSignal() }}
                       </p>
                     </div>
                     <div class="flex justify-between">
                       <h3 class="text-sm">Crust:</h3>
                       <p class="text-sm pl-5 text-gray-400">
-                        {{ $pizzaCrustPrice | async }}
+                        {{ $pizzaCrustPriceSignal() }}
                       </p>
                     </div>
                     <div class="flex justify-between">
                       <h3 class="text-sm">Sauce:</h3>
                       <p class="text-sm pl-5 text-gray-400">
-                        {{ $pizzaSaucePrice | async }}
+                        {{ $pizzaSaucePriceSignal() }}
                       </p>
                     </div>
                     <div class="flex justify-between">
                       <h3 class="text-sm">Cheese Qty:</h3>
                       <p class="text-sm pl-5 text-gray-400">
-                        {{ $pizzaCheeseQuantityPrice | async }}
+                        {{ $pizzaCheeseQuantityPriceSignal() }}
                       </p>
                     </div>
                     <div class="flex justify-between">
                       <h3 class="text-sm">Add Cheese:</h3>
                       <p class="text-sm pl-5 text-gray-400">
-                        {{ $pizzaCheeseAdditionalPrice | async }}
+                        $pizzaCheeseAdditionalPrice | async
                       </p>
                     </div>
                     <div class="flex justify-between">
                       <h3 class="text-sm">Meats:</h3>
                       <p class="text-sm pl-5 text-gray-400">
-                        {{ meatFormat() | async }}
+                        {{ $meatPriceSignal() | currency }}
                       </p>
                     </div>
                     <div class="flex justify-between">
                       <h3 class="text-sm">Veggies:</h3>
                       <p class="text-sm pl-5 text-gray-400">
-                        {{ veggieFormat() | async }}
+                        {{ $veggiePriceSignal() | currency }}
                       </p>
                     </div>
                   </div>
@@ -113,7 +112,7 @@ import { CustomPizza } from 'src/app/API.service';
                 <div class="flex items-center justify-between">
                   <dt class="text-base font-medium text-gray-300">Subtotal</dt>
                   <dd class="ml-4 text-base font-medium text-gray-300">
-                    {{ totalPriceBeforeTax() | async }}
+                    {{ $totalPriceBeforeTaxSignal() | currency }}
                   </dd>
                 </div>
               </dl>
@@ -121,7 +120,7 @@ import { CustomPizza } from 'src/app/API.service';
                 <div class="flex items-center justify-between">
                   <dt class="text-xs font-medium text-medium-default">Tax</dt>
                   <dd class="ml-4 text-base font-medium text-gray-300">
-                    {{ totalTax() | async }}
+                    {{ $totalTaxSignal() | currency }}
                   </dd>
                 </div>
               </dl>
@@ -129,7 +128,7 @@ import { CustomPizza } from 'src/app/API.service';
                 <div class="flex items-center justify-between">
                   <dt class="text-base font-medium text-gray-300">Total</dt>
                   <dd class="ml-4 text-base font-medium text-gray-300">
-                    {{ totalPriceAfterTax() | async }}
+                    {{ $totalPriceAfterTaxSignal() | currency }}
                   </dd>
                 </div>
               </dl>
@@ -154,66 +153,49 @@ import { CustomPizza } from 'src/app/API.service';
   `,
 })
 export default class CheckoutComponent {
-  $pizzaSizePrice: Observable<number> = this.pizza.$pizzaSizePrice;
-  $pizzaCrustPrice: Observable<number> = this.pizza.$pizzaCrustPrice;
-  $pizzaSaucePrice: Observable<number> = this.pizza.$pizzaSaucePrice;
-  $pizzaCheeseQuantityPrice: Observable<number> =
-    this.pizza.$pizzaCheeseQuantityPrice;
-  $pizzaCheeseAdditionalPrice: Observable<number> =
-    this.pizza.$pizzaCheeseAdditionalPrice;
-  $meatPrice: Observable<number> = this.pizza.$meatPrice;
-  $veggiePrice: Observable<number> = this.pizza.$veggiePrice;
-  $pizzaPrice: Observable<number | undefined> = this.pizza.$pizzaPrice;
-  $quantityTotal: Observable<number | undefined> = this.pizza.$quantity;
+  $pizzaSizePriceSignal: Signal<number> = this.pizza.$pizzaSizePriceSignal;
+  $pizzaCrustPriceSignal: Signal<number> = this.pizza.$pizzaCrustPriceSignal;
+  $pizzaSaucePriceSignal: Signal<number> = this.pizza.$pizzaSaucePriceSignal;
+  $pizzaCheeseQuantityPriceSignal: Signal<number> =
+    this.pizza.$pizzaCheeseQuantityPriceSignal;
+  $meatPriceSignal: Signal<number> = this.pizza.$pizzaMeatsSignalPrice;
+  $veggiePriceSignal: Signal<number> = this.pizza.$pizzaVeggiesSignalPrice;
+  $pizzaPriceSignal: Signal<number | undefined> = this.pizza.$pizzaPriceSignal;
+  $quantitySignal: Signal<number | undefined> = this.pizza.$quantitySignal;
+
+  $totalPriceBeforeTaxSignal: Signal<number> =
+    this.pizza.$totalPriceBeforeTaxSignal;
+  $totalTaxSignal: Signal<number> = this.pizza.$totalTaxSignal;
+  $totalPriceAfterTaxSignal: Signal<number> =
+    this.pizza.$totalPriceAfterTaxSignal;
 
   $signal: WritableSignal<CustomPizza> = this.pizza.$signal;
 
   constructor(private pizza: PizzaService) {}
 
-  totalPriceBeforeTax(): Observable<number> {
-    return this.pizza.totalPriceBeforeTax();
-  }
-
-  totalTax(): Observable<number> {
-    return this.pizza.totalTax();
-  }
-
-  totalPriceAfterTax(): Observable<number> {
-    return this.pizza.totalPriceAfterTax();
-  }
-
-  veggieFormat(): Observable<string> {
-    return this.$veggiePrice.pipe(
-      map((veggiePrice: number) => {
-        return veggiePrice.toFixed(2);
-      })
-    );
-  }
-
-  meatFormat(): Observable<string> {
-    return this.$meatPrice.pipe(
-      map((meatPrice: number) => {
-        return meatPrice.toFixed(2);
-      })
-    );
-  }
-
   addPizzaToCart(): void {
-    const subscription = this.pizza.totalPriceBeforeTax().subscribe((price) => {
-      this.pizza.setPizza({ price: price });
-    });
-    this.pizza.addCustomPizza(this.pizza.$pizza.value);
-    subscription.unsubscribe();
+    this.pizza.setSignal({ price: this.$totalPriceAfterTaxSignal() });
+    this.pizza.addCustomPizzaSignal(this.$signal());
 
     Swal.fire({
-      ...this.swalOptions,
-      title: 'Pizza Added to Cart!',
-      text: `Price: ${this.pizza.$pizza.value.price}`,
-      icon: 'success',
-      target: document.body,
-      heightAuto: false,
-    });
+           ...this.swalOptions,
+           title: 'Pizza Added to Cart!',
+           text: `Price: ${this.pizza.$signal().price}`,
+           icon: 'success',
+           target: document.body,
+           heightAuto: false,
+         });
   }
+
+  // addPizzaToCart(): void {
+  //   const subscription = this.pizza.totalPriceBeforeTax().subscribe((price) => {
+  //     this.pizza.setPizza({ price: price });
+  //   });
+  //   this.pizza.addCustomPizza(this.pizza.$pizza.value);
+  //   subscription.unsubscribe();
+
+  //   
+  // }
 
   public readonly swalOptions: SweetAlertOptions = {
     title: '',

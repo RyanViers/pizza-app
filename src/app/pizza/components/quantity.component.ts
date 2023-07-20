@@ -1,10 +1,9 @@
 import { StepperService } from '../stepper/stepper/stepper.service';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
-import { Observable } from 'rxjs';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { TailwindIconType, TailwindIcon } from 'src/app/utils/tailwind-icons';
 
@@ -29,7 +28,7 @@ import { TailwindIconType, TailwindIcon } from 'src/app/utils/tailwind-icons';
             ></span>
           </button>
           <ion-label class="text-lg text-dark">{{
-            $quantityTotal | async
+            $quantitySignal()
           }}</ion-label>
           <button
             (click)="increaseQuantity(1)"
@@ -56,7 +55,8 @@ import { TailwindIconType, TailwindIcon } from 'src/app/utils/tailwind-icons';
   </div>`,
 })
 export class QuantityComponent {
-  $quantityTotal: Observable<number | undefined> = this.pizzaService.$quantity;
+  $quantitySignal: Signal<number | undefined> =
+    this.pizzaService.$quantitySignal;
 
   icons: Map<TailwindIconType, SafeHtml> = TailwindIcon.getTailwindIconSvgs(
     [TailwindIconType.PLUS, TailwindIconType.MINUS],
@@ -82,18 +82,18 @@ export class QuantityComponent {
 
   // create a method that will increment the quantity up or down based on user input as long as the quantity is greater than or equal to 1
   increaseQuantity(num: number): void {
-    let quantity = this.pizzaService.getPizzaQuantity();
+    let quantity = this.pizzaService.getPizzaQuantitySignal();
     if (quantity >= 1) {
       quantity += num;
-      this.pizzaService.setPizza({ quantity: quantity });
+      this.pizzaService.setSignal({ quantity: quantity });
     }
   }
 
   decreaseQuantity(num: number): void {
-    let quantity = this.pizzaService.getPizzaQuantity();
+    let quantity = this.pizzaService.getPizzaQuantitySignal();
     if (quantity > 1) {
       quantity -= num;
-      this.pizzaService.setPizza({ quantity: quantity });
+      this.pizzaService.setSignal({ quantity: quantity });
     }
   }
 

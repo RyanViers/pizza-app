@@ -274,7 +274,11 @@ export class PizzaService {
     );
   }
 
-  /*********************************** Signals **************************************/
+  /***********************************************************************/
+  /***********************************************************************/
+  /****************************** SIGNALS ********************************/
+  /***********************************************************************/
+  /***********************************************************************/
   public $signal: WritableSignal<CustomPizza> = signal({
     __typename: 'CustomPizza',
     size: PizzaSize.LARGE,
@@ -293,12 +297,9 @@ export class PizzaService {
   /********************** SET SIGNAL ****************************/
   setSignal(options: Partial<CustomPizza>): void {
     const currentPizza = this.$signal();
-    console.log(currentPizza, options);
     const newPizza = { ...currentPizza, ...options };
-    console.log(newPizza);
     if (!isEqual(currentPizza, newPizza)) {
       this.$signal.set(newPizza);
-      console.log(this.$signal(), newPizza);
     }
   }
 
@@ -323,7 +324,7 @@ export class PizzaService {
   /****************************** CUSTOM PIZZAS ARRAY ********************************/
   public $customPizzaArraySignal: WritableSignal<CustomPizza[]> = signal([]);
 
-  addCustomPizzaSignal(pizza: any): void {
+  addCustomPizzaSignal(pizza: CustomPizza): void {
     const currentPizzas = this.$customPizzaArraySignal();
     const newPizzas = [...currentPizzas, pizza];
     this.$customPizzaArraySignal.set(newPizzas);
@@ -400,6 +401,15 @@ export class PizzaService {
     );
   });
 
+  // public $pizzaCheeseAdditionalPriceSignal: Signal<
+  //   AdditionCheeseType | null | undefined
+  // > = computed(() => {
+  //   return (
+  //     AdditionCheeseTypePrice[this.$signal().cheese.additional] ||
+  //     AdditionCheeseTypePrice.NONE
+  //   );
+  // });
+
   public $pizzaMeatsSignalPrice: Signal<number> = computed(() => {
     return this.$signal().meats.reduce(
       (total, meat) => total + (MeatPrice[meat as PizzaMeat] || MeatPrice.NONE),
@@ -439,12 +449,22 @@ export class PizzaService {
 
   /*********************************** MATH METHODS **************************************/
   $totalPriceBeforeTaxSignal: Signal<number> = computed(() => {
-    const qty = this.$signal().quantity || 1;
     return (
       (this.$pizzaSizePriceSignal() +
         this.$pizzaCrustPriceSignal() +
-        this.$pizzaSaucePriceSignal()) *
-      qty
+        this.$pizzaSaucePriceSignal() +
+        this.$pizzaCheeseQuantityPriceSignal() +
+        this.$pizzaMeatsSignalPrice() +
+        this.$pizzaVeggiesSignalPrice()) *
+        this.$signal().quantity || 1
     );
+  });
+
+  $totalTaxSignal: Signal<number> = computed(() => {
+    return this.$totalPriceBeforeTaxSignal() * 0.097;
+  });
+
+  $totalPriceAfterTaxSignal: Signal<number> = computed(() => {
+    return this.$totalTaxSignal() + this.$totalPriceBeforeTaxSignal();
   });
 }

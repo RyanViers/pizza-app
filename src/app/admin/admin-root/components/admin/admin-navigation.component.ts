@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-admin-navigation',
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule],
+  styles: [``],
   template: `<div>
     <div
       class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-dark-shade bg-light-shade px-4 shadow-sm sm:px-6 lg:px-8"
@@ -87,7 +88,6 @@ import { IonicModule } from '@ionic/angular';
       </ul>
     </nav>
   </div>`,
-  styles: [``],
 })
 export class AdminNavigationComponent implements OnInit {
   constructor(private icons: IconsService) {}
