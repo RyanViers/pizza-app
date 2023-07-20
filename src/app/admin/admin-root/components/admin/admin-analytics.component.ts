@@ -101,18 +101,15 @@ import { opacityScale } from 'src/app/utils/animations';
         </p>
       </div>
     </div>
-    
   </div>`,
   styles: [],
 })
 export class AdminAnalyticsComponent {
-  
   $toggleSignal = this.admin.$toggleSignal;
 
-  constructor(private admin: AdminService) {console.log(this.$toggleSignal)}
+  constructor(private admin: AdminService) {}
 
   toggle() {
     this.$toggleSignal.set(!this.$toggleSignal());
   }
-  
 }

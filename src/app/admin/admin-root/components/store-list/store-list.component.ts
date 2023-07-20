@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { storesPractice, Store } from '../../utils/models/stores';
@@ -9,6 +9,7 @@ import { EmailButtonComponent } from './email-button/email-button.component';
   selector: 'app-store-list',
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule, EmailButtonComponent],
+  styles: [],
   template: `<div>
     <div class="bg-light-shade py-24 sm:py-32">
       <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
@@ -47,12 +48,9 @@ import { EmailButtonComponent } from './email-button/email-button.component';
       </div>
     </div>
   </div>`,
-  styles: [],
 })
-export default class StoreListComponent implements OnInit {
+export default class StoreListComponent {
   stores: Store[] = storesPractice;
 
   constructor() {}
-
-  ngOnInit() {}
 }

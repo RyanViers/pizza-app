@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-pizza-cards',
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule],
+  styles: [``],
   template: `<section class="pt-24 sm:pt-32 xl:mx-auto xl:max-w-7xl xl:px-8">
     <div
       class="px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8 xl:px-0"
@@ -119,10 +120,7 @@ import { IonicModule } from '@ionic/angular';
       </div>
     </div>
   </section>`,
-  styles: [``],
 })
-export class PizzaCardsComponent implements OnInit {
+export class PizzaCardsComponent {
   constructor() {}
-
-  ngOnInit() {}
 }

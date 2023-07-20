@@ -1,6 +1,6 @@
 import { IconsService } from '../../../../../utils/icons.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
@@ -118,10 +118,8 @@ import { IonicModule } from '@ionic/angular';
   </div> `,
   styles: [``],
 })
-export class AdminPaginationComponent implements OnInit {
+export class AdminPaginationComponent {
   constructor(private icons: IconsService) {}
-
-  ngOnInit() {}
 
   getIcon(num: number) {
     return this.icons.getIcon(num);

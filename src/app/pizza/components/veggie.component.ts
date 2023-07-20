@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { PizzaVeggie } from 'src/app/API.service';
 import { PizzaService } from '../pizza.service';
@@ -9,6 +9,9 @@ import { PizzaService } from '../pizza.service';
   standalone: true,
   imports: [CommonModule, IonicModule],
   providers: [],
+  styles: [
+    ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0;}',
+  ],
   template: `<div class="flex w-full h-full justify-evenly ">
     <fieldset>
       <legend class="text-base font-semibold text-dark">Select Veggies</legend>
@@ -37,19 +40,14 @@ import { PizzaService } from '../pizza.service';
       </div>
     </fieldset>
   </div>`,
-  styles: [
-    ':host { display: flex; justify-content: center; position: absolute; top: 0; left: 0; right: 0;}',
-  ],
 })
-export default class VeggieComponent implements OnInit {
+export default class VeggieComponent {
   PizzaVeggie: PizzaVeggie[] = this.objectValues(PizzaVeggie);
 
   $pizzaVeggiesSignal: Signal<(PizzaVeggie | null)[]> =
     this.pizzaService.$pizzaVeggiesSignal;
 
   constructor(private pizzaService: PizzaService) {}
-
-  ngOnInit(): void {}
 
   objectValues(obj: any): PizzaVeggie[] {
     return Object.values(obj);

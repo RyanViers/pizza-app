@@ -2,14 +2,13 @@ import { CustomCartComponent } from './components/custom-cart.component';
 import { CartSummaryComponent } from './components/cart-summary.component';
 import { SpecialtyCartComponent } from './components/specialty-cart.component';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, WritableSignal } from '@angular/core';
+import { Component, WritableSignal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from 'src/app/pizza/pizza.service';
-import { BehaviorSubject } from 'rxjs';
 import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
 
 @Component({
@@ -49,14 +48,14 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
               >
                 <li
                   class="grid py-6 sm:py-10"
-                  *ngFor="let customPizza of $customPizzaList?.value"
+                  *ngFor="let customPizza of $customPizzaArraySignal()"
                 >
                   <app-custom-cart [customPizza]="customPizza" />
                 </li>
 
                 <li
                   class="flex py-6 sm:py-10"
-                  *ngFor="let specialtyPizza of $specialtyPizzaList | async"
+                  *ngFor="let specialtyPizza of $specialtyPizzaArraySignal()"
                 >
                   <app-specialty-cart [specialtyPizza]="specialtyPizza" />
                 </li>
@@ -78,14 +77,12 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
     </ion-content> `,
   styles: [],
 })
-export default class CartComponent implements OnInit {
-  $specialtyPizzaList: BehaviorSubject<SpecialtyPizza[]> =
-    this.pizza.$specialtyPizza;
-  $customPizzaList: BehaviorSubject<CustomPizza[]> = this.pizza.$customPizza;
+export default class CartComponent {
+  $customPizzaArraySignal: WritableSignal<CustomPizza[]> =
+    this.pizza.$customPizzaArraySignal;
 
-  constructor(private pizza: PizzaService) {
-    console.log();
-  }
+  $specialtyPizzaArraySignal: WritableSignal<SpecialtyPizza[]> =
+    this.pizza.$specialtyPizzaArraySignal;
 
-  ngOnInit() {}
+  constructor(private pizza: PizzaService) {}
 }

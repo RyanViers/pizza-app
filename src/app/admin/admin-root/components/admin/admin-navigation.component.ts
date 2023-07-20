@@ -1,6 +1,6 @@
 import { IconsService } from '../../../../utils/icons.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -89,10 +89,8 @@ import { IonicModule } from '@ionic/angular';
     </nav>
   </div>`,
 })
-export class AdminNavigationComponent implements OnInit {
+export class AdminNavigationComponent {
   constructor(private icons: IconsService) {}
-
-  ngOnInit() {}
 
   getIcon(num: number): SafeHtml | undefined {
     return this.icons.getIcon(num);

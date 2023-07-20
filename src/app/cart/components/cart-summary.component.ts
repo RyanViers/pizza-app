@@ -1,7 +1,7 @@
 import { MutationsService } from '../../utils/services/api/mutations.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { Observable, combineLatest, map, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { PizzaService } from 'src/app/pizza/pizza.service';
 import { CartService } from '../cart.service';
 import { CommonModule } from '@angular/common';
@@ -26,7 +26,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
       <div class="flex items-center justify-between">
         <dt class="text-sm text-dark-tint">Subtotal</dt>
         <dd class="text-sm font-medium text-dark-tint">
-          {{ calculateTotal() | async }}
+          {{ $calculateTotalSignal() | currency }}
         </dd>
       </div>
       <div
@@ -42,8 +42,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
           </a>
         </dt>
         <dd class="flex text-sm font-medium text-dark-tint">
-          <p>$</p>
-          {{ addTax() | async }}
+          {{ $calculateTaxSignal() | currency }}
         </dd>
       </div>
       <div
@@ -51,7 +50,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
       >
         <dt class="text-base font-medium text-dark-tint">Order total</dt>
         <dd class="text-base font-medium text-dark-tint">
-          {{ calculateTotalWithTax() | async }}
+          {{ $calculateTotalWithTaxSignal() | currency }}
         </dd>
       </div>
     </dl>
@@ -67,133 +66,19 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
     </div> `,
   styles: [``],
 })
-export class CartSummaryComponent implements OnInit {
-  $specialtyPizzaList: Observable<(SpecialtyPizza | undefined)[]> =
-    this.pizza.$specialtyPizza;
-  $customPizzaList: Observable<(CustomPizza | undefined)[]> =
-    this.pizza.$customPizza;
+export class CartSummaryComponent {
+  $calculateTotalSignal: Signal<number> = this.pizza.$calculateTotalSignal;
+  $calculateTaxSignal: Signal<number> = this.pizza.$calculateTaxSignal;
+  $calculateTotalWithTaxSignal: Signal<number> =
+    this.pizza.$calculateTotalWithTaxSignal;
 
-  constructor(
-    private pizza: PizzaService,
-    private cognito: CognitoService,
-    private mutation: MutationsService,
-    private cart: CartService
-  ) {}
-
-  ngOnInit() {}
+  constructor(private pizza: PizzaService, private cart: CartService) {}
 
   getIcon(num: number): SafeHtml | undefined {
     return this.cart.getIcon(num);
   }
 
-  /******* MATH METHODS *********/
-  calculateTotal(): Observable<number | undefined> {
-    return combineLatest([
-      this.$specialtyPizzaList,
-      this.$customPizzaList,
-    ]).pipe(
-      map(([specialtyPizzas, customPizzas]) => {
-        const pizzas = [...specialtyPizzas, ...customPizzas];
-        return pizzas.reduce((total, pizza) => {
-          return pizza?.price ? total + pizza?.price : total;
-        }, 0);
-      }),
-      map((total: number) => parseFloat(total.toFixed(2)))
-    );
+  onCheckout(): void {
+    this.cart.onCheckout();
   }
-
-  addTax(): Observable<number | undefined> {
-    return this.calculateTotal().pipe(
-      map((total) => {
-        return total ? total * 0.097 : 0;
-      }),
-      map((totalTax: number) => parseFloat(totalTax.toFixed(2)))
-    );
-  }
-
-  calculateTotalWithTax(): Observable<number | undefined> {
-    return this.calculateTotal().pipe(
-      map((total) => {
-        return total ? total * 0.097 + total : 0;
-      }),
-      map((totalWithTax: number) => parseFloat(totalWithTax.toFixed(2)))
-    );
-  }
-
-  async onCheckout(): Promise<void> {
-    try {
-      const user = await this.cognito.currentAuthenticatedUser();
-
-      // Get total cost, tax, and authenticated user
-      const totalCost: any = await firstValueFrom(
-        this.pizza.totalPriceAfterTax()
-      );
-
-      const tax: any = await firstValueFrom(this.pizza.totalTax());
-
-      const subtotal: number = await firstValueFrom(
-        this.pizza.totalPriceBeforeTax()
-      );
-
-      // Get custom and specialty pizzas
-      const customPizzas: CustomPizza[] = this.pizza.$customPizza.getValue();
-
-      const specialtyPizzas: SpecialtyPizza[] =
-        this.pizza.$specialtyPizza.getValue();
-
-      // Create CreateOrderInput
-      const order: CreateOrderInput = {
-        user_id: user?.attributes.sub,
-        user_name: user?.username,
-        date: `${new Date().getTime()}`,
-        customPizzas: [
-          ...customPizzas.map((pizza: CustomPizza) => {
-            delete (pizza as any)?.__typename;
-            return pizza;
-          }),
-        ],
-        specialtyPizzas: [
-          ...specialtyPizzas.map((pizza: SpecialtyPizza) => {
-            delete (pizza as any)?.__typename;
-            return pizza;
-          }),
-        ],
-        subtotal: subtotal,
-        tax: tax,
-        total: totalCost,
-      };
-
-      const swal = await Swal.fire({ ...this.swalOptions });
-
-      if (swal.isConfirmed) {
-        console.log('order:', order);
-        await this.mutation.createOrder(order);
-        await Swal.fire({
-          title: 'Order Saved',
-          icon: 'success',
-          heightAuto: false,
-          customClass: {
-            popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
-          },
-        });
-        this.pizza.resetPizza();
-      }
-    } catch (err) {
-      console.error('Error in onCheckout:', err);
-    }
-  }
-
-  public readonly swalOptions: SweetAlertOptions = {
-    title: 'Save Order',
-    icon: 'info',
-    showCancelButton: true,
-    confirmButtonText: 'Add To Database',
-    cancelButtonText: 'Cancel',
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    heightAuto: false,
-    customClass: {
-      popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
-    },
-  };
 }

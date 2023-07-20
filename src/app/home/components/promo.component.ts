@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-promo',
@@ -138,8 +138,6 @@ import { Component, OnInit } from '@angular/core';
   </div> `,
   styles: [``],
 })
-export class PromoComponent implements OnInit {
+export class PromoComponent {
   constructor() {}
-
-  ngOnInit() {}
 }

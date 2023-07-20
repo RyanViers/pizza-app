@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnInit,
-  WritableSignal,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CartService } from '../cart.service';
 import { PizzaService } from 'src/app/pizza/pizza.service';
 import { CommonModule } from '@angular/common';
@@ -17,42 +11,54 @@ import { CustomPizza } from 'src/app/API.service';
   imports: [CommonModule, IonicModule, SharedModule],
   standalone: true,
   styles: [],
-  template: `<div class="grid grid-cols-2">
-    <div class="">
-      <img
-        src="assets/pizza.jpg"
-        class="object-cover object-center w-24 h-24 rounded-md sm:h-48 sm:w-48"
-      />
-    </div>
-
-    <div *ngFor="let c of $customPizzaArraySignal()" class="grid grid-cols-2">
-      <h1 class="text-base font-bold text-dark-shade">Quantity</h1>
-      <p class="text-sm text-dark-tint">{{ c.quantity }}</p>
-      <h1 class="text-base font-bold text-dark-shade">Size</h1>
-      <p class="text-sm text-dark-tint">{{ c.size }}</p>
-      <h1 class="text-base font-bold text-dark-shade">Crust</h1>
-      <p class="text-sm text-dark-tint">{{ c.crust }}</p>
-      <h1 class="text-base font-bold text-dark-shade">Sauce</h1>
-      <p class="text-sm text-dark-tint">{{ c.sauce }}</p>
-      <h1 class="text-base font-bold text-dark-shade">Cheese</h1>
-      <p class="text-sm text-dark-tint">
-        {{ c.cheese.additional }}
-      </p>
-      <h1 class="text-base font-bold text-dark-shade">Toppings</h1>
-      <p class="text-sm text-dark-tint">{{ c.meats }}</p>
-      <p class="text-sm text-dark-tint">{{ c.veggies }}</p>
-      <h1 class="text-base font-bold text-dark-shade">Price</h1>
-      <p class="text-sm text-dark-tint">{{ c.price }}</p>
-    </div>
-
-    <div class="mt-4 sm:mt-0 sm:pr-9">
-      <div class="absolute top-0 right-0">
-        <button
-          type="button"
-          class="inline-flex p-2 -m-2 text-gray-400 hover:text-gray-500"
+  template: `<div class="space-y-24">
+    <div
+      class="grid grid-cols-1 text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-8"
+    >
+      <div class="sm:col-span-4 md:col-span-5 md:row-span-2 md:row-end-2">
+        <div
+          class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-50"
         >
-          <span class="w-6 h-6" [innerHTML]="getIcon(1)"></span>
-        </button>
+          <img src="assets/pizza.jpg" class="object-cover object-center" />
+        </div>
+      </div>
+      <div class="mt-6 sm:col-span-7 sm:mt-0 md:row-end-1">
+        <h3 class="text-lg font-medium text-dark-shade">
+          <a href="#">Custom Pizza</a>
+        </h3>
+        <p class="mt-1 font-medium text-dark-tint">
+          Qty: <span class="text-success">{{ customPizza?.quantity }}</span>
+        </p>
+        <p class="mt-1 font-medium text-dark-tint">
+          Price:
+          <span class="text-success">{{ customPizza?.price | currency }}</span>
+        </p>
+        <p class="mt-1 font-medium text-dark-tint">
+          Size: <span class="text-success">{{ customPizza?.size }}</span>
+        </p>
+        <p class="mt-1 font-medium text-dark-tint">
+          Crust: <span class="text-success">{{ customPizza?.crust }}</span>
+        </p>
+        <p class="mt-1 font-medium text-dark-tint">
+          Sauce: <span class="text-success">{{ customPizza?.sauce }}</span>
+        </p>
+        <p class="mt-1 font-medium text-dark-tint">
+          Cheesse Qty:
+          <span class="text-success">{{ customPizza?.cheese?.quantity }}</span>
+        </p>
+        <p class="mt-1 font-medium text-dark-tint">
+          Cheesse Type:
+          <span class="text-success">{{
+            customPizza?.cheese?.additional
+          }}</span>
+        </p>
+        <p class="mt-1 font-medium text-dark-tint">
+          Meats: <span class="text-success">{{ customPizza?.meats }}</span>
+        </p>
+        <p class="mt-1 font-medium text-dark-tint">
+          Veggies:
+          <span class="text-success">{{ customPizza?.veggies }}</span>
+        </p>
       </div>
     </div>
   </div> `,
@@ -60,12 +66,7 @@ import { CustomPizza } from 'src/app/API.service';
 export class CustomCartComponent {
   @Input() customPizza: CustomPizza | undefined;
 
-  $customPizzaArraySignal: WritableSignal<CustomPizza[]> =
-    this.pizza.$customPizzaArraySignal;
-
-  constructor(private cart: CartService, private pizza: PizzaService) {
-    console.log(this.$customPizzaArraySignal());
-  }
+  constructor(private cart: CartService, private pizza: PizzaService) {}
 
   getIcon(num: number) {
     return this.cart.getIcon(num);

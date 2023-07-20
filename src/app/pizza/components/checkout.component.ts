@@ -3,7 +3,6 @@ import { Component, Signal, WritableSignal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PizzaService } from '../pizza.service';
-import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { CustomPizza } from 'src/app/API.service';
 
 @Component({
@@ -82,7 +81,7 @@ import { CustomPizza } from 'src/app/API.service';
                     <div class="flex justify-between">
                       <h3 class="text-sm">Add Cheese:</h3>
                       <p class="text-sm pl-5 text-gray-400">
-                        $pizzaCheeseAdditionalPrice | async
+                        {{ $pizzaCheeseAdditionalPriceSignal() }}
                       </p>
                     </div>
                     <div class="flex justify-between">
@@ -158,6 +157,8 @@ export default class CheckoutComponent {
   $pizzaSaucePriceSignal: Signal<number> = this.pizza.$pizzaSaucePriceSignal;
   $pizzaCheeseQuantityPriceSignal: Signal<number> =
     this.pizza.$pizzaCheeseQuantityPriceSignal;
+  $pizzaCheeseAdditionalPriceSignal: Signal<number> =
+    this.pizza.$pizzaCheeseAdditionalPriceSignal;
   $meatPriceSignal: Signal<number> = this.pizza.$pizzaMeatsSignalPrice;
   $veggiePriceSignal: Signal<number> = this.pizza.$pizzaVeggiesSignalPrice;
   $pizzaPriceSignal: Signal<number | undefined> = this.pizza.$pizzaPriceSignal;
@@ -174,39 +175,6 @@ export default class CheckoutComponent {
   constructor(private pizza: PizzaService) {}
 
   addPizzaToCart(): void {
-    this.pizza.setSignal({ price: this.$totalPriceAfterTaxSignal() });
-    this.pizza.addCustomPizzaSignal(this.$signal());
-
-    Swal.fire({
-           ...this.swalOptions,
-           title: 'Pizza Added to Cart!',
-           text: `Price: ${this.pizza.$signal().price}`,
-           icon: 'success',
-           target: document.body,
-           heightAuto: false,
-         });
+    this.pizza.addPizzaToCart();
   }
-
-  // addPizzaToCart(): void {
-  //   const subscription = this.pizza.totalPriceBeforeTax().subscribe((price) => {
-  //     this.pizza.setPizza({ price: price });
-  //   });
-  //   this.pizza.addCustomPizza(this.pizza.$pizza.value);
-  //   subscription.unsubscribe();
-
-  //   
-  // }
-
-  public readonly swalOptions: SweetAlertOptions = {
-    title: '',
-    icon: 'info',
-    showCancelButton: true,
-    confirmButtonText: 'Add to Cart',
-    cancelButtonText: 'Cancel',
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    customClass: {
-      popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
-    },
-  };
 }

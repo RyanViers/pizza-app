@@ -111,11 +111,9 @@ export default class SignInComponent implements OnInit {
           this.password.nativeElement.value
         )
         .then((data) => {
-          console.log(data);
           this.router.navigate(['/home']);
         })
         .catch((err) => {
-          console.log(err);
           Swal.fire({
             ...this.swalOptions,
           });

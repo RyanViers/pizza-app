@@ -2,7 +2,7 @@ import { HeaderService } from './../header.service';
 import { IconsService } from './../../../utils/icons.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component, Signal, WritableSignal } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { opacityScale } from 'src/app/utils/animations';
 
 @Component({

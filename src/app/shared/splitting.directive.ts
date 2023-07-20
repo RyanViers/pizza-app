@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef } from '@angular/core';
 //import * as Splitting from 'splitting';
 
 @Directive({
@@ -6,12 +6,4 @@ import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 })
 export class SplittingDirective {
   constructor(private el: ElementRef) {}
-
-  // ngAfterViewInit() {
-  //   console.log(this.el.nativeElement);
-  //   this.el.nativeElement.classList.add('splitting');
-  //   setTimeout(() => {
-  //     Splitting({ target: this.el.nativeElement });
-  //   });
-  // }
 }

@@ -2,7 +2,15 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { TailwindIconType, TailwindIcon } from '../utils/tailwind-icons';
-import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
+import {
+  SpecialtyPizza,
+  CustomPizza,
+  CreateOrderInput,
+} from 'src/app/API.service';
+import { CognitoService } from '../home/cognito.service';
+import { PizzaService } from '../pizza/pizza.service';
+import { MutationsService } from '../utils/services/api/mutations.service';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 
 export interface CartItem {
   pizza: CustomPizza | SpecialtyPizza;
@@ -11,20 +19,17 @@ export interface CartItem {
   providedIn: 'root',
 })
 export class CartService {
-  private cartItems: CartItem[] = [];
-
-  private cart: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>(
-    []
-  );
-
-  getCart = this.cart.asObservable();
-
   icons: Map<TailwindIconType, SafeHtml> = TailwindIcon.getTailwindIconSvgs(
     [TailwindIconType.X_MARK, TailwindIconType.QUESTION_MARK_CIRCLE],
     this.sanitizer
   );
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(
+    private sanitizer: DomSanitizer,
+    private pizza: PizzaService,
+    private cognito: CognitoService,
+    private mutation: MutationsService
+  ) {}
 
   getIcon(num: number): SafeHtml | undefined {
     switch (num) {
@@ -37,24 +42,71 @@ export class CartService {
     }
   }
 
-  addToCart(item: CartItem) {
-    this.cartItems.push(item);
-    this.cart.next(this.cartItems);
-  }
+  public async onCheckout(): Promise<void> {
+    try {
+      const user = await this.cognito.currentAuthenticatedUser();
+      const totalCost: number = this.pizza.$calculateTotalWithTaxSignal();
+      const tax: number = this.pizza.$calculateTaxSignal();
+      const subtotal: number = this.pizza.$calculateTotalSignal();
 
-  removeFromCart(item: CartItem) {
-    const index = this.cartItems.indexOf(item);
-    if (index > -1) {
-      this.cartItems.splice(index, 1);
-      this.cart.next(this.cartItems);
+      // Get custom and specialty pizzas
+      const customPizzas: CustomPizza[] = this.pizza.$customPizzaArraySignal();
+
+      const specialtyPizzas: SpecialtyPizza[] =
+        this.pizza.$specialtyPizzaArraySignal();
+
+      // Create CreateOrderInput
+      const order: CreateOrderInput = {
+        user_id: user?.attributes.sub,
+        user_name: user?.username,
+        date: `${new Date().getTime()}`,
+        customPizzas: [
+          ...customPizzas.map((pizza: CustomPizza) => {
+            delete (pizza as any)?.__typename;
+            return pizza;
+          }),
+        ],
+        specialtyPizzas: [
+          ...specialtyPizzas.map((pizza: SpecialtyPizza) => {
+            delete (pizza as any)?.__typename;
+            return pizza;
+          }),
+        ],
+        subtotal: subtotal,
+        tax: tax,
+        total: totalCost,
+      };
+
+      const swal = await Swal.fire({ ...this.swalOptions });
+
+      if (swal.isConfirmed) {
+        await this.mutation.createOrder(order);
+        await Swal.fire({
+          title: 'Order Saved',
+          icon: 'success',
+          heightAuto: false,
+          customClass: {
+            popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
+          },
+        });
+        this.pizza.resetSignal();
+      }
+    } catch (err) {
+      console.error('Error in onCheckout:', err);
     }
   }
 
-  calculateTotal() {
-    let total = 0;
-    for (let item of this.cartItems) {
-      total += item.pizza.price ? item.pizza.price : 0;
-    }
-    return total;
-  }
+  public readonly swalOptions: SweetAlertOptions = {
+    title: 'Save Order',
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonText: 'Add To Database',
+    cancelButtonText: 'Cancel',
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    heightAuto: false,
+    customClass: {
+      popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
+    },
+  };
 }

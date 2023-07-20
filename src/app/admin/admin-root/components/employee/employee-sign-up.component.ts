@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -162,8 +162,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ></ion-content>`,
   styles: [],
 })
-export default class EmployeeSignUpComponent implements OnInit {
+export default class EmployeeSignUpComponent {
   constructor() {}
-
-  ngOnInit() {}
 }

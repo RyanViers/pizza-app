@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-footer-newsletter',
@@ -35,8 +35,6 @@ import { Component, OnInit } from '@angular/core';
     </form>
   </div>`,
 })
-export class FooterNewsletterComponent implements OnInit {
+export class FooterNewsletterComponent {
   constructor() {}
-
-  ngOnInit() {}
 }

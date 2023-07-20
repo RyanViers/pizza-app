@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Signal, DoCheck } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PizzaSize, PizzaCrust, PizzaSauce } from 'src/app/API.service';
@@ -98,7 +98,7 @@ import { PizzaService } from '../pizza.service';
     </div>
   `,
 })
-export default class BaseComponent implements DoCheck {
+export default class BaseComponent {
   PizzaSize: string[] = this.objectValues(PizzaSize);
   PizzaSauce: string[] = this.objectValues(PizzaSauce);
   PizzaCrust: string[] = this.objectValues(PizzaCrust);
@@ -111,10 +111,6 @@ export default class BaseComponent implements DoCheck {
     this.pizzaService.$totalPriceBeforeTaxSignal;
 
   constructor(private pizzaService: PizzaService) {}
-
-  ngDoCheck(): void {
-    console.log(this.$totalPriceBeforeTaxSignal());
-  }
 
   objectValues(obj: object): string[] {
     return Object.values(obj);

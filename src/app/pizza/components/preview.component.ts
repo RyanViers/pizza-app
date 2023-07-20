@@ -10,6 +10,7 @@ import { CustomPizza } from 'src/app/API.service';
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule],
   providers: [],
+  styles: [``],
   template: `
     <div class="grid grid-cols-1 gap-4 p-4 bg-light-tint rounded-lg">
       <div class="flex items-center mb-4">
@@ -91,10 +92,8 @@ import { CustomPizza } from 'src/app/API.service';
       </div>
     </div>
   `,
-  styles: [``],
 })
 export class PizzaPreviewComponent {
-
   $signal: Signal<CustomPizza> = this.pizza.$signal;
 
   constructor(private pizza: PizzaService) {}

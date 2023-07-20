@@ -1,6 +1,6 @@
 import { AdminLocationSelectorComponent } from './../location-selector/admin-location-selector.component';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -138,12 +138,10 @@ import { employees, Employee } from '../../utils/models/employees';
   `,
   styles: [],
 })
-export default class EmployeeListComponent implements OnInit {
+export default class EmployeeListComponent {
   selectedLocation: string | null = null;
   employees: Employee[] = employees;
   constructor() {}
-
-  ngOnInit() {}
 
   onLocationChange(location: string | null) {
     this.selectedLocation = location;

@@ -113,7 +113,7 @@ export default class SpecialtyPizzasComponent implements OnDestroy {
     });
 
     if (swal.isConfirmed) {
-      this.pizzaService.addSpecialtyPizza(pizza);
+      this.pizzaService.addSpecialtyPizzaSignal(pizza);
     }
   }
 }

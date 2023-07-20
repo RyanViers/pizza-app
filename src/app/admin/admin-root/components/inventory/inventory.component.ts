@@ -2,7 +2,7 @@ import { AdminPaginationComponent } from './components/admin-pagination.componen
 import { IconsService } from './../../../../utils/icons.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PizzaVeggie, PizzaMeat } from 'src/app/API.service';
 import { Inventory, inventory } from './model';
 import { IonicModule } from '@ionic/angular';
@@ -168,9 +168,8 @@ import { AdminLocationSelectorComponent } from '../location-selector/admin-locat
   </div>`,
   styles: [],
 })
-export default class InventoryComponent implements OnInit {
+export default class InventoryComponent {
   optionCheckbox: boolean = false;
-
   selectedLocation: string | null = null;
   pizzaVeggie: PizzaVeggie[] = this.objectValues(PizzaVeggie);
   pizzaMeat: PizzaMeat[] = this.objectValues(PizzaMeat);
@@ -181,8 +180,6 @@ export default class InventoryComponent implements OnInit {
   inventory: Inventory[] = inventory;
 
   constructor(private icons: IconsService) {}
-
-  ngOnInit() {}
 
   getIcon(num: number) {
     return this.icons.getIcon(num);

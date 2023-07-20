@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { NgOptimizedImage } from '@angular/common';
@@ -9,6 +9,7 @@ import { Locations, locations } from '../models/locations';
   selector: 'app-locations',
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule, NgOptimizedImage],
+  styles: [``],
   template: `<section
     class="relative max-w-xl px-4 mb-10 mx-auto sm:px-6  lg:max-w-7xl lg:px-8"
   >
@@ -44,11 +45,8 @@ import { Locations, locations } from '../models/locations';
       </div>
     </div>
   </section>`,
-  styles: [``],
 })
-export class LocationsComponent implements OnInit {
+export class LocationsComponent {
   locations: Locations[] = locations;
   constructor() {}
-
-  ngOnInit() {}
 }

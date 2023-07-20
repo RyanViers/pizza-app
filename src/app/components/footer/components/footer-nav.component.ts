@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -73,8 +73,6 @@ import { RouterModule } from '@angular/router';
     </div>
   </div>`,
 })
-export class FooterNavComponent implements OnInit {
+export class FooterNavComponent {
   constructor() {}
-
-  ngOnInit() {}
 }

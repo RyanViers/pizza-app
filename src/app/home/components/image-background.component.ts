@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Options } from '../models/options';
@@ -9,6 +9,7 @@ import { NgOptimizedImage } from '@angular/common';
   selector: 'app-image-background',
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule, NgOptimizedImage],
+  styles: [``],
   template: `<section
     class="relative px-4 py-4 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:px-8"
   >
@@ -41,12 +42,9 @@ import { NgOptimizedImage } from '@angular/common';
       </div>
     </div>
   </section>`,
-  styles: [``],
 })
-export class ImageBackgroundComponent implements OnInit {
+export class ImageBackgroundComponent {
   @Input() options: Options | undefined;
 
   constructor() {}
-
-  ngOnInit() {}
 }

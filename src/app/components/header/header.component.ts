@@ -4,7 +4,7 @@ import { HeaderBottomComponent } from './components/header-bottom.component';
 import { HeaderTopComponent } from './components/header-top.component';
 import { IconsService } from './../../utils/icons.service';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, Signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -38,12 +38,10 @@ import { opacityScale } from 'src/app/utils/animations';
     </header>
   `,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   $menuToggle: Signal<boolean> = this.header.$menuToggle;
 
   constructor(private icons: IconsService, private header: HeaderService) {}
-
-  ngOnInit() {}
 
   getIcon(num: number) {
     return this.icons.getIcon(num);

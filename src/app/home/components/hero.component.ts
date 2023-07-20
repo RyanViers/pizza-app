@@ -1,7 +1,7 @@
 import { IconsService } from '../../utils/icons.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { NgOptimizedImage } from '@angular/common';
 
@@ -9,6 +9,7 @@ import { NgOptimizedImage } from '@angular/common';
   selector: 'app-hero',
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule, NgOptimizedImage],
+  styles: [``],
   template: ` <div class="relative bg-gray-900">
     <!-- Decorative image and overlay -->
     <div class="absolute inset-0 overflow-hidden">
@@ -74,12 +75,9 @@ import { NgOptimizedImage } from '@angular/common';
       >
     </div>
   </div>`,
-  styles: [``],
 })
-export class HeroComponent implements OnInit {
+export class HeroComponent {
   constructor(private icons: IconsService) {}
-
-  ngOnInit() {}
 
   getIcon(num: number) {
     return this.icons.getIcon(num);
