@@ -141,7 +141,7 @@ export class PizzaService {
   /****************************** COST SIGNALS ********************************/
 
   public $pizzaSizePriceSignal: Signal<number> = computed(() => {
-    return PizzaSizePrice[this.$signal().size] || PizzaSizePrice.LARGE;
+    return PizzaSizePrice[this.$pizzaSizeSignal()] || PizzaSizePrice.LARGE;
   });
 
   public $pizzaSaucePriceSignal: Signal<number> = computed(() => {

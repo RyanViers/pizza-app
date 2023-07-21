@@ -43,11 +43,11 @@ import { CustomPizza } from 'src/app/API.service';
           Sauce: <span class="text-success">{{ customPizza?.sauce }}</span>
         </p>
         <p class="mt-1 font-medium text-dark-tint">
-          Cheesse Qty:
+          Cheese Qty:
           <span class="text-success">{{ customPizza?.cheese?.quantity }}</span>
         </p>
         <p class="mt-1 font-medium text-dark-tint">
-          Cheesse Type:
+          Cheese Type:
           <span class="text-success">{{
             customPizza?.cheese?.additional
           }}</span>

@@ -41,7 +41,7 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
           <form
             class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16"
           >
-            <section aria-labelledby="cart-heading" class="lg:col-span-7">
+            <section class="lg:col-span-7">
               <ul
                 role="list"
                 class="border-t border-b border-gray-200 divide-y divide-gray-200"

@@ -77,7 +77,19 @@ export class CartService {
         total: totalCost,
       };
 
-      const swal = await Swal.fire({ ...this.swalOptions });
+      const swal = await Swal.fire({
+        title: 'Save Order',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Add To Database',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        heightAuto: false,
+        customClass: {
+          popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
+        },
+      });
 
       if (swal.isConfirmed) {
         await this.mutation.createOrder(order);
@@ -95,18 +107,4 @@ export class CartService {
       console.error('Error in onCheckout:', err);
     }
   }
-
-  public readonly swalOptions: SweetAlertOptions = {
-    title: 'Save Order',
-    icon: 'info',
-    showCancelButton: true,
-    confirmButtonText: 'Add To Database',
-    cancelButtonText: 'Cancel',
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    heightAuto: false,
-    customClass: {
-      popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
-    },
-  };
 }
