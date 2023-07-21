@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-footer-bottom',
@@ -89,8 +89,6 @@ import { Component, OnInit } from '@angular/core';
     </p>
   </div>`,
 })
-export class FooterBottomComponent implements OnInit {
+export class FooterBottomComponent {
   constructor() {}
-
-  ngOnInit() {}
 }

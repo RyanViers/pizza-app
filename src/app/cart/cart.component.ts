@@ -52,7 +52,6 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
                 >
                   <app-custom-cart [customPizza]="customPizza" />
                 </li>
-
                 <li
                   class="flex py-6 sm:py-10"
                   *ngFor="let specialtyPizza of $specialtyPizzaArraySignal()"
