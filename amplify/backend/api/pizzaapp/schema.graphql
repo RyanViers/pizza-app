@@ -14,10 +14,46 @@ type PizzaApp
   GSI_SECONDARY_PK: String!
     @index(name: "GSI_SECONDARY_PK", sortKeyFields: ["GSI_SECONDARY_SK"])
   GSI_SECONDARY_SK: String!
+  GSI_TERTIARY_PK: String!
+    @index(name: "GSI_TERTIARY_PK", sortKeyFields: ["GSI_TERTIARY_SK"])
+  GSI_TERTIARY_SK: String!
   CREATED_AT: String!
   UPDATED_AT: String!
   MODEL: String!
   TTL: AWSTimestamp
+}
+
+### TYPES ###
+type Employee {
+  id: String!
+  name: String!
+  address: String!
+  phone: String!
+  date_of_birth: String!
+  date_hired: String!
+  user_role: UserRole!
+  annual_salary: Float!
+  employee_url: String!
+}
+
+type Location {
+  id: String!
+  name: String!
+  address: String!
+  city: String!
+  state: String!
+  zip: Int!
+  location_url: String!
+}
+
+type EmployeeLocationListData {
+  employee_id: String!
+  location_id: String!
+  name: String!
+  location_url: String!
+  employee_url: String!
+  city: String!
+  state: String!
 }
 
 type Order {
@@ -55,6 +91,13 @@ type SpecialtyPizza {
 type PizzaCheese {
   quantity: CheeseQuantity!
   additional: AdditionCheeseType
+}
+
+### ENUMS ###
+enum UserRole {
+  ADMIN
+  MANAGER
+  EMPLOYEE
 }
 
 enum PizzaVeggie {
@@ -116,14 +159,84 @@ enum PizzaSauce {
   NONE
 }
 
+### INPUTS ###
+
+### Query Inputs ###
 input ListOrdersByUserInput {
   user_id: String!
+  reverse_dir: Boolean!
+  limit: Int
+  nextToken: String
 }
 
 input GetOrderInput {
   id: String!
   user_id: String!
   date: String!
+}
+
+input GetEmployeeInput {
+  id: String!
+}
+
+input ListEmployeesInput {
+  reverse_dir: Boolean!
+  limit: Int
+  nextToken: String
+}
+
+input GetLocationInput {
+  id: String!
+}
+
+input ListLocationsInput {
+  reverse_dir: Boolean!
+  limit: Int
+  nextToken: String
+}
+
+input ListLocationEmployeesInput {
+  location_id: String!
+  reverse_dir: Boolean!
+  limit: Int
+  nextToken: String
+}
+
+input ListEmplyeeLocationsInput {
+  employee_id: String!
+  reverse_dir: Boolean!
+  limit: Int
+  nextToken: String
+}
+
+type Mutation {
+  createOrder(input: CreateOrderInput!): Order
+  updateOrder(input: UpdateOrderInput!): Order
+  deleteOrder(input: DeleteOrderInput!): Order
+  createEmployee(input: CreateEmployeeInput!): Employee
+  updateEmployee(input: UpdateEmployeeInput!): Employee
+  deleteEmployee(input: DeleteEmployeeInput!): Employee
+  createLocation(input: CreateLocationInput!): Location
+  deleteLocation(input: DeleteLocationInput!): Location
+  addEmployeeToLocation(
+    input: AddEmployeeToLocationInput!
+  ): EmployeeLocationListData
+  deleteEmployeeFromLocation(
+    input: DeleteEmployeeFromLocationInput!
+  ): EmployeeLocationListData
+}
+
+### Mutation Inputs ###
+
+input CreateEmployeeInput {
+  id: String!
+  name: String!
+  address: String!
+  phone: String!
+  date_of_birth: String!
+  date_hired: String!
+  user_role: UserRole!
+  annual_salary: Float!
 }
 
 input CreateOrderInput {
@@ -180,13 +293,38 @@ input DeleteOrderInput {
   date: String!
 }
 
+### Response Types ###
+
+### Queries ###
 type Query {
-  listOrdersByUser(input: ListOrdersByUserInput): [Order]
+  listOrdersByUser(input: ListOrdersByUserInput!): ListOrdersByUserResponse
   getOrder(input: GetOrderInput!): Order
+  getEmployee(input: GetEmployeeInput!): Employee
+  listEmployees(input: ListEmployeesInput!): ListEmployeesResponse
+  getLocation(input: GetLocationInput!): Location
+  listLocations(input: ListLocationsInput!): ListLocationsResponse
+  listLocationEmployees(
+    input: ListLocationEmployeesInput!
+  ): ListLocationEmployeesResponse
+  listEmployeeLocations(
+    input: ListEmplyeeLocationsInput!
+  ): ListEmployeeLocationsResponse
 }
 
+### Mutations ###
 type Mutation {
   createOrder(input: CreateOrderInput!): Order
   updateOrder(input: UpdateOrderInput!): Order
   deleteOrder(input: DeleteOrderInput!): Order
+  createEmployee(input: CreateEmployeeInput!): Employee
+  updateEmployee(input: UpdateEmployeeInput!): Employee
+  deleteEmployee(input: DeleteEmployeeInput!): Employee
+  createLocation(input: CreateLocationInput!): Location
+  deleteLocation(input: DeleteLocationInput!): Location
+  addEmployeeToLocation(
+    input: AddEmployeeToLocationInput!
+  ): EmployeeLocationListData
+  deleteEmployeeFromLocation(
+    input: DeleteEmployeeFromLocationInput!
+  ): EmployeeLocationListData
 }

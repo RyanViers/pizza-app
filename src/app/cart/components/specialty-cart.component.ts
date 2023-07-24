@@ -6,6 +6,7 @@ import { SpecialtyPizza } from 'src/app/API.service';
 @Component({
   selector: 'app-specialty-cart',
   standalone: true,
+  styles: [],
   template: `
     <div class="flex">
       <div class="flex-shrink-0">
@@ -39,7 +40,6 @@ import { SpecialtyPizza } from 'src/app/API.service';
       </div>
     </div>
   `,
-  styles: [],
 })
 export class SpecialtyCartComponent {
   @Input() specialtyPizza: SpecialtyPizza | undefined;
