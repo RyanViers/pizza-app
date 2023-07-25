@@ -209,25 +209,7 @@ input ListEmplyeeLocationsInput {
   nextToken: String
 }
 
-type Mutation {
-  createOrder(input: CreateOrderInput!): Order
-  updateOrder(input: UpdateOrderInput!): Order
-  deleteOrder(input: DeleteOrderInput!): Order
-  createEmployee(input: CreateEmployeeInput!): Employee
-  updateEmployee(input: UpdateEmployeeInput!): Employee
-  deleteEmployee(input: DeleteEmployeeInput!): Employee
-  createLocation(input: CreateLocationInput!): Location
-  deleteLocation(input: DeleteLocationInput!): Location
-  addEmployeeToLocation(
-    input: AddEmployeeToLocationInput!
-  ): EmployeeLocationListData
-  deleteEmployeeFromLocation(
-    input: DeleteEmployeeFromLocationInput!
-  ): EmployeeLocationListData
-}
-
 ### Mutation Inputs ###
-
 input CreateEmployeeInput {
   id: String!
   name: String!
