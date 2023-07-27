@@ -36,6 +36,7 @@
       {
         "aria-allowed-attr": "off"
       }
-    ]
+    ],
+    "typescript-config/strict": "off"
   }
 }
