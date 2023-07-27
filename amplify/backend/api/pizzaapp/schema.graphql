@@ -93,6 +93,32 @@ type PizzaCheese {
   additional: AdditionCheeseType
 }
 
+### Response Types ###
+type ListOrdersByUserResponse {
+  items: [Order]
+  nextToken: String
+}
+
+type ListEmployeesResponse {
+  items: [Employee]
+  nextToken: String
+}
+
+type ListLocationsResponse {
+  items: [Location]
+  nextToken: String
+}
+
+type ListLocationEmployeesResponse {
+  items: [EmployeeLocationListData]
+  nextToken: String
+}
+
+type ListEmployeeLocationsResponse {
+  items: [EmployeeLocationListData]
+  nextToken: String
+}
+
 ### ENUMS ###
 enum UserRole {
   ADMIN
@@ -221,6 +247,44 @@ input CreateEmployeeInput {
   annual_salary: Float!
 }
 
+input UpdateEmployeeInput {
+  id: String!
+  name: String!
+  address: String!
+  phone: String!
+  date_of_birth: String!
+  date_hired: String!
+  user_role: UserRole!
+  annual_salary: Float!
+}
+
+input DeleteEmployeeInput {
+  id: String!
+}
+
+input CreateLocationInput {
+  id: String!
+  name: String!
+  address: String!
+  city: String!
+  state: String!
+  zip: Int!
+}
+
+input DeleteLocationInput {
+  id: String!
+}
+
+input AddEmployeeToLocationInput {
+  employee_id: String!
+  location_id: String!
+}
+
+input DeleteEmployeeFromLocationInput {
+  employee_id: String!
+  location_id: String!
+}
+
 input CreateOrderInput {
   user_id: String!
   date: String!
@@ -274,8 +338,6 @@ input DeleteOrderInput {
   user_id: String!
   date: String!
 }
-
-### Response Types ###
 
 ### Queries ###
 type Query {

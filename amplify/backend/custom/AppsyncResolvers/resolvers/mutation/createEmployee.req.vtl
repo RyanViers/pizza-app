@@ -1,0 +1,28 @@
+#set($id = $util.autoId())
+#set($PK = "NAME#" + $ctx.args.input.name)
+#set($SK = "EMPLOYEE#ADDRESS#" + $ctx.args.input.address)
+#set($GSI_SECONDARY_SK = "PHONE#" + $ctx.args.input.phone + "#ID#" + $id)
+
+$util.qr($ctx.args.input.put("id", $id))
+
+#set($DATA = {
+    "DATA": $ctx.args.input,
+    "GSI_SECONDARY_PK": "EMPLOYEE",
+    "GSI_SECONDARY_SK": $GSI_SECONDARY_SK,
+    "MODEL": "EMPLOYEE",
+    "CREATED_AT": $util.time.nowEpochMilliSeconds(),
+    "UPDATED_AT": $util.time.nowEpochMilliSeconds()
+})
+
+{
+    "version" : "2018-05-29",
+    "operation" : "PutItem",
+    "key": {
+        "PK" : {"S": "${PK}"},
+        "SK" : {"S": "${SK}"}
+    },
+    "attributeValues" : $util.dynamodb.toMapValuesJson($DATA),
+    "condition" : {
+        "expression" : "attribute_not_exists(PK) AND attribute_not_exists(SK)"
+    }
+}
