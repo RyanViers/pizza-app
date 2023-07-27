@@ -1,34 +1,33 @@
 # this is an auto generated file. This will be overwritten
-query ListOrdersByUser($input: ListOrdersByUserInput) {
+query ListOrdersByUser($input: ListOrdersByUserInput!) {
   listOrdersByUser(input: $input) {
-    id
-    user_id
-    date
-    customPizzas {
-      size
-      crust
-      sauce
-      cheese {
-        quantity
-        additional
-      }
-      meats
-      veggies
-      price
-      quantity
-    }
-    specialtyPizzas {
-      description
+    items {
       id
-      imageUrl
-      name
-      price
-      toppings
+      user_id
+      date
+      customPizzas {
+        size
+        crust
+        sauce
+        meats
+        veggies
+        price
+        quantity
+      }
+      specialtyPizzas {
+        description
+        id
+        imageUrl
+        name
+        price
+        toppings
+      }
+      user_name
+      subtotal
+      tax
+      total
     }
-    user_name
-    subtotal
-    tax
-    total
+    nextToken
   }
 }
 query GetOrder($input: GetOrderInput!) {
@@ -63,6 +62,88 @@ query GetOrder($input: GetOrderInput!) {
     total
   }
 }
+query GetEmployee($input: GetEmployeeInput!) {
+  getEmployee(input: $input) {
+    id
+    name
+    address
+    phone
+    date_of_birth
+    date_hired
+    user_role
+    annual_salary
+    employee_url
+  }
+}
+query ListEmployees($input: ListEmployeesInput!) {
+  listEmployees(input: $input) {
+    items {
+      id
+      name
+      address
+      phone
+      date_of_birth
+      date_hired
+      user_role
+      annual_salary
+      employee_url
+    }
+    nextToken
+  }
+}
+query GetLocation($input: GetLocationInput!) {
+  getLocation(input: $input) {
+    id
+    name
+    address
+    city
+    state
+    zip
+    location_url
+  }
+}
+query ListLocations($input: ListLocationsInput!) {
+  listLocations(input: $input) {
+    items {
+      id
+      name
+      address
+      city
+      state
+      zip
+      location_url
+    }
+    nextToken
+  }
+}
+query ListLocationEmployees($input: ListLocationEmployeesInput!) {
+  listLocationEmployees(input: $input) {
+    items {
+      employee_id
+      location_id
+      name
+      location_url
+      employee_url
+      city
+      state
+    }
+    nextToken
+  }
+}
+query ListEmployeeLocations($input: ListEmplyeeLocationsInput!) {
+  listEmployeeLocations(input: $input) {
+    items {
+      employee_id
+      location_id
+      name
+      location_url
+      employee_url
+      city
+      state
+    }
+    nextToken
+  }
+}
 query PizzaAppsByGSI_SECONDARY_PKAndGSI_SECONDARY_SK(
   $GSI_SECONDARY_PK: String!
   $GSI_SECONDARY_SK: ModelStringKeyConditionInput
@@ -84,6 +165,39 @@ query PizzaAppsByGSI_SECONDARY_PKAndGSI_SECONDARY_SK(
       SK
       GSI_SECONDARY_PK
       GSI_SECONDARY_SK
+      GSI_TERTIARY_PK
+      GSI_TERTIARY_SK
+      CREATED_AT
+      UPDATED_AT
+      MODEL
+      TTL
+    }
+    nextToken
+  }
+}
+query PizzaAppsByGSI_TERTIARY_PKAndGSI_TERTIARY_SK(
+  $GSI_TERTIARY_PK: String!
+  $GSI_TERTIARY_SK: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelPizzaAppFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  pizzaAppsByGSI_TERTIARY_PKAndGSI_TERTIARY_SK(
+    GSI_TERTIARY_PK: $GSI_TERTIARY_PK
+    GSI_TERTIARY_SK: $GSI_TERTIARY_SK
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      PK
+      SK
+      GSI_SECONDARY_PK
+      GSI_SECONDARY_SK
+      GSI_TERTIARY_PK
+      GSI_TERTIARY_SK
       CREATED_AT
       UPDATED_AT
       MODEL

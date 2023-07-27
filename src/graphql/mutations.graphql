@@ -95,3 +95,86 @@ mutation DeleteOrder($input: DeleteOrderInput!) {
     total
   }
 }
+mutation CreateEmployee($input: CreateEmployeeInput!) {
+  createEmployee(input: $input) {
+    id
+    name
+    address
+    phone
+    date_of_birth
+    date_hired
+    user_role
+    annual_salary
+    employee_url
+  }
+}
+mutation UpdateEmployee($input: UpdateEmployeeInput!) {
+  updateEmployee(input: $input) {
+    id
+    name
+    address
+    phone
+    date_of_birth
+    date_hired
+    user_role
+    annual_salary
+    employee_url
+  }
+}
+mutation DeleteEmployee($input: DeleteEmployeeInput!) {
+  deleteEmployee(input: $input) {
+    id
+    name
+    address
+    phone
+    date_of_birth
+    date_hired
+    user_role
+    annual_salary
+    employee_url
+  }
+}
+mutation CreateLocation($input: CreateLocationInput!) {
+  createLocation(input: $input) {
+    id
+    name
+    address
+    city
+    state
+    zip
+    location_url
+  }
+}
+mutation DeleteLocation($input: DeleteLocationInput!) {
+  deleteLocation(input: $input) {
+    id
+    name
+    address
+    city
+    state
+    zip
+    location_url
+  }
+}
+mutation AddEmployeeToLocation($input: AddEmployeeToLocationInput!) {
+  addEmployeeToLocation(input: $input) {
+    employee_id
+    location_id
+    name
+    location_url
+    employee_url
+    city
+    state
+  }
+}
+mutation DeleteEmployeeFromLocation($input: DeleteEmployeeFromLocationInput!) {
+  deleteEmployeeFromLocation(input: $input) {
+    employee_id
+    location_id
+    name
+    location_url
+    employee_url
+    city
+    state
+  }
+}

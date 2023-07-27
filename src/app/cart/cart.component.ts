@@ -62,7 +62,6 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
             </section>
 
             <section
-              aria-labelledby="summary-heading"
               class="px-4 py-6 mt-16 rounded-lg bg-light-tint sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"
             >
               <app-cart-summary />
@@ -73,7 +72,7 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
       <ion-footer>
         <app-footer />
       </ion-footer>
-    </ion-content> `,
+    </ion-content>`,
   styles: [],
 })
 export default class CartComponent {

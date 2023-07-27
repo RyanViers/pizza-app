@@ -1,4 +1,9 @@
-import { ListOrdersByUserInput, GetOrderInput } from '../../../API.service';
+import {
+  ListOrdersByUserInput,
+  GetOrderInput,
+  Employee,
+  ListEmployeesResponse,
+} from '../../../API.service';
 import { Injectable } from '@angular/core';
 import { ApolloCache, InMemoryCache } from '@apollo/client/core';
 import { Order } from 'src/app/API.service';
@@ -24,6 +29,7 @@ export class CacheService {
     try {
       const input: ListOrdersByUserInput = {
         user_id: order.user_id,
+        reverse_dir: false,
       };
       const result: ListOrdersByUserResponse | null = cloneDeep(
         cache.readQuery({
@@ -95,6 +101,7 @@ export class CacheService {
     try {
       const input: ListOrdersByUserInput = {
         user_id: order.user_id,
+        reverse_dir: false,
       };
       const result: ListOrdersByUserResponse | null = cloneDeep(
         cache.readQuery({
@@ -139,4 +146,6 @@ export class CacheService {
       console.debug(error);
     }
   }
+
+  /*********** EMPLOYEE  *********/
 }
