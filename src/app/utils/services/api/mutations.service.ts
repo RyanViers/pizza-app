@@ -2,6 +2,7 @@ import {
   DeleteOrderInput,
   UpdateOrderInput,
   CustomPizza,
+  CreateEmployeeInput,
 } from '../../../API.service';
 import { Injectable } from '@angular/core';
 import { Apollo, MutationResult } from 'apollo-angular';
@@ -9,6 +10,7 @@ import { CreateOrderInput, Order, SpecialtyPizza } from 'src/app/API.service';
 import createOrder from '../../graphql/mutation/order/createOrder';
 import deleteOrder from '../../graphql/mutation/order/deleteOrder';
 import updateOrder from '../../graphql/mutation/order/updateOrder';
+import createEmployee from '../../graphql/mutation/employee/createEmployee';
 import { ApolloCache, FetchResult, InMemoryCache } from '@apollo/client/core';
 import {
   CreateOrderResponse,
@@ -182,6 +184,28 @@ export class MutationsService {
         .subscribe({
           next: (order: Order) => {
             resolve(order);
+          },
+          error: (err) => {
+            reject(err);
+          },
+        });
+    });
+  }
+
+  /*********** EMPLOYEE MUTATIONS *********/
+  async createEmployee(input: CreateEmployeeInput): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.apollo
+        .mutate({
+          mutation: createEmployee,
+          variables: {
+            input,
+          },
+        })
+        .pipe(first())
+        .subscribe({
+          next: () => {
+            resolve();
           },
           error: (err) => {
             reject(err);

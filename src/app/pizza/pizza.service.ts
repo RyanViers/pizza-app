@@ -43,6 +43,7 @@ export class PizzaService {
     crust: PizzaCrust.ORIGINAL,
     sauce: PizzaSauce.TOMATO,
     cheese: {
+      __typename: 'PizzaCheese',
       quantity: CheeseQuantity.NORMAL,
       additional: AdditionCheeseType.NONE,
     },
@@ -69,6 +70,7 @@ export class PizzaService {
       crust: PizzaCrust.ORIGINAL,
       sauce: PizzaSauce.TOMATO,
       cheese: {
+        __typename: 'PizzaCheese',
         quantity: CheeseQuantity.NORMAL,
         additional: AdditionCheeseType.NONE,
       },
