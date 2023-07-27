@@ -9,6 +9,7 @@ import { opacityScale } from 'src/app/utils/animations';
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule],
   animations: [opacityScale],
+  styles: [],
   template: `<div>
     <!-- Heading -->
     <div
@@ -84,7 +85,6 @@ import { opacityScale } from 'src/app/utils/animations';
       </div>
     </div>
   </div>`,
-  styles: [],
 })
 export class AdminAnalyticsComponent {
   constructor() {}

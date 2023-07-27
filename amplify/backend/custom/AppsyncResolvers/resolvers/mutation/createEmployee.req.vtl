@@ -1,7 +1,8 @@
 #set($id = $util.autoId())
-#set($PK = "NAME#" + $ctx.args.input.name)
-#set($SK = "EMPLOYEE#ADDRESS#" + $ctx.args.input.address)
-#set($GSI_SECONDARY_SK = "PHONE#" + $ctx.args.input.phone + "#ID#" + $id)
+#set($PK = "EMPLOYEE")
+#set($SK = "ID#" + $id)
+#set($GSI_SECONDARY_SK = "NAME#" + $ctx.args.input.name)
+#set($timestamp = $util.time.nowEpochMilliSeconds())
 
 $util.qr($ctx.args.input.put("id", $id))
 
@@ -10,8 +11,8 @@ $util.qr($ctx.args.input.put("id", $id))
     "GSI_SECONDARY_PK": "EMPLOYEE",
     "GSI_SECONDARY_SK": $GSI_SECONDARY_SK,
     "MODEL": "EMPLOYEE",
-    "CREATED_AT": $util.time.nowEpochMilliSeconds(),
-    "UPDATED_AT": $util.time.nowEpochMilliSeconds()
+    "CREATED_AT": $timestamp,
+    "UPDATED_AT": $timestamp,
 })
 
 {

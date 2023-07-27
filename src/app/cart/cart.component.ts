@@ -25,6 +25,7 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
     SpecialtyCartComponent,
     CartSummaryComponent,
   ],
+  styles: [],
   template: `<ion-header>
       <app-header />
     </ion-header>
@@ -73,7 +74,6 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
         <app-footer />
       </ion-footer>
     </ion-content>`,
-  styles: [],
 })
 export default class CartComponent {
   $customPizzaArraySignal: WritableSignal<CustomPizza[]> =
