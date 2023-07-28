@@ -65,8 +65,13 @@ query GetOrder($input: GetOrderInput!) {
 query GetEmployee($input: GetEmployeeInput!) {
   getEmployee(input: $input) {
     id
-    name
-    address
+    first_name
+    last_name
+    email
+    street
+    city
+    state
+    zip
     phone
     date_of_birth
     date_hired
@@ -79,8 +84,13 @@ query ListEmployees($input: ListEmployeesInput!) {
   listEmployees(input: $input) {
     items {
       id
-      name
-      address
+      first_name
+      last_name
+      email
+      street
+      city
+      state
+      zip
       phone
       date_of_birth
       date_hired

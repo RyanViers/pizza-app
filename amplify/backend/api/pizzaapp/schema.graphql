@@ -26,8 +26,13 @@ type PizzaApp
 ### TYPES ###
 type Employee {
   id: String!
-  name: String!
-  address: String!
+  first_name: String!
+  last_name: String!
+  email: String!
+  street: String!
+  city: String!
+  state: String!
+  zip: Int!
   phone: String!
   date_of_birth: String!
   date_hired: String!
@@ -238,24 +243,36 @@ input ListEmplyeeLocationsInput {
 ### Mutation Inputs ###
 input CreateEmployeeInput {
   id: String!
-  name: String!
-  address: String!
+  first_name: String!
+  last_name: String!
+  email: String!
+  street: String!
+  city: String!
+  state: String!
+  zip: Int!
   phone: String!
   date_of_birth: String!
   date_hired: String!
   user_role: UserRole!
   annual_salary: Float!
+  employee_url: String!
 }
 
 input UpdateEmployeeInput {
   id: String!
-  name: String!
-  address: String!
+  first_name: String!
+  last_name: String!
+  email: String!
+  street: String!
+  city: String!
+  state: String!
+  zip: Int!
   phone: String!
   date_of_birth: String!
   date_hired: String!
   user_role: UserRole!
   annual_salary: Float!
+  employee_url: String!
 }
 
 input DeleteEmployeeInput {

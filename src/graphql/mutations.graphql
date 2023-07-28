@@ -98,8 +98,13 @@ mutation DeleteOrder($input: DeleteOrderInput!) {
 mutation CreateEmployee($input: CreateEmployeeInput!) {
   createEmployee(input: $input) {
     id
-    name
-    address
+    first_name
+    last_name
+    email
+    street
+    city
+    state
+    zip
     phone
     date_of_birth
     date_hired
@@ -111,8 +116,13 @@ mutation CreateEmployee($input: CreateEmployeeInput!) {
 mutation UpdateEmployee($input: UpdateEmployeeInput!) {
   updateEmployee(input: $input) {
     id
-    name
-    address
+    first_name
+    last_name
+    email
+    street
+    city
+    state
+    zip
     phone
     date_of_birth
     date_hired
@@ -124,8 +134,13 @@ mutation UpdateEmployee($input: UpdateEmployeeInput!) {
 mutation DeleteEmployee($input: DeleteEmployeeInput!) {
   deleteEmployee(input: $input) {
     id
-    name
-    address
+    first_name
+    last_name
+    email
+    street
+    city
+    state
+    zip
     phone
     date_of_birth
     date_hired

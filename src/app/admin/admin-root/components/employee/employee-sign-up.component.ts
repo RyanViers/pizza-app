@@ -1,3 +1,5 @@
+import { AdminService } from './../../admin.service';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -7,7 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 @Component({
   selector: 'app-employee-sign-up',
   standalone: true,
-  imports: [CommonModule, IonicModule, SharedModule, RouterModule],
+  imports: [CommonModule, IonicModule, SharedModule, RouterModule, FormsModule],
   template: `<ion-content
     ><div class="flex flex-row w-full">
       <div class="border-b border-white/10 pb-12 mx-20 w-full">
@@ -163,5 +165,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   styles: [],
 })
 export default class EmployeeSignUpComponent {
-  constructor() {}
+  constructor(private admin: AdminService) {}
+
+
 }
