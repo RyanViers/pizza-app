@@ -1,11 +1,10 @@
-import { Injectable,  WritableSignal,  signal } from '@angular/core';
-import { Employee, UserRole } from 'src/app/API.service';
+import { Injectable, WritableSignal, signal } from '@angular/core';
+import { APIService, Employee, UserRole } from 'src/app/API.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminService {
-
   public $toggleSignal = signal(false);
 
   public $employee: WritableSignal<Employee> = signal({
@@ -25,12 +24,16 @@ export class AdminService {
     annual_salary: 0,
     employee_url: '',
   });
-    
+
   public setEmployee(options: Partial<Employee>) {
     const currentEmployee = this.$employee();
     const newEmployee = { ...currentEmployee, ...options };
     this.$employee.set(newEmployee);
   }
 
-  constructor() {}
+  constructor(private api: APIService) {}
+
+  getEmployees() {
+    return this.api.ListEmployees;
+  }
 }

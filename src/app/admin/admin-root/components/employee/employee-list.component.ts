@@ -4,7 +4,12 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { employees, Employee } from '../../utils/models/employees';
+import {
+  APIService,
+  ListEmployeesInput,
+  ListEmployeesQuery,
+} from 'src/app/API.service';
+import { Employee, employees } from '../../utils/models/employees';
 
 @Component({
   selector: 'app-employee-list',
@@ -16,6 +21,7 @@ import { employees, Employee } from '../../utils/models/employees';
     RouterModule,
     AdminLocationSelectorComponent,
   ],
+  styles: [],
   template: `
     <ion-content class="maw-w-max">
       <h1
@@ -99,10 +105,10 @@ import { employees, Employee } from '../../utils/models/employees';
                           </div>
                           <div class="ml-4">
                             <div class="font-medium text-gray-300">
-                              {{ e.name }}
+                              {{ e?.name }}
                             </div>
                             <div class="mt-1 text-gray-500">
-                              {{ e.email }}
+                              {{ e?.email }}
                             </div>
                           </div>
                         </div>
@@ -110,21 +116,21 @@ import { employees, Employee } from '../../utils/models/employees';
                       <td
                         class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
                       >
-                        <div class="text-gray-300">{{ e.storeName }}</div>
-                        <div class="mt-1 text-gray-500">{{ e.age }}</div>
+                        <div class="text-gray-300">{{ e?.storeName }}</div>
+                        <div class="mt-1 text-gray-500">{{ e?.age }}</div>
                       </td>
                       <td
                         class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
                       >
                         <span
                           class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
-                          >{{ e.phone }}</span
+                          >{{ e?.phone }}</span
                         >
                       </td>
                       <td
                         class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
                       >
-                        {{ e.salary }}
+                        {{ e?.salary }}
                       </td>
                     </tr>
                   </ng-container>
@@ -136,12 +142,28 @@ import { employees, Employee } from '../../utils/models/employees';
       </div>
     </ion-content>
   `,
-  styles: [],
 })
 export default class EmployeeListComponent {
   selectedLocation: string | null = null;
-  employees: Employee[] = employees;
-  constructor() {}
+  employees: any = employees;
+  constructor(private api: APIService) {
+    console.log(this.employees);
+  }
+
+  async ngOnInit() {
+    const input: ListEmployeesInput = {
+      reverse_dir: false, // or true, depending on your requirements
+      limit: 2, // Fetch 20 records at a time. Adjust this value as needed.
+      nextToken: null, // This is passed from the previous call. Initialize it to null on the first call.
+    };
+
+    const employeesResponse: ListEmployeesQuery = await this.api.ListEmployees(
+      input
+    );
+    console.log(employeesResponse);
+    this.employees = employeesResponse.items;
+    console.log(this.employees);
+  }
 
   onLocationChange(location: string | null) {
     this.selectedLocation = location;

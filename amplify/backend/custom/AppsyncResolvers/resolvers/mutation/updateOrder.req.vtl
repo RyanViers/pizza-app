@@ -47,10 +47,6 @@
     $util.qr($values.put(":specialtyPizzas", $util.dynamodb.toList($ctx.args.input.specialtyPizzas)))
 #end
 
-#if($expression.length() > 0)
-	#set($length = $expression.length() - 2 )
-    #set($expression = "SET " + $expression.substring(0, $length))
-#end
 
 {
     "version" : "2018-05-29",

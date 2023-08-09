@@ -18,4 +18,12 @@ export const queryMap = new Map<
       fieldName: 'getOrder',
     },
   ],
+  [
+    'ListEmployees',
+    {
+      requestTemplate: 'listEmployees.req.vtl',
+      responseTemplate: 'listEmployees.res.vtl',
+      fieldName: 'listEmployees',
+    },
+  ],
 ]);

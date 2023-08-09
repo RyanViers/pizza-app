@@ -1,0 +1,121 @@
+#set($PK = "EMPLOYEE")
+#set($SK = "ID#" + $id)
+
+#set($expression = "")
+#set($values = {})
+#set($names = {})
+
+#if(!$util.isNullOrEmpty($ctx.args.input.first_name))
+    #set($expression = $expression + "#data.#first_name = :first_name, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#first_name", "first_name"))
+    $util.qr($values.put(":first_name", $util.dynamodb.toString($ctx.args.input.first_name)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.last_name))
+    #set($expression = $expression + "#data.#last_name = :last_name, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#last_name", "last_name"))
+    $util.qr($values.put(":last_name", $util.dynamodb.toString($ctx.args.input.last_name)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.email))
+    #set($expression = $expression + "#data.#email = :email, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#email", "email"))
+    $util.qr($values.put(":email", $util.dynamodb.toString($ctx.args.input.email)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.street))
+    #set($expression = $expression + "#data.#street = :street, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#street", "street"))
+    $util.qr($values.put(":street", $util.dynamodb.toString($ctx.args.input.street)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.city))
+    #set($expression = $expression + "#data.#city = :city, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#city", "city"))
+    $util.qr($values.put(":city", $util.dynamodb.toString($ctx.args.input.city)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.state))
+    #set($expression = $expression + "#data.#state = :state, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#state", "state"))
+    $util.qr($values.put(":state", $util.dynamodb.toString($ctx.args.input.state)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.zip))
+    #set($expression = $expression + "#data.#zip = :zip, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#zip", "zip"))
+    $util.qr($values.put(":zip", $util.dynamodb.toString($ctx.args.input.zip)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.phone))
+    #set($expression = $expression + "#data.#phone = :phone, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#phone", "phone"))
+    $util.qr($values.put(":phone", $util.dynamodb.toString($ctx.args.input.phone)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.date_of_birth))
+    #set($expression = $expression + "#data.#date_of_birth = :date_of_birth, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#date_of_birth", "date_of_birth"))
+    $util.qr($values.put(":date_of_birth", $util.dynamodb.toString($ctx.args.input.date_of_birth)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.date_hired))
+    #set($expression = $expression + "#data.#date_hired = :date_hired, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#date_hired", "date_hired"))
+    $util.qr($values.put(":date_hired", $util.dynamodb.toString($ctx.args.input.date_hired)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.user_role))
+    #set($expression = $expression + "#data.#user_role = :user_role, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#user_role", "user_role"))
+    $util.qr($values.put(":user_role", $util.dynamodb.toString($ctx.args.input.user_role)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.annual_salary))
+    #set($expression = $expression + "#data.#annual_salary = :annual_salary, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#annual_salary", "annual_salary"))
+    $util.qr($values.put(":annual_salary", $util.dynamodb.toString($ctx.args.input.annual_salary)))
+#end
+
+#if(!$util.isNullOrEmpty($ctx.args.input.employee_url))
+    #set($expression = $expression + "#data.#employee_url = :employee_url, ")
+    $util.qr($names.put("#data", "DATA"))
+    $util.qr($names.put("#employee_url", "employee_url"))
+    $util.qr($values.put(":employee_url", $util.dynamodb.toString($ctx.args.input.employee_url)))
+#end
+
+#if($expression.length() > 0)
+    #set($length = $expression.length() - 2 )
+    #set($expression = "SET " + $expression.substring(0, $length))
+#end
+
+{
+  "version" : "2018-05-29",
+  "operation" : "UpdateItem",
+  "key" : {
+    "PK" : $util.dynamodb.toString($PK),
+    "SK" : $util.dynamodb.toString($SK)
+  },
+  "update" : {
+    "expression" : "SET $expression",
+    "expressionNames" : $util.toJson($names),
+    "expressionValues" : $util.toJson($values)
+  },
+  "condition" : {
+    "expression" : "attribute_exists(PK) AND attribute_exists(SK)"
+  }
+}
+
+

@@ -1,9 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
-import { Injectable } from "@angular/core";
-import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
-import { Observable } from "zen-observable-ts";
+import { Injectable } from '@angular/core';
+import API, { graphqlOperation, GraphQLResult } from '@aws-amplify/api-graphql';
+import { Observable } from 'zen-observable-ts';
 
 export type CreateOrderInput = {
   user_id: string;
@@ -28,26 +28,26 @@ export type CustomPizzaInput = {
 };
 
 export enum PizzaSize {
-  SMALL = "SMALL",
-  MEDIUM = "MEDIUM",
-  LARGE = "LARGE"
+  SMALL = 'SMALL',
+  MEDIUM = 'MEDIUM',
+  LARGE = 'LARGE',
 }
 
 export enum PizzaCrust {
-  ORIGINAL = "ORIGINAL",
-  DEEP_DISH = "DEEP_DISH",
-  THIN = "THIN",
-  STUFFED = "STUFFED",
-  NEW_YORK = "NEW_YORK"
+  ORIGINAL = 'ORIGINAL',
+  DEEP_DISH = 'DEEP_DISH',
+  THIN = 'THIN',
+  STUFFED = 'STUFFED',
+  NEW_YORK = 'NEW_YORK',
 }
 
 export enum PizzaSauce {
-  TOMATO = "TOMATO",
-  ALFREDO = "ALFREDO",
-  PESTO = "PESTO",
-  BBQ = "BBQ",
-  GARLIC = "GARLIC",
-  NONE = "NONE"
+  TOMATO = 'TOMATO',
+  ALFREDO = 'ALFREDO',
+  PESTO = 'PESTO',
+  BBQ = 'BBQ',
+  GARLIC = 'GARLIC',
+  NONE = 'NONE',
 }
 
 export type PizzaCheeseInput = {
@@ -56,39 +56,39 @@ export type PizzaCheeseInput = {
 };
 
 export enum CheeseQuantity {
-  NORMAL = "NORMAL",
-  LIGHT = "LIGHT",
-  NONE = "NONE"
+  NORMAL = 'NORMAL',
+  LIGHT = 'LIGHT',
+  NONE = 'NONE',
 }
 
 export enum AdditionCheeseType {
-  THREE_CHEESE = "THREE_CHEESE",
-  EXTRA_CHEESE = "EXTRA_CHEESE",
-  PARMESAN = "PARMESAN",
-  FETA = "FETA",
-  CHEDDAR = "CHEDDAR",
-  NONE = "NONE"
+  THREE_CHEESE = 'THREE_CHEESE',
+  EXTRA_CHEESE = 'EXTRA_CHEESE',
+  PARMESAN = 'PARMESAN',
+  FETA = 'FETA',
+  CHEDDAR = 'CHEDDAR',
+  NONE = 'NONE',
 }
 
 export enum PizzaMeat {
-  PEPPERONI = "PEPPERONI",
-  SAUSAGE = "SAUSAGE",
-  BEEF = "BEEF",
-  HAM = "HAM",
-  BACON = "BACON",
-  CHICKEN = "CHICKEN",
-  NONE = "NONE"
+  PEPPERONI = 'PEPPERONI',
+  SAUSAGE = 'SAUSAGE',
+  BEEF = 'BEEF',
+  HAM = 'HAM',
+  BACON = 'BACON',
+  CHICKEN = 'CHICKEN',
+  NONE = 'NONE',
 }
 
 export enum PizzaVeggie {
-  MUSHROOMS = "MUSHROOMS",
-  ONIONS = "ONIONS",
-  GREEN_PEPPERS = "GREEN_PEPPERS",
-  BLACK_OLIVES = "BLACK_OLIVES",
-  TOMATOES = "TOMATOES",
-  PINEAPPLE = "PINEAPPLE",
-  JALAPENOS = "JALAPENOS",
-  NONE = "NONE"
+  MUSHROOMS = 'MUSHROOMS',
+  ONIONS = 'ONIONS',
+  GREEN_PEPPERS = 'GREEN_PEPPERS',
+  BLACK_OLIVES = 'BLACK_OLIVES',
+  TOMATOES = 'TOMATOES',
+  PINEAPPLE = 'PINEAPPLE',
+  JALAPENOS = 'JALAPENOS',
+  NONE = 'NONE',
 }
 
 export type SpecialtyPizzaInput = {
@@ -101,7 +101,7 @@ export type SpecialtyPizzaInput = {
 };
 
 export type Order = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   user_id: string;
   date: string;
@@ -114,7 +114,7 @@ export type Order = {
 };
 
 export type CustomPizza = {
-  __typename: "CustomPizza";
+  __typename: 'CustomPizza';
   size: PizzaSize;
   crust: PizzaCrust;
   sauce: PizzaSauce;
@@ -126,13 +126,13 @@ export type CustomPizza = {
 };
 
 export type PizzaCheese = {
-  __typename: "PizzaCheese";
+  __typename: 'PizzaCheese';
   quantity: CheeseQuantity;
   additional?: AdditionCheeseType | null;
 };
 
 export type SpecialtyPizza = {
-  __typename: "SpecialtyPizza";
+  __typename: 'SpecialtyPizza';
   description: string;
   id: string;
   imageUrl: string;
@@ -176,15 +176,14 @@ export type CreateEmployeeInput = {
   employee_url: string;
 };
 
-
 export enum UserRole {
-  ADMIN = "ADMIN",
-  MANAGER = "MANAGER",
-  EMPLOYEE = "EMPLOYEE",
+  ADMIN = 'ADMIN',
+  MANAGER = 'MANAGER',
+  EMPLOYEE = 'EMPLOYEE',
 }
 
 export type Employee = {
-  __typename: "Employee";
+  __typename: 'Employee';
   id: string;
   first_name: string;
   last_name: string;
@@ -232,7 +231,7 @@ export type CreateLocationInput = {
 };
 
 export type Location = {
-  __typename: "Location";
+  __typename: 'Location';
   id: string;
   name: string;
   address: string;
@@ -252,7 +251,7 @@ export type AddEmployeeToLocationInput = {
 };
 
 export type EmployeeLocationListData = {
-  __typename: "EmployeeLocationListData";
+  __typename: 'EmployeeLocationListData';
   employee_id: string;
   location_id: string;
   name: string;
@@ -275,7 +274,7 @@ export type ListOrdersByUserInput = {
 };
 
 export type ListOrdersByUserResponse = {
-  __typename: "ListOrdersByUserResponse";
+  __typename: 'ListOrdersByUserResponse';
   items?: Array<Order | null> | null;
   nextToken?: string | null;
 };
@@ -297,7 +296,7 @@ export type ListEmployeesInput = {
 };
 
 export type ListEmployeesResponse = {
-  __typename: "ListEmployeesResponse";
+  __typename: 'ListEmployeesResponse';
   items?: Array<Employee | null> | null;
   nextToken?: string | null;
 };
@@ -313,7 +312,7 @@ export type ListLocationsInput = {
 };
 
 export type ListLocationsResponse = {
-  __typename: "ListLocationsResponse";
+  __typename: 'ListLocationsResponse';
   items?: Array<Location | null> | null;
   nextToken?: string | null;
 };
@@ -326,7 +325,7 @@ export type ListLocationEmployeesInput = {
 };
 
 export type ListLocationEmployeesResponse = {
-  __typename: "ListLocationEmployeesResponse";
+  __typename: 'ListLocationEmployeesResponse';
   items?: Array<EmployeeLocationListData | null> | null;
   nextToken?: string | null;
 };
@@ -339,7 +338,7 @@ export type ListEmplyeeLocationsInput = {
 };
 
 export type ListEmployeeLocationsResponse = {
-  __typename: "ListEmployeeLocationsResponse";
+  __typename: 'ListEmployeeLocationsResponse';
   items?: Array<EmployeeLocationListData | null> | null;
   nextToken?: string | null;
 };
@@ -355,8 +354,8 @@ export type ModelStringKeyConditionInput = {
 };
 
 export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC"
+  ASC = 'ASC',
+  DESC = 'DESC',
 }
 
 export type ModelPizzaAppFilterInput = {
@@ -392,16 +391,16 @@ export type ModelStringInput = {
 };
 
 export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null"
+  binary = 'binary',
+  binarySet = 'binarySet',
+  bool = 'bool',
+  list = 'list',
+  map = 'map',
+  number = 'number',
+  numberSet = 'numberSet',
+  string = 'string',
+  stringSet = 'stringSet',
+  _null = '_null',
 }
 
 export type ModelSizeInput = {
@@ -427,13 +426,13 @@ export type ModelIntInput = {
 };
 
 export type ModelPizzaAppConnection = {
-  __typename: "ModelPizzaAppConnection";
+  __typename: 'ModelPizzaAppConnection';
   items: Array<PizzaApp | null>;
   nextToken?: string | null;
 };
 
 export type PizzaApp = {
-  __typename: "PizzaApp";
+  __typename: 'PizzaApp';
   PK: string;
   SK: string;
   GSI_SECONDARY_PK: string;
@@ -447,17 +446,17 @@ export type PizzaApp = {
 };
 
 export type CreateOrderMutation = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   user_id: string;
   date: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -467,7 +466,7 @@ export type CreateOrderMutation = {
     quantity: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialtyPizza";
+    __typename: 'SpecialtyPizza';
     description: string;
     id: string;
     imageUrl: string;
@@ -482,17 +481,17 @@ export type CreateOrderMutation = {
 };
 
 export type UpdateOrderMutation = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   user_id: string;
   date: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -502,7 +501,7 @@ export type UpdateOrderMutation = {
     quantity: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialtyPizza";
+    __typename: 'SpecialtyPizza';
     description: string;
     id: string;
     imageUrl: string;
@@ -517,17 +516,17 @@ export type UpdateOrderMutation = {
 };
 
 export type DeleteOrderMutation = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   user_id: string;
   date: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -537,7 +536,7 @@ export type DeleteOrderMutation = {
     quantity: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialtyPizza";
+    __typename: 'SpecialtyPizza';
     description: string;
     id: string;
     imageUrl: string;
@@ -552,7 +551,7 @@ export type DeleteOrderMutation = {
 };
 
 export type CreateEmployeeMutation = {
-  __typename: "Employee";
+  __typename: 'Employee';
   id: string;
   first_name: string;
   last_name: string;
@@ -570,7 +569,7 @@ export type CreateEmployeeMutation = {
 };
 
 export type UpdateEmployeeMutation = {
-  __typename: "Employee";
+  __typename: 'Employee';
   id: string;
   first_name: string;
   last_name: string;
@@ -588,7 +587,7 @@ export type UpdateEmployeeMutation = {
 };
 
 export type DeleteEmployeeMutation = {
-  __typename: "Employee";
+  __typename: 'Employee';
   id: string;
   first_name: string;
   last_name: string;
@@ -606,7 +605,7 @@ export type DeleteEmployeeMutation = {
 };
 
 export type CreateLocationMutation = {
-  __typename: "Location";
+  __typename: 'Location';
   id: string;
   name: string;
   address: string;
@@ -617,7 +616,7 @@ export type CreateLocationMutation = {
 };
 
 export type DeleteLocationMutation = {
-  __typename: "Location";
+  __typename: 'Location';
   id: string;
   name: string;
   address: string;
@@ -628,7 +627,7 @@ export type DeleteLocationMutation = {
 };
 
 export type AddEmployeeToLocationMutation = {
-  __typename: "EmployeeLocationListData";
+  __typename: 'EmployeeLocationListData';
   employee_id: string;
   location_id: string;
   name: string;
@@ -639,7 +638,7 @@ export type AddEmployeeToLocationMutation = {
 };
 
 export type DeleteEmployeeFromLocationMutation = {
-  __typename: "EmployeeLocationListData";
+  __typename: 'EmployeeLocationListData';
   employee_id: string;
   location_id: string;
   name: string;
@@ -650,14 +649,14 @@ export type DeleteEmployeeFromLocationMutation = {
 };
 
 export type ListOrdersByUserQuery = {
-  __typename: "ListOrdersByUserResponse";
+  __typename: 'ListOrdersByUserResponse';
   items?: Array<{
-    __typename: "Order";
+    __typename: 'Order';
     id: string;
     user_id: string;
     date: string;
     customPizzas: Array<{
-      __typename: "CustomPizza";
+      __typename: 'CustomPizza';
       size: PizzaSize;
       crust: PizzaCrust;
       sauce: PizzaSauce;
@@ -667,7 +666,7 @@ export type ListOrdersByUserQuery = {
       quantity: number;
     } | null>;
     specialtyPizzas: Array<{
-      __typename: "SpecialtyPizza";
+      __typename: 'SpecialtyPizza';
       description: string;
       id: string;
       imageUrl: string;
@@ -684,17 +683,17 @@ export type ListOrdersByUserQuery = {
 };
 
 export type GetOrderQuery = {
-  __typename: "Order";
+  __typename: 'Order';
   id: string;
   user_id: string;
   date: string;
   customPizzas: Array<{
-    __typename: "CustomPizza";
+    __typename: 'CustomPizza';
     size: PizzaSize;
     crust: PizzaCrust;
     sauce: PizzaSauce;
     cheese: {
-      __typename: "PizzaCheese";
+      __typename: 'PizzaCheese';
       quantity: CheeseQuantity;
       additional?: AdditionCheeseType | null;
     };
@@ -704,7 +703,7 @@ export type GetOrderQuery = {
     quantity: number;
   } | null>;
   specialtyPizzas: Array<{
-    __typename: "SpecialtyPizza";
+    __typename: 'SpecialtyPizza';
     description: string;
     id: string;
     imageUrl: string;
@@ -719,7 +718,7 @@ export type GetOrderQuery = {
 };
 
 export type GetEmployeeQuery = {
-  __typename: "Employee";
+  __typename: 'Employee';
   id: string;
   first_name: string;
   last_name: string;
@@ -737,9 +736,9 @@ export type GetEmployeeQuery = {
 };
 
 export type ListEmployeesQuery = {
-  __typename: "ListEmployeesResponse";
+  __typename: 'ListEmployeesResponse';
   items?: Array<{
-    __typename: "Employee";
+    __typename: 'Employee';
     id: string;
     first_name: string;
     last_name: string;
@@ -759,7 +758,7 @@ export type ListEmployeesQuery = {
 };
 
 export type GetLocationQuery = {
-  __typename: "Location";
+  __typename: 'Location';
   id: string;
   name: string;
   address: string;
@@ -770,9 +769,9 @@ export type GetLocationQuery = {
 };
 
 export type ListLocationsQuery = {
-  __typename: "ListLocationsResponse";
+  __typename: 'ListLocationsResponse';
   items?: Array<{
-    __typename: "Location";
+    __typename: 'Location';
     id: string;
     name: string;
     address: string;
@@ -785,9 +784,9 @@ export type ListLocationsQuery = {
 };
 
 export type ListLocationEmployeesQuery = {
-  __typename: "ListLocationEmployeesResponse";
+  __typename: 'ListLocationEmployeesResponse';
   items?: Array<{
-    __typename: "EmployeeLocationListData";
+    __typename: 'EmployeeLocationListData';
     employee_id: string;
     location_id: string;
     name: string;
@@ -800,9 +799,9 @@ export type ListLocationEmployeesQuery = {
 };
 
 export type ListEmployeeLocationsQuery = {
-  __typename: "ListEmployeeLocationsResponse";
+  __typename: 'ListEmployeeLocationsResponse';
   items?: Array<{
-    __typename: "EmployeeLocationListData";
+    __typename: 'EmployeeLocationListData';
     employee_id: string;
     location_id: string;
     name: string;
@@ -815,9 +814,9 @@ export type ListEmployeeLocationsQuery = {
 };
 
 export type PizzaAppsByGSI_SECONDARY_PKAndGSI_SECONDARY_SKQuery = {
-  __typename: "ModelPizzaAppConnection";
+  __typename: 'ModelPizzaAppConnection';
   items: Array<{
-    __typename: "PizzaApp";
+    __typename: 'PizzaApp';
     PK: string;
     SK: string;
     GSI_SECONDARY_PK: string;
@@ -833,9 +832,9 @@ export type PizzaAppsByGSI_SECONDARY_PKAndGSI_SECONDARY_SKQuery = {
 };
 
 export type PizzaAppsByGSI_TERTIARY_PKAndGSI_TERTIARY_SKQuery = {
-  __typename: "ModelPizzaAppConnection";
+  __typename: 'ModelPizzaAppConnection';
   items: Array<{
-    __typename: "PizzaApp";
+    __typename: 'PizzaApp';
     PK: string;
     SK: string;
     GSI_SECONDARY_PK: string;
@@ -851,7 +850,7 @@ export type PizzaAppsByGSI_TERTIARY_PKAndGSI_TERTIARY_SKQuery = {
 };
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class APIService {
   async CreateOrder(input: CreateOrderInput): Promise<CreateOrderMutation> {
@@ -892,7 +891,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -937,7 +936,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -982,7 +981,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1012,7 +1011,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1042,7 +1041,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1072,7 +1071,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1095,7 +1094,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1118,7 +1117,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1141,7 +1140,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1164,7 +1163,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1212,7 +1211,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1257,7 +1256,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1285,7 +1284,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1317,7 +1316,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1338,7 +1337,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1363,7 +1362,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1390,7 +1389,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1417,7 +1416,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      input
+      input,
     };
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
@@ -1459,7 +1458,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      GSI_SECONDARY_PK
+      GSI_SECONDARY_PK,
     };
     if (GSI_SECONDARY_SK) {
       gqlAPIServiceArguments.GSI_SECONDARY_SK = GSI_SECONDARY_SK;
@@ -1518,7 +1517,7 @@ export class APIService {
         }
       }`;
     const gqlAPIServiceArguments: any = {
-      GSI_TERTIARY_PK
+      GSI_TERTIARY_PK,
     };
     if (GSI_TERTIARY_SK) {
       gqlAPIServiceArguments.GSI_TERTIARY_SK = GSI_TERTIARY_SK;

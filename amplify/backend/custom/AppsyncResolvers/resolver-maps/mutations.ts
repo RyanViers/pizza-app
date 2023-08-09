@@ -34,4 +34,12 @@ export const mutationMap = new Map<
       fieldName: 'createEmployee',
     },
   ],
+  [
+    'UpdateEmployee',
+    {
+      requestTemplate: 'updateEmployee.req.vtl',
+      responseTemplate: 'updateEmployee.res.vtl',
+      fieldName: 'updateEmployee',
+    },
+  ],
 ]);
