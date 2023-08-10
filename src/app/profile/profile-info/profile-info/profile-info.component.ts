@@ -23,11 +23,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
     <form class="md:col-span-2">
       <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
         <div class="flex items-center col-span-full gap-x-8">
-          <img
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt=""
-            class="flex-none object-cover w-24 h-24 bg-gray-800 rounded-lg"
-          />
+           <img 
+              #img 
+              class="flex-none object-cover w-24 h-24 bg-gray-800 rounded-lg"
+              (error)="img.src = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'" 
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phonasldkfjalskjdflaksjdfe.png">
           <div>
             <button
               type="button"
@@ -87,7 +87,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
               id="email"
               name="email"
               type="email"
-              [placeholder]="user?.email"
+              disabled
+              [value]="user?.email"
               class="block pl-3 w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
             />
           </div>

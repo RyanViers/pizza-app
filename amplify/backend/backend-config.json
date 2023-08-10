@@ -1,17 +1,23 @@
 {
   "api": {
     "pizzaapp": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "pizzaAuth"
+        }
+      ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
-            "apiKeyConfig": {
-              "apiKeyExpirationDate": "2024-05-02T18:23:57.769Z",
-              "apiKeyExpirationDays": 365,
-              "description": "APIKEY"
-            },
-            "authenticationType": "API_KEY"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authpizzaAuth"
+            }
           }
         }
       },
@@ -19,12 +25,55 @@
       "service": "AppSync"
     }
   },
+  "auth": {
+    "pizzaAuth": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    },
+    "userPoolGroups": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "pizzaAuth"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito-UserPool-Groups"
+    }
+  },
   "custom": {
     "AppsyncResolvers": {
       "dependsOn": [
         {
           "attributes": [
-            "GraphQLAPIKeyOutput",
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
           ],
@@ -34,6 +83,69 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "customCDK"
+    },
+    "cloudfront": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "BucketName",
+            "Region"
+          ],
+          "category": "storage",
+          "resourceName": "pizzaStorage"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "customCDK"
+    }
+  },
+  "function": {
+    "InvalidateCloudfrontUrls": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "CloudFrontDistributionId"
+          ],
+          "category": "custom",
+          "resourceName": "cloudfront"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "pizzaapp"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_InvalidateCloudfrontUrls_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InvalidateCloudfrontUrls"
+        }
+      ]
+    },
+    "AMPLIFY_function_InvalidateCloudfrontUrls_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InvalidateCloudfrontUrls"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "pizzaStorage": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     }
   }
 }

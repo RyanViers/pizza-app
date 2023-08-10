@@ -16,7 +16,21 @@
         "pizzaapp": {}
       },
       "custom": {
-        "AppsyncResolvers": {}
+        "AppsyncResolvers": {},
+        "cloudfront": {}
+      },
+      "auth": {
+        "pizzaAuth": {},
+        "userPoolGroups": {}
+      },
+      "storage": {
+        "pizzaStorage": {}
+      },
+      "function": {
+        "InvalidateCloudfrontUrls": {
+          "deploymentBucketName": "amplify-pizzaapp-dev-125945-deployment",
+          "s3Key": "amplify-builds/InvalidateCloudfrontUrls-764d424336572f6f6331-build.zip"
+        }
       }
     }
   }

@@ -4,10 +4,10 @@
     "apiName": "pizzaapp",
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "API_KEY",
-      "expirationTime": 365,
-      "apiKeyExpirationDate": "2024-05-02T18:23:57.769Z",
-      "keyDescription": "APIKEY"
-    }
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authpizzaAuth"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
   }
 }

@@ -15,12 +15,7 @@ import { graphqlOperation } from '@aws-amplify/api-graphql';
 
 export const environment = {
   production: false,
-  cognito: {
-    region: 'us-east-1',
-    userPoolId: 'us-east-1_dLoujDkIo',
-    userPoolWebClientId: '6o614drm7oefknhdrvag1f1a7i',
-    //identityPoolId: 'us-east-1:fa9bf76b-a317-4b9f-908d-b088a8e777b8',
-  },
+  CLOUDFRONT_URL: "https://ds1wry2ak21pm.cloudfront.net"
 };
 
 //

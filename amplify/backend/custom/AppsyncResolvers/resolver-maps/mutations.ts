@@ -41,5 +41,5 @@ export const mutationMap = new Map<
       responseTemplate: 'updateEmployee.res.vtl',
       fieldName: 'updateEmployee',
     },
-  ],
+  ]
 ]);

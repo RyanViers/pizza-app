@@ -95,10 +95,13 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
   </div>`,
 })
 export default class SignInComponent implements OnInit {
+
   @ViewChild('email') email: ElementRef | undefined;
   @ViewChild('password') password: ElementRef | undefined;
 
-  constructor(private cognitoService: CognitoService, private router: Router) {}
+  constructor(
+    private cognitoService: CognitoService, 
+    private router: Router) {}
 
   ngOnInit() {}
 

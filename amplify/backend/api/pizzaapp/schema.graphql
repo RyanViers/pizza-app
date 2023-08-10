@@ -1,21 +1,11 @@
-input AMPLIFY {
-  globalAuthRule: AuthRule = { allow: public }
-}
-
-type PizzaApp
-  @model(
-    queries: null
-    mutations: null
-    subscriptions: null
-    timestamps: null
-  ) {
+type PizzaApp @model(queries: null, mutations: null, subscriptions: null, timestamps: null) 
+  @auth(rules: [{ allow: groups, groups: ["Admin", "Manager", "Employee"] }]) {
+  
   PK: String! @primaryKey(sortKeyFields: ["SK"])
   SK: String!
-  GSI_SECONDARY_PK: String!
-    @index(name: "GSI_SECONDARY_PK", sortKeyFields: ["GSI_SECONDARY_SK"])
+  GSI_SECONDARY_PK: String! @index(name: "GSI_SECONDARY_PK", sortKeyFields: ["GSI_SECONDARY_SK"])
   GSI_SECONDARY_SK: String!
-  GSI_TERTIARY_PK: String!
-    @index(name: "GSI_TERTIARY_PK", sortKeyFields: ["GSI_TERTIARY_SK"])
+  GSI_TERTIARY_PK: String! @index(name: "GSI_TERTIARY_PK", sortKeyFields: ["GSI_TERTIARY_SK"])
   GSI_TERTIARY_SK: String!
   CREATED_AT: String!
   UPDATED_AT: String!
@@ -302,6 +292,10 @@ input DeleteEmployeeFromLocationInput {
   location_id: String!
 }
 
+input InvalidateCloudfrontUrlInput {
+  urls: [String]!
+}
+
 input CreateOrderInput {
   user_id: String!
   date: String!
@@ -364,16 +358,13 @@ type Query {
   listEmployees(input: ListEmployeesInput!): ListEmployeesResponse
   getLocation(input: GetLocationInput!): Location
   listLocations(input: ListLocationsInput!): ListLocationsResponse
-  listLocationEmployees(
-    input: ListLocationEmployeesInput!
-  ): ListLocationEmployeesResponse
-  listEmployeeLocations(
-    input: ListEmplyeeLocationsInput!
-  ): ListEmployeeLocationsResponse
+  listLocationEmployees(input: ListLocationEmployeesInput!): ListLocationEmployeesResponse
+  listEmployeeLocations(input: ListEmplyeeLocationsInput!): ListEmployeeLocationsResponse
 }
 
 ### Mutations ###
 type Mutation {
+  invalidateCloudfrontUrl(input: InvalidateCloudfrontUrlInput!): Boolean
   createOrder(input: CreateOrderInput!): Order
   updateOrder(input: UpdateOrderInput!): Order
   deleteOrder(input: DeleteOrderInput!): Order
@@ -382,10 +373,6 @@ type Mutation {
   deleteEmployee(input: DeleteEmployeeInput!): Employee
   createLocation(input: CreateLocationInput!): Location
   deleteLocation(input: DeleteLocationInput!): Location
-  addEmployeeToLocation(
-    input: AddEmployeeToLocationInput!
-  ): EmployeeLocationListData
-  deleteEmployeeFromLocation(
-    input: DeleteEmployeeFromLocationInput!
-  ): EmployeeLocationListData
+  addEmployeeToLocation(input: AddEmployeeToLocationInput!): EmployeeLocationListData
+  deleteEmployeeFromLocation(input: DeleteEmployeeFromLocationInput!): EmployeeLocationListData
 }

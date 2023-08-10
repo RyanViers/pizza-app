@@ -1,0 +1,15 @@
+{
+  "resourceName": "pizzaStorage",
+  "policyUUID": "90f40ed6",
+  "bucketName": "pizzaapp5d147c8f30b94acc8f65cba5e870e8a6",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE"
+}
