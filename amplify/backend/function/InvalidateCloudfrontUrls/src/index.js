@@ -53,8 +53,10 @@ exports.handler = async event => {
   try {
     const urls = event.arguments.urls;
     await invalidateUrls(urls);
+    console.log('SUCCESS', JSON.stringify(urls));
     return okResponse(true);      
   } catch (error) {
+    console.log(error);
     return errorResponse(error)
   }
 };

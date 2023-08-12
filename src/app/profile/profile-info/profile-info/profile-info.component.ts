@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { Storage } from 'aws-amplify';
+import { APIService } from 'src/app/API.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile-info',
@@ -27,10 +30,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
               #img 
               class="flex-none object-cover w-24 h-24 bg-gray-800 rounded-lg"
               (error)="img.src = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'" 
-              src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phonasldkfjalskjdflaksjdfe.png">
+              src="https://d3bxgelzcyt5r7.cloudfront.net/public/USERS/AndrewHaselden.png">
           <div>
             <button
               type="button"
+              (click)="changeImage(img)"
               class="px-3 py-2 text-sm font-semibold text-white rounded-md shadow-sm bg-white/10 hover:bg-white/20"
             >
               Change avatar
@@ -109,7 +113,113 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class ProfileInfoComponent implements OnInit {
   @Input() user?: any;
-  constructor() {}
+  
+  private processing = false;
+
+  constructor(private api: APIService) {}
+
+  /**
+   * change image
+   * @param img
+   */
+  async changeImage(img: any) {
+    if (this.processing) return;
+    this.processing = true;
+    setTimeout(() => {this.processing = false;}, 2000);
+
+    const file = await this.selectFile();
+    if (file) {
+      try {
+
+        const blob = await this.fileToBlob(file);
+        const dataUrl = await this.blobToDataUrl(blob);
+        img.src = dataUrl;
+        const storageKey = "USERS/AndrewHaselden.png";
+        const url = `${environment.CLOUDFRONT_URL}/public/${storageKey}`;
+        await this.api.InvalidateCloudfrontUrls({urls: [`/public/${storageKey}`]});
+        const key = await Storage.put(storageKey, blob);
+        this.updateImageCache(blob, url);
+      } catch(err) {console.debug(err)}
+    }
+  }
 
   ngOnInit() {}
+
+  /**
+   * update image cache
+   * @param blob 
+   * @param url
+   */
+  private updateImageCache(blob: Blob, url: string) {
+    
+      (navigator.serviceWorker.controller)?.postMessage({ 
+        action: 'USER_IMAGE_UPDATED', 
+        url: url,
+        blob: blob
+      });
+    
+  }
+
+  /**
+   * select file
+   */
+  private async selectFile(): Promise<File> {
+    return new Promise((resolve) => {
+      
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+
+      input.onchange = (e: any) => { 
+        const file = e.target.files[0]; 
+        console.log(file);
+        resolve(file)
+      }
+
+      input.click();
+      
+    })
+  }
+
+  /**
+   * file to blob
+   * @param file 
+   * @returns 
+   */
+  private async fileToBlob(file: File): Promise<Blob> {
+    return new Promise<Blob>((resolve, reject) => {
+      const reader = new FileReader();
+  
+      reader.onload = () => {
+        if (reader.result instanceof ArrayBuffer) {
+          const blob = new Blob([reader.result], { type: file.type });
+          resolve(blob);
+        } else {
+          reject(new Error('Failed to read file as ArrayBuffer.'));
+        }
+      };
+  
+      reader.onerror = () => {
+        reject(new Error('Error reading file.'));
+      };
+  
+      reader.readAsArrayBuffer(file);
+    });
+  }
+
+  /**
+   * blob to data url
+   */
+  private async blobToDataUrl(blob: Blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = error => {
+        reject(error);
+      };
+      reader.readAsDataURL(blob);
+    });
+  }
 }

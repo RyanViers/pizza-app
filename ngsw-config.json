@@ -26,5 +26,23 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "user-images",
+      "urls": ["https://ds1wry2ak21pm.cloudfront.net/USERS/*"],
+      "cacheConfig": {
+        "maxSize": 10000000,
+        "maxAge": "7d"
+      }
+    },    
+    {
+      "name": "other",
+      "urls": ["https://*"],
+      "cacheConfig": {
+        "maxSize": 20000000,
+        "maxAge": "14d"
+      }
+    }
   ]
 }

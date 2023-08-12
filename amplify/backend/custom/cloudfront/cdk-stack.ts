@@ -3,7 +3,7 @@ import * as AmplifyHelpers from '@aws-amplify/cli-extensibility-helper';
 import { AmplifyDependentResourcesAttributes } from '../../types/amplify-dependent-resources-ref';
 import { Construct } from 'constructs';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
-import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 
 export class cdkStack extends cdk.Stack {
@@ -44,17 +44,36 @@ export class cdkStack extends cdk.Stack {
       comment: 'Origin Access Identity for the Amplify S3 bucket',
     });
 
+    // Create an Origin Access Identity policy
+    const oaiPolicy = new iam.Policy(this, 'MyOriginAccessIdentityPolicy', {
+      statements: [
+        new iam.PolicyStatement({
+          actions: ['s3:GetObject'],
+          effect: iam.Effect.ALLOW,
+          resources: [`${amplifyS3Bucket.bucketArn}/*`],
+          principals: [oai.grantPrincipal],
+        }),
+      ],
+    });
+
     // Create a CloudFront distribution and use the Amplify S3 bucket as the origin
     const distributionId = `AmplifyCloudFrontDistribution`;
-    const distribution = new cloudfront.Distribution(this, distributionId, {
-      defaultBehavior: {
-        origin: new origins.S3Origin(amplifyS3Bucket, {
-          originAccessIdentity: oai,
-        }),
-        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
-      },
-      // Add any additional configuration options you need for your distribution
+    const distribution = new cloudfront.CloudFrontWebDistribution(this, distributionId, {
+      originConfigs: [
+        {
+          s3OriginSource: {
+            s3BucketSource: amplifyS3Bucket,
+            originAccessIdentity: oai,
+          },
+          behaviors: [
+            {
+              isDefaultBehavior: true,
+              viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+              allowedMethods: cloudfront.CloudFrontAllowedMethods.ALL
+            },
+          ],
+        },
+      ],
     });
 
     // Output the CloudFront distribution domain name

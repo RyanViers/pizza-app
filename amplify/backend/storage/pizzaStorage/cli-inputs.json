@@ -11,5 +11,21 @@
     "READ",
     "DELETE"
   ],
-  "triggerFunction": "NONE"
+  "groupAccess": {
+    "Admin": [
+      "CREATE_AND_UPDATE",
+      "READ",
+      "DELETE"
+    ],
+    "Manager": [
+      "CREATE_AND_UPDATE",
+      "READ",
+      "DELETE"
+    ],
+    "Employee": [
+      "CREATE_AND_UPDATE",
+      "READ",
+      "DELETE"
+    ]
+  }
 }

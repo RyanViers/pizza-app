@@ -1,6 +1,6 @@
 # this is an auto generated file. This will be overwritten
-mutation InvalidateCloudfrontUrl($input: InvalidateCloudfrontUrlInput!) {
-  invalidateCloudfrontUrl(input: $input)
+mutation InvalidateCloudfrontUrls($input: InvalidateCloudfrontUrlsInput!) {
+  invalidateCloudfrontUrls(input: $input)
 }
 mutation CreateOrder($input: CreateOrderInput!) {
   createOrder(input: $input) {

@@ -6,7 +6,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm run build:prod",
+    "build:dev": "node --max_old_space_size=7000 node_modules/@angular/cli/bin/ng build",
+    "build:prod": "node --max_old_space_size=7000 node_modules/@angular/cli/bin/ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
@@ -68,7 +70,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
     "autoprefixer": "^10.4.14",
-    "eslint": "^8.39.0",
+    "eslint": "^7.20.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
     "eslint-plugin-prefer-arrow": "1.2.2",

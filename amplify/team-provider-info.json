@@ -29,8 +29,11 @@
       "function": {
         "InvalidateCloudfrontUrls": {
           "deploymentBucketName": "amplify-pizzaapp-dev-125945-deployment",
-          "s3Key": "amplify-builds/InvalidateCloudfrontUrls-764d424336572f6f6331-build.zip"
+          "s3Key": "amplify-builds/InvalidateCloudfrontUrls-594569305647444c7632-build.zip"
         }
+      },
+      "hosting": {
+        "S3AndCloudFront": {}
       }
     }
   }

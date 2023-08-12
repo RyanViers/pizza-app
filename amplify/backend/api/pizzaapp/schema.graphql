@@ -292,7 +292,7 @@ input DeleteEmployeeFromLocationInput {
   location_id: String!
 }
 
-input InvalidateCloudfrontUrlInput {
+input InvalidateCloudfrontUrlsInput {
   urls: [String]!
 }
 
@@ -364,7 +364,7 @@ type Query {
 
 ### Mutations ###
 type Mutation {
-  invalidateCloudfrontUrl(input: InvalidateCloudfrontUrlInput!): Boolean
+  invalidateCloudfrontUrls(input: InvalidateCloudfrontUrlsInput!): Boolean
   createOrder(input: CreateOrderInput!): Order
   updateOrder(input: UpdateOrderInput!): Order
   deleteOrder(input: DeleteOrderInput!): Order

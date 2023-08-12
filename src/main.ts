@@ -1,4 +1,4 @@
-import { enableProdMode, importProvidersFrom, isDevMode } from '@angular/core';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
 import awsmobile from './aws-exports';
 import { environment } from './environments/environment';
 import { Amplify, Auth } from 'aws-amplify';
@@ -58,20 +58,8 @@ bootstrapApplication(AppComponent, {
         },
         deps: [HttpLink],
     },
-    provideServiceWorker('ngsw-worker.js', {
-        enabled: !isDevMode(),
-        registrationStrategy: 'registerWhenStable:30000'
-    }),
-    provideServiceWorker('ngsw-worker.js', {
-        enabled: !isDevMode(),
-        registrationStrategy: 'registerWhenStable:30000'
-    }),
-    provideServiceWorker('ngsw-worker.js', {
-        enabled: !isDevMode(),
-        registrationStrategy: 'registerWhenStable:30000'
-    }),
-    provideServiceWorker('ngsw-worker.js', {
-        enabled: !isDevMode(),
+    provideServiceWorker('my-service-worker.js', {
+        enabled: true,
         registrationStrategy: 'registerWhenStable:30000'
     })
 ],

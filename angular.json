@@ -41,9 +41,7 @@
                 "output": "./svg"
               },
               "src/manifest.webmanifest",
-              "src/manifest.webmanifest",
-              "src/manifest.webmanifest",
-              "src/manifest.webmanifest"
+              "src/my-service-worker.js"
             ],
             "styles": [
               "src/theme/variables.scss",
@@ -131,9 +129,7 @@
                 "output": "./svg"
               },
               "src/manifest.webmanifest",
-              "src/manifest.webmanifest",
-              "src/manifest.webmanifest",
-              "src/manifest.webmanifest"
+              "src/my-service-worker.js"
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": []

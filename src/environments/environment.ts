@@ -1,4 +1,3 @@
-import { graphqlOperation } from '@aws-amplify/api-graphql';
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
@@ -15,7 +14,7 @@ import { graphqlOperation } from '@aws-amplify/api-graphql';
 
 export const environment = {
   production: false,
-  CLOUDFRONT_URL: "https://ds1wry2ak21pm.cloudfront.net"
+  CLOUDFRONT_URL: "https://d3bxgelzcyt5r7.cloudfront.net"
 };
 
 //

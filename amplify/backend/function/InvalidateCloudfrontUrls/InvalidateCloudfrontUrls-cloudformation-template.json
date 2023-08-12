@@ -129,6 +129,17 @@
               "Action": [
                 "sts:AssumeRole"
               ]
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "appsync.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
             }
           ]
         }
@@ -149,6 +160,18 @@
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "lambda:InvokeFunction"
+              ],
+              "Resource": {
+                "Fn::GetAtt": [
+                  "LambdaFunction",
+                  "Arn"
+                ]
+              }
+            },
             {
               "Effect": "Allow",
               "Action": [
@@ -211,38 +234,11 @@
           "Ref": "apipizzaappGraphQLAPIIdOutput"
         },
         "TypeName": "Mutation",
-        "FieldName": "invalidateCloudfrontUrl",
-        "Kind": "PIPELINE",
-        "PipelineConfig": {
-          "Functions": [
-            {
-              "Fn::GetAtt": [
-                "InvalidateCloudfrontUrlsFunction",
-                "FunctionId"
-              ]
-            }
-          ]
-        },
-        "RequestMappingTemplate": "## [Start] Determine request authentication mode **\r\n#if( $util.isNullOrEmpty($authMode) && !$util.isNull($ctx.identity) && !$util.isNull($ctx.identity.sub) && !$util.isNull($ctx.identity.issuer) && !$util.isNull($ctx.identity.username) && !$util.isNull($ctx.identity.claims) && !$util.isNull($ctx.identity.sourceIp) && !$util.isNull($ctx.identity.defaultAuthStrategy) )\r\n  #set( $authMode = \"userPools\" )\r\n#end\r\n## [Start] Check authMode and execute owner/group checks **\r\n#if( $authMode == \"userPools\" )\r\n  ## [Start] Static Group Authorization Checks **\r\n  #set($isStaticGroupAuthorized = $util.defaultIfNull(\r\n            $isStaticGroupAuthorized, false))\r\n  \r\n  #set( $userGroups = $util.defaultIfNull($ctx.identity.claims.get(\"cognito:groups\"), []) )\r\n  #set( $allowedGroups = [\"Admin\", \"Management\", \"Employee\"] )\r\n  #foreach( $userGroup in $userGroups )\r\n    #if( $allowedGroups.contains($userGroup) )\r\n      #set( $isStaticGroupAuthorized = true )\r\n      #break\r\n    #end\r\n  #end\r\n\r\n  ## [Start] Throw if unauthorized **\r\n  #if( !($isStaticGroupAuthorized == true || $isOwnerAuthorized == true) )\r\n    $util.unauthorized()\r\n  #end\r\n#end\r\n## [End] Check authMode and execute owner/group checks **\r\n{}",
-        "ResponseMappingTemplate": "#if($ctx.error)\r\n    $utils.appendError($ctx.error.message, $ctx.error.message)\r\n#end\r\n$util.toJson($ctx.result)"
-      }
-    },
-    "InvalidateCloudfrontUrlsFunction": {
-      "Type": "AWS::AppSync::FunctionConfiguration",
-      "Properties": {
-        "ApiId": {
-          "Ref": "apipizzaappGraphQLAPIIdOutput"
-        },
+        "FieldName": "invalidateCloudfrontUrls",
         "DataSourceName": "InvalidateCloudfrontUrlsDataSource",
-        "Name": "Mutation_Invalidate_Cloudfront_Urls_Function",
-        "Description": "invalidate a list of cloudfront urls",
-        "FunctionVersion": "2018-05-29",
-        "RequestMappingTemplate": "{\r\n\t\"version\": \"2017-02-28\",\r\n    \"operation\": \"Invoke\",\r\n    \"payload\": {\r\n    \t\"arguments\":  $util.toJson($ctx.args.input)\r\n    }\r\n}",
-        "ResponseMappingTemplate": "#if($ctx.error)\r\n    $utils.appendError($ctx.error.message, $ctx.error.message)\r\n#end\r\n\r\n#if ($ctx.result.statusCode == 200)\r\n  $util.toJson($ctx.result.body)\r\n#else\r\n  $util.error($ctx.result.body, $ctx.result.body)\r\n#end"
-      },
-      "DependsOn": [
-        "InvalidateCloudfrontUrlsDataSource"
-      ]
+        "RequestMappingTemplate": "## [Start] Determine request authentication mode **\r\n#if( $util.isNullOrEmpty($authMode) && !$util.isNull($ctx.identity) && !$util.isNull($ctx.identity.sub) && !$util.isNull($ctx.identity.issuer) && !$util.isNull($ctx.identity.username) && !$util.isNull($ctx.identity.claims) && !$util.isNull($ctx.identity.sourceIp) && !$util.isNull($ctx.identity.defaultAuthStrategy) )\r\n  #set( $authMode = \"userPools\" )\r\n#end\r\n## [Start] Check authMode and execute owner/group checks **\r\n#if( $authMode == \"userPools\" )\r\n  ## [Start] Static Group Authorization Checks **\r\n  #set($isStaticGroupAuthorized = $util.defaultIfNull(\r\n            $isStaticGroupAuthorized, false))\r\n  \r\n  #set( $userGroups = $util.defaultIfNull($ctx.identity.claims.get(\"cognito:groups\"), []) )\r\n  #set( $allowedGroups = [\"Admin\", \"Management\", \"Employee\"] )\r\n  #foreach( $userGroup in $userGroups )\r\n    #if( $allowedGroups.contains($userGroup) )\r\n      #set( $isStaticGroupAuthorized = true )\r\n      #break\r\n    #end\r\n  #end\r\n\r\n  ## [Start] Throw if unauthorized **\r\n  #if( !($isStaticGroupAuthorized == true || $isOwnerAuthorized == true) )\r\n    $util.unauthorized()\r\n  #end\r\n#end\r\n## [End] Check authMode and execute owner/group checks **\r\n{\r\n\t\"version\": \"2017-02-28\",\r\n    \"operation\": \"Invoke\",\r\n    \"payload\": {\r\n    \t\"arguments\":  $util.toJson($ctx.args.input)\r\n    }\r\n}",
+        "ResponseMappingTemplate": "#if($ctx.error)\r\n    $utils.appendError($ctx.error.message, $ctx.error.message)\r\n#end\r\n\r\n#if ($ctx.result.statusCode == 200)\r\n  $util.toJson(true)\r\n#else\r\n  $util.toJson(false)\r\n#end"
+      }
     },
     "CloudFrontInvalidationPolicy": {
       "Type": "AWS::IAM::Policy",

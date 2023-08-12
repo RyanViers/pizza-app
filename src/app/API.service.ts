@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
 import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
 import { Observable } from "zen-observable-ts";
 
-export type InvalidateCloudfrontUrlInput = {
+export type InvalidateCloudfrontUrlsInput = {
   urls: Array<string | null>;
 };
 
@@ -857,11 +857,11 @@ export type PizzaAppsByGSI_TERTIARY_PKAndGSI_TERTIARY_SKQuery = {
   providedIn: "root"
 })
 export class APIService {
-  async InvalidateCloudfrontUrl(
-    input: InvalidateCloudfrontUrlInput
+  async InvalidateCloudfrontUrls(
+    input: InvalidateCloudfrontUrlsInput
   ): Promise<boolean | null> {
-    const statement = `mutation InvalidateCloudfrontUrl($input: InvalidateCloudfrontUrlInput!) {
-        invalidateCloudfrontUrl(input: $input)
+    const statement = `mutation InvalidateCloudfrontUrls($input: InvalidateCloudfrontUrlsInput!) {
+        invalidateCloudfrontUrls(input: $input)
       }`;
     const gqlAPIServiceArguments: any = {
       input
@@ -869,7 +869,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <boolean | null>response.data.invalidateCloudfrontUrl;
+    return <boolean | null>response.data.invalidateCloudfrontUrls;
   }
   async CreateOrder(input: CreateOrderInput): Promise<CreateOrderMutation> {
     const statement = `mutation CreateOrder($input: CreateOrderInput!) {
