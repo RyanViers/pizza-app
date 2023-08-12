@@ -7,8 +7,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "npm run build:prod",
-    "build:dev": "node --max_old_space_size=7000 node_modules/@angular/cli/bin/ng build",
-    "build:prod": "node --max_old_space_size=7000 node_modules/@angular/cli/bin/ng build --configuration production",
+    "build:dev": "node src/assets/scripts/service-worker-env-vars.js && node --max_old_space_size=7000 node_modules/@angular/cli/bin/ng build",
+    "build:prod": "node src/assets/scripts/service-worker-env-vars.js && node --max_old_space_size=7000 node_modules/@angular/cli/bin/ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"

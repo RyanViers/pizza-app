@@ -12,7 +12,7 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
 
   // Check if the request URL starts with USER_IMAGES_URL
-  const USER_IMAGES_URL = `https://d3bxgelzcyt5r7.cloudfront.net/public/USERS/`;
+  const USER_IMAGES_URL = `<<SITE_URL>>/public/USERS/`;
 
   if (event.request.url.startsWith(USER_IMAGES_URL)) {
     event.respondWith(
