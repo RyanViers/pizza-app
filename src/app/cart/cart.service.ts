@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { TailwindIconType, TailwindIcon } from '../utils/tailwind-icons';
 import {
@@ -10,7 +9,7 @@ import {
 import { CognitoService } from '../home/cognito.service';
 import { PizzaService } from '../pizza/pizza.service';
 import { MutationsService } from '../utils/services/api/mutations.service';
-import Swal, { SweetAlertOptions } from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 export interface CartItem {
   pizza: CustomPizza | SpecialtyPizza;
@@ -102,6 +101,7 @@ export class CartService {
           },
         });
         this.pizza.resetSignal();
+        this.pizza.resetPizzaArraySignal();
       }
     } catch (err) {
       console.error('Error in onCheckout:', err);

@@ -19,6 +19,14 @@ export const queryMap = new Map<
     },
   ],
   [
+    'GetEmployee',
+    {
+      requestTemplate: 'getEmployee.req.vtl',
+      responseTemplate: 'getEmployee.res.vtl',
+      fieldName: 'getEmployee',
+    },
+  ],
+  [
     'ListEmployees',
     {
       requestTemplate: 'listEmployees.req.vtl',

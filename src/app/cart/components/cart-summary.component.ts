@@ -1,20 +1,11 @@
-import { MutationsService } from '../../utils/services/api/mutations.service';
 import { Component, Signal } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { firstValueFrom } from 'rxjs';
 import { PizzaService } from 'src/app/pizza/pizza.service';
 import { CartService } from '../cart.service';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
-import {
-  CreateOrderInput,
-  CustomPizza,
-  SpecialtyPizza,
-} from 'src/app/API.service';
-import { CognitoService } from 'src/app/home/cognito.service';
-import Swal, { SweetAlertOptions } from 'sweetalert2';
 
 @Component({
   selector: 'app-cart-summary',

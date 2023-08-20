@@ -165,7 +165,4 @@ import { SharedModule } from 'src/app/shared/shared.module';
   styles: [],
 })
 export default class EmployeeSignUpComponent {
-  constructor(private admin: AdminService) {}
-
-
 }

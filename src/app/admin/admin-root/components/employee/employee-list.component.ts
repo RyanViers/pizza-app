@@ -1,3 +1,4 @@
+import { GetEmployeeQuery, GetEmployeeInput } from './../../../../API.service';
 import { AdminLocationSelectorComponent } from './../location-selector/admin-location-selector.component';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
@@ -10,6 +11,7 @@ import {
   ListEmployeesQuery,
 } from 'src/app/API.service';
 import { Employee, employees } from '../../utils/models/employees';
+import { CognitoService } from 'src/app/home/cognito.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -146,23 +148,30 @@ import { Employee, employees } from '../../utils/models/employees';
 export default class EmployeeListComponent {
   selectedLocation: string | null = null;
   employees: any = employees;
-  constructor(private api: APIService) {
+  constructor(private api: APIService, private cognito: CognitoService) {
     console.log(this.employees);
   }
 
   async ngOnInit() {
-    const input: ListEmployeesInput = {
-      reverse_dir: false, // or true, depending on your requirements
-      limit: 2, // Fetch 20 records at a time. Adjust this value as needed.
-      nextToken: null, // This is passed from the previous call. Initialize it to null on the first call.
+    const id = await this.cognito.currentAuthenticatedUser();
+    console.log(id);
+    const test: GetEmployeeInput = {
+      id: 'dbc4196e-fc95-47bc-b42f-5161588fe168',
     };
+    //34b81448-10f1-704e-644a-8fd40bb14006
+    const employee: GetEmployeeQuery = await this.api.GetEmployee(test);
+    //const employee: GetEmployeeQuery = await this.api.GetEmployee(test);
+    console.log(employee);
 
-    const employeesResponse: ListEmployeesQuery = await this.api.ListEmployees(
-      input
-    );
-    console.log(employeesResponse);
-    this.employees = employeesResponse.items;
-    console.log(this.employees);
+    const input: ListEmployeesInput = {
+      reverse_dir: false,
+      limit: 100,
+      nextToken: null,
+    };
+    const employees: ListEmployeesQuery = await this.api.ListEmployees(input);
+    console.log(employees.items);
+
+    
   }
 
   onLocationChange(location: string | null) {

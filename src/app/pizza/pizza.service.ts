@@ -90,6 +90,10 @@ export class PizzaService {
     this.$customPizzaArraySignal.set(newPizzas);
   }
 
+  resetCustomPizzaArraySignal(): void {
+    
+  }
+
   /****************************** SPECIALTY PIZZAS ARRAY ********************************/
   public $specialtyPizzaArraySignal: WritableSignal<SpecialtyPizza[]> = signal(
     []
@@ -99,6 +103,11 @@ export class PizzaService {
     const currentPizzas = this.$specialtyPizzaArraySignal();
     const newPizzas = [...currentPizzas, pizza];
     this.$specialtyPizzaArraySignal.set(newPizzas);
+  }
+
+  resetPizzaArraySignal(): void {
+    this.$specialtyPizzaArraySignal.set([]);
+    this.$customPizzaArraySignal.set([]);
   }
 
   /****************************** SIGNALS ********************************/

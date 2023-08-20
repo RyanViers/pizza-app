@@ -1,0 +1,11 @@
+#set($PK = "EMPLOYEE")
+#set($SK = "ID#" + $ctx.args.input.id)
+
+{
+    "version" : "2017-02-28",
+    "operation" : "GetItem",
+    "key" : {
+        "PK" : {"S": "${PK}"},
+        "SK" : {"S": "${SK}"}
+    }
+}

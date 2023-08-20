@@ -1304,9 +1304,12 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       input
     };
+    console.log('input', input)
+    console.log('gqlAPIServiceArguments', gqlAPIServiceArguments)
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
+    console.log('response', response)
     return <GetEmployeeQuery>response.data.getEmployee;
   }
   async ListEmployees(input: ListEmployeesInput): Promise<ListEmployeesQuery> {
@@ -1333,12 +1336,15 @@ export class APIService {
           nextToken
         }
       }`;
+      console.log('input', input)
     const gqlAPIServiceArguments: any = {
       input
     };
+    console.log('gqlAPIServiceArguments', gqlAPIServiceArguments)
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
+    console.log('response', response)
     return <ListEmployeesQuery>response.data.listEmployees;
   }
   async GetLocation(input: GetLocationInput): Promise<GetLocationQuery> {

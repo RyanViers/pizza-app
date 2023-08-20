@@ -32,7 +32,7 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
     <ion-content>
       <div class="bg-white">
         <div
-          class="max-w-2xl px-4 pt-16 pb-24 mx-auto sm:px-6 lg:max-w-7xl lg:px-8"
+          class="element1 max-w-2xl px-4 pt-16 pb-24 mx-auto sm:px-6 lg:max-w-7xl lg:px-8"
         >
           <h1
             class="text-3xl font-bold tracking-tight text-dark-shade sm:text-4xl"
