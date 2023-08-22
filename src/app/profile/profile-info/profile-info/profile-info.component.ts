@@ -26,11 +26,15 @@ import { environment } from 'src/environments/environment';
     <form class="md:col-span-2">
       <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
         <div class="flex items-center col-span-full gap-x-8">
-           <img 
-              #img 
-              class="flex-none object-cover w-24 h-24 bg-gray-800 rounded-lg"
-              (error)="img.src = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'" 
-              src="https://d3bxgelzcyt5r7.cloudfront.net/public/USERS/AndrewHaselden.png">
+          <img
+            #img
+            class="flex-none object-cover w-24 h-24 bg-gray-800 rounded-lg"
+            (error)="
+              img.src =
+                'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+            "
+            src="https://d3bxgelzcyt5r7.cloudfront.net/public/USERS/AndrewHaselden.png"
+          />
           <div>
             <button
               type="button"
@@ -113,7 +117,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProfileInfoComponent implements OnInit {
   @Input() user?: any;
-  
+
   private processing = false;
 
   constructor(private api: APIService) {}
@@ -125,21 +129,26 @@ export class ProfileInfoComponent implements OnInit {
   async changeImage(img: any) {
     if (this.processing) return;
     this.processing = true;
-    setTimeout(() => {this.processing = false;}, 2000);
+    setTimeout(() => {
+      this.processing = false;
+    }, 2000);
 
     const file = await this.selectFile();
     if (file) {
       try {
-
         const blob = await this.fileToBlob(file);
         const dataUrl = await this.blobToDataUrl(blob);
         img.src = dataUrl;
-        const storageKey = "USERS/AndrewHaselden.png";
+        const storageKey = 'USERS/AndrewHaselden.png';
         const url = `${environment.CLOUDFRONT_URL}/public/${storageKey}`;
-        await this.api.InvalidateCloudfrontUrls({urls: [`/public/${storageKey}`]});
+        await this.api.InvalidateCloudfrontUrls({
+          urls: [`/public/${storageKey}`],
+        });
         const key = await Storage.put(storageKey, blob);
         this.updateImageCache(blob, url);
-      } catch(err) {console.debug(err)}
+      } catch (err) {
+        console.debug(err);
+      }
     }
   }
 
@@ -147,17 +156,15 @@ export class ProfileInfoComponent implements OnInit {
 
   /**
    * update image cache
-   * @param blob 
+   * @param blob
    * @param url
    */
   private updateImageCache(blob: Blob, url: string) {
-    
-      (navigator.serviceWorker.controller)?.postMessage({ 
-        action: 'USER_IMAGE_UPDATED', 
-        url: url,
-        blob: blob
-      });
-    
+    navigator.serviceWorker.controller?.postMessage({
+      action: 'USER_IMAGE_UPDATED',
+      url: url,
+      blob: blob,
+    });
   }
 
   /**
@@ -165,31 +172,29 @@ export class ProfileInfoComponent implements OnInit {
    */
   private async selectFile(): Promise<File> {
     return new Promise((resolve) => {
-      
       const input = document.createElement('input');
       input.type = 'file';
       input.accept = 'image/*';
 
-      input.onchange = (e: any) => { 
-        const file = e.target.files[0]; 
+      input.onchange = (e: any) => {
+        const file = e.target.files[0];
         console.log(file);
-        resolve(file)
-      }
+        resolve(file);
+      };
 
       input.click();
-      
-    })
+    });
   }
 
   /**
    * file to blob
-   * @param file 
-   * @returns 
+   * @param file
+   * @returns
    */
   private async fileToBlob(file: File): Promise<Blob> {
     return new Promise<Blob>((resolve, reject) => {
       const reader = new FileReader();
-  
+
       reader.onload = () => {
         if (reader.result instanceof ArrayBuffer) {
           const blob = new Blob([reader.result], { type: file.type });
@@ -198,11 +203,11 @@ export class ProfileInfoComponent implements OnInit {
           reject(new Error('Failed to read file as ArrayBuffer.'));
         }
       };
-  
+
       reader.onerror = () => {
         reject(new Error('Error reading file.'));
       };
-  
+
       reader.readAsArrayBuffer(file);
     });
   }
@@ -216,7 +221,7 @@ export class ProfileInfoComponent implements OnInit {
       reader.onload = () => {
         resolve(reader.result);
       };
-      reader.onerror = error => {
+      reader.onerror = (error) => {
         reject(error);
       };
       reader.readAsDataURL(blob);

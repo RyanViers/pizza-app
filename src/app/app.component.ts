@@ -6,13 +6,6 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, IonicModule],
-  template: `<ion-app>
-    <ion-content>
-      <div class="flex w-full h-full">
-        <ion-router-outlet />
-      </div>
-    </ion-content>
-  </ion-app> `,
   styles: [
     `
       :host {
@@ -21,6 +14,13 @@ import { IonicModule } from '@ionic/angular';
       }
     `,
   ],
+  template: `<ion-app>
+    <ion-content>
+      <div class="flex w-full h-full">
+        <ion-router-outlet />
+      </div>
+    </ion-content>
+  </ion-app> `,
 })
 export class AppComponent {
   constructor() {}

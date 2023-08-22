@@ -1,12 +1,25 @@
-#set($PKValue = "EMPLOYEE#")
+#set($limit = $util.defaultIfNull($ctx.args.input.limit, 20))
+#set($scanDirection = true) 
+
+#if($ctx.args.input && $ctx.args.input.reverse_dir != null)
+  #set($scanDirection = $ctx.args.input.reverse_dir)
+#end
+
+#set($nextToken = "")
+#if($ctx.args.input && $ctx.args.input.nextToken != null)
+  #set($nextToken = $ctx.args.input.nextToken)
+#end
 
 {
-    "version": "2017-02-28",
-    "operation": "Query",
-    "query": {
-        "expression": "PK = :pk",
-        "expressionValues": {
-            ":pk": {"S": "${PKValue}"}
-        }
-    }
+  "version" : "2017-02-28",
+  "operation" : "Query",
+  "keyConditionExpression": "PK = :pk",
+  "expressionAttributeValues": {
+    ":pk": {"S": "EMPLOYEE"}
+  },
+  "limit": $limit,
+  "scanIndexForward": $scanDirection
+  #if($nextToken && $nextToken != "")
+  , "nextToken": "$nextToken"
+  #end
 }

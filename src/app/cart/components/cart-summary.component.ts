@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-cart-summary',
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule, RouterModule],
+  styles: [``],
   template: `<h2 class="text-lg font-medium text-dark-tint">Order summary</h2>
 
     <dl class="mt-6 space-y-4">
@@ -55,7 +56,6 @@ import { RouterModule } from '@angular/router';
         Checkout
       </button>
     </div> `,
-  styles: [``],
 })
 export class CartSummaryComponent {
   $calculateTotalSignal: Signal<number> = this.pizza.$calculateTotalSignal;

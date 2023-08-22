@@ -1,3 +1,9 @@
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  Validators,
+} from '@angular/forms';
 import { GetEmployeeQuery, GetEmployeeInput } from './../../../../API.service';
 import { AdminLocationSelectorComponent } from './../location-selector/admin-location-selector.component';
 import { CommonModule } from '@angular/common';
@@ -22,6 +28,7 @@ import { CognitoService } from 'src/app/home/cognito.service';
     SharedModule,
     RouterModule,
     AdminLocationSelectorComponent,
+    FormsModule,
   ],
   styles: [],
   template: `
@@ -148,9 +155,11 @@ import { CognitoService } from 'src/app/home/cognito.service';
 export default class EmployeeListComponent {
   selectedLocation: string | null = null;
   employees: any = employees;
-  constructor(private api: APIService, private cognito: CognitoService) {
-    console.log(this.employees);
-  }
+  constructor(
+    private api: APIService,
+    private cognito: CognitoService,
+    private builder: FormBuilder
+  ) {}
 
   async ngOnInit() {
     const id = await this.cognito.currentAuthenticatedUser();
@@ -164,14 +173,12 @@ export default class EmployeeListComponent {
     console.log(employee);
 
     const input: ListEmployeesInput = {
-      reverse_dir: false,
       limit: 100,
+      reverse_dir: false,
       nextToken: null,
     };
     const employees: ListEmployeesQuery = await this.api.ListEmployees(input);
     console.log(employees.items);
-
-    
   }
 
   onLocationChange(location: string | null) {
