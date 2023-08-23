@@ -99,7 +99,7 @@ import { CognitoService } from 'src/app/home/cognito.service';
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
-                  <ng-container *ngFor="let e of employees">
+                  <ng-container *ngFor="let e of employees?.items">
                     <tr
                       *ngIf="
                         !selectedLocation || e.storeName === selectedLocation
@@ -114,7 +114,7 @@ import { CognitoService } from 'src/app/home/cognito.service';
                           </div>
                           <div class="ml-4">
                             <div class="font-medium text-gray-300">
-                              {{ e?.name }}
+                              {{ e?.first_name }} {{ e?.last_name }}
                             </div>
                             <div class="mt-1 text-gray-500">
                               {{ e?.email }}
@@ -125,8 +125,8 @@ import { CognitoService } from 'src/app/home/cognito.service';
                       <td
                         class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
                       >
-                        <div class="text-gray-300">{{ e?.storeName }}</div>
-                        <div class="mt-1 text-gray-500">{{ e?.age }}</div>
+                        <div class="text-gray-300">{{ e?.city }}</div>
+                        <div class="mt-1 text-gray-500">{{ e?.state }}</div>
                       </td>
                       <td
                         class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
@@ -139,7 +139,7 @@ import { CognitoService } from 'src/app/home/cognito.service';
                       <td
                         class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
                       >
-                        {{ e?.salary }}
+                        {{ e?.user_role }}
                       </td>
                     </tr>
                   </ng-container>
@@ -154,7 +154,7 @@ import { CognitoService } from 'src/app/home/cognito.service';
 })
 export default class EmployeeListComponent {
   selectedLocation: string | null = null;
-  employees: any = employees;
+  employees: any;
   constructor(
     private api: APIService,
     private cognito: CognitoService,
@@ -165,7 +165,7 @@ export default class EmployeeListComponent {
     const id = await this.cognito.currentAuthenticatedUser();
     console.log(id);
     const test: GetEmployeeInput = {
-      id: 'dbc4196e-fc95-47bc-b42f-5161588fe168',
+      id: '9f09416c-b52c-4546-800f-a2d83309125c',
     };
     //34b81448-10f1-704e-644a-8fd40bb14006
     const employee: GetEmployeeQuery = await this.api.GetEmployee(test);
@@ -173,12 +173,12 @@ export default class EmployeeListComponent {
     console.log(employee);
 
     const input: ListEmployeesInput = {
-      limit: 100,
       reverse_dir: false,
+      limit: 100,
       nextToken: null,
     };
-    const employees: ListEmployeesQuery = await this.api.ListEmployees(input);
-    console.log(employees.items);
+    this.employees = await this.api.ListEmployees(input);
+    console.log(this.employees);
   }
 
   onLocationChange(location: string | null) {
