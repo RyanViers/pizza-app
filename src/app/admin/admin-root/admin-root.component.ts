@@ -47,12 +47,9 @@ import StoreListComponent from './components/store-list/store-list.component';
           <app-admin-analytics />
 
           <!-- Administration Router -->
-          <div class="h-full relative w-full block ">
+          <div class="h-full absolute w-full block ">
             <ion-router-outlet />
           </div>
-
-          <!-- Footer -->
-          <app-footer class="sticky" />
         </main>
       </div>
     </ion-content> `,

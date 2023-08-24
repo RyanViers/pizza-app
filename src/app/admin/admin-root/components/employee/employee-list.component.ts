@@ -110,7 +110,10 @@ import { CognitoService } from 'src/app/home/cognito.service';
                       >
                         <div class="flex items-center">
                           <div class="h-11 w-11 flex-shrink-0">
-                            <img class="h-11 w-11 rounded-full" [src]="e.img" />
+                            <img
+                              class="h-11 w-11 rounded-full"
+                              [src]="e?.employee_url"
+                            />
                           </div>
                           <div class="ml-4">
                             <div class="font-medium text-gray-300">

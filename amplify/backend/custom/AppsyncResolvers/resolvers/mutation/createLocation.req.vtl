@@ -1,0 +1,29 @@
+#set($id = $util.autoId())
+#set($PK = "LOCATION")
+#set($SK = "ID#" + $id)
+#set($GSI_SECONDARY_SK = "NAME#" + $ctx.args.input.name)
+#set($timestamp = $util.time.nowEpochMilliSeconds())
+
+$util.qr($ctx.args.input.put("id", $id))
+
+#set($DATA = {
+    "DATA": $ctx.args.input,
+    "GSI_SECONDARY_PK": "LOCATION",
+    "GSI_SECONDARY_SK": $GSI_SECONDARY_SK,
+    "MODEL": "LOCATION",
+    "CREATED_AT": $timestamp,
+    "UPDATED_AT": $timestamp
+})
+
+{
+  "version": "2018-05-29",
+  "operation": "PutItem",
+  "key": {
+    "PK": {"S": "${PK}"},
+    "SK": {"S": "${SK}"}
+  },
+  "attributeValues": $util.dynamodb.toMapValuesJson($DATA),
+  "condition": {
+    "expression": "attribute_not_exists(PK) AND attribute_not_exists(SK)",
+  }
+}

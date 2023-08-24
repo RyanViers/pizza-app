@@ -34,4 +34,20 @@ export const queryMap = new Map<
       fieldName: 'listEmployees',
     },
   ],
+  [
+    'GetLocation',
+    {
+      requestTemplate: 'getLocation.req.vtl',
+      responseTemplate: 'getLocation.res.vtl',
+      fieldName: 'getLocation',
+    },
+  ],
+  [
+    'ListLocations',
+    {
+      requestTemplate: 'listLocations.req.vtl',
+      responseTemplate: 'listLocations.res.vtl',
+      fieldName: 'listLocations',
+    },
+  ],
 ]);
