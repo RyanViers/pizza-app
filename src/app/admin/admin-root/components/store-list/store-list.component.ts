@@ -1,17 +1,16 @@
-import { administrator } from './../../utils/models/administrator';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { storesPractice, Store } from '../../utils/models/stores';
 import { EmailButtonComponent } from './email-button/email-button.component';
+import { APIService, ListLocationsInput } from 'src/app/API.service';
 
 @Component({
   selector: 'app-store-list',
   standalone: true,
   imports: [CommonModule, IonicModule, SharedModule, EmailButtonComponent],
   styles: [],
-  template: `<ion-content>
+  template: `<div class="overflow-y-auto">
     <div class="bg-light-shade p-24 sm:py-32">
       <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
         <div class="mx-auto max-w-2xl">
@@ -33,17 +32,19 @@ import { EmailButtonComponent } from './email-button/email-button.component';
           >
             <img
               class="mx-auto h-48 w-48 rounded-full md:h-56 md:w-56"
-              [src]="s.img"
+              [src]="s.location_url"
             />
             <h3
               class="mt-6 text-base font-semibold leading-7 tracking-tight text-white"
             >
               {{ s.location }}
             </h3>
-            <p class="text-sm leading-6 text-gray-400">{{ s.address }}</p>
-            <p class="text-sm leading-6 text-gray-400">{{ s.email }}</p>
+            <p class="text-sm leading-6 text-gray-400">{{ s.name }}</p>
+            <p class="text-sm leading-6 text-gray-400">
+              {{ s.address }} {{ s.state }} {{ s.zip }}
+            </p>
             <p class="text-sm leading-6 text-gray-400">{{ s.phone }}</p>
-            <p class="text-sm leading-6 text-gray-400">{{ s.manager }}</p>
+            <p class="text-sm leading-6 text-gray-400">{{ s.email }}</p>
           </li>
         </ul>
       </div>
@@ -160,10 +161,21 @@ import { EmailButtonComponent } from './email-button/email-button.component';
         </div>
       </div>
     </div>
-  </ion-content> `,
+  </div> `,
 })
-export default class StoreListComponent {
-  stores: Store[] = storesPractice;
+export default class StoreListComponent implements OnInit {
+  stores?: any;
 
-  constructor() {}
+  constructor(private api: APIService) {}
+
+  async ngOnInit() {
+    const input: ListLocationsInput = {
+      reverse_dir: false,
+      limit: 100,
+      nextToken: null,
+    };
+    const response = await this.api.ListLocations(input);
+
+    this.stores = response.items;
+  }
 }

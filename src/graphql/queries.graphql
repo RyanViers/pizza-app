@@ -101,6 +101,27 @@ query ListEmployees($input: ListEmployeesInput!) {
     nextToken
   }
 }
+query ListEmployeesById($input: ListEmployeesInput!) {
+  listEmployeesById(input: $input) {
+    items {
+      id
+      first_name
+      last_name
+      email
+      street
+      city
+      state
+      zip
+      phone
+      date_of_birth
+      date_hired
+      user_role
+      annual_salary
+      employee_url
+    }
+    nextToken
+  }
+}
 query GetLocation($input: GetLocationInput!) {
   getLocation(input: $input) {
     id
@@ -110,6 +131,8 @@ query GetLocation($input: GetLocationInput!) {
     state
     zip
     location_url
+    phone
+    email
   }
 }
 query ListLocations($input: ListLocationsInput!) {
@@ -122,6 +145,8 @@ query ListLocations($input: ListLocationsInput!) {
       state
       zip
       location_url
+      phone
+      email
     }
     nextToken
   }

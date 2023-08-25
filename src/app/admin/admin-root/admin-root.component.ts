@@ -47,8 +47,8 @@ import StoreListComponent from './components/store-list/store-list.component';
           <app-admin-analytics />
 
           <!-- Administration Router -->
-          <div class="h-full absolute w-full block ">
-            <ion-router-outlet />
+          <div class="min-h-[80rem] relative w-full block ">
+            <ion-router-outlet class="overflow-y-auto" />
           </div>
         </main>
       </div>

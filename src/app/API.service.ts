@@ -232,6 +232,9 @@ export type CreateLocationInput = {
   city: string;
   state: string;
   zip: number;
+  location_url: string;
+  phone: string;
+  email: string;
 };
 
 export type Location = {
@@ -243,6 +246,8 @@ export type Location = {
   state: string;
   zip: number;
   location_url: string;
+  phone: string;
+  email: string;
 };
 
 export type DeleteLocationInput = {
@@ -617,6 +622,8 @@ export type CreateLocationMutation = {
   state: string;
   zip: number;
   location_url: string;
+  phone: string;
+  email: string;
 };
 
 export type DeleteLocationMutation = {
@@ -628,6 +635,8 @@ export type DeleteLocationMutation = {
   state: string;
   zip: number;
   location_url: string;
+  phone: string;
+  email: string;
 };
 
 export type AddEmployeeToLocationMutation = {
@@ -761,6 +770,28 @@ export type ListEmployeesQuery = {
   nextToken?: string | null;
 };
 
+export type ListEmployeesByIdQuery = {
+  __typename: "ListEmployeesResponse";
+  items?: Array<{
+    __typename: "Employee";
+    id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    street: string;
+    city: string;
+    state: string;
+    zip: number;
+    phone: string;
+    date_of_birth: string;
+    date_hired: string;
+    user_role: UserRole;
+    annual_salary: number;
+    employee_url: string;
+  } | null> | null;
+  nextToken?: string | null;
+};
+
 export type GetLocationQuery = {
   __typename: "Location";
   id: string;
@@ -770,6 +801,8 @@ export type GetLocationQuery = {
   state: string;
   zip: number;
   location_url: string;
+  phone: string;
+  email: string;
 };
 
 export type ListLocationsQuery = {
@@ -783,6 +816,8 @@ export type ListLocationsQuery = {
     state: string;
     zip: number;
     location_url: string;
+    phone: string;
+    email: string;
   } | null> | null;
   nextToken?: string | null;
 };
@@ -1109,6 +1144,8 @@ export class APIService {
           state
           zip
           location_url
+          phone
+          email
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1132,6 +1169,8 @@ export class APIService {
           state
           zip
           location_url
+          phone
+          email
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1341,6 +1380,40 @@ export class APIService {
     )) as any;
     return <ListEmployeesQuery>response.data.listEmployees;
   }
+  async ListEmployeesById(
+    input: ListEmployeesInput
+  ): Promise<ListEmployeesByIdQuery> {
+    const statement = `query ListEmployeesById($input: ListEmployeesInput!) {
+        listEmployeesById(input: $input) {
+          __typename
+          items {
+            __typename
+            id
+            first_name
+            last_name
+            email
+            street
+            city
+            state
+            zip
+            phone
+            date_of_birth
+            date_hired
+            user_role
+            annual_salary
+            employee_url
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListEmployeesByIdQuery>response.data.listEmployeesById;
+  }
   async GetLocation(input: GetLocationInput): Promise<GetLocationQuery> {
     const statement = `query GetLocation($input: GetLocationInput!) {
         getLocation(input: $input) {
@@ -1352,6 +1425,8 @@ export class APIService {
           state
           zip
           location_url
+          phone
+          email
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1375,6 +1450,8 @@ export class APIService {
             state
             zip
             location_url
+            phone
+            email
           }
           nextToken
         }

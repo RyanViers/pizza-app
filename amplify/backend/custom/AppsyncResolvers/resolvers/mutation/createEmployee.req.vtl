@@ -1,7 +1,7 @@
 #set($id = $util.autoId())
 #set($PK = "EMPLOYEE")
 #set($SK = "ID#" + $id)
-#set($GSI_SECONDARY_SK = "NAME#" + $ctx.args.input.name)
+#set($GSI_SECONDARY_SK = "LAST_NAME#" + $ctx.args.input.last_name)
 #set($timestamp = $util.time.nowEpochMilliSeconds())
 
 $util.qr($ctx.args.input.put("id", $id))

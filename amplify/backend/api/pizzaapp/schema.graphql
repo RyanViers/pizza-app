@@ -41,6 +41,8 @@ type Location {
   state: String!
   zip: Int!
   location_url: String!
+  phone: String!
+  email: String!
 }
 
 type EmployeeLocationListData {
@@ -278,6 +280,9 @@ input CreateLocationInput {
   city: String!
   state: String!
   zip: Int!
+  location_url: String!
+  phone: String!
+  email: String!
 }
 
 input DeleteLocationInput {
@@ -358,6 +363,7 @@ type Query {
   getOrder(input: GetOrderInput!): Order
   getEmployee(input: GetEmployeeInput!): Employee
   listEmployees(input: ListEmployeesInput!): ListEmployeesResponse
+  listEmployeesById(input: ListEmployeesInput!): ListEmployeesResponse
   getLocation(input: GetLocationInput!): Location
   listLocations(input: ListLocationsInput!): ListLocationsResponse
   listLocationEmployees(
