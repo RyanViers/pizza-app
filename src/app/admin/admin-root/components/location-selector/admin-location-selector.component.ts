@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-admin-location-selector',
   standalone: true,
   imports: [CommonModule, IonicModule, RouterModule, ReactiveFormsModule],
-
+  styles: [``],
   template: `<div class="flex mb-8 w-max">
     <div
       class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-dark-shade bg-light-shade border border-light rounded-l-lg hover:bg-light focus:outline-none "
@@ -27,7 +27,6 @@ import { IonicModule } from '@ionic/angular';
       <option value="Kingsport">Kingsport</option>
     </select>
   </div>`,
-  styles: [``],
 })
 export class AdminLocationSelectorComponent implements OnInit {
   @Output() locationChange = new EventEmitter<string | null>();
