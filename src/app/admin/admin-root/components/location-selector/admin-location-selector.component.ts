@@ -1,6 +1,13 @@
+import { APIService, ListLocationsInput } from 'src/app/API.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
@@ -21,22 +28,39 @@ import { IonicModule } from '@ionic/angular';
       [formControl]="selectedLocation"
       class="cursor-pointer bg-light-tint border border-light text-dark-shade text-sm rounded-r-lg border-l-light border-l-2 block w-full p-2.5"
     >
-      <option selected value="">Choose a Store</option>
-      <option value="Johnson City">Johnson City</option>
-      <option value="Bristol">Bristol</option>
-      <option value="Kingsport">Kingsport</option>
+      <option selected value="">All Employees</option>
+      <option *ngFor="let location of locations" [value]="location.id">
+        {{ location.city }}
+      </option>
     </select>
   </div>`,
 })
-export class AdminLocationSelectorComponent implements OnInit {
+export class AdminLocationSelectorComponent implements OnInit, OnDestroy {
   @Output() locationChange = new EventEmitter<string | null>();
   selectedLocation = new FormControl('');
+  locations: any;
 
-  constructor() {}
+  constructor(private api: APIService) {}
 
-  ngOnInit() {
-    this.selectedLocation.valueChanges.subscribe((selectedLocation) => {
-      this.locationChange.emit(selectedLocation);
+  async ngOnInit() {
+    this.selectedLocation.valueChanges.subscribe((selectedId) => {
+      this.locationChange.emit(selectedId);
     });
+
+    try {
+      const input: ListLocationsInput = {
+        reverse_dir: false,
+        limit: 100,
+        nextToken: null,
+      };
+      const response = await this.api.ListLocations(input);
+      this.locations = response.items;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.locationChange.unsubscribe();
   }
 }

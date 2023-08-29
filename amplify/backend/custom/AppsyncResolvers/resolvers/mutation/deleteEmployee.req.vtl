@@ -1,0 +1,14 @@
+#set($PK = "EMPLOYEE")
+#set($SK = "ID#" + $ctx.args.input.id)
+
+{
+    "version" : "2018-05-29",
+    "operation" : "DeleteItem",
+    "key": {
+        "PK" : {"S": "${PK}"},
+        "SK" : {"S": "${SK}"}
+    },
+    "condition" : {
+        "expression" : "attribute_exists(PK) AND attribute_exists(SK)"
+    }
+}

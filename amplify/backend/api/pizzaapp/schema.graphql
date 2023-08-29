@@ -204,6 +204,10 @@ input GetEmployeeInput {
   id: String!
 }
 
+input GetEmployeeByNameInput {
+  last_name: String!
+}
+
 input ListEmployeesInput {
   reverse_dir: Boolean!
   limit: Int
@@ -362,10 +366,12 @@ type Query {
   listOrdersByUser(input: ListOrdersByUserInput!): ListOrdersByUserResponse
   getOrder(input: GetOrderInput!): Order
   getEmployee(input: GetEmployeeInput!): Employee
+  getEmployeeByName(input: GetEmployeeByNameInput!): Employee
   listEmployees(input: ListEmployeesInput!): ListEmployeesResponse
   listEmployeesById(input: ListEmployeesInput!): ListEmployeesResponse
   getLocation(input: GetLocationInput!): Location
   listLocations(input: ListLocationsInput!): ListLocationsResponse
+  listLocationsById(input: ListLocationsInput!): ListLocationsResponse
   listLocationEmployees(
     input: ListLocationEmployeesInput!
   ): ListLocationEmployeesResponse

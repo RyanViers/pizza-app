@@ -1,0 +1,20 @@
+{
+  "version": "2017-02-28",
+  "operation": "Query",
+  "index": "GSI_SECONDARY",
+  "query": {
+    "expression": "#PK = :PK AND begins_with(#SK, :SK)",
+    "expressionNames": {
+      "#PK": "PK",
+      "#SK": "SK",
+    },
+    "expressionValues": {
+            ":PK": {
+                "S": "LOCATION"
+            },
+            ":SK": {
+                "S": "ID#"
+            }
+        }
+  }
+}

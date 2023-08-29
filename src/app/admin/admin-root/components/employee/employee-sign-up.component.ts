@@ -12,6 +12,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { APIService, CreateEmployeeInput, UserRole } from 'src/app/API.service';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
+import { AdminLocationSelectorComponent } from '../location-selector/admin-location-selector.component';
 
 @Component({
   selector: 'app-employee-sign-up',
@@ -21,24 +22,30 @@ import Swal from 'sweetalert2';
     IonicModule,
     SharedModule,
     RouterModule,
+    AdminLocationSelectorComponent,
     ReactiveFormsModule,
   ],
-  template: ` <div class="sm:flex sm:items-center p-10">
-      <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold leading-6 text-gray-300">Users</h1>
-        <p class="mt-2 text-sm text-gray-700">
-          A list of all the users in your account including their name, title,
-          email and role.
-        </p>
-      </div>
-      <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <button
-          type="button"
-          (click)="onSubmit()"
-          class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Add user
-        </button>
+  template: ` <div class="grid-cols-1">
+      <app-admin-location-selector
+        (locationChange)="onLocationChange($event)"
+      />
+      <div class="sm:flex sm:items-center p-10">
+        <div class="sm:flex-auto">
+          <h1 class="text-base font-semibold leading-6 text-gray-300">Users</h1>
+          <p class="mt-2 text-sm text-gray-700">
+            A list of all the users in your account including their name, title,
+            email and role.
+          </p>
+        </div>
+        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+          <button
+            type="button"
+            (click)="onSubmit()"
+            class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Add user
+          </button>
+        </div>
       </div>
     </div>
     <ion-content
@@ -243,6 +250,7 @@ import Swal from 'sweetalert2';
   styles: [],
 })
 export default class EmployeeSignUpComponent implements OnInit, OnDestroy {
+  selectedLocation?: any;
   employeeInput: FormGroup = new FormGroup({});
   private employeeState = new Subscription();
   form: CreateEmployeeInput | undefined;
@@ -250,7 +258,7 @@ export default class EmployeeSignUpComponent implements OnInit, OnDestroy {
 
   constructor(private api: APIService, private builder: FormBuilder) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.employeeInput = this.builder.group({
       first_name: ['', [Validators.required, Validators.maxLength(60)]],
       last_name: ['', [Validators.required, Validators.maxLength(60)]],
@@ -325,5 +333,10 @@ export default class EmployeeSignUpComponent implements OnInit, OnDestroy {
     } else {
       console.error('Form is invalid');
     }
+  }
+
+  onLocationChange(location: string | null) {
+    console.log('location', location);
+    this.selectedLocation = location;
   }
 }

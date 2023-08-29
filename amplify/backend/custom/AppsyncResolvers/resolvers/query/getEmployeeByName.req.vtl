@@ -1,0 +1,12 @@
+#set($PK = "EMPLOYEE")
+#set($SK = "LAST_NAME#" + $ctx.args.input.last_name)
+
+{
+    "version" : "2017-02-28",
+    "operation" : "GetItem",
+    "index": "GSI_SECONDARY"
+    "key" : {
+        "PK" : {"S": "${PK}"},
+        "SK" : {"S": "${SK}"}
+    }
+}

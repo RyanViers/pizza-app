@@ -27,6 +27,14 @@ export const queryMap = new Map<
     },
   ],
   [
+    'GetEmployeeByName',
+    {
+      requestTemplate: 'getEmployeeByName.req.vtl',
+      responseTemplate: 'getEmployeeByName.res.vtl',
+      fieldName: 'getEmployeeByName',
+    },
+  ],
+  [
     'ListEmployees',
     {
       requestTemplate: 'listEmployees.req.vtl',
@@ -56,6 +64,14 @@ export const queryMap = new Map<
       requestTemplate: 'listLocations.req.vtl',
       responseTemplate: 'listLocations.res.vtl',
       fieldName: 'listLocations',
+    },
+  ],
+  [
+    'ListLocationsById',
+    {
+      requestTemplate: 'listLocationsById.req.vtl',
+      responseTemplate: 'listLocationsById.res.vtl',
+      fieldName: 'listLocationsById',
     },
   ],
 ]);

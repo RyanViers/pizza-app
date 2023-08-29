@@ -1,5 +1,3 @@
-import { Country } from './enums';
-
 export interface SignUpForm {
   email: string;
   password: string;

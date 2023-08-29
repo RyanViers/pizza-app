@@ -1,23 +1,13 @@
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  Validators,
-} from '@angular/forms';
-import { GetEmployeeQuery, GetEmployeeInput } from './../../../../API.service';
+import { UpdateEmployeeModalComponent } from './components/update-employee-modal.component';
 import { AdminLocationSelectorComponent } from './../location-selector/admin-location-selector.component';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
-import {
-  APIService,
-  ListEmployeesInput,
-  ListEmployeesQuery,
-} from 'src/app/API.service';
-import { Employee, employees } from '../../utils/models/employees';
-import { CognitoService } from 'src/app/home/cognito.service';
+import { APIService, ListEmployeesInput } from 'src/app/API.service';
+import { opacityScale } from 'src/app/utils/animations';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-list',
@@ -28,9 +18,10 @@ import { CognitoService } from 'src/app/home/cognito.service';
     SharedModule,
     RouterModule,
     AdminLocationSelectorComponent,
-    FormsModule,
+    UpdateEmployeeModalComponent,
   ],
   styles: [],
+  animations: [opacityScale],
   template: `
     <ion-content class="maw-w-max">
       <h1
@@ -55,9 +46,10 @@ import { CognitoService } from 'src/app/home/cognito.service';
           <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
             <button
               type="button"
+              (click)="deleteSelectedEmployees()"
               class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              Add user
+              Delete user
             </button>
           </div>
         </div>
@@ -105,6 +97,22 @@ import { CognitoService } from 'src/app/home/cognito.service';
                         !selectedLocation || e.storeName === selectedLocation
                       "
                     >
+                      <td class="relative px-7 sm:w-12 sm:px-6">
+                        <!-- Selected row marker, only show when row is selected. -->
+                        <div
+                          class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"
+                          [style.visibility]="
+                            selectedEmployees[e?.id] ? 'visible' : 'hidden'
+                          "
+                        ></div>
+
+                        <input
+                          type="checkbox"
+                          [checked]="selectedEmployees[e?.id] || false"
+                          (change)="toggleEmployeeSelection(e?.id)"
+                          class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        />
+                      </td>
                       <td
                         class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0"
                       >
@@ -153,38 +161,72 @@ import { CognitoService } from 'src/app/home/cognito.service';
         </div>
       </div>
     </ion-content>
+    <app-update-employee-modal></app-update-employee-modal>
   `,
 })
 export default class EmployeeListComponent {
   selectedLocation: string | null = null;
   employees: any;
-  constructor(
-    private api: APIService,
-    private cognito: CognitoService,
-    private builder: FormBuilder
-  ) {}
+  selectedEmployees: { [employeeId: string]: boolean } = {};
+  constructor(private api: APIService) {}
 
   async ngOnInit() {
-    const id = await this.cognito.currentAuthenticatedUser();
-    console.log(id);
-    const test: GetEmployeeInput = {
-      id: '9f09416c-b52c-4546-800f-a2d83309125c',
-    };
-    //34b81448-10f1-704e-644a-8fd40bb14006
-    const employee: GetEmployeeQuery = await this.api.GetEmployee(test);
-    //const employee: GetEmployeeQuery = await this.api.GetEmployee(test);
-    console.log(employee);
-
     const input: ListEmployeesInput = {
       reverse_dir: false,
       limit: 100,
       nextToken: null,
     };
-    this.employees = await this.api.ListEmployees(input);
-    console.log(this.employees);
+    try {
+      this.employees = await this.api.ListEmployees(input);
+      console.log(this.employees);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   onLocationChange(location: string | null) {
     this.selectedLocation = location;
+  }
+
+  toggleEmployeeSelection(employeeId: string) {
+    this.selectedEmployees[employeeId] = !this.selectedEmployees[employeeId];
+  }
+
+  async deleteSelectedEmployees() {
+    for (let employeeId in this.selectedEmployees) {
+      if (this.selectedEmployees[employeeId]) {
+        console.log('Deleting employee with ID: ', employeeId);
+        try {
+          const response = await this.api.DeleteEmployee({ id: employeeId });
+
+          Swal.fire({
+            title: 'Success!',
+            text:
+              'Employee' +
+              ` ${response.first_name} ` +
+              `${response.last_name} ` +
+              'deleted successfully!',
+            icon: 'success',
+            confirmButtonText: 'Ok',
+            heightAuto: false,
+            customClass: {
+              popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
+            },
+          });
+        } catch (error) {
+          console.log(error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Something went wrong. Please try again later.',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            heightAuto: false,
+            customClass: {
+              popup: 'bg-light-shade text-dark-shade rounded-lg shadow-lg',
+            },
+          });
+        }
+      }
+    }
   }
 }

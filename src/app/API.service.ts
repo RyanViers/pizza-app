@@ -298,6 +298,10 @@ export type GetEmployeeInput = {
   id: string;
 };
 
+export type GetEmployeeByNameInput = {
+  last_name: string;
+};
+
 export type ListEmployeesInput = {
   reverse_dir: boolean;
   limit?: number | null;
@@ -748,6 +752,24 @@ export type GetEmployeeQuery = {
   employee_url: string;
 };
 
+export type GetEmployeeByNameQuery = {
+  __typename: "Employee";
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: number;
+  phone: string;
+  date_of_birth: string;
+  date_hired: string;
+  user_role: UserRole;
+  annual_salary: number;
+  employee_url: string;
+};
+
 export type ListEmployeesQuery = {
   __typename: "ListEmployeesResponse";
   items?: Array<{
@@ -806,6 +828,23 @@ export type GetLocationQuery = {
 };
 
 export type ListLocationsQuery = {
+  __typename: "ListLocationsResponse";
+  items?: Array<{
+    __typename: "Location";
+    id: string;
+    name: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: number;
+    location_url: string;
+    phone: string;
+    email: string;
+  } | null> | null;
+  nextToken?: string | null;
+};
+
+export type ListLocationsByIdQuery = {
   __typename: "ListLocationsResponse";
   items?: Array<{
     __typename: "Location";
@@ -1348,6 +1387,36 @@ export class APIService {
     )) as any;
     return <GetEmployeeQuery>response.data.getEmployee;
   }
+  async GetEmployeeByName(
+    input: GetEmployeeByNameInput
+  ): Promise<GetEmployeeByNameQuery> {
+    const statement = `query GetEmployeeByName($input: GetEmployeeByNameInput!) {
+        getEmployeeByName(input: $input) {
+          __typename
+          id
+          first_name
+          last_name
+          email
+          street
+          city
+          state
+          zip
+          phone
+          date_of_birth
+          date_hired
+          user_role
+          annual_salary
+          employee_url
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetEmployeeByNameQuery>response.data.getEmployeeByName;
+  }
   async ListEmployees(input: ListEmployeesInput): Promise<ListEmployeesQuery> {
     const statement = `query ListEmployees($input: ListEmployeesInput!) {
         listEmployees(input: $input) {
@@ -1463,6 +1532,35 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListLocationsQuery>response.data.listLocations;
+  }
+  async ListLocationsById(
+    input: ListLocationsInput
+  ): Promise<ListLocationsByIdQuery> {
+    const statement = `query ListLocationsById($input: ListLocationsInput!) {
+        listLocationsById(input: $input) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            address
+            city
+            state
+            zip
+            location_url
+            phone
+            email
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListLocationsByIdQuery>response.data.listLocationsById;
   }
   async ListLocationEmployees(
     input: ListLocationEmployeesInput
