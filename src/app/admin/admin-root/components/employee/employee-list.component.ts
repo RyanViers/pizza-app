@@ -91,69 +91,67 @@ import Swal from 'sweetalert2';
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
-                  <ng-container *ngFor="let e of employees?.items">
-                    <tr
-                      *ngIf="
-                        !selectedLocation || e.storeName === selectedLocation
-                      "
-                    >
-                      <td class="relative px-7 sm:w-12 sm:px-6">
-                        <!-- Selected row marker, only show when row is selected. -->
-                        <div
-                          class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"
-                          [style.visibility]="
-                            selectedEmployees[e?.id] ? 'visible' : 'hidden'
-                          "
-                        ></div>
+                  @for (e of employees?.items; track e?.id) {
+                    @if ( e?.storeName === selectedLocation || !selectedLocation) {
+                      <tr>
+                        <td class="relative px-7 sm:w-12 sm:px-6">
+                          <!-- Selected row marker, only show when row is selected. -->
+                          <div
+                            class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"
+                            [style.visibility]="
+                              selectedEmployees[e?.id] ? 'visible' : 'hidden'
+                            "
+                          ></div>
 
-                        <input
-                          type="checkbox"
-                          [checked]="selectedEmployees[e?.id] || false"
-                          (change)="toggleEmployeeSelection(e?.id)"
-                          class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        />
-                      </td>
-                      <td
-                        class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0"
-                      >
-                        <div class="flex items-center">
-                          <div class="h-11 w-11 flex-shrink-0">
-                            <img
-                              class="h-11 w-11 rounded-full"
-                              [src]="e?.employee_url"
-                            />
-                          </div>
-                          <div class="ml-4">
-                            <div class="font-medium text-gray-300">
-                              {{ e?.first_name }} {{ e?.last_name }}
-                            </div>
-                            <div class="mt-1 text-gray-500">
-                              {{ e?.email }}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
-                      >
-                        <div class="text-gray-300">{{ e?.city }}</div>
-                        <div class="mt-1 text-gray-500">{{ e?.state }}</div>
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
-                      >
-                        <span
-                          class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
-                          >{{ e?.phone }}</span
+                          <input
+                            type="checkbox"
+                            [checked]="selectedEmployees[e?.id] || false"
+                            (change)="toggleEmployeeSelection(e?.id)"
+                            class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                          />
+                        </td>
+                        <td
+                          class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0"
                         >
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
-                      >
-                        {{ e?.user_role }}
-                      </td>
-                    </tr>
-                  </ng-container>
+                          <div class="flex items-center">
+                            <div class="h-11 w-11 flex-shrink-0">
+                              <img
+                                class="h-11 w-11 rounded-full"
+                                [src]="e?.employee_url"
+                              />
+                            </div>
+                            <div class="ml-4">
+                              <div class="font-medium text-gray-300">
+                                {{ e?.first_name }} {{ e?.last_name }}
+                              </div>
+                              <div class="mt-1 text-gray-500">
+                                {{ e?.email }}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
+                        >
+                          <div class="text-gray-300">{{ e?.city }}</div>
+                          <div class="mt-1 text-gray-500">{{ e?.state }}</div>
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
+                        >
+                          <span
+                            class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20"
+                            >{{ e?.phone }}</span
+                          >
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-5 text-sm text-gray-500"
+                        >
+                          {{ e?.user_role }}
+                        </td>
+                      </tr>
+                    }
+                  }
                 </tbody>
               </table>
             </div>

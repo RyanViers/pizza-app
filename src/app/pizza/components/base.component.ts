@@ -46,26 +46,25 @@ import { PizzaService } from '../pizza.service';
         <div
           class="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200"
         >
-          <div
-            class="relative flex items-start py-4"
-            *ngFor="let crust of PizzaCrust"
-          >
-            <div class="min-w-0 flex-1 text-sm leading-6">
-              <label for="side-2" class="select-none font-medium text-dark">{{
-                crust
-              }}</label>
+          @for (crust of PizzaCrust; track $index) {
+            <div class="relative flex items-start py-4">
+              <div class="min-w-0 flex-1 text-sm leading-6">
+                <label for="side-2" class="select-none font-medium text-dark">
+                 {{ crust }}
+                </label>
+              </div>
+              <div class="ml-3 flex h-6 items-center">
+                <input
+                  [checked]="$pizzaCrust() === crust"
+                  [id]="crust"
+                  [name]="'pizzaCrust'"
+                  type="radio"
+                  class="h-4 w-4"
+                  (change)="onCrustChange(crust)"
+                />
+              </div>
             </div>
-            <div class="ml-3 flex h-6 items-center">
-              <input
-                [checked]="$pizzaCrust() === crust"
-                [id]="crust"
-                [name]="'pizzaCrust'"
-                type="radio"
-                class="h-4 w-4"
-                (change)="onCrustChange(crust)"
-              />
-            </div>
-          </div>
+          }
         </div>
       </fieldset>
       <fieldset>

@@ -45,7 +45,7 @@ import { opacityScale } from 'src/app/utils/animations';
           </div>
           <div class="ml-3">
             <div class="text-base font-medium text-white">Tom Cook</div>
-            <div class="text-sm font-medium text-gray-400">tom@example.com</div>
+            <div class="text-sm font-medium text-gray-400">tom&#64;example.com</div>
           </div>
           <button
             type="button"

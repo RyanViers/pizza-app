@@ -15,14 +15,14 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^16.2.12",
-    "@angular/common": "^16.2.12",
-    "@angular/core": "^16.2.12",
-    "@angular/forms": "^16.2.12",
-    "@angular/platform-browser": "^16.2.12",
-    "@angular/platform-browser-dynamic": "^16.2.12",
-    "@angular/router": "^16.2.12",
-    "@angular/service-worker": "^16.2.12",
+    "@angular/animations": "^17.0.0-rc.2",
+    "@angular/common": "^17.0.0-rc.2",
+    "@angular/core": "^17.0.0-rc.2",
+    "@angular/forms": "^17.0.0-rc.2",
+    "@angular/platform-browser": "^17.0.0-rc.2",
+    "@angular/platform-browser-dynamic": "^17.0.0-rc.2",
+    "@angular/router": "^17.0.0-rc.2",
+    "@angular/service-worker": "^17.0.0-rc.2",
     "@apollo/client": "^3.8.7",
     "@capacitor/android": "4.7.3",
     "@capacitor/app": "4.1.1",
@@ -46,19 +46,19 @@
     "sweetalert2": "^11.7.11",
     "tslib": "^2.3.0",
     "uuid": "^9.0.0",
-    "zone.js": "~0.13.1"
+    "zone.js": "~0.14.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^16.2.9",
+    "@angular-devkit/build-angular": "^17.0.0-rc.3",
     "@angular-eslint/builder": "^16.2.0",
     "@angular-eslint/eslint-plugin": "^16.2.0",
     "@angular-eslint/eslint-plugin-template": "^16.2.0",
     "@angular-eslint/schematics": "^16.2.0",
     "@angular-eslint/template-parser": "^16.2.0",
-    "@angular/cli": "^16.2.9",
-    "@angular/compiler": "^16.2.12",
-    "@angular/compiler-cli": "^16.2.12",
-    "@angular/language-service": "^16.2.12",
+    "@angular/cli": "^17.0.0-rc.3",
+    "@angular/compiler": "^17.0.0-rc.2",
+    "@angular/compiler-cli": "^17.0.0-rc.2",
+    "@angular/language-service": "^17.0.0-rc.2",
     "@capacitor/cli": "4.7.3",
     "@ionic/angular-toolkit": "^9.0.0",
     "@tailwindcss/forms": "^0.5.3",
@@ -85,7 +85,7 @@
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.3",
     "ts-node": "~8.3.0",
-    "typescript": "~5.1.6"
+    "typescript": "~5.2.2"
   },
   "description": "An Ionic project"
 }
