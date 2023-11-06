@@ -14,7 +14,8 @@ import { IonicModule } from '@ionic/angular';
       }
     `,
   ],
-  template: `<ion-app>
+  template: `
+  <ion-app>
     <ion-content>
       <div class="flex w-full h-full">
         <ion-router-outlet />

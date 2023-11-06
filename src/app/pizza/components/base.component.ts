@@ -16,29 +16,26 @@ import { PizzaService } from '../pizza.service';
     <div class="flex w-full h-full justify-evenly ">
       <fieldset>
         <legend class="text-base font-semibold text-dark">Select Size</legend>
-        <div
-          class="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200"
-        >
-          <div
-            class="relative flex items-start py-4"
-            *ngFor="let size of PizzaSize"
-          >
-            <div class="min-w-0 flex-1 text-sm leading-6">
-              <label [for]="size" class="select-none font-medium text-dark">{{
-                size
-              }}</label>
+        <div class="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
+          @for(size of PizzaSize; track $index) {
+            <div class="relative flex items-start py-4">
+              <div class="min-w-0 flex-1 text-sm leading-6">
+                <label [for]="size" class="select-none font-medium text-dark">
+                  {{ size }}
+                </label>
+              </div>
+              <div class="ml-3 flex h-6 items-center">
+                <input
+                  [checked]="$pizzaSize() === size"
+                  [id]="size"
+                  [name]="'pizzaSize'"
+                  type="radio"
+                  class="h-4 w-4 border-gray-300"
+                  (change)="onSizeChange(size)"
+                />
+              </div>
             </div>
-            <div class="ml-3 flex h-6 items-center">
-              <input
-                [checked]="$pizzaSize() === size"
-                [id]="size"
-                [name]="'pizzaSize'"
-                type="radio"
-                class="h-4 w-4 border-gray-300"
-                (change)="onSizeChange(size)"
-              />
-            </div>
-          </div>
+          }
         </div>
       </fieldset>
       <fieldset>
@@ -72,26 +69,25 @@ import { PizzaService } from '../pizza.service';
         <div
           class="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200"
         >
-          <div
-            class="relative flex items-start py-4"
-            *ngFor="let sauce of PizzaSauce"
-          >
-            <div class="min-w-0 flex-1 text-sm leading-6">
-              <label for="side-3" class="select-none font-medium text-dark">{{
-                sauce
-              }}</label>
+          @for(sauce of PizzaSauce; track $index) {
+            <div class="relative flex items-start py-4">
+              <div class="min-w-0 flex-1 text-sm leading-6">
+                <label for="side-3" class="select-none font-medium text-dark">{{
+                  sauce
+                }}</label>
+              </div>
+              <div class="ml-3 flex h-6 items-center">
+                <input
+                  [checked]="$pizzaSauce() === sauce"
+                  [id]="sauce"
+                  [name]="'pizzaSauce'"
+                  type="radio"
+                  class="h-4 w-4"
+                  (change)="onSauceChange(sauce)"
+                />
+              </div>
             </div>
-            <div class="ml-3 flex h-6 items-center">
-              <input
-                [checked]="$pizzaSauce() === sauce"
-                [id]="sauce"
-                [name]="'pizzaSauce'"
-                type="radio"
-                class="h-4 w-4"
-                (change)="onSauceChange(sauce)"
-              />
-            </div>
-          </div>
+          }
         </div>
       </fieldset>
     </div>

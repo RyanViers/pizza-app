@@ -200,9 +200,11 @@ import { AdminLocationSelectorComponent } from '../location-selector/admin-locat
             id="user_role"
             class="block w-full mt-2 p-2 rounded-md"
           >
-            <option *ngFor="let r of role" [value]="r">
-              {{ r }}
-            </option>
+            @for (r of role; track r) {
+              <option [value]="r">
+                {{ r }}
+              </option>
+            }
           </select>
         </div>
 

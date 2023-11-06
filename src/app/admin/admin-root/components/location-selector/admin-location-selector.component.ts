@@ -29,9 +29,11 @@ import { IonicModule } from '@ionic/angular';
       class="cursor-pointer bg-light-tint border border-light text-dark-shade text-sm rounded-r-lg border-l-light border-l-2 block w-full p-2.5"
     >
       <option selected value="">All Employees</option>
-      <option *ngFor="let location of locations" [value]="location.id">
-        {{ location.city }}
-      </option>
+      @for (location of locations; track location.id) {
+        <option [value]="location.id">
+          {{ location.city }}
+        </option>
+      }
     </select>
   </div>`,
 })

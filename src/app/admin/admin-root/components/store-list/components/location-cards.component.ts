@@ -23,23 +23,25 @@ import { APIService, ListLocationsInput } from 'src/app/API.service';
       role="list"
       class="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8"
     >
-      <li class="rounded-2xl bg-light-tint px-8 py-10" *ngFor="let s of stores">
-        <img
-          class="mx-auto h-48 w-48 rounded-full md:h-56 md:w-56"
-          [src]="s.location_url"
-        />
-        <h3
-          class="mt-6 text-base font-semibold leading-7 tracking-tight text-white"
-        >
-          {{ s.location }}
-        </h3>
-        <p class="text-sm leading-6 text-gray-400">{{ s.name }}</p>
-        <p class="text-sm leading-6 text-gray-400">
-          {{ s.address }} {{ s.state }} {{ s.zip }}
-        </p>
-        <p class="text-sm leading-6 text-gray-400">{{ s.phone }}</p>
-        <p class="text-sm leading-6 text-gray-400">{{ s.email }}</p>
-      </li>
+      @for (s of stores; track s.id) {
+        <li class="rounded-2xl bg-light-tint px-8 py-10">
+          <img
+            class="mx-auto h-48 w-48 rounded-full md:h-56 md:w-56"
+            [src]="s.location_url"
+          />
+          <h3
+            class="mt-6 text-base font-semibold leading-7 tracking-tight text-white"
+          >
+            {{ s.location }}
+          </h3>
+          <p class="text-sm leading-6 text-gray-400">{{ s.name }}</p>
+          <p class="text-sm leading-6 text-gray-400">
+            {{ s.address }} {{ s.state }} {{ s.zip }}
+          </p>
+          <p class="text-sm leading-6 text-gray-400">{{ s.phone }}</p>
+          <p class="text-sm leading-6 text-gray-400">{{ s.email }}</p>
+        </li>
+      }
     </ul>
   </div>`,
 })

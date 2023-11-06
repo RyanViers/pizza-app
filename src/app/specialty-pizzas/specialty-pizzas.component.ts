@@ -28,42 +28,36 @@ import { SpecialtyPizza } from 'src/app/API.service';
     SweetAlert2Module,
     QuantityComponent,
   ],
-  styles: [``],
   template: `
     <ion-header>
       <app-header />
     </ion-header>
     <ion-content>
       <div class="bg-white">
-        <div
-          class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
-        >
-          <div
-            class="grid justify-items-center cursor-pointer grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
-          >
-            <a
-              *ngFor="let pizza of pizzas"
-              class="group hover:bg-medium-tint rounded-lg w-fit"
-              (click)="onClick(pizza)"
-            >
-              <div
-                class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-transparent xl:aspect-h-8 xl:aspect-w-7"
+        <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+          <div class="grid justify-items-center cursor-pointer grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+            @for (pizza of pizzas; track pizza.id) {
+              <a
+                class="group hover:bg-medium-tint rounded-lg w-fit"
+                (click)="onClick(pizza)"
               >
-                <img
-                  [src]="pizza.imageUrl"
-                  class="h-80 w-80 object-cover object-center group-hover:opacity-75"
-                />
-              </div>
-              <div class="flex flex-col justify-center items-center">
-                <h3 class="mt-4 text-sm text-dark-shade">{{ pizza.name }}</h3>
-                <p class="mt-1 text-lg font-medium text-dark-tint">
-                  Click to see ingredients
-                </p>
-                <p class="mt-1 text-lg font-medium text-dark-tint">
-                  {{ pizza.price | currency }}
-                </p>
-              </div>
-            </a>
+                <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-transparent xl:aspect-h-8 xl:aspect-w-7">
+                  <img
+                    [src]="pizza.imageUrl"
+                    class="h-80 w-80 object-cover object-center group-hover:opacity-75"
+                  />
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                  <h3 class="mt-4 text-sm text-dark-shade">{{ pizza.name }}</h3>
+                  <p class="mt-1 text-lg font-medium text-dark-tint">
+                    Click to see ingredients
+                  </p>
+                  <p class="mt-1 text-lg font-medium text-dark-tint">
+                    {{ pizza.price | currency }}
+                  </p>
+                </div>
+              </a>
+            }
           </div>
         </div>
       </div>

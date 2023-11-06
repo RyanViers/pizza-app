@@ -47,18 +47,16 @@ import { SpecialtyPizza, CustomPizza } from 'src/app/API.service';
                 role="list"
                 class="border-t border-b border-gray-200 divide-y divide-gray-200"
               >
-                <li
-                  class="grid py-6 sm:py-10"
-                  *ngFor="let customPizza of $customPizzaArraySignal()"
-                >
-                  <app-custom-cart [customPizza]="customPizza" />
-                </li>
-                <li
-                  class="flex py-6 sm:py-10"
-                  *ngFor="let specialtyPizza of $specialtyPizzaArraySignal()"
-                >
-                  <app-specialty-cart [specialtyPizza]="specialtyPizza" />
-                </li>
+                @for(customPizza of $customPizzaArraySignal(); track customPizza) {
+                  <li class="grid py-6 sm:py-10">
+                    <app-custom-cart [customPizza]="customPizza" />
+                  </li>
+                }
+                @for(specialtyPizza of $specialtyPizzaArraySignal(); track specialtyPizza) {
+                  <li class="flex py-6 sm:py-10">
+                    <app-specialty-cart [specialtyPizza]="specialtyPizza" />
+                  </li>
+                }
               </ul>
             </section>
 

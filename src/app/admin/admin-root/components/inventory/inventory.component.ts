@@ -44,7 +44,6 @@ import { AdminLocationSelectorComponent } from '../location-selector/admin-locat
             class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
           >
             <div class="relative">
-              <!-- Selected row actions, only show when rows are selected. -->
               <div
                 [style.visibility]="optionCheckbox ? 'visible' : 'hidden'"
                 class="absolute top-0 left-14 flex h-12 items-center space-x-3 bg-white sm:left-12"
@@ -105,57 +104,51 @@ import { AdminLocationSelectorComponent } from '../location-selector/admin-locat
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-gray-900">
-                  <ng-container *ngFor="let inventoryItem of inventory">
-                    <!-- Selected: "bg-gray-50" -->
-                    <tr
-                      *ngFor="let item of inventoryItem.items"
-                      [hidden]="
-                        selectedLocation && item.location !== selectedLocation
-                      "
-                    >
-                      <td class="relative px-7 sm:w-12 sm:px-6">
-                        <!-- Selected row marker, only show when row is selected. -->
-                        <div
-                          class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"
-                        ></div>
+                  @for (inventoryItem of inventory; track inventoryItem.id) { 
+                    @for (item of inventoryItem.items; track item) { 
+                      <tr [hidden]="selectedLocation && item.location !== selectedLocation">
+                        <td class="relative px-7 sm:w-12 sm:px-6">
+                          <div
+                            class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"
+                          ></div>
 
-                        <input
-                          type="checkbox"
-                          class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        />
-                      </td>
-                      <!-- Selected: "text-indigo-600", Not Selected: "text-gray-300" -->
-                      <td
-                        class="whitespace-nowrap py-4 pr-3 text-sm font-medium text-gray-300"
-                      >
-                        {{ item.name }}
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                      >
-                        {{ item.price }}
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                      >
-                        {{ item.amount }}
-                      </td>
-                      <td
-                        class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                      >
-                        {{ item.location }}
-                      </td>
-                      <td
-                        class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3"
-                      >
-                        <a
-                          href="#"
-                          class="text-indigo-600 hover:text-indigo-900"
-                          >Edit<span class="sr-only">, Lindsay Walton</span></a
+                          <input
+                            type="checkbox"
+                            class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                          />
+                        </td>
+                        <td
+                          class="whitespace-nowrap py-4 pr-3 text-sm font-medium text-gray-300"
                         >
-                      </td>
-                    </tr>
-                  </ng-container>
+                          {{ item.name }}
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                        >
+                          {{ item.price }}
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                        >
+                          {{ item.amount }}
+                        </td>
+                        <td
+                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                        >
+                          {{ item.location }}
+                        </td>
+                        <td
+                          class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3"
+                        >
+                          <a
+                            href="#"
+                            class="text-indigo-600 hover:text-indigo-900"
+                            >Edit<span class="sr-only">, Lindsay Walton</span></a
+                          >
+                        </td>
+                      </tr>
+                    }
+                  }
                 </tbody>
               </table>
             </div>

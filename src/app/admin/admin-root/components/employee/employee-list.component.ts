@@ -20,13 +20,10 @@ import Swal from 'sweetalert2';
     AdminLocationSelectorComponent,
     UpdateEmployeeModalComponent,
   ],
-  styles: [],
   animations: [opacityScale],
   template: `
     <ion-content class="maw-w-max">
-      <h1
-        class="flex justify-center items-center px-4 text-4xl font-semibold text-white sm:px-6 lg:px-8"
-      >
+      <h1 class="flex justify-center items-center px-4 text-4xl font-semibold text-white sm:px-6 lg:px-8">
         Employee List
       </h1>
       <app-admin-location-selector

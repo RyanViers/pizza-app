@@ -1,29 +1,6 @@
-import {
-  Injectable,
-  Signal,
-  WritableSignal,
-  computed,
-  signal,
-} from '@angular/core';
-import {
-  MeatPrice,
-  PizzaCrustPrice,
-  PizzaSizePrice,
-  VeggiePrice,
-  PizzaSaucePrice,
-  CheeseQuantityPrice,
-  AdditionCheeseTypePrice,
-} from './helpers/enums';
-import {
-  AdditionCheeseType,
-  CheeseQuantity,
-  PizzaCheese,
-  PizzaCrust,
-  PizzaMeat,
-  PizzaSauce,
-  PizzaSize,
-  PizzaVeggie,
-} from '../API.service';
+import { Injectable, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { MeatPrice, PizzaCrustPrice, PizzaSizePrice, VeggiePrice, PizzaSaucePrice, CheeseQuantityPrice, AdditionCheeseTypePrice } from './helpers/enums';
+import { AdditionCheeseType, CheeseQuantity, PizzaCheese, PizzaCrust, PizzaMeat, PizzaSauce, PizzaSize, PizzaVeggie } from '../API.service';
 import { SpecialtyPizza, CustomPizza } from '../API.service';
 import Swal from 'sweetalert2';
 import { isEqual } from 'lodash';
@@ -91,13 +68,12 @@ export class PizzaService {
   }
 
   resetCustomPizzaArraySignal(): void {
-    
+    this.$customPizzaArraySignal.set([]);
+
   }
 
   /****************************** SPECIALTY PIZZAS ARRAY ********************************/
-  public $specialtyPizzaArraySignal: WritableSignal<SpecialtyPizza[]> = signal(
-    []
-  );
+  public $specialtyPizzaArraySignal: WritableSignal<SpecialtyPizza[]> = signal([]);
 
   public addSpecialtyPizzaSignal(pizza: SpecialtyPizza): void {
     const currentPizzas = this.$specialtyPizzaArraySignal();

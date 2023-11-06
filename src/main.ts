@@ -58,9 +58,5 @@ bootstrapApplication(AppComponent, {
         },
         deps: [HttpLink],
     },
-    provideServiceWorker('my-service-worker.js', {
-        enabled: true,
-        registrationStrategy: 'registerWhenStable:30000'
-    })
 ],
 }).catch((e) => console.error(e));
