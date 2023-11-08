@@ -92,7 +92,6 @@ import Swal from 'sweetalert2';
                     @if ( e?.storeName === selectedLocation || !selectedLocation) {
                       <tr>
                         <td class="relative px-7 sm:w-12 sm:px-6">
-                          <!-- Selected row marker, only show when row is selected. -->
                           <div
                             class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"
                             [style.visibility]="

@@ -12,19 +12,9 @@
       "AmplifyAppId": "d3d28prt5k2ays"
     },
     "categories": {
-      "api": {
-        "pizzaapp": {}
-      },
-      "custom": {
-        "AppsyncResolvers": {},
-        "cloudfront": {}
-      },
       "auth": {
         "pizzaAuth": {},
         "userPoolGroups": {}
-      },
-      "storage": {
-        "pizzaStorage": {}
       },
       "function": {
         "InvalidateCloudfrontUrls": {
@@ -32,8 +22,8 @@
           "s3Key": "amplify-builds/InvalidateCloudfrontUrls-594569305647444c7632-build.zip"
         }
       },
-      "hosting": {
-        "S3AndCloudFront": {}
+      "storage": {
+        "pizzaStorage": {}
       }
     }
   }

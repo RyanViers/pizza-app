@@ -26,15 +26,15 @@ import { opacityScale } from 'src/app/utils/animations';
   animations: [opacityScale],
   template: `
     <header class="bg-light-shade relative ">
-      <div
-        class="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-gray-700 lg:px-8"
-      >
-        <app-header-top></app-header-top>
+      <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-gray-700 lg:px-8">
+        <app-header-top />
 
-        <app-header-bottom></app-header-bottom>
+        <app-header-bottom />
       </div>
 
-      <app-header-mobile *ngIf="$menuToggle()"></app-header-mobile>
+      @if ($menuToggle() ) {
+        <app-header-mobile/>
+      }
     </header>
   `,
 })

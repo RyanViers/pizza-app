@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   selector: 'app-footer-newsletter',
   standalone: true,
   imports: [CommonModule],
-  styles: [``],
   template: `<div class="mt-10 xl:mt-0">
     <h3 class="text-sm font-semibold leading-6 text-white">
       Subscribe to our newsletter

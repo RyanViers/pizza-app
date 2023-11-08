@@ -49,16 +49,18 @@ import { opacityScale } from 'src/app/utils/animations';
         type="button"
         class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
       >
-        <span
-          class="w-6 h-6"
-          [innerHTML]="getIcon(4)"
-          *ngIf="!$menuToggle()"
-        ></span>
-        <span
-          class="w-6 h-6"
-          [innerHTML]="getIcon(1)"
-          *ngIf="$menuToggle()"
-        ></span>
+        @if ($menuToggle() ) {
+          <span
+            class="w-6 h-6"
+            [innerHTML]="getIcon(1)"
+          ></span>
+        } @else {
+          <span
+            class="w-6 h-6"
+            [innerHTML]="getIcon(4)"
+          ></span>
+        }
+        
       </button>
     </div>
 
