@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SignUpForm } from './helpers/models';
 import { Country } from './helpers/enums';
 
 @Injectable()
 export class SignUpService {
-  public $signUp = new BehaviorSubject<SignUpForm>({
+  public $signUp: WritableSignal<SignUpForm> = signal<SignUpForm>({
     firstName: '',
     lastName: '',
     email: '',
@@ -24,8 +24,8 @@ export class SignUpService {
    * @param options
    */
   setSignUpForm(options: Partial<SignUpForm>) {
-    const signUpForm = this.$signUp.value;
-    this.$signUp.next({
+    const signUpForm = this.$signUp();
+    this.$signUp.set({
       ...signUpForm,
       ...options,
     });

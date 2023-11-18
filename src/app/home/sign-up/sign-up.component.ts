@@ -3,9 +3,7 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SharedModule } from '../../shared/shared.module';
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  ElementRef,
+import { Component, ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -85,7 +83,7 @@ export default class SignUpComponent implements OnInit, OnDestroy {
    * save personal info
    */
   savePersonal() {
-    console.log(this.signUp.$signUp.value);
+    console.log(this.signUp.$signUp());
   }
 
   /**
