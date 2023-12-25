@@ -9,6 +9,7 @@ import {
 import { Subscription } from 'rxjs';
 import { CreateEmployeeInput, UserRole, APIService } from 'src/app/API.service';
 import Swal from 'sweetalert2';
+import { AdminService } from '../../../admin.service';
 
 @Component({
   selector: 'app-update-employee-modal',
@@ -285,6 +286,7 @@ import Swal from 'sweetalert2';
               Deactivate
             </button>
             <button
+              (click)="toggleUpdateEmployeeModal()"
               type="button"
               class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
             >
@@ -303,7 +305,11 @@ export class UpdateEmployeeModalComponent implements OnInit {
   form: CreateEmployeeInput | undefined;
   role: UserRole[] = [UserRole.ADMIN, UserRole.MANAGER, UserRole.EMPLOYEE];
 
-  constructor(private api: APIService, private builder: FormBuilder) {}
+  constructor(
+    private api: APIService, 
+    private builder: FormBuilder,
+    private service: AdminService
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.employeeInput = this.builder.group({
@@ -380,5 +386,9 @@ export class UpdateEmployeeModalComponent implements OnInit {
     } else {
       console.error('Form is invalid');
     }
+  }
+
+  toggleUpdateEmployeeModal() {
+    this.service.$updateEmployeeModal.set(false);
   }
 }

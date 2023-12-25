@@ -38,7 +38,6 @@ import { ImageBackgroundComponent } from './components/image-background.componen
         <!-- Hero section -->
         <app-hero />
 
-        <p class="text-base font-bold text-dark-shade">Right Here</p>
         <main>
           <!-- Pizza Cards -->
           <app-pizza-cards />

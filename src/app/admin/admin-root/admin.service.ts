@@ -7,6 +7,9 @@ import { APIService, Employee, UserRole } from 'src/app/API.service';
 export class AdminService {
   public $toggleSignal = signal(false);
 
+  public $updateEmployeeModal = signal(false);
+  public $displayEmployeeModal = signal(false);
+
   public $employee: WritableSignal<Employee> = signal({
     __typename: 'Employee',
     id: '',
@@ -25,15 +28,11 @@ export class AdminService {
     employee_url: '',
   });
 
-  public setEmployee(options: Partial<Employee>) {
-    const currentEmployee = this.$employee();
-    const newEmployee = { ...currentEmployee, ...options };
-    this.$employee.set(newEmployee);
-  }
+  // public setEmployee(options: Partial<Employee>) {
+  //   const currentEmployee = this.$employee();
+  //   const newEmployee = { ...currentEmployee, ...options };
+  //   this.$employee.set(newEmployee);
+  // }
 
   constructor(private api: APIService) {}
-
-  getEmployees() {
-    return this.api.ListEmployees;
-  }
 }

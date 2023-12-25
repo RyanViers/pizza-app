@@ -9,11 +9,6 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SafeHtml } from '@angular/platform-browser';
-import EmployeeSignUpComponent from './components/employee/employee-sign-up.component';
-import EmployeeListComponent from './components/employee/employee-list.component';
-import AdminInfoComponent from './components/admin/admin-info.component';
-import InventoryComponent from './components/inventory/inventory.component';
-import StoreListComponent from './components/store-list/store-list.component';
 
 @Component({
   selector: 'app-admin-root',
@@ -23,13 +18,8 @@ import StoreListComponent from './components/store-list/store-list.component';
     IonicModule,
     SharedModule,
     RouterModule,
-    AdminInfoComponent,
-    InventoryComponent,
-    StoreListComponent,
     HeaderComponent,
     FooterComponent,
-    EmployeeListComponent,
-    EmployeeSignUpComponent,
     AdminNavigationComponent,
     AdminAnalyticsComponent,
   ],
