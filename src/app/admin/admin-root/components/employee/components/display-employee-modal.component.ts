@@ -130,8 +130,6 @@ import { Employee } from 'src/app/API.service';
         </div>
       </div>
     </div>
-
-
   `,
 })
 
@@ -139,7 +137,6 @@ export class DisplayEmployeeModalComponent {
   $employee: Employee = this.adminService.$employee();
 
   constructor(
-    private api: APIService,
     private adminService: AdminService,
   ) {}
     

@@ -14,7 +14,6 @@ import { AUTH_TYPE, createAuthLink as awsCreateAuthLink } from 'aws-appsync-auth
 import { HttpLink, InMemoryCache, concat } from '@apollo/client/core';
 import { IonicModule } from '@ionic/angular';
 import { NgOptimizedImage } from '@angular/common';
-import { provideServiceWorker } from '@angular/service-worker';
 
 if (environment.production) {
   enableProdMode();

@@ -4,7 +4,7 @@ import { APIService, Employee, UserRole } from 'src/app/API.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminService {
+export class AdminService{
   public $toggleSignal = signal(false);
 
   public $updateEmployeeModal = signal(false);
@@ -28,11 +28,6 @@ export class AdminService {
     employee_url: '',
   });
 
-  // public setEmployee(options: Partial<Employee>) {
-  //   const currentEmployee = this.$employee();
-  //   const newEmployee = { ...currentEmployee, ...options };
-  //   this.$employee.set(newEmployee);
-  // }
-
   constructor(private api: APIService) {}
+
 }

@@ -40,8 +40,7 @@
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
               },
-              "src/manifest.webmanifest",
-              "src/my-service-worker.js"
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/theme/variables.scss",
@@ -128,8 +127,7 @@
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
               },
-              "src/manifest.webmanifest",
-              "src/my-service-worker.js"
+              "src/manifest.webmanifest"
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": []
